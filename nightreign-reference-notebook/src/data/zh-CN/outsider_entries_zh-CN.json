@@ -2,189 +2,189 @@
     {
         "entry_id":"7000000",
         "entry_name":"生命力＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点生命力（固定+20点生命值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000001",
         "entry_name":"生命力＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点生命力（固定+40点生命值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000002",
         "entry_name":"生命力＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点生命力（固定+60点生命值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000090",
         "entry_name":"提升血量上限",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+5点生命力（固定+100点生命值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000100",
         "entry_name":"集中力＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点集中力（固定+5点专注值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000101",
         "entry_name":"集中力＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点集中力（固定+10点专注值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000102",
         "entry_name":"集中力＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点集中力（固定+15点专注值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000190",
         "entry_name":"提升专注值上限",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+5点集中力（固定+25点专注值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000200",
         "entry_name":"耐力＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点耐力（固定+2点精力值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000201",
         "entry_name":"耐力＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点耐力（固定+4点精力值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000202",
         "entry_name":"耐力＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点耐力（固定+6点精力值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000290",
         "entry_name":"提升精力上限",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+5点耐力（固定+10点精力值上限）",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000300",
         "entry_name":"力气＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点力气",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000301",
         "entry_name":"力气＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点力气",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000302",
         "entry_name":"力气＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点力气",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000400",
         "entry_name":"灵巧＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点灵巧",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000401",
         "entry_name":"灵巧＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点灵巧",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000402",
         "entry_name":"灵巧＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点灵巧",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000500",
         "entry_name":"智力＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点智力",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000501",
         "entry_name":"智力＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点智力",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000502",
         "entry_name":"智力＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点智力",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000600",
         "entry_name":"信仰＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点信仰",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000601",
         "entry_name":"信仰＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点信仰",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000602",
         "entry_name":"信仰＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点信仰",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000700",
         "entry_name":"感应＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+1点感应",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000701",
         "entry_name":"感应＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+2点感应",
         "superposability":"相同词条可叠加"
     },
     {
         "entry_id":"7000702",
         "entry_name":"感应＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"+3点感应",
         "superposability":"相同词条可叠加"
     },
@@ -233,21 +233,21 @@
     {
         "entry_id":"7001000",
         "entry_name":"强韧度＋１",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"受到的韧性伤害-5%",
         "superposability":"叠加性未知"
     },
     {
         "entry_id":"7001001",
         "entry_name":"强韧度＋２",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"受到的韧性伤害-10%",
         "superposability":"叠加性未知"
     },
     {
         "entry_id":"7001002",
         "entry_name":"强韧度＋３",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"受到的韧性伤害-15%",
         "superposability":"叠加性未知"
     },
@@ -940,7 +940,7 @@
     {
         "entry_id":"7060100",
         "entry_name":"每次解开魔法师塔的机关，能永久性提升专注值上限",
-        "entry_type":"能力值",
+        "entry_type":"能力",
         "explanation":"专注值上限每次+18%，局内无限成长",
         "superposability":"相同词条不可叠加"
     },
@@ -961,203 +961,203 @@
     {
         "entry_id":"7080000",
         "entry_name":"装备三把以上类别为短剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080100",
         "entry_name":"装备三把以上类别为直剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080200",
         "entry_name":"装备三把以上类别为大剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080300",
         "entry_name":"装备三把以上类别为特大剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080400",
         "entry_name":"装备三把以上类别为曲剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080500",
         "entry_name":"装备三把以上类别为大曲剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080600",
         "entry_name":"装备三把以上类别为刀的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080700",
         "entry_name":"装备三把以上类别为双头剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080800",
         "entry_name":"装备三把以上类别为刺剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7080900",
         "entry_name":"装备三把以上类别为重刺剑的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081000",
         "entry_name":"装备三把以上类别为斧的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081100",
         "entry_name":"装备三把以上类别为大斧的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081200",
         "entry_name":"装备三把以上类别为槌的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081300",
         "entry_name":"装备三把以上类别为大槌的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081400",
         "entry_name":"装备三把以上类别为连枷的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081500",
         "entry_name":"装备三把以上类别为矛的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081700",
         "entry_name":"装备三把以上类别为大矛的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081800",
         "entry_name":"装备三把以上类别为戟的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7081900",
         "entry_name":"装备三把以上类别为镰刀的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082000",
         "entry_name":"装备三把以上类别为拳头的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082100",
         "entry_name":"装备三把以上类别为钩爪的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082200",
         "entry_name":"装备三把以上类别为软鞭的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082300",
         "entry_name":"装备三把以上类别为特大武器的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082400",
         "entry_name":"装备三把以上类别为弓的武器，能提升攻击力",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"造成的伤害+10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082500",
         "entry_name":"装备三把以上类别为手杖的武器，能提升专注值上限",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"+10点集中力（固定+50点专注值上限）",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082600",
         "entry_name":"装备三把以上类别为圣印记的武器，能提升专注值上限",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"+10点集中力（固定+50点专注值上限）",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082700",
         "entry_name":"装备三把以上类别为小盾的武器，能提升血量上限",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"+10点生命力（固定+200点生命值上限）",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082800",
         "entry_name":"装备三把以上类别为中盾的武器，能提升血量上限",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"+10点生命力（固定+200点生命值上限）",
         "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"7082900",
         "entry_name":"装备三把以上类别为大盾的武器，能提升血量上限",
-        "entry_type":"特定武器",
+        "entry_type":"仅限特定武器",
         "explanation":"+10点生命力（固定+200点生命值上限）",
         "superposability":"相同词条不可叠加"
     },
