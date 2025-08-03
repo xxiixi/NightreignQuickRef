@@ -1,0 +1,16 @@
+[
+    {
+    "entry_id": "7044400",
+    "entry_name": "test1",
+    "entry_type": "test1",
+    "explanation": "test1",
+    "superposability": "test1"
+},
+{
+    "entry_id": "7044500",
+    "entry_name": "test2",
+    "entry_type": "test2",
+    "explanation": "test2",
+    "superposability": "test2"
+  }
+]
