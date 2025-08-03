@@ -1,8 +1,53 @@
 /* 全局容器 */
 .app-container {
   min-height: 100vh;
-  background-color: #f5f5f5;
-  padding: 20px 0;
+  background: linear-gradient(135deg, #dfe5ff 0%, #abb6ee 100%);
+}
+
+/* 顶部 Bar 样式 */
+.top-bar {
+  width: 100%;
+  background: transparent;
+  text-align: center;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.top-bar-content {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar-left {
+  flex: 1;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle-btn,
+.language-toggle-btn {
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover,
+.language-toggle-btn:hover {
+  color: #bae7ff !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-1px);
 }
 
 /* 内容包装器 - 实现左右8%留白和居中 */
@@ -10,24 +55,30 @@
   max-width: 80%;
   margin: 0 auto;
   background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   padding: 40px;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 40px);
+  min-height: calc(100vh - 200px);
 }
 
 /* 头部样式 */
 .header {
   text-align: center;
   margin-bottom: 40px;
+  padding: 20px;
+  background: transparent;
+  border-radius: 12px;
+  margin: 0 auto 40px auto;
+  max-width: 80%;
 }
 
 .main-title {
   margin-bottom: 16px !important;
-  color: #1890ff;
+  color: white !important;
   font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .subtitle {
@@ -36,16 +87,18 @@
 
 .subtitle .ant-typography {
   font-size: 14px;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .subtitle a {
-  color: #1890ff;
+  color: #fff;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .subtitle a:hover {
   text-decoration: underline;
+  color: #e6f7ff;
 }
 
 /* 标签页容器 */
@@ -60,31 +113,70 @@
 
 /* 表格样式优化 */
 .ant-table {
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .ant-table-thead > tr > th {
-  background-color: #fafafa;
+  background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
   font-weight: 600;
+  border-bottom: 2px solid #e8e8e8;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: #f0f5ff;
+}
+
+/* 自定义 Tag 样式 - 统一使用 geekblue 色板 */
+.ant-table .ant-tag {
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  min-width: 70px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ant-table .ant-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Footer 样式 */
 .footer {
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
   text-align: center;
+  background: linear-gradient(135deg, #fafafa17 0%, #f5f5f513 100%);
+  padding: 20px;
+  margin: 40px auto 0 auto;
+  max-width: 100%;
 }
 
 .footer-text {
-  font-size: 12px;
-  color: #999;
+  font-size: 13px;
+}
+
+.footer a {
+  color: #597ef7;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer a:hover {
+  color: #85a5ff;
+  text-decoration: underline;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  .content-wrapper {
+  .content-wrapper,
+  .header,
+  .footer,
+  .top-bar-content {
     max-width: 95%;
     padding: 20px;
   }
@@ -92,16 +184,33 @@
   .main-title {
     font-size: 24px !important;
   }
+  
+  .top-bar {
+    padding: 10px 15px;
+  }
+  
+  .theme-toggle-btn,
+  .language-toggle-btn {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
 }
 
 @media (max-width: 480px) {
-  .content-wrapper {
+  .content-wrapper,
+  .header,
+  .footer,
+  .top-bar-content {
     max-width: 98%;
     padding: 15px;
   }
   
   .main-title {
     font-size: 20px !important;
+  }
+  
+  .top-bar {
+    padding: 8px 10px;
   }
 }
 

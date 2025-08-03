@@ -2363,55 +2363,55 @@
         "entry_name":"追踪者的不甘",
         "entry_type":"能力值",
         "explanation":"+3力气+3灵巧",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"9990200",
         "entry_name":"守护者的不甘",
         "entry_type":"能力值",
         "explanation":"+3生命力+3耐力",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"9990300",
         "entry_name":"铁之眼的不甘",
         "entry_type":"能力值",
         "explanation":"+3耐力+3灵巧",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"9990400",
         "entry_name":"女爵的不甘",
         "entry_type":"能力值",
         "explanation":"+3灵巧+3智力",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"9990500",
         "entry_name":"无赖的不甘",
         "entry_type":"能力值",
         "explanation":"+3生命力+3力气",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"9990600",
         "entry_name":"复仇者的不甘",
         "entry_type":"能力值",
         "explanation":"+3信仰+3感应",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"9990700",
         "entry_name":"隐士的不甘",
         "entry_type":"能力值",
         "explanation":"+3集中力+3智力",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     },
     {
         "entry_id":"9990800",
         "entry_name":"执行者的不甘",
         "entry_type":"能力值",
         "explanation":"+3灵巧+3感应",
-        "superposability":"相同词条不可叠加\n但不同的“不甘”系列词条可以叠加"
+        "superposability":"相同词条不可叠加"
     }
 ]
