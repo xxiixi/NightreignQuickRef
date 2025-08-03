@@ -299,6 +299,18 @@ body[tomato-theme="dark"] {
 
 /* 搜索框样式 */
 .custom-search-input {
-  width: 200px;
+  width: 250px;
+}
+
+.outsider-type-select {
+  min-width: 350px;
+  width: auto;
+}
+
+.filter-search-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
 }
 
