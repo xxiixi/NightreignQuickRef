@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Table, Typography, Space, Tag, Button, ConfigProvider, theme, Input, Select, message } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { geekblue } from '@ant-design/colors';
-import { MoonOutlined, SunOutlined, TranslationOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, TranslationOutlined, HeartOutlined, GithubOutlined } from '@ant-design/icons';
 import outsiderEntries from './data/zh-CN/outsider_entries_zh-CN.json';
 import talismanEntries from './data/zh-CN/talisman_entries_zh-CN.json';
 import inGameEntries from './data/zh-CN/in-game_entries_zh-CN.json';
@@ -379,49 +379,49 @@ function App() {
 
         <div className="header">
           <Title level={1} className="main-title">
-            nightreign reference notebook
+            Nightreign Reference Notebook
           </Title>
           <Space direction="vertical" size="small" className="subtitle">
-            <Text type="secondary" className="footer-text">
-              based on version 1.0.0 | created by xxiixi
+            <Text type="secondary" className="subtitle-text">
+              Based on ELDEN RING NIGHTREIGN version 1.01.3
+            </Text>
+            <Text type="secondary" className="subtitle-text">
+            <HeartOutlined style={{ marginRight: '4px' }} />
+               Created by{' '}
+              <a 
+                href="https://github.com/xxiixi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="author-link"
+              >
+                xxiixi
+              </a>
             </Text>
           </Space>
         </div>
 
         {/* 自定义按钮组 */}
         <div className="custom-buttons-container">
-          <Button
-            type={activeTab === '局外词条' ? 'primary' : 'default'}
-            size="large"
-            onClick={() => setActiveTab('局外词条')}
-            className="custom-tab-button"
-          >
-            局外词条
-          </Button>
-          <Button
-            type={activeTab === '护符词条' ? 'primary' : 'default'}
-            size="large"
-            onClick={() => setActiveTab('护符词条')}
-            className="custom-tab-button"
-          >
-            护符词条
-          </Button>
-          <Button
-            type={activeTab === '局内词条' ? 'primary' : 'default'}
-            size="large"
-            onClick={() => setActiveTab('局内词条')}
-            className="custom-tab-button"
-          >
-            局内词条
-          </Button>
-          <Button
-            type={activeTab === '其他词条' ? 'primary' : 'default'}
-            size="large"
-            onClick={() => setActiveTab('其他词条')}
-            className="custom-tab-button"
-          >
-            其他词条
-          </Button>
+          <div className={`custom-tab-button ${activeTab === '局外词条' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('局外词条'); }}>
+              局外词条
+            </a>
+          </div>
+          <div className={`custom-tab-button ${activeTab === '护符词条' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('护符词条'); }}>
+              护符词条
+            </a>
+          </div>
+          <div className={`custom-tab-button ${activeTab === '局内词条' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('局内词条'); }}>
+              局内词条
+            </a>
+          </div>
+          <div className={`custom-tab-button ${activeTab === '其他词条' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('其他词条'); }}>
+              其他词条
+            </a>
+          </div>
         </div>
 
         <div className="content-wrapper">
@@ -523,13 +523,15 @@ function App() {
         <div className="footer">
             <Space direction="vertical" size="middle" align="center">
               <Text type="secondary" className="footer-text">
+              <GithubOutlined style={{ marginRight: '4px' }} />
                 Check out the project or report an issue on{' '}
                 <a 
                   href="https://github.com/xxiixi/NightreignQuickRef" 
                   target="_blank" 
                   rel="noopener noreferrer"
+                  className="footer-link"
                 >
-                  Github
+                  NightreignQuickRef
                 </a>
               </Text>
             </Space>

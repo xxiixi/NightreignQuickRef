@@ -14,8 +14,8 @@
   
   /* 亮色模式变量 */
   --bg-color: #fff;
-  --color-text-1: rgba(0, 0, 0, 0.88);
-  --color-text-2: rgba(0, 0, 0, 0.45);
+  --color-text-1: rgba(64, 64, 64, 0.88);
+  --color-text-2: rgba(128, 128, 128, 0.65);
   --bg-gradient: linear-gradient(135deg, var(--geekblue-1) 0%, var(--geekblue-2) 100%);
   --content-bg: white;
   --content-shadow: rgba(0, 0, 0, 0.08);
@@ -52,6 +52,8 @@ body[tomato-theme="dark"] {
   background: var(--bg-gradient);
   color: var(--color-text-1);
 }
+
+
 
 /* 顶部 Bar 样式 */
 .top-bar {
@@ -135,8 +137,26 @@ body[tomato-theme="dark"] {
 }
 
 .subtitle .ant-typography {
-  font-size: 14px;
-  color: var(--color-text-2);
+  font-size: 16px;
+  color: var(--color-text-1);
+}
+
+.subtitle-text {
+  font-size: 16px !important;
+  color: var(--color-text-1) !important;
+  font-weight: 500;
+}
+
+.author-link {
+  color: var(--link-color) !important;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.author-link:hover {
+  color: var(--link-hover-color) !important;
+  text-decoration: underline;
 }
 
 .subtitle a {
@@ -206,7 +226,23 @@ body[tomato-theme="dark"] {
 }
 
 .footer-text {
-  font-size: 13px;
+  font-size: 15px;
+  color: var(--color-text-1);
+  font-weight: 500;
+}
+
+.footer-link {
+  color: var(--link-color) !important;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-link:hover {
+  color: var(--link-hover-color) !important;
+  text-decoration: underline;
 }
 
 .footer a {
@@ -263,31 +299,193 @@ body[tomato-theme="dark"] {
   }
 }
 
-/* 自定义按钮样式 */
+/* 自定义按钮样式 - 玻璃态效果 */
 .custom-tab-button {
-  min-width: 150px;
-  height: 48px;
-  border-radius: 10px;
-  font-weight: normal;
+  position: relative;
+  width: 155px;
+  height: 50px;
+}
+
+.custom-tab-button a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  color: #fff;
+  z-index: 1;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.5s;
+  backdrop-filter: blur(15px);
+}
+
+/* 亮色模式下的按钮样式 */
+.custom-tab-button a {
+  color: #333;
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* 暗黑模式下的按钮样式 */
+body[tomato-theme="dark"] .custom-tab-button a {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.custom-tab-button:hover a {
+  letter-spacing: 3px;
+}
+
+/* Active状态的按钮样式 - 发光边框效果 */
+.custom-tab-button.active a {
+  background: rgba(133, 165, 255, 0.15) !important;
+  color: #2f54eb !important;
+  border: 2px solid #85a5ff !important;
+  box-shadow: 
+    0 0 10px rgba(133, 165, 255, 0.5),
+    0 0 20px rgba(133, 165, 255, 0.3),
+    0 0 30px rgba(133, 165, 255, 0.2),
+    inset 0 0 20px rgba(133, 165, 255, 0.1) !important;
+  letter-spacing: 2px;
+  transform: scale(1.02);
   transition: all 0.3s ease;
 }
 
-.custom-tab-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+/* 暗黑模式下的Active状态 */
+body[tomato-theme="dark"] .custom-tab-button.active a {
+  background: rgba(47, 84, 235, 0.2) !important;
+  color: #85a5ff !important;
+  border: 2px solid #2f54eb !important;
+  box-shadow: 
+    0 0 10px rgba(47, 84, 235, 0.6),
+    0 0 20px rgba(47, 84, 235, 0.4),
+    0 0 30px rgba(47, 84, 235, 0.3),
+    inset 0 0 20px rgba(47, 84, 235, 0.15) !important;
 }
 
-/* .custom-tab-button.ant-btn-primary {
-  font-weight: bold;
-} */
+/* Active状态下的发光效果增强 */
+.custom-tab-button.active::before,
+.custom-tab-button.active::after {
+  background: #85a5ff !important;
+  box-shadow: 
+    0 0 10px #85a5ff,
+    0 0 25px #85a5ff,
+    0 0 50px #85a5ff,
+    0 0 100px #85a5ff !important;
+  opacity: 1;
+}
 
-/* 自定义按钮容器 */
-.custom-buttons-container {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 24px;
-  padding: 0 16px;
+body[tomato-theme="dark"] .custom-tab-button.active::before,
+body[tomato-theme="dark"] .custom-tab-button.active::after {
+  background: #2f54eb !important;
+  box-shadow: 
+    0 0 10px #2f54eb,
+    0 0 25px #2f54eb,
+    0 0 50px #2f54eb,
+    0 0 100px #2f54eb !important;
+}
+
+.custom-tab-button a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255,255,255,0.15),
+              transparent);
+  transform: skewX(45deg) translateX(0);
+  transition: 0.5s;
+}
+
+.custom-tab-button:hover a::before {
+  transform: skewX(45deg) translateX(200%);
+}
+
+.custom-tab-button::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -5px;
+  width: 30px;
+  height: 10px;
+  background: #85a5ff; /* 统一粉色 */
+  border-radius: 10px;
+  transition: 0.5s;
+  transition-delay: 0s;
+  box-shadow: 0 0 5px #85a5ff,
+              0 0 15px #85a5ff,
+              0 0 30px #85a5ff,
+              0 0 60px #85a5ff;
+}
+
+.custom-tab-button:hover::before {
+  bottom: 0;
+  height: 50%;
+  width: 90%;
+  border-radius: 30px;
+  transition-delay: 0.5s;
+}
+
+.custom-tab-button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -5px;
+  width: 30px;
+  height: 10px;
+  background: #85a5ff;
+  border-radius: 10px;
+  transition: 0.5s;
+  transition-delay: 0s;
+  box-shadow: 0 0 5px #85a5ff,
+              0 0 15px #85a5ff,
+              0 0 30px #85a5ff,
+              0 0 60px #85a5ff;
+}
+
+.custom-tab-button:hover::after {
+  top: 0;
+  height: 50%;
+  width: 90%;
+  border-radius: 30px;
+  transition-delay: 0.5s;
+}
+
+/* 亮色模式下的发光颜色 - 统一使用粉色 */
+.custom-tab-button::before,
+.custom-tab-button::after {
+  background: #85a5ff;
+  box-shadow: 0 0 5px #85a5ff,
+              0 0 15px #85a5ff,
+              0 0 30px #85a5ff,
+              0 0 60px #85a5ff;
+}
+
+/* 暗黑模式下的发光颜色 - 统一使用亮粉色 */
+body[tomato-theme="dark"] .custom-tab-button::before,
+body[tomato-theme="dark"] .custom-tab-button::after {
+  background: #2f54eb;
+  box-shadow: 0 0 5px #2f54eb,
+              0 0 15px #2f54eb,
+              0 0 30px #2f54eb,
+              0 0 60px #2f54eb;
 }
 
 /* 搜索框容器 */
@@ -312,5 +510,14 @@ body[tomato-theme="dark"] {
   gap: 16px;
   margin-bottom: 16px;
   align-items: center;
+}
+
+/* 自定义按钮容器 */
+.custom-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 0 16px;
 }
 
