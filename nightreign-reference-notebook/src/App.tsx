@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Tabs, Table, Typography, Space, Tag, Button, ConfigProvider, theme } from 'antd';
-import type { TabsProps, TableColumnsType } from 'antd';
+import { Table, Typography, Space, Tag, Button, ConfigProvider, theme, Input } from 'antd';
+import type { TableColumnsType } from 'antd';
 import { geekblue } from '@ant-design/colors';
-import { BulbOutlined, BulbFilled, GlobalOutlined } from '@ant-design/icons';
-import outsiderEntries from './data/outsider_entries_zh-CN.json';
-import talismanEntries from './data/talisman_entries_zh-CN.json';
-import inGameEntries from './data/in-game_entries_zh-CN.json';
+import { BulbOutlined, BulbFilled, GlobalOutlined, SearchOutlined } from '@ant-design/icons';
+import outsiderEntries from './data/zh-CN/outsider_entries_zh-CN.json';
+import talismanEntries from './data/zh-CN/talisman_entries_zh-CN.json';
+import inGameEntries from './data/zh-CN/in-game_entries_zh-CN.json';
+import otherEntries from './data/zh-CN/other_entries_zh-CN.json';
 import './App.css';
 
 const { Title, Text } = Typography;
+const { Search } = Input;
 
 // 定义数据接口
 interface EntryData {
@@ -24,6 +26,44 @@ function App() {
   const [activeTab, setActiveTab] = useState('局外词条');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isEnglish, setIsEnglish] = useState(false);
+  const [searchKeyword, setSearchKeyword] = useState('');
+
+  // 搜索过滤函数
+  const filterData = (data: EntryData[], searchValue: string) => {
+    if (!searchValue.trim()) return data;
+    
+    const searchLower = searchValue.toLowerCase();
+    return data.filter(item => 
+      item.entry_name?.toLowerCase().includes(searchLower) ||
+      item.explanation?.toLowerCase().includes(searchLower) ||
+      item.entry_type?.toLowerCase().includes(searchLower) ||
+      item.superposability?.toLowerCase().includes(searchLower) ||
+      item.talisman?.toLowerCase().includes(searchLower) ||
+      item.entry_id?.toLowerCase().includes(searchLower)
+    );
+  };
+
+  // 获取当前过滤后的数据
+  const getCurrentData = () => {
+    let data: EntryData[] = [];
+    switch (activeTab) {
+      case '局外词条':
+        data = outsiderEntries as EntryData[];
+        break;
+      case '护符词条':
+        data = talismanEntries as EntryData[];
+        break;
+      case '局内词条':
+        data = inGameEntries as EntryData[];
+        break;
+      case '其他词条':
+        data = otherEntries as EntryData[];
+        break;
+      default:
+        data = outsiderEntries as EntryData[];
+    }
+    return filterData(data, searchKeyword);
+  };
 
   // 主题切换函数
   const toggleTheme = () => {
@@ -100,7 +140,6 @@ function App() {
       dataIndex: 'explanation',
       key: 'explanation',
       width: 300,
-      ellipsis: true,
       render: (text) => text || '-',
     },
     {
@@ -145,7 +184,6 @@ function App() {
       dataIndex: 'explanation',
       key: 'explanation',
       width: 300,
-      ellipsis: true,
       render: (text) => text || '-',
     },
     {
@@ -170,7 +208,6 @@ function App() {
       dataIndex: 'explanation',
       key: 'explanation',
       width: 400,
-      ellipsis: true,
       render: (text) => text || '-',
     },
     {
@@ -181,64 +218,33 @@ function App() {
     },
   ];
 
-  // 标签页配置
-  const tabItems: TabsProps['items'] = [
+  // 其他词条表格列定义
+  const otherColumns: TableColumnsType<EntryData> = [
     {
-      key: '局外词条',
-      label: '局外词条',
-      children: (
-        <Table
-          columns={outsiderColumns}
-          dataSource={outsiderEntries as EntryData[]}
-          rowKey="entry_id"
-          pagination={{ 
-            pageSize: 20,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`
-          }}
-          scroll={{ x: 900 }}
-          size="middle"
-        />
-      ),
+      title: '词条名称',
+      dataIndex: 'entry_name',
+      key: 'entry_name',
+      width: 150,
     },
     {
-      key: '护符词条',
-      label: '护符词条',
-      children: (
-        <Table
-          columns={talismanColumns}
-          dataSource={talismanEntries as EntryData[]}
-          rowKey="entry_id"
-          pagination={{ 
-            pageSize: 20,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`
-          }}
-          scroll={{ x: 800 }}
-          size="middle"
-        />
-      ),
+      title: '解释',
+      dataIndex: 'explanation',
+      key: 'explanation',
+      width: 400,
+      render: (text) => text || '-',
     },
     {
-      key: '局内词条',
-      label: '局内词条',
-      children: (
-        <Table
-          columns={inGameColumns}
-          dataSource={inGameEntries as EntryData[]}
-          rowKey="entry_id"
-          pagination={{ 
-            pageSize: 20,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`
-          }}
-          scroll={{ x: 700 }}
-          size="middle"
-        />
-      ),
+      title: '词条类型',
+      dataIndex: 'entry_type',
+      key: 'entry_type',
+      width: 50,
+      render: (text) => text || '-',
+    },
+    {
+      title: '词条ID',
+      dataIndex: 'entry_id',
+      key: 'entry_id',
+      width: 50,
     },
   ];
 
@@ -247,9 +253,9 @@ function App() {
       theme={{
         algorithm: isDarkMode ? theme.darkAlgorithm : undefined,
         token: {
-          colorPrimary: geekblue[6],
-          colorPrimaryHover: geekblue[5],
-          colorPrimaryActive: geekblue[7],
+          colorPrimary: isDarkMode ? geekblue[4] : geekblue[6],
+          colorPrimaryHover: isDarkMode ? geekblue[3] : geekblue[5],
+          colorPrimaryActive: isDarkMode ? geekblue[5] : geekblue[7],
         },
       }}
     >
@@ -289,13 +295,66 @@ function App() {
           </Space>
         </div>
 
+        {/* 自定义按钮组 */}
+        <div className="custom-buttons-container">
+          <Button
+            type={activeTab === '局外词条' ? 'primary' : 'default'}
+            size="large"
+            onClick={() => setActiveTab('局外词条')}
+            className="custom-tab-button"
+          >
+            局外词条
+          </Button>
+          <Button
+            type={activeTab === '护符词条' ? 'primary' : 'default'}
+            size="large"
+            onClick={() => setActiveTab('护符词条')}
+            className="custom-tab-button"
+          >
+            护符词条
+          </Button>
+          <Button
+            type={activeTab === '局内词条' ? 'primary' : 'default'}
+            size="large"
+            onClick={() => setActiveTab('局内词条')}
+            className="custom-tab-button"
+          >
+            局内词条
+          </Button>
+          <Button
+            type={activeTab === '其他词条' ? 'primary' : 'default'}
+            size="large"
+            onClick={() => setActiveTab('其他词条')}
+            className="custom-tab-button"
+          >
+            其他词条
+          </Button>
+        </div>
+
         <div className="content-wrapper">
           <div className="tabs-container">
-            <Tabs
-              activeKey={activeTab}
-              items={tabItems}
-              onChange={setActiveTab}
-              className="main-tabs"
+            {/* 搜索框 */}
+            <div className="search-container">
+              <Search 
+                placeholder={`搜索${activeTab}...`}
+                onSearch={(value) => setSearchKeyword(value)}
+                className="custom-search-input"
+                allowClear
+              />
+            </div>
+            
+            <Table
+              columns={activeTab === '局外词条' ? outsiderColumns : activeTab === '护符词条' ? talismanColumns : activeTab === '局内词条' ? inGameColumns : otherColumns}
+              dataSource={getCurrentData()}
+              rowKey="entry_id"
+              pagination={{ 
+                pageSize: 20,
+                showSizeChanger: true,
+                showQuickJumper: true,
+                showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`
+              }}
+              scroll={{ x: activeTab === '局外词条' ? 900 : activeTab === '护符词条' ? 800 : activeTab === '局内词条' ? 700 : 650 }}
+              size="middle"
             />
           </div>
         </div>

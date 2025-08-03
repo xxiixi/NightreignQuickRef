@@ -1,16 +1,32 @@
 /* CSS变量定义 - 支持暗黑模式 */
 :root {
+  /* geekblue色板 - 全局定义 */
+  --geekblue-1: #f0f5ff;
+  --geekblue-2: #d6e4ff;
+  --geekblue-3: #adc6ff;
+  --geekblue-4: #85a5ff;
+  --geekblue-5: #597ef7;
+  --geekblue-6: #2f54eb;
+  --geekblue-7: #1d39c4;
+  --geekblue-8: #10239e;
+  --geekblue-9: #061178;
+  --geekblue-10: #030852;
+  
+  /* 亮色模式变量 */
   --bg-color: #fff;
   --color-text-1: rgba(0, 0, 0, 0.88);
   --color-text-2: rgba(0, 0, 0, 0.45);
-  --bg-gradient: linear-gradient(135deg, #e0e6ff 0%, #f7f7f7 100%);
+  --bg-gradient: linear-gradient(135deg, var(--geekblue-1) 0%, var(--geekblue-2) 100%);
   --content-bg: white;
   --content-shadow: rgba(0, 0, 0, 0.08);
   --table-header-bg: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
-  --table-hover-bg: #f0f5ff;
+  --table-hover-bg: var(--geekblue-1);
   --footer-bg: rgba(0, 0, 0, 0.05);
-  --link-color: #597ef7;
-  --link-hover-color: #85a5ff;
+  --link-color: var(--geekblue-6);
+  --link-hover-color: var(--geekblue-5);
+  --theme-primary: var(--geekblue-6);
+  --theme-primary-hover: var(--geekblue-5);
+  --theme-primary-active: var(--geekblue-7);
 }
 
 body[tomato-theme="dark"] {
@@ -21,10 +37,13 @@ body[tomato-theme="dark"] {
   --content-bg: #1f1f1f;
   --content-shadow: rgba(0, 0, 0, 0.3);
   --table-header-bg: linear-gradient(135deg, #262626 0%, #1f1f1f 100%);
-  --table-hover-bg: #177ddc;
+  --table-hover-bg: var(--geekblue-6);
   --footer-bg: rgba(255, 255, 255, 0.1);
-  --link-color: #85a5ff;
-  --link-hover-color: #bae7ff;
+  --link-color: var(--geekblue-4);
+  --link-hover-color: var(--geekblue-3);
+  --theme-primary: var(--geekblue-4);
+  --theme-primary-hover: var(--geekblue-3);
+  --theme-primary-active: var(--geekblue-5);
 }
 
 /* 全局容器 */
@@ -133,7 +152,7 @@ body[tomato-theme="dark"] {
 
 /* 标签页容器 */
 .tabs-container {
-  margin-top: 30px;
+  /* margin-top: 30px; */
   flex: 1;
 }
 
@@ -242,5 +261,44 @@ body[tomato-theme="dark"] {
   .top-bar {
     padding: 8px 10px;
   }
+}
+
+/* 自定义按钮样式 */
+.custom-tab-button {
+  min-width: 150px;
+  height: 48px;
+  border-radius: 10px;
+  font-weight: normal;
+  transition: all 0.3s ease;
+}
+
+.custom-tab-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* .custom-tab-button.ant-btn-primary {
+  font-weight: bold;
+} */
+
+/* 自定义按钮容器 */
+.custom-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 0 16px;
+}
+
+/* 搜索框容器 */
+.search-container {
+  margin-bottom: 16px;
+  display: flex;
+  /* justify-content: center; */
+}
+
+/* 搜索框样式 */
+.custom-search-input {
+  width: 200px;
 }
 
