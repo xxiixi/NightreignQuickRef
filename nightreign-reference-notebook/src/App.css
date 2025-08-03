@@ -1,7 +1,37 @@
+/* CSS变量定义 - 支持暗黑模式 */
+:root {
+  --bg-color: #fff;
+  --color-text-1: rgba(0, 0, 0, 0.88);
+  --color-text-2: rgba(0, 0, 0, 0.45);
+  --bg-gradient: linear-gradient(135deg, #e0e6ff 0%, #f7f7f7 100%);
+  --content-bg: white;
+  --content-shadow: rgba(0, 0, 0, 0.08);
+  --table-header-bg: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+  --table-hover-bg: #f0f5ff;
+  --footer-bg: rgba(0, 0, 0, 0.05);
+  --link-color: #597ef7;
+  --link-hover-color: #85a5ff;
+}
+
+body[tomato-theme="dark"] {
+  --bg-color: #141414;
+  --color-text-1: rgba(255, 255, 255, 0.85);
+  --color-text-2: rgba(255, 255, 255, 0.45);
+  --bg-gradient: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%);
+  --content-bg: #1f1f1f;
+  --content-shadow: rgba(0, 0, 0, 0.3);
+  --table-header-bg: linear-gradient(135deg, #262626 0%, #1f1f1f 100%);
+  --table-hover-bg: #177ddc;
+  --footer-bg: rgba(255, 255, 255, 0.1);
+  --link-color: #85a5ff;
+  --link-hover-color: #bae7ff;
+}
+
 /* 全局容器 */
 .app-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #dfe5ff 0%, #abb6ee 100%);
+  background: var(--bg-gradient);
+  color: var(--color-text-1);
 }
 
 /* 顶部 Bar 样式 */
@@ -34,7 +64,7 @@
 
 .theme-toggle-btn,
 .language-toggle-btn {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--color-text-1) !important;
   border: none !important;
   background: transparent !important;
   font-size: 16px;
@@ -45,7 +75,7 @@
 
 .theme-toggle-btn:hover,
 .language-toggle-btn:hover {
-  color: #bae7ff !important;
+  color: var(--link-hover-color) !important;
   background: rgba(255, 255, 255, 0.1) !important;
   transform: translateY(-1px);
 }
@@ -54,9 +84,9 @@
 .content-wrapper {
   max-width: 80%;
   margin: 0 auto;
-  background-color: white;
+  background-color: var(--content-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px var(--content-shadow);
   padding: 40px;
   display: flex;
   flex-direction: column;
@@ -76,7 +106,7 @@
 
 .main-title {
   margin-bottom: 16px !important;
-  color: white !important;
+  color: var(--color-text-1) !important;
   font-weight: 600;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -87,18 +117,18 @@
 
 .subtitle .ant-typography {
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-2);
 }
 
 .subtitle a {
-  color: #fff;
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 500;
 }
 
 .subtitle a:hover {
   text-decoration: underline;
-  color: #e6f7ff;
+  color: var(--link-hover-color);
 }
 
 /* 标签页容器 */
@@ -119,13 +149,13 @@
 }
 
 .ant-table-thead > tr > th {
-  background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+  background: var(--table-header-bg);
   font-weight: 600;
-  border-bottom: 2px solid #e8e8e8;
+  border-bottom: 2px solid var(--color-text-2);
 }
 
 .ant-table-tbody > tr:hover > td {
-  background-color: #f0f5ff;
+  background-color: var(--table-hover-bg);
 }
 
 /* 自定义 Tag 样式 - 统一使用 geekblue 色板 */
@@ -150,7 +180,7 @@
   margin-top: 40px;
   padding-top: 20px;
   text-align: center;
-  background: linear-gradient(135deg, #fafafa17 0%, #f5f5f513 100%);
+  background: var(--footer-bg);
   padding: 20px;
   margin: 40px auto 0 auto;
   max-width: 100%;
@@ -161,13 +191,13 @@
 }
 
 .footer a {
-  color: #597ef7;
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 500;
 }
 
 .footer a:hover {
-  color: #85a5ff;
+  color: var(--link-hover-color);
   text-decoration: underline;
 }
 
