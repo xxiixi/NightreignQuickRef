@@ -98,7 +98,7 @@ npm run deploy
 ### 访问地址
 
 部署完成后，可通过以下地址访问：
-- **在线地址**：https://xixi.github.io/NightreignQuickRef
+- **在线地址**：https://xxiixi.github.io/NightreignQuickRef/
 
 ### 注意事项
 
