@@ -19,8 +19,8 @@
   
   /* 亮色模式变量 */
   --bg-color: #fff;
-  --color-text-1: rgba(64, 64, 64, 0.88);
-  --color-text-2: rgba(82, 82, 82, 0.75);
+  --color-text-1: #415394;
+  --color-text-2: #637fbb;
   --bg-gradient: linear-gradient(135deg, var(--geekblue-1) 0%, var(--geekblue-2) 100%);
   --content-bg: white;
   --content-shadow: rgba(0, 0, 0, 0.08);
@@ -148,7 +148,7 @@ body[tomato-theme="dark"] {
 
 .subtitle-text {
   font-size: 16px !important;
-  color: var(--color-text-1) !important;
+  color: var(--color-text-2) !important;
   font-weight: 500;
 }
 
@@ -521,8 +521,8 @@ body[tomato-theme="dark"] .custom-tab-button::after {
 .custom-buttons-container {
   display: flex;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 24px;
+  gap: 30px;
+  margin-bottom: 34px;
   padding: 0 16px;
 }
 

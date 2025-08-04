@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Space } from 'antd';
-import { HeartOutlined, GithubOutlined } from '@ant-design/icons';
+import { HeartOutlined, MailOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
       <Space direction="vertical" size="small" align="center">
         <Text type="secondary" className="footer-text" style={{ fontSize: '14px', color: 'var(--color-text-2)' }}>
           <HeartOutlined style={{ marginRight: '4px', color: '#ff4d4f' }} />
-          Created with love by{' '}
+          Created by{' '}
           <a 
             href="https://github.com/xxiixi" 
             target="_blank" 
@@ -23,7 +23,6 @@ const Footer: React.FC = () => {
             style={{ 
               color: 'var(--link-color)', 
               textDecoration: 'none',
-              fontWeight: '600',
               transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
@@ -38,15 +37,13 @@ const Footer: React.FC = () => {
             Cecilia
           </a>
           {' '}｜{' '}
-          <GithubOutlined style={{ marginRight: '4px', color: 'var(--color-text-2)' }} />
+          <MailOutlined style={{ marginRight: '4px', color: 'var(--color-text-2)' }} />
+          Contact me at{' '}
           <a 
-            href="https://github.com/xxiixi/NightreignQuickRef" 
-            target="_blank" 
-            rel="noopener noreferrer"
+            href="mailto:scyxw5@gmail.com" 
             style={{ 
               color: 'var(--link-color)', 
               textDecoration: 'none',
-              fontWeight: '600',
               transition: 'all 0.3s ease'
             }}
             onMouseEnter={(e) => {
@@ -58,7 +55,7 @@ const Footer: React.FC = () => {
               e.currentTarget.style.textDecoration = 'none';
             }}
           >
-            GitHub Repository
+            scyxw5@gmail.com
           </a>
         </Text>
         <Text type="secondary" className="footer-text" style={{ fontSize: '12px', color: 'var(--color-text-2)' }}>
