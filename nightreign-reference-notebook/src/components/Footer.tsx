@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Space } from 'antd';
-import { HeartOutlined, MailOutlined } from '@ant-design/icons';
+import { HeartOutlined, GithubOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
       marginTop: '40px'
     }}>
       <Space direction="vertical" size="small" align="center">
-        <Text type="secondary" className="footer-text" style={{ fontSize: '14px', color: 'var(--color-text-2)' }}>
+        <Text type="secondary" className="footer-text" style={{ fontSize: '13px', color: 'var(--color-text-2)' }}>
           <HeartOutlined style={{ marginRight: '4px', color: '#ff4d4f' }} />
           Created by{' '}
           <a 
@@ -37,10 +37,12 @@ const Footer: React.FC = () => {
             Cecilia
           </a>
           {' '}｜{' '}
-          <MailOutlined style={{ marginRight: '4px', color: 'var(--color-text-2)' }} />
-          Contact me at{' '}
+          <GithubOutlined style={{ marginRight: '4px', color: 'var(--color-text-2)' }} />
+          Report an issue on{' '}
           <a 
-            href="mailto:scyxw5@gmail.com" 
+            href="https://github.com/xxiixi/NightreignQuickRef" 
+            target="_blank" 
+            rel="noopener noreferrer"
             style={{ 
               color: 'var(--link-color)', 
               textDecoration: 'none',
@@ -55,7 +57,7 @@ const Footer: React.FC = () => {
               e.currentTarget.style.textDecoration = 'none';
             }}
           >
-            scyxw5@gmail.com
+            NightreignQuickRef
           </a>
         </Text>
         <Text type="secondary" className="footer-text" style={{ fontSize: '12px', color: 'var(--color-text-2)' }}>
