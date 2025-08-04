@@ -1,3 +1,8 @@
+/* 全局字体优化 */
+* {
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
 /* CSS变量定义 - 支持暗黑模式 */
 :root {
   /* geekblue色板 - 全局定义 */
@@ -15,15 +20,15 @@
   /* 亮色模式变量 */
   --bg-color: #fff;
   --color-text-1: rgba(64, 64, 64, 0.88);
-  --color-text-2: rgba(128, 128, 128, 0.65);
+  --color-text-2: rgba(82, 82, 82, 0.75);
   --bg-gradient: linear-gradient(135deg, var(--geekblue-1) 0%, var(--geekblue-2) 100%);
   --content-bg: white;
   --content-shadow: rgba(0, 0, 0, 0.08);
   --table-header-bg: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
   --table-hover-bg: var(--geekblue-1);
   --footer-bg: rgba(0, 0, 0, 0.05);
-  --link-color: var(--geekblue-6);
-  --link-hover-color: var(--geekblue-5);
+  --link-color: var(--geekblue-5);
+  --link-hover-color: var(--geekblue-6);
   --theme-primary: var(--geekblue-6);
   --theme-primary-hover: var(--geekblue-5);
   --theme-primary-active: var(--geekblue-7);
@@ -39,8 +44,8 @@ body[tomato-theme="dark"] {
   --table-header-bg: linear-gradient(135deg, #262626 0%, #1f1f1f 100%);
   --table-hover-bg: var(--geekblue-6);
   --footer-bg: rgba(255, 255, 255, 0.1);
-  --link-color: var(--geekblue-4);
-  --link-hover-color: var(--geekblue-3);
+  --link-color: var(--geekblue-6);
+  --link-hover-color: var(--geekblue-5);
   --theme-primary: var(--geekblue-4);
   --theme-primary-hover: var(--geekblue-3);
   --theme-primary-active: var(--geekblue-5);
