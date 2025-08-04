@@ -217,7 +217,7 @@ const LegendaryWeaponView: React.FC = () => {
         arrows 
         infinite={false}
         dots={false}
-        beforeChange={(from, to) => setCurrentStep(to)}
+        beforeChange={(_from, to) => setCurrentStep(to)}
       >
         <div>
           {firstTable}
