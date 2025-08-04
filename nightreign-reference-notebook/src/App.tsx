@@ -383,19 +383,7 @@ function App() {
           </Title>
           <Space direction="vertical" size="small" className="subtitle">
             <Text type="secondary" className="subtitle-text">
-              Based on ELDEN RING NIGHTREIGN version 1.01.3
-            </Text>
-            <Text type="secondary" className="subtitle-text">
-            <HeartOutlined style={{ marginRight: '4px' }} />
-               Created by{' '}
-              <a 
-                href="https://github.com/xxiixi" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="author-link"
-              >
-                xxiixi
-              </a>
+              黑夜君临内容速查工具，按游戏内结构分类整理，可快速检索条目信息，后续会添加更多内容。
             </Text>
           </Space>
         </div>
@@ -509,7 +497,7 @@ function App() {
               rowKey="entry_id"
               pagination={{ 
                 current: currentPage,
-                pageSize: 30,
+                pageSize: 20,
                 showSizeChanger: true,
                 showQuickJumper: true,
                 showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
@@ -520,11 +508,23 @@ function App() {
             />
           </div>
         </div>
-        <div className="footer">
+                <div className="footer">
             <Space direction="vertical" size="middle" align="center">
               <Text type="secondary" className="footer-text">
-              <GithubOutlined style={{ marginRight: '4px' }} />
-                Check out the project or report an issue on{' '}
+                <HeartOutlined style={{ marginRight: '4px' }} />
+                Created by{' '}
+                <a 
+                  href="https://github.com/xxiixi" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="author-link"
+                >
+                  Cecilia
+                </a>
+               
+                ｜
+                <GithubOutlined style={{ marginRight: '4px' }} />
+                Report an issue on{' '}
                 <a 
                   href="https://github.com/xxiixi/NightreignQuickRef" 
                   target="_blank" 
@@ -533,6 +533,12 @@ function App() {
                 >
                   NightreignQuickRef
                 </a>
+              </Text>
+              <Text type="secondary" className="footer-text">
+                © 2025 NightreignQuickRef · All Rights Reserved
+              </Text>
+              <Text type="secondary" className="footer-text">
+                Last updated: August 4, 2025 | Based on Elden Ring: Nightreign version 1.01.3
               </Text>
             </Space>
           </div>
