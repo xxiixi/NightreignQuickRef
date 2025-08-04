@@ -2,7 +2,7 @@
 
 Quick reference for Elden Ring: Nightreign entries, categorized to match in-game structure for instant lookup.
 
-All data reference files are located in the [row_data/](./row_data/) directory
+All data reference files are located in the [raw_data/](./reference/raw_data/) directory.
 
 ## Tech Stack
 
