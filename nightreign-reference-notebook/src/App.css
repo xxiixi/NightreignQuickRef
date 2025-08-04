@@ -108,7 +108,7 @@ body[tomato-theme="dark"] {
   background-color: var(--content-bg);
   border-radius: 12px;
   box-shadow: 0 4px 20px var(--content-shadow);
-  padding: 40px;
+  padding: 10px 40px;
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - 200px);

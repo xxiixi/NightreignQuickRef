@@ -235,21 +235,21 @@
         "entry_name":"强韧度＋１",
         "entry_type":"能力",
         "explanation":"受到的韧性伤害-5%",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7001001",
         "entry_name":"强韧度＋２",
         "entry_type":"能力",
         "explanation":"受到的韧性伤害-10%",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7001002",
         "entry_name":"强韧度＋３",
         "entry_type":"能力",
         "explanation":"受到的韧性伤害-15%",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7001400",
@@ -445,14 +445,14 @@
         "entry_name":"提升双手共持时，造成失去平衡的能力",
         "entry_type":"攻击力",
         "explanation":"双手共持时，造成的削韧+5%",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7006100",
         "entry_name":"提升双手各持时，造成失去平衡的能力",
         "entry_type":"攻击力",
         "explanation":"双手各持时，造成的削韧+5%",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7010200",
@@ -529,7 +529,7 @@
         "entry_name":"血量偏低时，能提升减伤率",
         "entry_type":"减伤率",
         "explanation":"生命值量小于20%时，受到的伤害-25%",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7020000",
@@ -557,21 +557,21 @@
         "entry_name":"防御成功时，能累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表+1",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7030700",
         "entry_name":"防御时，变得容易被敌人攻击",
         "entry_type":"行动",
         "explanation":"仇恨增益+300",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7030800",
         "entry_name":"使出致命一击时，加快累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表+5",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7030900",
@@ -921,14 +921,14 @@
         "entry_name":"不包含自己，提升周围我方人物的精力恢复速度",
         "entry_type":"队伍成员",
         "explanation":"周围友方人物但不包括自己，精力恢复速度+4点\/秒",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7050100",
         "entry_name":"道具效用能扩及我方人物",
         "entry_type":"队伍成员",
         "explanation":null,
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7060000",
@@ -1166,14 +1166,14 @@
         "entry_name":"提升打倒敌人时，绝招量表的累积量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表+5",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7090100",
         "entry_name":"打倒敌人时，除了自己恢复周围我方人物的血量",
         "entry_type":"队伍成员",
         "explanation":"固定回复20点生命值，有0.5秒内置冷却时间",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7090300",
@@ -1565,7 +1565,7 @@
         "entry_name":"受到损伤并被弹飞时，能提升强韧度与减伤率",
         "entry_type":"减伤率",
         "explanation":"玩家被击飞时，30秒内，受到的伤害-20%，受到的韧性伤害-20%",
-        "superposability":"叠加性未知"
+        "superposability":"未知"
     },
     {
         "entry_id":"7260000",
