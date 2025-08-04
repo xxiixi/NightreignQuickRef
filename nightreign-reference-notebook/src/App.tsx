@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Table, Typography, Space, Tag, Button, ConfigProvider, theme, Input, Select, message } from 'antd';
+import { Table, Typography, Space, Tag, Button, ConfigProvider, theme, Input, Select, message, Tabs } from 'antd';
 import type { TableColumnsType } from 'antd';
 import { geekblue } from '@ant-design/colors';
 import { MoonOutlined, SunOutlined, TranslationOutlined, HeartOutlined, GithubOutlined } from '@ant-design/icons';
@@ -96,13 +96,14 @@ const getTypeColor = (type: string | null | undefined): string => {
 };
 
 function App() {
-  const [activeTab, setActiveTab] = useState('局外词条');
+  const [activeTab, setActiveTab] = useState('词条详细数据');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isEnglish, setIsEnglish] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedOtherTypes, setSelectedOtherTypes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeEntryTab, setActiveEntryTab] = useState('局外词条');
 
   // 搜索过滤函数
   const filterData = (data: EntryData[], searchValue: string, types?: string[]) => {
@@ -123,33 +124,7 @@ function App() {
     );
   };
 
-  // 获取当前过滤后的数据
-  const getCurrentData = () => {
-    let data: EntryData[] = [];
-    switch (activeTab) {
-      case '局外词条':
-        data = outsiderEntries as EntryData[];
-        break;
-      case '护符词条':
-        data = talismanEntries as EntryData[];
-        break;
-      case '局内词条':
-        data = inGameEntries as EntryData[];
-        break;
-      case '其他词条':
-        data = otherEntries as EntryData[];
-        break;
-      default:
-        data = outsiderEntries as EntryData[];
-    }
-    if (activeTab === '局外词条') {
-      return filterData(data, searchKeyword, selectedTypes);
-    }
-    if (activeTab === '其他词条') {
-      return filterData(data, searchKeyword, selectedOtherTypes);
-    }
-    return filterData(data, searchKeyword);
-  };
+
 
   // 主题切换函数
   const toggleTheme = () => {
@@ -341,6 +316,201 @@ function App() {
     },
   ];
 
+  // 渲染表格内容
+  const renderTableContent = (tabKey: string) => {
+    let data: EntryData[] = [];
+    let columns: TableColumnsType<EntryData>;
+    
+    switch (tabKey) {
+      case '局外词条':
+        data = outsiderEntries as EntryData[];
+        columns = outsiderColumns;
+        data = filterData(data, searchKeyword, selectedTypes);
+        break;
+      case '护符词条':
+        data = talismanEntries as EntryData[];
+        columns = talismanColumns;
+        data = filterData(data, searchKeyword);
+        break;
+      case '局内词条':
+        data = inGameEntries as EntryData[];
+        columns = inGameColumns;
+        data = filterData(data, searchKeyword);
+        break;
+      case '其他词条':
+        data = otherEntries as EntryData[];
+        columns = otherColumns;
+        data = filterData(data, searchKeyword, selectedOtherTypes);
+        break;
+      default:
+        data = outsiderEntries as EntryData[];
+        columns = outsiderColumns;
+        data = filterData(data, searchKeyword, selectedTypes);
+    }
+
+    return (
+      <Table
+        columns={columns}
+        dataSource={data}
+        rowKey="entry_id"
+        pagination={{ 
+          current: currentPage,
+          pageSize: 20,
+          showSizeChanger: true,
+          showQuickJumper: true,
+          showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
+          onChange: (page) => setCurrentPage(page)
+        }}
+        scroll={{ x: tabKey === '局外词条' ? 900 : tabKey === '护符词条' ? 800 : activeTab === '局内词条' ? 700 : 650 }}
+        size="middle"
+      />
+    );
+  };
+
+  // 渲染搜索和筛选器的函数
+  const renderSearchAndFilter = (tabKey: string) => {
+    if (tabKey === '局外词条') {
+      return (
+        <div className="filter-search-row">
+          <Search 
+            placeholder={`搜索 ${tabKey} 关键字`}
+            onSearch={(value) => {
+              setSearchKeyword(value);
+              setCurrentPage(1);
+            }}
+            className="custom-search-input"
+            allowClear
+          />
+          <Select
+            className="outsider-type-select"
+            mode="multiple"
+            allowClear
+            tagRender={tagRender}
+            placeholder="按词条类型筛选（最多3项）"
+            value={selectedTypes}
+            onChange={(values) => {
+              if (values && values.length > 3) {
+                message.warning('最多只能选择3个词条类型');
+                return;
+              }
+              setSelectedTypes(values);
+              setCurrentPage(1);
+            }}
+            options={outsiderTypeOptions}
+            maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+            maxTagCount={3}
+            maxCount={3}
+          />
+        </div>
+      );
+    } else if (tabKey === '其他词条') {
+      return (
+        <div className="filter-search-row">
+          <Search 
+            placeholder={`搜索 ${tabKey} 关键字`}
+            onSearch={(value) => {
+              setSearchKeyword(value);
+              setCurrentPage(1);
+            }}
+            className="custom-search-input"
+            allowClear
+          />
+          <Select
+            className="outsider-type-select"
+            mode="multiple"
+            allowClear
+            tagRender={tagRender}
+            placeholder="按词条类型筛选"
+            value={selectedOtherTypes}
+            onChange={(values) => {
+              setSelectedOtherTypes(values);
+              setCurrentPage(1);
+            }}
+            options={otherTypeOptions}
+            maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="search-container">
+          <Search 
+            placeholder={`搜索 ${tabKey} 关键字`}
+            onSearch={(value) => {
+              setSearchKeyword(value);
+              setCurrentPage(1);
+            }}
+            className="custom-search-input"
+            allowClear
+          />
+        </div>
+      );
+    }
+  };
+
+  // 渲染词条详细数据内容
+  const renderEntryDetailContent = () => {
+    return (
+      <Tabs
+        activeKey={activeEntryTab}
+        onChange={(key) => setActiveEntryTab(key)}
+        items={[
+          {
+            key: '局外词条',
+            label: '局外词条',
+            children: (
+              <div>
+                {renderSearchAndFilter('局外词条')}
+                {renderTableContent('局外词条')}
+              </div>
+            ),
+          },
+          {
+            key: '护符词条',
+            label: '护符词条',
+            children: (
+              <div>
+                {renderSearchAndFilter('护符词条')}
+                {renderTableContent('护符词条')}
+              </div>
+            ),
+          },
+          {
+            key: '局内词条',
+            label: '局内词条',
+            children: (
+              <div>
+                {renderSearchAndFilter('局内词条')}
+                {renderTableContent('局内词条')}
+              </div>
+            ),
+          },
+          {
+            key: '其他词条',
+            label: '其他词条',
+            children: (
+              <div>
+                {renderSearchAndFilter('其他词条')}
+                {renderTableContent('其他词条')}
+              </div>
+            ),
+          },
+        ]}
+        className="custom-tabs"
+      />
+    );
+  };
+
+  // 渲染其他功能内容
+  const renderOtherFunctionContent = (functionName: string) => {
+    return (
+      <div style={{ textAlign: 'center', padding: '40px' }}>
+        <Title level={3}>{functionName}</Title>
+        <Text type="secondary">此功能正在开发中...</Text>
+      </div>
+    );
+  };
+
   return (
     <ConfigProvider
       theme={{
@@ -390,158 +560,71 @@ function App() {
 
         {/* 自定义按钮组 */}
         <div className="custom-buttons-container">
-          <div className={`custom-tab-button ${activeTab === '局外词条' ? 'active' : ''}`}>
-            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('局外词条'); }}>
-              局外词条
+          <div className={`custom-tab-button ${activeTab === '词条详细数据' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('词条详细数据'); }}>
+              词条详细数据
             </a>
           </div>
-          <div className={`custom-tab-button ${activeTab === '护符词条' ? 'active' : ''}`}>
-            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('护符词条'); }}>
-              护符词条
+          <div className={`custom-tab-button ${activeTab === '功能2' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('功能2'); }}>
+              功能2
             </a>
           </div>
-          <div className={`custom-tab-button ${activeTab === '局内词条' ? 'active' : ''}`}>
-            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('局内词条'); }}>
-              局内词条
+          <div className={`custom-tab-button ${activeTab === '功能3' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('功能3'); }}>
+              功能3
             </a>
           </div>
-          <div className={`custom-tab-button ${activeTab === '其他词条' ? 'active' : ''}`}>
-            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('其他词条'); }}>
-              其他词条
+          <div className={`custom-tab-button ${activeTab === '功能4' ? 'active' : ''}`}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab('功能4'); }}>
+              功能4
             </a>
           </div>
         </div>
 
         <div className="content-wrapper">
           <div className="tabs-container">
-            {/* 筛选器+搜索框，仅在局外词条显示 */}
-            {activeTab === '局外词条' && (
-              <div className="filter-search-row">
-                 <Search 
-                  placeholder={`搜索 ${activeTab} 关键字`}
-                  onSearch={(value) => {
-                    setSearchKeyword(value);
-                    setCurrentPage(1); // 重置到第一页
-                  }}
-                  className="custom-search-input"
-                  allowClear
-                />
-                <Select
-                  className="outsider-type-select"
-                  mode="multiple"
-                  allowClear
-                  tagRender={tagRender}
-                  placeholder="按词条类型筛选（最多3项）"
-                  value={selectedTypes}
-                  onChange={(values) => {
-                    if (values && values.length > 3) {
-                      message.warning('最多只能选择3个词条类型');
-                      return; // 不更新状态
-                    }
-                    setSelectedTypes(values);
-                    setCurrentPage(1); // 重置到第一页
-                  }}
-                  options={outsiderTypeOptions}
-                  maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                  maxTagCount={3}
-                  maxCount={3}
-                />
-              </div>
-            )}
-            {/* 其他词条的筛选器+搜索框 */}
-            {activeTab === '其他词条' && (
-              <div className="filter-search-row">
-                 <Search 
-                  placeholder={`搜索 ${activeTab} 关键字`}
-                  onSearch={(value) => {
-                    setSearchKeyword(value);
-                    setCurrentPage(1); // 重置到第一页
-                  }}
-                  className="custom-search-input"
-                  allowClear
-                />
-                <Select
-                  className="outsider-type-select"
-                  mode="multiple"
-                  allowClear
-                  tagRender={tagRender}
-                  placeholder="按词条类型筛选"
-                  value={selectedOtherTypes}
-                  onChange={(values) => {
-                    setSelectedOtherTypes(values);
-                    setCurrentPage(1); // 重置到第一页
-                  }}
-                  options={otherTypeOptions}
-                  maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                />
-              </div>
-            )}
-            {/* 护符词条和局内词条时的搜索框 */}
-            {activeTab !== '局外词条' && activeTab !== '其他词条' && (
-              <div className="search-container">
-                <Search 
-                  placeholder={`搜索 ${activeTab} 关键字`}
-                  onSearch={(value) => {
-                    setSearchKeyword(value);
-                    setCurrentPage(1); // 重置到第一页
-                  }}
-                  className="custom-search-input"
-                  allowClear
-                />
-              </div>
-            )}
-            
-            <Table
-              columns={activeTab === '局外词条' ? outsiderColumns : activeTab === '护符词条' ? talismanColumns : activeTab === '局内词条' ? inGameColumns : otherColumns}
-              dataSource={getCurrentData()}
-              rowKey="entry_id"
-              pagination={{ 
-                current: currentPage,
-                pageSize: 20,
-                showSizeChanger: true,
-                showQuickJumper: true,
-                showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
-                onChange: (page) => setCurrentPage(page)
-              }}
-              scroll={{ x: activeTab === '局外词条' ? 900 : activeTab === '护符词条' ? 800 : activeTab === '局内词条' ? 700 : 650 }}
-              size="middle"
-            />
+            {/* 根据当前选中的功能渲染不同内容 */}
+            {activeTab === '词条详细数据' && renderEntryDetailContent()}
+            {activeTab === '功能2' && renderOtherFunctionContent('功能2')}
+            {activeTab === '功能3' && renderOtherFunctionContent('功能3')}
+            {activeTab === '功能4' && renderOtherFunctionContent('功能4')}
           </div>
         </div>
-                <div className="footer">
-            <Space direction="vertical" size="middle" align="center">
-              <Text type="secondary" className="footer-text">
-                <HeartOutlined style={{ marginRight: '4px' }} />
-                Created by{' '}
-                <a 
-                  href="https://github.com/xxiixi" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="author-link"
-                >
-                  Cecilia
-                </a>
-               
-                ｜
-                <GithubOutlined style={{ marginRight: '4px' }} />
-                Report an issue on{' '}
-                <a 
-                  href="https://github.com/xxiixi/NightreignQuickRef" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="footer-link"
-                >
-                  NightreignQuickRef
-                </a>
-              </Text>
-              <Text type="secondary" className="footer-text">
-                © 2025 NightreignQuickRef · All Rights Reserved
-              </Text>
-              <Text type="secondary" className="footer-text">
-                Last updated: August 4, 2025 | Based on Elden Ring: Nightreign version 1.01.3
-              </Text>
-            </Space>
-          </div>
+        <div className="footer">
+          <Space direction="vertical" size="middle" align="center">
+            <Text type="secondary" className="footer-text">
+              <HeartOutlined style={{ marginRight: '4px' }} />
+              Created by{' '}
+              <a 
+                href="https://github.com/xxiixi" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="author-link"
+              >
+                Cecilia
+              </a>
+             
+              ｜
+              <GithubOutlined style={{ marginRight: '4px' }} />
+              Report an issue on{' '}
+              <a 
+                href="https://github.com/xxiixi/NightreignQuickRef" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                NightreignQuickRef
+              </a>
+            </Text>
+            <Text type="secondary" className="footer-text">
+              © 2025 NightreignQuickRef · All Rights Reserved
+            </Text>
+            <Text type="secondary" className="footer-text">
+              Last updated: August 4, 2025 | Based on Elden Ring: Nightreign version 1.01.3
+            </Text>
+          </Space>
+        </div>
       </div>
     </ConfigProvider>
   );
