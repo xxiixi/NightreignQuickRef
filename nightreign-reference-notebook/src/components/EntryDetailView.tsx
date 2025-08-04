@@ -117,7 +117,12 @@ const EntryDetailView: React.FC = () => {
       key: 'superposability',
       width: 55,
       align: 'center',
-      render: (text) => text || '-',
+      filters: [
+        { text: '可叠加', value: '可叠加' },
+        { text: '不可叠加', value: '不可叠加' },
+        { text: '未知', value: '未知' },
+      ],
+      onFilter: (value, record) => record.superposability === value,
     },
     {
       title: '词条ID',

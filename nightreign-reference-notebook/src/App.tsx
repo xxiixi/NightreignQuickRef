@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Navigation from './components/Navigation';
 import EntryDetailView from './components/EntryDetailView';
 import OtherFunctionView from './components/OtherFunctionView';
+import LegendaryWeaponView from './components/LegendaryWeaponView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
 import './App.css';
 
@@ -51,8 +52,8 @@ function App() {
     switch (activeTab) {
       case '词条详细数据':
         return <EntryDetailView />;
-      case '功能2':
-        return <OtherFunctionView functionName="功能2" />;
+      case '传说武器详情':
+        return <LegendaryWeaponView />;
       case '功能3':
         return <OtherFunctionView functionName="功能3" />;
       case '功能4':

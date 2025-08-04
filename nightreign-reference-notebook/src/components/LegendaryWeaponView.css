@@ -1,0 +1,199 @@
+/* 禁用表格行的默认悬停效果 */
+.heatmap-table .ant-table-tbody > tr:hover > td {
+    background: transparent !important;
+  }
+  
+  /* 单元格悬停效果 - 无缩放版本 */
+  .heatmap-cell {
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .heatmap-cell:hover {
+    /* 只放大，不改变颜色 */
+    transform: scale(1.1); /* 轻微放大 */
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* 阴影效果 */
+  }
+
+  .heatmap-table .ant-table-cell {
+    transition: background-color 0.3s ease;
+    padding: 0;
+  }
+  
+  /* 确保色块占满单元格 */
+  .heatmap-table .ant-table-tbody > tr > td {
+    padding: 5 !important;
+    text-align: center !important;
+  }
+  
+  
+  .heatmap-table .ant-table-thead > tr > th {
+    text-align: center !important;
+    font-weight: normal !important;
+  }
+
+  
+  
+  /* 武器名称列使用和表头一样的底色 */
+  .heatmap-table .ant-table-tbody > tr > td:first-child {
+    background-color: var(--ant-color-bg-container) !important;
+  }
+  
+  /* 黑暗模式适配 */
+  [data-theme='dark'] .heatmap-table .ant-table-tbody > tr > td:first-child,
+  [tomato-theme='dark'] .heatmap-table .ant-table-tbody > tr > td:first-child {
+    background-color: var(--ant-color-bg-container) !important;
+  }
+  
+  /* 黑暗模式下的文字颜色和背景色 */
+  [data-theme='dark'] .heatmap-cell,
+  [tomato-theme='dark'] .heatmap-cell {
+    color: var(--ant-color-text) !important;
+    /* 移除背景色覆盖，让JavaScript动态设置的颜色生效 */
+  }
+      
+/* Steps组件自定义样式 */
+.ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  background-color: #4d87f3 !important;
+  border-color: #4d87f3 !important;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #4d87f3 !important;
+  border-color: #4d87f3 !important;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon {
+  color: #fff !important;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon .anticon {
+  color: #fff !important;
+}
+
+.ant-steps .ant-steps-item-process .ant-steps-item-icon .ant-steps-icon {
+  color: #fff !important;
+}
+
+.ant-steps .ant-steps-item-process .ant-steps-item-icon .ant-steps-icon .anticon {
+  color: #fff !important;
+}
+
+.ant-steps .ant-steps-item-wait .ant-steps-item-icon {
+  background-color: #f0f0f0 !important;
+  border-color: #d9d9d9 !important;
+}
+
+.ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon {
+  color: #bfbfbf !important;
+}
+
+.ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon .anticon {
+  color: #bfbfbf !important;
+}
+
+/* 步骤条连接线颜色 */
+.ant-steps .ant-steps-item-finish .ant-steps-item-tail::after {
+  background-color: #8bb4ff !important;
+}
+
+.ant-steps .ant-steps-item-process .ant-steps-item-tail::after {
+  background-color: #8bb4ff !important;
+}
+
+.ant-steps .ant-steps-item-wait .ant-steps-item-tail::after {
+  background-color: #f0f0f0 !important;
+}
+
+/* 文字颜色 */
+.ant-steps .ant-steps-item-title {
+  color: #666 !important;
+}
+
+.ant-steps .ant-steps-item-process .ant-steps-item-title {
+  color: #4d87f3 !important;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-title {
+  color: #4d87f3 !important;
+}
+
+/* 自定义步骤条容器样式 */
+.custom-steps-container {
+  margin-bottom: 16px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto 16px auto;
+}
+
+/* 黑夜模式下的步骤条容器 */
+[data-theme='dark'] .custom-steps-container,
+[tomato-theme='dark'] .custom-steps-container {
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 黑夜模式下的Steps样式 */
+[data-theme='dark'] .ant-steps .ant-steps-item-process .ant-steps-item-icon,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  background-color: #4d87f3 !important;
+  border-color: #4d87f3 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-finish .ant-steps-item-icon,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #4d87f3 !important;
+  border-color: #4d87f3 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon {
+  background-color: #303030 !important;
+  border-color: #434343 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon {
+  color: #666 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon .anticon,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon .anticon {
+  color: #666 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-finish .ant-steps-item-tail::after,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-finish .ant-steps-item-tail::after {
+  background-color: #4d87f3 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-process .ant-steps-item-tail::after,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-process .ant-steps-item-tail::after {
+  background-color: #4d87f3 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-tail::after,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-tail::after {
+  background-color: #303030 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-title,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-title {
+  color: #d9d9d9 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-process .ant-steps-item-title,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-process .ant-steps-item-title {
+  color: #4d87f3 !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-finish .ant-steps-item-title,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-finish .ant-steps-item-title {
+  color: #4d87f3 !important;
+}
+      

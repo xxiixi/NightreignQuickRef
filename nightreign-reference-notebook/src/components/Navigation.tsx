@@ -13,9 +13,9 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
           词条详细数据
         </a>
       </div>
-      <div className={`custom-tab-button ${activeTab === '功能2' ? 'active' : ''}`}>
-        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('功能2'); }}>
-          功能2
+      <div className={`custom-tab-button ${activeTab === '传说武器详情' ? 'active' : ''}`}>
+        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('传说武器详情'); }}>
+          传说武器详情
         </a>
       </div>
       <div className={`custom-tab-button ${activeTab === '功能3' ? 'active' : ''}`}>

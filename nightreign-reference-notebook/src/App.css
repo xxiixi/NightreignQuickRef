@@ -108,7 +108,7 @@ body[tomato-theme="dark"] {
 
 /* 内容包装器 - 实现左右8%留白和居中 */
 .content-wrapper {
-  max-width: 80%;
+  max-width: 70%;
   margin: 0 auto;
   background-color: var(--content-bg);
   border-radius: 12px;
