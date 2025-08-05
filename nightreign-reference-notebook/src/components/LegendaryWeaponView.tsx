@@ -21,7 +21,7 @@ interface WeaponEffect {
   };
 }
 
-// 转换后的武器特效数据结构
+// 转换后的数据结构
 interface TransformedWeaponEffect {
   weapon_id: string;
   weapon_name: string;
@@ -31,19 +31,16 @@ interface TransformedWeaponEffect {
   削韧: string;
 }
 
-// 转换后的武器角色数据结构
 interface TransformedWeaponCharacter {
   weapon_id: string;
   weapon_name: string;
   [characterName: string]: string | number;
 }
 
-// 角色列表
 const characterNames = ['追踪者', '守护者', '铁之眼', '女爵', '无赖', '复仇者', '隐士', '执行者'];
 
-// 转换数据格式
 const transformData = (rawData: WeaponCharacter[]) => {
-  const weapons = rawData[0]; // 获取第一个对象
+  const weapons = rawData[0];
   return Object.entries(weapons).map(([weaponName, characterData], index) => ({
     weapon_id: `LW${String(index + 1).padStart(3, '0')}`,
     weapon_name: weaponName,
@@ -51,9 +48,8 @@ const transformData = (rawData: WeaponCharacter[]) => {
   }));
 };
 
-// 转换武器特效数据格式
 const transformEffectData = (rawData: WeaponEffect[]) => {
-  const weapons = rawData[0]; // 获取第一个对象
+  const weapons = rawData[0];
   return Object.entries(weapons).map(([weaponName, effectData], index) => ({
     weapon_id: `LW${String(index + 1).padStart(3, '0')}`,
     weapon_name: weaponName,
@@ -67,34 +63,89 @@ const getBackgroundColor = (value: number, rowValues: number[]): string => {
   const min = Math.min(...rowValues);
   const range = max - min;
   
-  if (range === 0) return 'var(--color-primary-300)'; // 如果所有值相同，使用中间蓝色
+  if (range === 0) return 'var(--color-primary-300)';
   
-  // 计算当前值在行内范围内的位置 (0-1)
   const normalizedValue = (value - min) / range;
-  
-  // 检查是否为黑暗模式
   const isDarkMode = document.body.getAttribute('tomato-theme') === 'dark';
   
-  // 将0-1范围映射到颜色等级
-  if (normalizedValue < 0.3) {
-    return isDarkMode ? 'rgba(47, 84, 235, 0.1)' : 'var(--color-primary-50)';
+  // 浅色模式（带透明度）
+  if (!isDarkMode) {
+    if (normalizedValue < 0.25) return 'rgba(237, 242, 255, 0.3)';
+    if (normalizedValue < 0.5) return 'rgba(224, 232, 255, 0.5)';
+    if (normalizedValue < 0.8) return 'rgba(191, 207, 255, 0.7)';
+    return 'rgba(147, 167, 255, 0.9)';
   }
-  if (normalizedValue < 0.6) {
-    return isDarkMode ? 'rgba(47, 84, 235, 0.2)' : 'var(--color-primary-100)';
-  }
-  if (normalizedValue < 0.9) {
-    return isDarkMode ? 'rgba(47, 84, 235, 0.3)' : 'var(--color-primary-200)';
-  }
-  return isDarkMode ? 'rgba(47, 84, 235, 0.4)' : 'var(--color-primary-300)';
+  
+  // 深色模式
+  if (normalizedValue < 0.25) return 'rgba(47, 84, 235, 0.1)';
+  if (normalizedValue < 0.5) return 'rgba(47, 84, 235, 0.2)';
+  if (normalizedValue < 0.8) return 'rgba(47, 84, 235, 0.3)';
+  return 'rgba(47, 84, 235, 0.4)';
+};
+
+const ColorLegend = () => {
+  const isDarkMode = document.body.getAttribute('tomato-theme') === 'dark';
+  const legendItems = [
+    { range: '低', threshold: 0.25, valueRange: '0 ~ 25%' },
+    { range: '较低', threshold: 0.5, valueRange: '25% ~ 50%' },
+    { range: '较高', threshold: 0.8, valueRange: '50% ~ 80%' },
+    { range: '高', threshold: 1.0, valueRange: '80% ~ 100%' }
+  ];
+  
+  return (
+    <div className="color-legend-container" style={{ 
+      marginBottom: '12px', 
+      padding: '12px 16px',
+      backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
+      borderRadius: '6px'
+    }}>
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '16px',
+        marginBottom: '8px',
+        flexWrap: 'wrap'
+      }}>
+        <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>颜色映射：</span>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          {legendItems.map((item, index) => (
+            <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div 
+                style={{ 
+                  width: '16px', 
+                  height: '16px', 
+                  borderRadius: '3px',
+                  backgroundColor: getBackgroundColor(
+                    item.threshold, 
+                    [0, 1] // 用0和1模拟范围以便获取对应颜色
+                  )
+                }}
+              />
+              <span style={{ fontSize: '12px', display: 'flex', gap: '4px' }}>
+                <span>{item.range}</span>
+                <span style={{ color: 'var(--text-secondary)' }}>（{item.valueRange}）</span>
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    
+      <div style={{ 
+        paddingTop: '8px',
+        borderTop: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}`,
+        fontSize: '12px',
+        color: 'var(--text-secondary)'
+      }}>
+        映射原理：按行计算（当前值 - 最小值）/（最大值 - 最小值)，将结果归一化为0-100%范围，数值越高颜色越深。
+      </div>
+    </div>
+  );
 };
 
 const LegendaryWeaponView: React.FC = () => {
-  // 添加状态管理当前步骤
   const [currentStep, setCurrentStep] = React.useState(0);
-  // 添加ref来控制Carousel
   const carouselRef = React.useRef<React.ElementRef<typeof Carousel>>(null);
 
-  // 转换数据
   const weaponData = transformData(weaponCharacterData as WeaponCharacter[]);
   const effectData = transformEffectData(weaponEffectData as WeaponEffect[]);
 
@@ -106,7 +157,7 @@ const LegendaryWeaponView: React.FC = () => {
       key: 'weapon_name',
       width: 110,
       fixed: 'left',
-             render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
+      render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
     },
     ...characterNames.map(characterName => ({
       title: characterName,
@@ -115,17 +166,24 @@ const LegendaryWeaponView: React.FC = () => {
       width: 70,
       align: 'center' as const,
       render: (value: number, record: TransformedWeaponCharacter) => {
-        // 获取当前行的所有值用于比较
         const rowValues = characterNames.map(name => record[name] as number);
         return (
-                     <div 
-             className="heatmap-cell legendary-weapon-heatmap-cell" // 添加自定义类名
-                                          style={{ 
-                 backgroundColor: getBackgroundColor(value, rowValues),
-               }}
-           >
-             {value}
-           </div>
+          <div 
+            className="heatmap-cell legendary-weapon-heatmap-cell"
+            style={{ 
+              backgroundColor: getBackgroundColor(value, rowValues),
+              width: '90%',
+              height: '80%',
+              margin: '0 auto',
+              borderRadius: '6px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '13px'
+            }}
+          >
+            {value}
+          </div>
         );
       },
     }))
@@ -170,9 +228,10 @@ const LegendaryWeaponView: React.FC = () => {
     }
   ];
 
-  // 第一个表格内容
+  // 第一个表格内容（包含颜色图例）
   const firstTable = (
     <div className="legendary-weapon-table-container">
+      <ColorLegend />
       <Table
         className="heatmap-table"
         columns={columns}
@@ -216,7 +275,7 @@ const LegendaryWeaponView: React.FC = () => {
   );
 
   return (
-    <div className="legendary-weapon-container">
+    <div className="legendary-weapon-container" style={{ padding: '16px' }}>
       {customSteps}
       <Carousel 
         ref={carouselRef}
@@ -225,15 +284,12 @@ const LegendaryWeaponView: React.FC = () => {
         beforeChange={(_from, to) => setCurrentStep(to)}
         className="legendary-weapon-carousel"
       >
-        <div>
-          {firstTable}
-        </div>
-        <div>
-          {secondTable}
-        </div>
+        <div>{firstTable}</div>
+        <div>{secondTable}</div>
       </Carousel>
     </div>
   );
 };
 
 export default LegendaryWeaponView;
+    
