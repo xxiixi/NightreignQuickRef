@@ -18,11 +18,30 @@
   margin-bottom: 30px !important;
   transition: all var(--transition-normal);
   cursor: pointer;
+  animation: fadeInUp 0.3s ease-out;
 }
 
 .card-item:hover {
   transform: translateY(-4px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 卡片内容动画 */
+.card-item .card-header,
+.card-item .card-body {
+  transition: all var(--transition-normal);
+}
+
+/* 淡入动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card-item .card-header {
@@ -63,6 +82,16 @@ body[tomato-theme="dark"] .card-item .card-body {
   background: var(--content-bg);
   border-radius: 8px;
   overflow: hidden;
+  transition: all var(--transition-normal);
+}
+
+/* 表格行选择动画 */
+.character-attributes-table .ant-table-tbody > tr {
+  transition: background-color var(--transition-normal);
+}
+
+.character-attributes-table .ant-table-tbody > tr:hover {
+  transition: background-color var(--transition-normal);
 }
 
 /* 不同等级的颜色定义 */
@@ -100,6 +129,40 @@ body[tomato-theme="dark"] .card-item .card-body {
 .character-development-text {
   font-size: 16px;
   color: var(--color-text-2);
+}
+
+/* 雷达图过渡动画 - 与全局动画同步 */
+.radar-chart-container {
+  transition: all var(--transition-normal);
+  opacity: 1;
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+.radar-chart-container.theme-transitioning {
+  opacity: 0.6;
+  transform: scale(0.95);
+  filter: brightness(0.7);
+}
+
+/* 雷达图容器动画 */
+.radar-wrapper {
+  position: relative;
+  transition: all var(--transition-normal);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.radar-wrapper.theme-transitioning {
+  opacity: 0.6;
+  transform: scale(0.95);
+  filter: brightness(0.7);
+}
+
+/* 雷达图内部元素动画 */
+.radar-chart-container.theme-transitioning canvas,
+.radar-wrapper.theme-transitioning canvas {
+  transition: all var(--transition-normal);
 }
 
 /* 响应式设计 */

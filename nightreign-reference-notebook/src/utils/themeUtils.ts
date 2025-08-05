@@ -12,6 +12,9 @@ export const toggleTheme = (isDarkMode: boolean, setIsDarkMode: (value: boolean)
   
   // 保存到localStorage
   localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+  
+  // 触发自定义主题变化事件
+  window.dispatchEvent(new Event('themeChange'));
 };
 
 export const initializeTheme = (setIsDarkMode: (value: boolean) => void) => {
@@ -56,4 +59,21 @@ export const setupThemeListener = (setIsDarkMode: (value: boolean) => void) => {
   return () => {
     darkThemeMq.removeEventListener('change', handleThemeChange);
   };
+};
+
+// 检测当前主题状态
+export const getCurrentTheme = (): 'light' | 'dark' => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    return savedTheme as 'light' | 'dark';
+  }
+  
+  // 如果没有保存的主题设置，检查系统偏好
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return prefersDark ? 'dark' : 'light';
+};
+
+// 检测是否为深色模式
+export const isDarkMode = (): boolean => {
+  return getCurrentTheme() === 'dark';
 }; 

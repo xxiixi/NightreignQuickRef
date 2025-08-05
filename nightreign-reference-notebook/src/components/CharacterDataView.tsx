@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Typography, Table, Empty } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar } from '@ant-design/plots';
 import characterStatesData from '../data/zh-CN/character_states.json';
+import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
 
 const { Title, Text } = Typography;
@@ -32,6 +33,67 @@ const CharacterDataView: React.FC = () => {
 
   // 选中的角色状态 - 默认选中追踪者和女爵
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '守护者', '女爵']);
+  
+  // 当前主题状态
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
+  
+  // 强制重新渲染的key
+  const [chartKey, setChartKey] = useState(0);
+  
+  // 动画状态
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  // 监听主题变化
+  useEffect(() => {
+    const checkTheme = () => {
+      const newTheme = getCurrentTheme();
+      if (newTheme !== currentTheme) {
+        // 开始过渡动画
+        setIsTransitioning(true);
+        
+        // 延迟更新主题，让动画有时间执行
+        setTimeout(() => {
+          setCurrentTheme(newTheme);
+          setChartKey(prev => prev + 1);
+          
+          // 动画结束后恢复状态
+          setTimeout(() => {
+            setIsTransitioning(false);
+          }, 300);
+        }, 150);
+      }
+    };
+    
+    // 初始检查
+    checkTheme();
+    
+    // 监听 localStorage 变化
+    const handleStorageChange = () => {
+      // 延迟一点时间确保 localStorage 已更新
+      setTimeout(checkTheme, 50);
+    };
+    
+    // 监听系统主题变化
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleMediaChange = () => {
+      checkTheme();
+    };
+    
+    // 监听自定义主题变化事件
+    const handleThemeChange = () => {
+      setTimeout(checkTheme, 50);
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('themeChange', handleThemeChange);
+    mediaQuery.addEventListener('change', handleMediaChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('themeChange', handleThemeChange);
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, [currentTheme]);
 
   // 表格列定义
   const columns: ColumnsType<{ key: string; character: string; [key: string]: string }> = [
@@ -183,14 +245,19 @@ const CharacterDataView: React.FC = () => {
             </div>
             
             {/* 雷达图容器 - 固定高度防止下移 */}
-            <div style={{ flex: '1', minWidth: '400px', height: '500px' }}>
+            <div 
+              className={`radar-chart-container ${isTransitioning ? 'theme-transitioning' : ''}`}
+              style={{ flex: '1', minWidth: '400px', height: '500px' }}
+            >
               {selectedRowKeys.length > 0 ? (
                 <Radar
+                  key={`radar-main-${chartKey}`}
                   data={radarData}
                   xField="item"       // 用于X轴（雷达图的各个顶点）的字段
                   yField="score"      // 用于Y轴（数值）的字段
                   colorField="type"   // 用于区分不同角色的字段
                   height={450}        // 雷达图高度，与容器高度匹配
+                  theme={currentTheme}        // 根据当前主题动态设置
                   
                   // 坐标轴配置
                   axis={{
@@ -205,7 +272,9 @@ const CharacterDataView: React.FC = () => {
                       title: false,
                       gridLineWidth: 1,
                       gridLineDash: [0, 0],
-                      // 核心：将数值刻度转换为等级符号
+                      gridAreaFill: (_: unknown, index: number) => {
+                        return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
+                      },
                       tick: {
                         formatter: (value: number) => {
                           // 直接映射数值到等级（1→D，2→C，...，5→S）
@@ -220,14 +289,13 @@ const CharacterDataView: React.FC = () => {
                   point={{
                     size: 4,
                   }}
-                  
                   // 刻度配置
                   scale={{ 
-                    x: { padding: 0.5, align: 0 }, 
+                    x: { padding: 50, align: 0 }, 
                     y: { 
-                      tickCount: 5,          // Y轴刻度数量（对应5个等级）
-                      domainMin: 0,          // 最小值
-                      domainMax: 5           // 最大值（对应S等级）
+                      tickCount: 5,         
+                      domainMin: 0,          
+                      domainMax: 5 
                     }
                   }}
                   
@@ -258,10 +326,13 @@ const CharacterDataView: React.FC = () => {
                   }}
                 />
               ) : (
-                // 空状态显示：显示带有提示信息的空雷达图框架
-                <div style={{ height: '450px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-                  {/* 绘制一个空的雷达图框架 */}
+                // 空状态显示
+                <div 
+                  className={`radar-wrapper ${isTransitioning ? 'theme-transitioning' : ''}`}
+                  style={{ height: '450px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                >
                   <Radar
+                    key={`radar-empty-${chartKey}`}
                     data={radarAttributes.map(attr => ({
                       item: attr,
                       type: '',
@@ -271,6 +342,7 @@ const CharacterDataView: React.FC = () => {
                     yField="score"
                     colorField="type"
                     height={350}
+                    theme={currentTheme}        // 根据当前主题动态设置
                     axis={{
                       x: {
                         grid: true,

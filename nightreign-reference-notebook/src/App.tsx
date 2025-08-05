@@ -29,6 +29,9 @@ function App() {
     
     // 保存到localStorage
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
+    
+    // 触发自定义主题变化事件
+    window.dispatchEvent(new Event('themeChange'));
   };
 
   // 语言切换函数
