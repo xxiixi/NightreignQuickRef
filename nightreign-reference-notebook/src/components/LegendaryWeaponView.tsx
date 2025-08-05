@@ -76,13 +76,16 @@ const getBackgroundColor = (value: number, rowValues: number[]): string => {
   const isDarkMode = document.body.getAttribute('tomato-theme') === 'dark';
   
   // 将0-1范围映射到颜色等级
-  if (normalizedValue < 0.4) {
-    return isDarkMode ? 'rgba(47, 84, 235, 0.1)' : 'var(--color-primary-100)';
+  if (normalizedValue < 0.3) {
+    return isDarkMode ? 'rgba(47, 84, 235, 0.1)' : 'var(--color-primary-50)';
   }
-  if (normalizedValue < 0.8) {
-    return isDarkMode ? 'rgba(47, 84, 235, 0.2)' : 'var(--color-primary-200)';
+  if (normalizedValue < 0.6) {
+    return isDarkMode ? 'rgba(47, 84, 235, 0.2)' : 'var(--color-primary-100)';
   }
-  return isDarkMode ? 'rgba(47, 84, 235, 0.3)' : 'var(--color-primary-300)';
+  if (normalizedValue < 0.9) {
+    return isDarkMode ? 'rgba(47, 84, 235, 0.3)' : 'var(--color-primary-200)';
+  }
+  return isDarkMode ? 'rgba(47, 84, 235, 0.4)' : 'var(--color-primary-300)';
 };
 
 const LegendaryWeaponView: React.FC = () => {
