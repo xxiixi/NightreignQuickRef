@@ -20,7 +20,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
       </div>
       <div className={`custom-tab-button ${activeTab === '功能3' ? 'active' : ''}`}>
         <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('功能3'); }}>
-          功能3
+          角色数据
         </a>
       </div>
       <div className={`custom-tab-button ${activeTab === '功能4' ? 'active' : ''}`}>

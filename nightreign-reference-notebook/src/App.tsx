@@ -7,6 +7,7 @@ import Navigation from './components/Navigation';
 import EntryDetailView from './components/EntryDetailView';
 import OtherFunctionView from './components/OtherFunctionView';
 import LegendaryWeaponView from './components/LegendaryWeaponView';
+import CharacterDataView from './components/CharacterDataView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
       case '传说武器详情':
         return <LegendaryWeaponView />;
       case '功能3':
-        return <OtherFunctionView functionName="功能3" />;
+        return <CharacterDataView />;
       case '功能4':
         return <OtherFunctionView functionName="功能4" />;
       default:
@@ -85,11 +86,15 @@ function App() {
           onTabChange={setActiveTab}
         />
 
-        <div className="content-wrapper">
-          <div className="tabs-container">
-            {renderContent()}
+        {activeTab === '功能3' ? (
+          renderContent()
+        ) : (
+          <div className="content-wrapper">
+            <div className="tabs-container">
+              {renderContent()}
+            </div>
           </div>
-        </div>
+        )}
 
         <Footer />
       </div>

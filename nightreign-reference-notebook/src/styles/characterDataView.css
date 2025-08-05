@@ -1,0 +1,128 @@
+/* CharacterDataView 组件专用样式 */
+
+.character-data-container {
+  padding: 20px 0;
+  max-width: 100%;
+}
+
+/* 功能3页面的特殊样式 */
+.content-wrapper.card-item {
+  max-width: 70%;
+  margin: 0 auto 30px auto;
+  min-height: auto;
+  padding: 0;
+}
+
+/* ===== 卡片列表组件 ===== */
+.card-item {
+  margin-bottom: 30px !important;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.card-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-item .card-header {
+  padding: 20px 40px 10px 40px;
+  background: var(--table-header-bg);
+  border-radius: 12px 12px 0 0;
+}
+
+.card-item .card-body {
+  padding: 20px 40px 30px 40px;
+  background: var(--content-bg);
+  border-radius: 0 0 12px 12px;
+}
+
+[data-theme="dark"] .card-item,
+body[tomato-theme="dark"] .card-item {
+  border-color: transparent;
+}
+
+[data-theme="dark"] .card-item:hover,
+body[tomato-theme="dark"] .card-item:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .card-item .card-header,
+body[tomato-theme="dark"] .card-item .card-header {
+  background: var(--table-header-bg);
+  border-bottom-color: var(--color-text-2);
+}
+
+[data-theme="dark"] .card-item .card-body,
+body[tomato-theme="dark"] .card-item .card-body {
+  background: var(--content-bg);
+}
+
+/* 角色属性表格样式 */
+.character-attributes-table {
+  background: var(--content-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 不同等级的颜色定义 */
+.character-attribute-value.s-rank {
+  color: #ffc118;
+}
+
+.character-attribute-value.a-rank {
+  color: #52c41a;
+}
+
+.character-attribute-value.b-rank {
+  color: #1890ff;
+}
+
+.character-attribute-value.c-rank {
+  color: #6f3bfc;
+}
+
+.character-attribute-value.d-rank {
+  color: #e9369f;
+}
+
+.character-attribute-value.default {
+  color: var(--color-text-1);
+}
+
+
+/* 开发中功能样式 */
+.character-development-placeholder {
+  text-align: center;
+  padding: 40px;
+}
+
+.character-development-text {
+  font-size: 16px;
+  color: var(--color-text-2);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .character-data-container {
+    padding: 10px 0;
+  }
+  
+  .character-attribute-value {
+    font-size: 14px;
+  }
+  
+  .character-card-description {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .character-attributes-table .ant-table-cell {
+    padding: 8px 4px;
+  }
+  
+  .character-attribute-value {
+    font-size: 12px;
+  }
+} 
