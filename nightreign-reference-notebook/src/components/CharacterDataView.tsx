@@ -579,7 +579,7 @@ const CharacterDataView: React.FC = () => {
           };
 
           return (
-            <Text className={getValueClass(value)}>
+            <Text className={getValueClass(value)} strong>
               {value}
             </Text>
           );

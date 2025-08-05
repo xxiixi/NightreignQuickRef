@@ -100,7 +100,7 @@ body[tomato-theme="dark"] .card-item .card-body {
 }
 
 .character-attribute-value.a-rank {
-  color: #42af0c;
+  color: #00dcb0;
 }
 
 .character-attribute-value.b-rank {
@@ -108,11 +108,11 @@ body[tomato-theme="dark"] .card-item .card-body {
 }
 
 .character-attribute-value.c-rank {
-  color: #494ee1;
+  color: #393fef;
 }
 
 .character-attribute-value.d-rank {
-  color: #373b92;
+  color: #494ee1;
 }
 
 .character-attribute-value.default {
