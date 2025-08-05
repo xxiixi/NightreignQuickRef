@@ -180,9 +180,6 @@ const CharacterDataView: React.FC = () => {
     const throttledChartRefresh = throttle(() => {
       // 强制重新渲染图表
       setChartKey(prev => prev + 1);
-      
-      // 触发窗口resize事件，让图表重新计算尺寸
-      window.dispatchEvent(new Event('resize'));
     }, 300); // 300ms节流延迟
 
     // 监听窗口大小变化
@@ -195,7 +192,6 @@ const CharacterDataView: React.FC = () => {
       // 拖拽结束后延迟刷新，确保容器尺寸已稳定
       setTimeout(throttledChartRefresh, 100);
     };
-
 
     window.addEventListener('resize', handleResize);
     window.addEventListener('dragend', handleDragEnd);
@@ -226,14 +222,10 @@ const CharacterDataView: React.FC = () => {
     // 初始调整
     adjustRadarHeight();
     
-    // 监听窗口大小变化
-    window.addEventListener('resize', throttledAdjustHeight);
-    
     // 监听表格数据变化（通过selectedRowKeys变化触发）
     const timer = setTimeout(throttledAdjustHeight, 100);
     
     return () => {
-      window.removeEventListener('resize', throttledAdjustHeight);
       clearTimeout(timer);
     };
   }, [selectedRowKeys]);
@@ -310,7 +302,7 @@ const CharacterDataView: React.FC = () => {
 
   // 处理雷达图数据（使用useMemo避免不必要的重计算）
   const radarData = useMemo(() => {
-    const result: Array<{ item: string; type: string; score: number }> = [];
+    const result: Array<{ item: string; type: string; score: number; level: string; value: string }> = [];
     const attributes = getAttributeNames();
     
     // 过滤掉"擅长武器"属性，只保留需要在雷达图上展示的属性
@@ -326,10 +318,13 @@ const CharacterDataView: React.FC = () => {
     charactersToShow.forEach(character => {
       if (characterData[character]) {
         radarAttributes.forEach(attr => {
+          const level = characterData[character][attr];
           result.push({
             item: attr,
             type: character,
-            score: gradeToPosition(characterData[character][attr])
+            score: gradeToPosition(level), // 使用数值绘制图形
+            level: level, // 保存等级标签用于显示
+            value: level // 备用字段名
           });
         });
       }
@@ -419,6 +414,11 @@ const CharacterDataView: React.FC = () => {
                       gridAreaFill: (_: unknown, index: number) => {
                         return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
                       },
+                      labelFormatter: (value: number) => {
+                        const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
+                        return levelMap[value] || '';
+                      },
+
                     },
                   }}
                   
@@ -426,7 +426,8 @@ const CharacterDataView: React.FC = () => {
                   point={{
                     size: 4,
                   }}
-                  // 刻度配置
+                  
+                  // 刻度配置 - 恢复辅助线
                   scale={{ 
                     x: { padding: 50, align: 0 }, 
                     y: { 
@@ -441,12 +442,18 @@ const CharacterDataView: React.FC = () => {
                     lineWidth: 2,
                   }}
                   
-                  // 图例配置
-                  // legend={{
-                  //   position: 'bottom',     // 图例在底部
-                  //   layout: 'horizontal',   // 水平布局
-                  //   itemSpacing: 16,        // 图例项间距
-                  // }}
+                  // 提示框配置
+                  tooltip={{
+                    items: [
+                      {
+                        channel: 'y',
+                        valueFormatter: (value: number) => {
+                          const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
+                          return levelMap[value] || value.toString();
+                        }
+                      }
+                    ]
+                  }}
                   
                   // 填充区域样式
                   area={{
@@ -464,10 +471,10 @@ const CharacterDataView: React.FC = () => {
                 />
               ) : (
                 // 空状态显示
-                                  <div 
-                    className={`radar-wrapper ${isTransitioning ? 'theme-transitioning' : ''}`}
-                    style={{ height: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
-                  >
+                <div 
+                  className={`radar-wrapper ${isTransitioning ? 'theme-transitioning' : ''}`}
+                  style={{ height: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                >
                   <Radar
                     key={`radar-empty-${chartKey}`}
                     data={radarAttributes.map(attr => ({
@@ -513,13 +520,6 @@ const CharacterDataView: React.FC = () => {
                     point={{ size: 0 }}
                     line={{ style: { lineWidth: 0 } }}
                     area={false}
-                  />
-                  {/* 空状态提示文字 */}
-                  <Empty 
-                    description={
-                      <Text>请从左侧表格中选择角色进行对比</Text>
-                    } 
-                    style={{ marginTop: -50 }}
                   />
                 </div>
               )}
