@@ -165,6 +165,66 @@ body[tomato-theme="dark"] .card-item .card-body {
   transition: all var(--transition-normal);
 }
 
+/* 闪避无敌帧对比图表过渡动画 */
+.dodge-frames-chart-container {
+  transition: all var(--transition-normal);
+  opacity: 1;
+  transform: scale(1);
+  filter: brightness(1);
+}
+
+.dodge-frames-chart-container.theme-transitioning {
+  opacity: 0.6;
+  transform: scale(0.95);
+  filter: brightness(0.7);
+}
+
+.dodge-frames-chart-container.theme-transitioning canvas {
+  transition: all var(--transition-normal);
+}
+
+/* 闪避无敌帧提示信息样式 */
+.dodge-frames-tips {
+  color: var(--color-text-1);
+}
+
+.dodge-frames-tips .tip-item {
+  margin-bottom: 6px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-text-2);
+}
+
+.dodge-frames-tips .tip-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Alert 组件样式优化 */
+.character-data-container .ant-alert {
+  border-radius: 8px !important;
+  transition: all var(--transition-normal) !important;
+  border: 1px solid #d9d9d9 !important;
+  background: var(--content-bg) !important;
+}
+
+.character-data-container .ant-alert:hover {
+  border-color: #1890ff !important;
+}
+
+.character-data-container .ant-alert-info {
+  background: var(--content-bg) !important;
+}
+
+.character-data-container .ant-alert-message {
+  color: var(--color-text-1);
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.character-data-container .ant-alert-description {
+  color: var(--color-text-2);
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .character-data-container {

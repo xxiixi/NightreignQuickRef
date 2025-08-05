@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Typography, Table, Empty } from 'antd';
+import { Typography, Table, Alert } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
-import { Radar, Bar } from '@ant-design/plots';
+import { Radar, Column } from '@ant-design/plots';
 import characterStatesData from '../data/zh-CN/character_states.json';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
@@ -10,8 +10,114 @@ const { Title, Text } = Typography;
 
 // 闪避无敌帧对比组件
 const DodgeFramesComparison = () => {
-    // 获取当前主题
-    const currentTheme = getCurrentTheme();
+    // 当前主题状态
+    const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
+    
+    // 强制重新渲染的key
+    const [chartKey, setChartKey] = useState(0);
+    
+    // 动画状态
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    
+    // 节流函数 - 用于防止频繁的图表刷新
+    const throttle = (func: Function, delay: number) => {
+      let timeoutId: ReturnType<typeof setTimeout>;
+      let lastExecTime = 0;
+      return (...args: any[]) => {
+        const currentTime = Date.now();
+        
+        if (currentTime - lastExecTime > delay) {
+          func.apply(null, args);
+          lastExecTime = currentTime;
+        } else {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            func.apply(null, args);
+            lastExecTime = Date.now();
+          }, delay - (currentTime - lastExecTime));
+        }
+      };
+    };
+    
+    // 监听主题变化
+    useEffect(() => {
+      const checkTheme = () => {
+        const newTheme = getCurrentTheme();
+        if (newTheme !== currentTheme) {
+          // 开始过渡动画
+          setIsTransitioning(true);
+          
+          // 延迟更新主题，让动画有时间执行
+          setTimeout(() => {
+            setCurrentTheme(newTheme);
+            setChartKey(prev => prev + 1);
+            
+            // 动画结束后恢复状态
+            setTimeout(() => {
+              setIsTransitioning(false);
+            }, 300);
+          }, 150);
+        }
+      };
+      
+      // 初始检查
+      checkTheme();
+      
+      // 监听 localStorage 变化
+      const handleStorageChange = () => {
+        // 延迟一点时间确保 localStorage 已更新
+        setTimeout(checkTheme, 50);
+      };
+      
+      // 监听系统主题变化
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleMediaChange = () => {
+        checkTheme();
+      };
+      
+      // 监听自定义主题变化事件
+      const handleThemeChange = () => {
+        setTimeout(checkTheme, 50);
+      };
+      
+      window.addEventListener('storage', handleStorageChange);
+      window.addEventListener('themeChange', handleThemeChange);
+      mediaQuery.addEventListener('change', handleMediaChange);
+      
+      return () => {
+        window.removeEventListener('storage', handleStorageChange);
+        window.removeEventListener('themeChange', handleThemeChange);
+        mediaQuery.removeEventListener('change', handleMediaChange);
+      };
+    }, [currentTheme]);
+
+    // 处理窗口大小变化和拖拽导致的图表刷新问题
+    useEffect(() => {
+      // 节流后的图表刷新函数
+      const throttledChartRefresh = throttle(() => {
+        // 强制重新渲染图表
+        setChartKey(prev => prev + 1);
+      }, 300); // 300ms节流延迟
+
+      // 监听窗口大小变化
+      const handleResize = () => {
+        throttledChartRefresh();
+      };
+
+      // 监听拖拽相关事件
+      const handleDragEnd = () => {
+        // 拖拽结束后延迟刷新，确保容器尺寸已稳定
+        setTimeout(throttledChartRefresh, 100);
+      };
+
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('dragend', handleDragEnd);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('dragend', handleDragEnd);
+      };
+    }, []); // 空依赖数组，只在组件挂载时设置监听器
     
     // 确保组件挂载后图表能正确渲染
     useEffect(() => {
@@ -23,20 +129,163 @@ const DodgeFramesComparison = () => {
       return () => clearTimeout(timer);
     }, []);
     
-    // 整理数据格式（符合Ant Design图表要求）
+    // 整理数据格式（符合堆叠Column图表要求）
     const frameData = [
-      { name: "追踪者（翻滚）", value: 13 },
-      { name: "铁之眼（翻滚）", value: 13 },
-      { name: "复仇者（翻滚）", value: 13 },
-      { name: "执行者（翻滚）", value: 13 },
-      { name: "守护者（闪避）", value: 10 },
-      { name: "无赖（翻滚）", value: 12 },
-      { name: "隐士（闪避）", value: 15 },
-      { name: "女爵（闪避）", value: 10 },
-      { name: "女爵（双重踏步）", value: 11 },
-      { name: "女爵（后空翻）", value: 11 },
-      { name: "女爵（闪身）", value: 6 }
+      { name: "追踪者（翻滚）", type: "无敌帧", value: 13 },
+      { name: "追踪者（翻滚）", type: "非无敌帧", value: 7 },
+      { name: "铁之眼（翻滚）", type: "无敌帧", value: 13 },
+      { name: "铁之眼（翻滚）", type: "非无敌帧", value: 7 },
+      { name: "复仇者（翻滚）", type: "无敌帧", value: 13 },
+      { name: "复仇者（翻滚）", type: "非无敌帧", value: 7 },
+      { name: "执行者（翻滚）", type: "无敌帧", value: 13 },
+      { name: "执行者（翻滚）", type: "非无敌帧", value: 7 },
+      { name: "守护者（闪避）", type: "无敌帧", value: 10 },
+      { name: "守护者（闪避）", type: "非无敌帧", value: 7 },
+      { name: "无赖（翻滚）", type: "无敌帧", value: 12 },
+      { name: "无赖（翻滚）", type: "非无敌帧", value: 9 },
+      { name: "隐士（闪避）", type: "无敌帧", value: 15 },
+      { name: "隐士（闪避）", type: "非无敌帧", value: 5 },
+      { name: "女爵（闪避）", type: "无敌帧", value: 10 },
+      { name: "女爵（闪避）", type: "非无敌帧", value: 3 },
+      { name: "女爵（双重踏步）", type: "无敌帧", value: 11 },
+      { name: "女爵（双重踏步）", type: "非无敌帧", value: 8 },
+      { name: "女爵（后空翻）", type: "无敌帧", value: 11 },
+      { name: "女爵（后空翻）", type: "非无敌帧", value: 8 },
+      { name: "女爵（闪身）", type: "无敌帧", value: 6 },
+      { name: "女爵（闪身）", type: "非无敌帧", value: 6 }
     ];
+
+    // 计算每个角色的总帧数用于顶部注释
+    const totalFrames: { [key: string]: number } = {};
+    frameData.forEach(item => {
+      if (!totalFrames[item.name]) {
+        totalFrames[item.name] = 0;
+      }
+      totalFrames[item.name] += item.value;
+    });
+
+    // 创建注释数组
+    const annotations = Object.entries(totalFrames).map(([name, total]) => ({
+      type: 'text',
+      data: [name, total],
+      style: {
+        text: `${total}`,
+        textBaseline: 'bottom',
+        position: 'top',
+        textAlign: 'center',
+        fontSize: 14,
+        fill: currentTheme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.85)',
+      },
+      tooltip: false,
+    }));
+
+    const config = {
+      data: frameData,
+      xField: 'name',
+      yField: 'value',
+      stack: true,
+      colorField: 'type',
+      theme: currentTheme,
+      height: 400,
+      autoFit: true,
+      label: {
+        text: 'value',
+        textBaseline: 'bottom',
+        position: 'inside',
+      },
+      interaction: {
+        tooltip: {
+          render: (e: any, { title, items }: any) => {
+            const total = totalFrames[title] || 0;
+            return (
+              <div key={title} style={{ color: 'var(--color-text-1)' }}>
+                <h4 style={{ color: 'var(--color-text-1)', margin: '0 0 8px 0' }}>
+                  {title} 总帧长 <b style={{ color: 'var(--color-text-1)' }}>{total}</b>
+                </h4>
+                {items.map((item: any, index: number) => {
+                  const { name, value, color } = item;
+                  return (
+                    <div key={index}>
+                      <div style={{ margin: 0, display: 'flex', justifyContent: 'space-between' }}>
+                        <div>
+                          <span
+                            style={{
+                              display: 'inline-block',
+                              width: 6,
+                              height: 6,
+                              borderRadius: '50%',
+                              backgroundColor: color,
+                              marginRight: 6,
+                            }}
+                          ></span>
+                          <span style={{ color: 'var(--color-text-1)' }}>{name}</span>
+                        </div>
+                        <b style={{ color: 'var(--color-text-1)' }}>{value}</b>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          },
+        },
+      },
+      axis: {
+        x: {
+          label: {
+            autoRotate: false,
+            autoHide: false,
+            autoEllipsis: false,
+            style: {
+              fill: currentTheme === 'dark' ? '#ffffff' : '#000000',
+              fontSize: 12,
+            },
+          },
+          line: {
+            style: {
+              stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+              lineWidth: 1,
+            },
+          },
+          tickLine: {
+            style: {
+              stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+              lineWidth: 1,
+            },
+          },
+          labelFormatter: (value: string) => {
+            // 将括号内容换行显示
+            return value.replace(/（([^）]+)）/g, '\n（$1）');
+          },
+        },
+        y: {
+          label: {
+            style: {
+              fill: currentTheme === 'dark' ? '#ffffff' : '#000000',
+              fontSize: 12,
+            },
+          },
+          line: {
+            style: {
+              stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+              lineWidth: 1,
+            },
+          },
+          tickLine: {
+            style: {
+              stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+              lineWidth: 1,
+            },
+          },
+          labelFormatter: (value: number) => `${value}帧`,
+        },
+      },
+      style: {
+        radius: 10,
+        fillOpacity: 0.8,
+      },
+      annotations,
+    };
   
     return (
       <div className="content-wrapper card-item">
@@ -46,22 +295,41 @@ const DodgeFramesComparison = () => {
           </Title>
         </div>
         <div className="card-body">
-          <div style={{ 
-            height: 400, 
-            width: '100%',
-            padding: '20px 0',
-            minHeight: '400px',
-            position: 'relative'
-          }}>
-            <Bar 
-              data={frameData}
-              xField="name"
-              yField="value"
-              theme={currentTheme}
-              height={400}
-              autoFit={true}
-            />
+          <div 
+            className={`dodge-frames-chart-container ${isTransitioning ? 'theme-transitioning' : ''}`}
+            style={{ 
+              height: 400, 
+              width: '100%',
+              padding: '20px 0',
+              minHeight: '400px',
+              position: 'relative'
+            }}
+          >
+            <Column key={`dodge-frames-${chartKey}`} {...config} />
           </div>
+          
+          {/* 提示信息 */}
+          <Alert
+            message="机制说明"
+            description={
+              <div className="dodge-frames-tips">
+                <div className="tip-item">
+                  1. 黑夜君临中没有负重影响人物翻滚 / 闪避的机制，角色重按决定回避性能，人物体型 / 身高与回避性能无关。（ 1 帧，即 1/30 秒）
+                </div>
+                
+                <div className="tip-item">
+                  2. 蓝色部分表示 "无敌帧"，绿色部分表示非无敌帧。从0帧开始，非无敌帧结束后即可自由移动。（无敌帧 + 非无敌帧 = 翻滚/闪避动画总帧长）
+                </div>
+                
+                <div className="tip-item">
+                  3. 如果角色在动作的无敌帧结束前执行了其他动作（如进行轻攻击），那无敌帧会在执行其他动作的瞬间中断，同时这也会减少整个闪避动作的位移距离。
+                </div>
+              </div>
+            }
+            type="info"
+            showIcon={false}
+            style={{ marginTop: '20px' }}
+          />
         </div>
       </div>
     );
@@ -365,7 +633,7 @@ const CharacterDataView: React.FC = () => {
           </Title>
         </div>
         <div className="card-body">
-          <div style={{ marginBottom: '10px', color: 'var(--color-text-2)', fontSize: '14px' }}>
+          <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
             提示：可勾选多个角色进行对比
           </div>
           <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
