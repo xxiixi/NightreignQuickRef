@@ -3,10 +3,19 @@ import { Typography, Table, Alert } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
 import characterStatesData from '../data/zh-CN/character_states.json';
+import magicMoveData from '../data/zh-CN/magic_move_list.json';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
 
 const { Title, Text } = Typography;
+
+// 魔法招式接口
+interface MagicMove {
+  属性痕: string;
+  属性图标: string;
+  混合魔法: string;
+  混合魔法效果: string;
+}
 
 // 闪避无敌帧对比组件
 const DodgeFramesComparison = () => {
@@ -348,6 +357,41 @@ interface CharacterData {
 const CharacterDataView: React.FC = () => {
   // 直接使用导入的角色数据
   const characterData: CharacterData = characterStatesData[0] || {};
+
+  // 隐士出招表数据
+  const magicMoves: MagicMove[] = magicMoveData || [];
+
+  // 隐士出招表列配置
+  const magicMoveColumns: ColumnsType<MagicMove> = [
+    {
+      title: '属性痕',
+      dataIndex: '属性痕',
+      key: '属性痕',
+      width: 120,
+      align: 'center',
+    },
+    {
+      title: '属性图标',
+      dataIndex: '属性图标',
+      key: '属性图标',
+      width: 100,
+      align: 'center',
+    },
+    {
+      title: '混合魔法',
+      dataIndex: '混合魔法',
+      key: '混合魔法',
+      width: 150,
+      align: 'center',
+    },
+    {
+      title: '混合魔法效果',
+      dataIndex: '混合魔法效果',
+      key: '混合魔法效果',
+      ellipsis: true,
+      align: 'left',
+    },
+  ];
 
   // 获取所有属性名称
   const getAttributeNames = () => {
@@ -796,9 +840,6 @@ const CharacterDataView: React.FC = () => {
         </div>
       </div>
 
-      {/* 闪避无敌帧对比 */}
-      <DodgeFramesComparison />
-
       <div className="content-wrapper card-item">
         <div className="card-header">
           <Title level={5} className="character-card-title">
@@ -806,13 +847,21 @@ const CharacterDataView: React.FC = () => {
           </Title>
         </div>
         <div className="card-body">
-          <div className="character-development-placeholder">
-            <Text type="secondary" className="character-development-text">
-              此功能正在开发中...
-            </Text>
-          </div>
+          <Table
+            dataSource={magicMoves}
+            columns={magicMoveColumns}
+            pagination={false}
+            size="small"
+            bordered
+            rowKey={(record) => record.属性痕}
+          />
         </div>
       </div>
+      
+      {/* 闪避无敌帧对比 */}
+      <DodgeFramesComparison />
+
+
     </div>
   );
 };
