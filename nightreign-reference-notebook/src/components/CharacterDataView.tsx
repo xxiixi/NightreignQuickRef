@@ -1,13 +1,115 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Typography, Table, Empty } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
-import { Radar } from '@ant-design/plots';
+import { Radar, Bar } from '@ant-design/plots';
 import characterStatesData from '../data/zh-CN/character_states.json';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
 
 const { Title, Text } = Typography;
 
+// 闪避无敌帧对比组件
+const DodgeFramesComparison = () => {
+    // 获取当前主题
+    const currentTheme = getCurrentTheme();
+    
+    // 确保组件挂载后图表能正确渲染
+    useEffect(() => {
+      // 强制重新渲染图表
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 100);
+      
+      return () => clearTimeout(timer);
+    }, []);
+    
+    // 整理数据格式（符合Ant Design图表要求）
+    const frameData = [
+      { name: "追踪者（翻滚）", value: 13 },
+      { name: "铁之眼（翻滚）", value: 13 },
+      { name: "复仇者（翻滚）", value: 13 },
+      { name: "执行者（翻滚）", value: 13 },
+      { name: "守护者（闪避）", value: 10 },
+      { name: "无赖（翻滚）", value: 12 },
+      { name: "隐士（闪避）", value: 15 },
+      { name: "女爵（闪避）", value: 10 },
+      { name: "女爵（双重踏步）", value: 11 },
+      { name: "女爵（后空翻）", value: 11 },
+      { name: "女爵（闪身）", value: 6 }
+    ];
+  
+    // 根据主题设置颜色
+    const isDark = currentTheme === 'dark';
+    const textColor = isDark ? 'rgba(255, 255, 255, 0.85)' : '#415394';
+    const primaryColor = isDark ? '#2f54eb' : '#85a5ff';
+  
+    return (
+      <div className="content-wrapper card-item">
+        <div className="card-header">
+          <Title level={5} className="character-card-title">
+            闪避无敌帧对比
+          </Title>
+        </div>
+        <div className="card-body">
+          <div style={{ 
+            height: 400, 
+            width: '100%',
+            padding: '20px 0',
+            minHeight: '400px',
+            position: 'relative'
+          }}>
+            <Bar 
+              data={frameData}
+              xField="name"
+              yField="value"
+              theme={currentTheme}
+              height={400}
+              autoFit={true}
+              appendPadding={[20, 20, 20, 20]}
+              xAxis={{
+                label: {
+                  rotate: 45,
+                  style: {
+                    fontSize: 12,
+                    fill: textColor,
+                  },
+                },
+              }}
+              yAxis={{
+                min: 0,
+                tickInterval: 2,
+                label: {
+                  style: {
+                    fill: textColor,
+                    fontSize: 12,
+                  },
+                },
+              }}
+              label={{
+                position: 'top',
+                style: {
+                  fill: textColor,
+                  fontSize: 12,
+                  fontWeight: 600,
+                },
+              }}
+              tooltip={{
+                showMarkers: false,
+                showCrosshairs: true,
+                crosshairs: {
+                  type: 'xy',
+                },
+              }}
+              style={{
+                fill: primaryColor,
+              }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
 // 角色属性接口定义
 interface CharacterState {
   [key: string]: string;
@@ -391,21 +493,8 @@ const CharacterDataView: React.FC = () => {
         </div>
       </div>
 
-      {/* 其他未开发功能卡片 */}
-      <div className="content-wrapper card-item">
-        <div className="card-header">
-          <Title level={5} className="character-card-title">
-            闪避无敌帧对比
-          </Title>
-        </div>
-        <div className="card-body">
-          <div className="character-development-placeholder">
-            <Text type="secondary" className="character-development-text">
-              此功能正在开发中...
-            </Text>
-          </div>
-        </div>
-      </div>
+      {/* 闪避无敌帧对比 */}
+      <DodgeFramesComparison />
 
       <div className="content-wrapper card-item">
         <div className="card-header">
