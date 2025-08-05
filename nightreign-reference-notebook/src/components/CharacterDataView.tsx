@@ -204,7 +204,7 @@ const DodgeFramesComparison = () => {
       },
       interaction: {
         tooltip: {
-          render: ({ title, items }: any) => {
+          render: (e: any, { title, items }: any) => {
             const total = totalFrames[title] || 0;
             return (
               <div key={title} style={{ color: 'var(--color-text-1)' }}>
