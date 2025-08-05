@@ -8,7 +8,6 @@ import EntryDetailView from './components/EntryDetailView';
 import OtherFunctionView from './components/OtherFunctionView';
 import LegendaryWeaponView from './components/LegendaryWeaponView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
-import './App.css';
 
 function App() {
   const [activeTab, setActiveTab] = useState('词条详细数据');

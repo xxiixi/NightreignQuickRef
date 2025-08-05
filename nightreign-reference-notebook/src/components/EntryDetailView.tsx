@@ -258,9 +258,9 @@ const EntryDetailView: React.FC = () => {
         rowKey="entry_id"
         pagination={{ 
           current: currentPage,
-          pageSize: 20,
-          showSizeChanger: true,
-          showQuickJumper: true,
+          pageSize: 15,
+          showSizeChanger: false,
+          showQuickJumper: false,
           showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
           onChange: (page) => setCurrentPage(page),
           style: { marginTop: '25px' }

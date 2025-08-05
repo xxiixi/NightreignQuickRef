@@ -1,0 +1,665 @@
+/* 组件样式库 */
+
+/* CSS变量定义 - 支持暗黑模式 */
+:root {
+  /* geekblue色板 - 全局定义 */
+  --geekblue-1: #f0f5ff;
+  --geekblue-2: #d6e4ff;
+  --geekblue-3: #adc6ff;
+  --geekblue-4: #85a5ff;
+  --geekblue-5: #597ef7;
+  --geekblue-6: #2f54eb;
+  --geekblue-7: #1d39c4;
+  --geekblue-8: #10239e;
+  --geekblue-9: #061178;
+  --geekblue-10: #030852;
+  
+  /* 亮色模式变量 */
+  --bg-color: #fff;
+  --color-text-1: #415394;
+  --color-text-2: #637fbb;
+  --bg-gradient: linear-gradient(135deg, var(--geekblue-1) 0%, var(--geekblue-2) 100%);
+  --content-bg: white;
+  --content-shadow: rgba(0, 0, 0, 0.08);
+  --table-header-bg: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+  --table-hover-bg: var(--geekblue-1);
+  --footer-bg: rgba(0, 0, 0, 0.05);
+  --link-color: var(--geekblue-5);
+  --link-hover-color: var(--geekblue-6);
+  --theme-primary: var(--geekblue-6);
+  --theme-primary-hover: var(--geekblue-5);
+  --theme-primary-active: var(--geekblue-7);
+}
+
+body[tomato-theme="dark"] {
+  --bg-color: #141414;
+  --color-text-1: rgba(255, 255, 255, 0.85);
+  --color-text-2: rgba(255, 255, 255, 0.45);
+  --bg-gradient: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%);
+  --content-bg: #1f1f1f;
+  --content-shadow: rgba(0, 0, 0, 0.3);
+  --table-header-bg: linear-gradient(135deg, #262626 0%, #1f1f1f 100%);
+  --table-hover-bg: var(--geekblue-6);
+  --footer-bg: rgba(255, 255, 255, 0.1);
+  --link-color: var(--geekblue-6);
+  --link-hover-color: var(--geekblue-5);
+  --theme-primary: var(--geekblue-4);
+  --theme-primary-hover: var(--geekblue-3);
+  --theme-primary-active: var(--geekblue-5);
+}
+
+/* ===== 布局组件 ===== */
+.app-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 100%);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="dark"] .app-container,
+body[tomato-theme="dark"] .app-container {
+  background: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%);
+}
+
+.content-wrapper {
+  max-width: 70%;
+  margin: 0 auto;
+  background-color: var(--content-bg);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--content-shadow);
+  padding: 10px 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 200px);
+}
+
+/* ===== 顶部导航栏 ===== */
+.top-bar {
+  width: 100%;
+  text-align: center;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+
+.top-bar-content {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-bar-left {
+  flex: 1;
+}
+
+.top-bar-right {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle-btn,
+.language-toggle-btn {
+  color: var(--color-title-primary) !important;
+  border: none !important;
+  background: transparent !important;
+  font-size: var(--font-size-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.theme-toggle-btn:hover,
+.language-toggle-btn:hover {
+  color: var(--color-primary-500) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+/* ===== 头部组件 ===== */
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: transparent;
+  border-radius: var(--radius-lg);
+  margin: 0 auto var(--spacing-md) auto;
+  max-width: 80%;
+}
+
+.main-title {
+  color: var(--color-title-primary) !important;
+  font-weight: var(--font-weight-semibold);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  margin-top: var(--spacing-xs);
+}
+
+.subtitle .ant-typography {
+  font-size: var(--font-size-md);
+  color: var(--color-title-secondary);
+}
+
+.subtitle-text {
+  font-size: var(--font-size-sm) !important;
+  color: var(--color-title-secondary) !important;
+  font-weight: var(--font-weight-medium);
+}
+
+.author-link {
+  color: var(--color-primary-500) !important;
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-normal);
+}
+
+.author-link:hover {
+  color: var(--color-primary-600) !important;
+  text-decoration: underline;
+}
+
+.subtitle a {
+  color: var(--color-primary-500);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+}
+
+.subtitle a:hover {
+  text-decoration: underline;
+  color: var(--color-primary-600);
+}
+
+/* ===== 标签页组件 ===== */
+.tabs-container {
+  flex: 1;
+}
+
+.main-tabs {
+  width: 100%;
+}
+
+/* ===== 自定义按钮组件 ===== */
+.custom-tab-button {
+  position: relative;
+  width: 150px;
+  height: 45px;
+}
+
+.custom-tab-button a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  color: #415394;
+  z-index: 1;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 1px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: var(--transition-slow);
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .custom-tab-button a,
+body[tomato-theme="dark"] .custom-tab-button a {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.custom-tab-button:hover a {
+  letter-spacing: 3px;
+}
+
+.custom-tab-button.active a {
+  background: rgba(133, 165, 255, 0.15) !important;
+  color: var(--color-primary-500) !important;
+  border: 2px solid var(--color-primary-300) !important;
+  box-shadow: 
+    0 0 10px rgba(133, 165, 255, 0.5),
+    0 0 20px rgba(133, 165, 255, 0.3),
+    0 0 30px rgba(133, 165, 255, 0.2),
+    inset 0 0 20px rgba(133, 165, 255, 0.1) !important;
+  letter-spacing: 2px;
+  transform: scale(1.02);
+  transition: all var(--transition-normal);
+}
+
+[data-theme="dark"] .custom-tab-button.active a,
+body[tomato-theme="dark"] .custom-tab-button.active a {
+  background: rgba(47, 84, 235, 0.2) !important;
+  color: var(--color-primary-300) !important;
+  border: 2px solid var(--color-primary-500) !important;
+  box-shadow: 
+    0 0 10px rgba(47, 84, 235, 0.6),
+    0 0 20px rgba(47, 84, 235, 0.4),
+    0 0 30px rgba(47, 84, 235, 0.3),
+    inset 0 0 20px rgba(47, 84, 235, 0.15) !important;
+}
+
+.custom-tab-button a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(255,255,255,0.15), transparent);
+  transform: skewX(45deg) translateX(0);
+  transition: var(--transition-slow);
+}
+
+.custom-tab-button:hover a::before {
+  transform: skewX(45deg) translateX(200%);
+}
+
+.custom-tab-button::before,
+.custom-tab-button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 10px;
+  background: var(--color-primary-300);
+  border-radius: 10px;
+  transition: var(--transition-slow);
+  transition-delay: 0s;
+  box-shadow: 0 0 5px var(--color-primary-300),
+              0 0 15px var(--color-primary-300),
+              0 0 30px var(--color-primary-300),
+              0 0 60px var(--color-primary-300);
+}
+
+.custom-tab-button::before {
+  bottom: -5px;
+}
+
+.custom-tab-button::after {
+  top: -5px;
+}
+
+.custom-tab-button:hover::before {
+  bottom: 0;
+  height: 50%;
+  width: 90%;
+  border-radius: 30px;
+  transition-delay: 0.1s;
+}
+
+.custom-tab-button:hover::after {
+  top: 0;
+  height: 50%;
+  width: 90%;
+  border-radius: 30px;
+  transition-delay: 0.1s;
+}
+
+.custom-tab-button.active::before,
+.custom-tab-button.active::after {
+  background: var(--color-primary-300) !important;
+  box-shadow: 
+    0 0 10px var(--color-primary-300),
+    0 0 25px var(--color-primary-300),
+    0 0 50px var(--color-primary-300),
+    0 0 100px var(--color-primary-300) !important;
+  opacity: 1;
+}
+
+[data-theme="dark"] .custom-tab-button.active::before,
+[data-theme="dark"] .custom-tab-button.active::after,
+body[tomato-theme="dark"] .custom-tab-button.active::before,
+body[tomato-theme="dark"] .custom-tab-button.active::after {
+  background: var(--color-primary-600) !important;
+  box-shadow: 
+    0 0 10px var(--color-primary-600),
+    0 0 25px var(--color-primary-600),
+    0 0 50px var(--color-primary-600),
+    0 0 100px var(--color-primary-600) !important;
+}
+
+/* 黑暗模式下的普通发光效果 */
+[data-theme="dark"] .custom-tab-button::before,
+[data-theme="dark"] .custom-tab-button::after,
+body[tomato-theme="dark"] .custom-tab-button::before,
+body[tomato-theme="dark"] .custom-tab-button::after {
+  background: var(--color-primary-600);
+  box-shadow: 0 0 5px var(--color-primary-600),
+              0 0 15px var(--color-primary-600),
+              0 0 30px var(--color-primary-600),
+              0 0 60px var(--color-primary-600);
+}
+
+.custom-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  padding: 0 var(--spacing-md);
+}
+
+/* ===== 搜索组件 ===== */
+.search-container {
+  margin-bottom: var(--spacing-md);
+  display: flex;
+}
+
+.custom-search-input {
+  width: 250px;
+}
+
+.outsider-type-select {
+  min-width: 350px;
+  width: auto;
+}
+
+.filter-search-row {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  align-items: center;
+}
+
+/* ===== 表格组件 ===== */
+.ant-table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.ant-table-thead > tr > th {
+  background: var(--table-header-bg);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-text-2);
+}
+
+.ant-table-tbody > tr:hover > td {
+  background-color: var(--table-hover-bg);
+}
+
+[data-theme="dark"] .ant-table-tbody > tr:hover > td,
+body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
+  background-color: var(--table-hover-bg);
+}
+
+.ant-table .ant-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  min-width: 70px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ant-table .ant-tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== 热力图表格特殊样式 ===== */
+.heatmap-table .ant-table-tbody > tr:hover > td {
+  background: transparent !important;
+}
+
+.heatmap-cell {
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.heatmap-table .ant-table-cell {
+  transition: background-color 0.3s ease;
+  padding: 0;
+}
+
+.heatmap-table .ant-table-tbody > tr > td {
+  padding: 5px !important;
+  text-align: center !important;
+}
+
+.heatmap-table .ant-table-thead > tr > th {
+  text-align: center !important;
+  font-weight: normal !important;
+}
+
+.heatmap-table .ant-table-tbody > tr > td:first-child {
+  background-color: var(--ant-color-bg-container) !important;
+}
+
+[data-theme='dark'] .heatmap-table .ant-table-tbody > tr > td:first-child,
+[tomato-theme='dark'] .heatmap-table .ant-table-tbody > tr > td:first-child {
+  background-color: var(--ant-color-bg-container) !important;
+}
+
+[data-theme='dark'] .heatmap-cell,
+[tomato-theme='dark'] .heatmap-cell {
+  color: var(--ant-color-text) !important;
+}
+
+/* ===== 步骤条组件 ===== */
+.custom-steps-container {
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 550px;
+  margin: 0 auto 0 auto;
+}
+
+[data-theme='dark'] .custom-steps-container,
+[tomato-theme='dark'] .custom-steps-container {
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ant-steps .ant-steps-item-process .ant-steps-item-icon {
+  background-color: var(--color-primary-400) !important;
+  border-color: var(--color-primary-400) !important;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon {
+  background-color: var(--color-primary-400) !important;
+  border-color: var(--color-primary-400) !important;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon,
+.ant-steps .ant-steps-item-process .ant-steps-item-icon .ant-steps-icon {
+  color: #fff !important;
+}
+
+.ant-steps .ant-steps-item-wait .ant-steps-item-icon {
+  background-color: var(--theme-bg-tertiary) !important;
+  border-color: var(--theme-border) !important;
+}
+
+.ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon {
+  color: var(--theme-text-tertiary) !important;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-tail::after,
+.ant-steps .ant-steps-item-process .ant-steps-item-tail::after {
+  background-color: var(--color-primary-300) !important;
+}
+
+.ant-steps .ant-steps-item-wait .ant-steps-item-tail::after {
+  background-color: var(--theme-bg-tertiary) !important;
+}
+
+.ant-steps .ant-steps-item-title {
+  color: var(--theme-text-secondary) !important;
+}
+
+.ant-steps .ant-steps-item-process .ant-steps-item-title,
+.ant-steps .ant-steps-item-finish .ant-steps-item-title {
+  color: var(--color-primary-400) !important;
+}
+
+/* 暗色模式下的Steps样式 */
+[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon {
+  background-color: var(--theme-bg-tertiary) !important;
+  border-color: var(--theme-border) !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon {
+  color: var(--theme-text-tertiary) !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-tail::after,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-tail::after {
+  background-color: var(--theme-bg-tertiary) !important;
+}
+
+[data-theme='dark'] .ant-steps .ant-steps-item-title,
+[tomato-theme='dark'] .ant-steps .ant-steps-item-title {
+  color: var(--theme-text-primary) !important;
+}
+
+/* ===== 传说武器视图组件 ===== */
+.legendary-weapon-container {
+  padding: 6px;
+}
+
+.legendary-weapon-steps-container {
+  margin-bottom: 16px;
+  margin-top: 10px;
+}
+
+.legendary-weapon-carousel {
+  margin-top: 16px;
+}
+
+.legendary-weapon-table-container {
+  padding: 6px;
+}
+
+.legendary-weapon-text-center {
+  text-align: center;
+}
+
+.legendary-weapon-heatmap-cell {
+  color: var(--ant-color-text);
+  width: 90%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  padding: 6px 4px;
+  font-size: 13px;
+  margin: 0 auto;
+}
+
+/* ===== 页脚组件 ===== */
+.footer {
+  text-align: center;
+  background: rgba(0, 0, 0, 0.05);
+  padding: var(--spacing-lg);
+  margin: var(--spacing-xl) auto 0 auto;
+  max-width: 100%;
+}
+
+[data-theme="dark"] .footer,
+body[tomato-theme="dark"] .footer {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.footer-text {
+  font-size: var(--font-size-xs);
+  color: var(--theme-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.footer-link {
+  color: var(--color-primary-500) !important;
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+}
+
+.footer-link:hover {
+  color: var(--color-primary-600) !important;
+  text-decoration: underline;
+}
+
+.footer a {
+  color: var(--color-primary-500);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+}
+
+.footer a:hover {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+}
+
+/* ===== 响应式设计 ===== */
+@media (max-width: 768px) {
+  .content-wrapper,
+  .header,
+  .footer,
+  .top-bar-content {
+    max-width: 95%;
+    padding: var(--spacing-lg);
+  }
+  
+  .main-title {
+    font-size: var(--font-size-2xl) !important;
+  }
+  
+  .top-bar {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+  
+  .theme-toggle-btn,
+  .language-toggle-btn {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .content-wrapper,
+  .header,
+  .footer,
+  .top-bar-content {
+    max-width: 98%;
+    padding: var(--spacing-md);
+  }
+  
+  .main-title {
+    font-size: var(--font-size-xl) !important;
+  }
+  
+  .top-bar {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+} 

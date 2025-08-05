@@ -3,7 +3,6 @@ import { Table, Carousel, Steps } from 'antd';
 import type { TableColumnsType } from 'antd';
 import weaponCharacterData from '../data/zh-CN/weapon_character.json';
 import weaponEffectData from '../data/zh-CN/weapon_effect.json';
-import './LegendaryWeaponView.css'; // 导入样式表
 
 // 传说武器数据结构
 interface WeaponCharacter {
@@ -20,6 +19,23 @@ interface WeaponEffect {
     描述: string;
     削韧: string;
   };
+}
+
+// 转换后的武器特效数据结构
+interface TransformedWeaponEffect {
+  weapon_id: string;
+  weapon_name: string;
+  类型: string;
+  特效: string;
+  描述: string;
+  削韧: string;
+}
+
+// 转换后的武器角色数据结构
+interface TransformedWeaponCharacter {
+  weapon_id: string;
+  weapon_name: string;
+  [characterName: string]: string | number;
 }
 
 // 角色列表
@@ -51,7 +67,7 @@ const getBackgroundColor = (value: number, rowValues: number[]): string => {
   const min = Math.min(...rowValues);
   const range = max - min;
   
-  if (range === 0) return 'var(--geekblue-3)'; // 如果所有值相同，使用中间蓝色
+  if (range === 0) return 'var(--color-primary-300)'; // 如果所有值相同，使用中间蓝色
   
   // 计算当前值在行内范围内的位置 (0-1)
   const normalizedValue = (value - min) / range;
@@ -61,33 +77,33 @@ const getBackgroundColor = (value: number, rowValues: number[]): string => {
   
   // 将0-1范围映射到颜色等级
   if (normalizedValue < 0.4) {
-    return isDarkMode ? 'rgba(47, 84, 235, 0.1)' : 'var(--geekblue-1)';
+    return isDarkMode ? 'rgba(47, 84, 235, 0.1)' : 'var(--color-primary-100)';
   }
   if (normalizedValue < 0.8) {
-    return isDarkMode ? 'rgba(47, 84, 235, 0.2)' : 'var(--geekblue-2)';
+    return isDarkMode ? 'rgba(47, 84, 235, 0.2)' : 'var(--color-primary-200)';
   }
-  return isDarkMode ? 'rgba(47, 84, 235, 0.3)' : 'var(--geekblue-3)';
+  return isDarkMode ? 'rgba(47, 84, 235, 0.3)' : 'var(--color-primary-300)';
 };
 
 const LegendaryWeaponView: React.FC = () => {
   // 添加状态管理当前步骤
   const [currentStep, setCurrentStep] = React.useState(0);
   // 添加ref来控制Carousel
-  const carouselRef = React.useRef<any>(null);
+  const carouselRef = React.useRef<React.ElementRef<typeof Carousel>>(null);
 
   // 转换数据
   const weaponData = transformData(weaponCharacterData as WeaponCharacter[]);
   const effectData = transformEffectData(weaponEffectData as WeaponEffect[]);
 
   // 表格列定义
-  const columns: TableColumnsType<any> = [
+  const columns: TableColumnsType<TransformedWeaponCharacter> = [
     {
       title: '武器名称',
       dataIndex: 'weapon_name',
       key: 'weapon_name',
-      width: 120,
+      width: 110,
       fixed: 'left',
-             render: (text) => <span style={{ textAlign: 'center' }}>{text}</span>,
+             render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
     },
     ...characterNames.map(characterName => ({
       title: characterName,
@@ -95,24 +111,14 @@ const LegendaryWeaponView: React.FC = () => {
       key: characterName,
       width: 70,
       align: 'center' as const,
-      render: (value: number, record: any) => {
+      render: (value: number, record: TransformedWeaponCharacter) => {
         // 获取当前行的所有值用于比较
-        const rowValues = characterNames.map(name => record[name]);
+        const rowValues = characterNames.map(name => record[name] as number);
         return (
                      <div 
-             className="heatmap-cell" // 添加自定义类名
+             className="heatmap-cell legendary-weapon-heatmap-cell" // 添加自定义类名
                                           style={{ 
                  backgroundColor: getBackgroundColor(value, rowValues),
-                 color: 'var(--ant-color-text)', // 使用主题文字颜色
-                 width: '90%',
-                 height: '80%',
-                 display: 'flex',
-                 alignItems: 'center',
-                 justifyContent: 'center',
-                 borderRadius: '6px', // 恢复圆角
-                 padding: '6px 4px', // 调整内边距
-                 fontSize: '14px',
-                 margin: '0 auto' // 居中显示
                }}
            >
              {value}
@@ -123,14 +129,14 @@ const LegendaryWeaponView: React.FC = () => {
   ];
 
   // 武器特效表格列定义
-  const effectColumns: TableColumnsType<any> = [
+  const effectColumns: TableColumnsType<TransformedWeaponEffect> = [
     {
       title: '武器名称',
       dataIndex: 'weapon_name',
       key: 'weapon_name',
       width: 120,
       align: 'center' as const,
-      render: (text) => <span style={{ textAlign: 'center' }}>{text}</span>,
+      render: (text) => <span className="legendary-weapon-text-center">{text}</span>,
     },
     {
       title: '类型',
@@ -163,37 +169,34 @@ const LegendaryWeaponView: React.FC = () => {
 
   // 第一个表格内容
   const firstTable = (
-    <div style={{ padding: '16px' }}>
+    <div className="legendary-weapon-table-container">
       <Table
-        className="heatmap-table" // 添加表格类名
+        className="heatmap-table"
         columns={columns}
         dataSource={weaponData}
         rowKey="weapon_id"
         pagination={false}
         size="small"
-        bordered
       />
     </div>
   );
 
-  // 第二个表格内容（武器特效）
+  // 第二个表格内容
   const secondTable = (
-    <div style={{ padding: '16px' }}>
+    <div className="legendary-weapon-table-container">
       <Table
         columns={effectColumns}
         dataSource={effectData}
         rowKey="weapon_id"
         pagination={false}
         size="small"
-        bordered
-        scroll={{ x: 800 }}
       />
     </div>
   );
 
   // 自定义步骤条
   const customSteps = (
-    <div className="custom-steps-container">
+    <div className="custom-steps-container legendary-weapon-steps-container">
       <Steps
         size="small"
         current={currentStep}
@@ -210,14 +213,14 @@ const LegendaryWeaponView: React.FC = () => {
   );
 
   return (
-    <div style={{ padding: '16px' }}>
+    <div className="legendary-weapon-container">
       {customSteps}
       <Carousel 
         ref={carouselRef}
-        arrows 
         infinite={false}
         dots={false}
         beforeChange={(_from, to) => setCurrentStep(to)}
+        className="legendary-weapon-carousel"
       >
         <div>
           {firstTable}
@@ -231,4 +234,3 @@ const LegendaryWeaponView: React.FC = () => {
 };
 
 export default LegendaryWeaponView;
-    

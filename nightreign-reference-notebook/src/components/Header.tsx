@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
           <Text type="secondary" className="subtitle-text">
-            黑夜君临内容速查工具，按游戏内结构分类整理，可快速检索条目信息，后续会添加更多内容。
+            黑夜君临内容速查工具，可快速检索条目信息，后续会添加更多内容
           </Text>
         </Space>
       </div>

@@ -1,0 +1,109 @@
+/* 主样式文件 - 导入所有样式模块 */
+
+/* 导入设计系统 */
+@import './design-system.css';
+
+/* 导入组件样式 */
+@import './components.css';
+
+/* 导入工具类 */
+@import './utilities.css';
+
+/* 全局样式重置和基础样式 */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family);
+  line-height: var(--line-height-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--theme-bg-primary);
+  color: var(--theme-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* 链接样式 */
+a {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary-500);
+  text-decoration: inherit;
+  transition: color var(--transition-normal);
+}
+
+a:hover {
+  color: var(--color-primary-600);
+}
+
+/* 按钮基础样式 */
+button {
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: var(--font-weight-medium);
+  font-family: inherit;
+  background-color: var(--theme-bg-primary);
+  color: var(--theme-text-primary);
+  cursor: pointer;
+  transition: border-color var(--transition-normal);
+}
+
+button:hover {
+  border-color: var(--color-primary-500);
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* 标题样式 */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--theme-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--theme-border);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-text-secondary);
+}
+
+/* 选择文本样式 */
+::selection {
+  background-color: var(--color-primary-200);
+  color: var(--color-primary-900);
+}
+
+[data-theme="dark"] ::selection,
+body[tomato-theme="dark"] ::selection {
+  background-color: var(--color-primary-700);
+  color: var(--color-primary-100);
+} 
