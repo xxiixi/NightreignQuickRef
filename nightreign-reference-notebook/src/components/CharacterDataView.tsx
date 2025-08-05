@@ -38,11 +38,6 @@ const DodgeFramesComparison = () => {
       { name: "女爵（闪身）", value: 6 }
     ];
   
-    // 根据主题设置颜色
-    const isDark = currentTheme === 'dark';
-    const textColor = isDark ? 'rgba(255, 255, 255, 0.85)' : '#415394';
-    const primaryColor = isDark ? '#2f54eb' : '#85a5ff';
-  
     return (
       <div className="content-wrapper card-item">
         <div className="card-header">
@@ -65,44 +60,6 @@ const DodgeFramesComparison = () => {
               theme={currentTheme}
               height={400}
               autoFit={true}
-              appendPadding={[20, 20, 20, 20]}
-              xAxis={{
-                label: {
-                  rotate: 45,
-                  style: {
-                    fontSize: 12,
-                    fill: textColor,
-                  },
-                },
-              }}
-              yAxis={{
-                min: 0,
-                tickInterval: 2,
-                label: {
-                  style: {
-                    fill: textColor,
-                    fontSize: 12,
-                  },
-                },
-              }}
-              label={{
-                position: 'top',
-                style: {
-                  fill: textColor,
-                  fontSize: 12,
-                  fontWeight: 600,
-                },
-              }}
-              tooltip={{
-                showMarkers: false,
-                showCrosshairs: true,
-                crosshairs: {
-                  type: 'xy',
-                },
-              }}
-              style={{
-                fill: primaryColor,
-              }}
             />
           </div>
         </div>
@@ -144,6 +101,26 @@ const CharacterDataView: React.FC = () => {
   
   // 动画状态
   const [isTransitioning, setIsTransitioning] = useState(false);
+  
+  // 节流函数 - 用于防止频繁的图表刷新
+  const throttle = (func: Function, delay: number) => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    let lastExecTime = 0;
+    return (...args: any[]) => {
+      const currentTime = Date.now();
+      
+      if (currentTime - lastExecTime > delay) {
+        func.apply(null, args);
+        lastExecTime = currentTime;
+      } else {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func.apply(null, args);
+          lastExecTime = Date.now();
+        }, delay - (currentTime - lastExecTime));
+      }
+    };
+  };
   
   // 监听主题变化
   useEffect(() => {
@@ -196,6 +173,70 @@ const CharacterDataView: React.FC = () => {
       mediaQuery.removeEventListener('change', handleMediaChange);
     };
   }, [currentTheme]);
+
+  // 处理窗口大小变化和拖拽导致的图表刷新问题
+  useEffect(() => {
+    // 节流后的图表刷新函数
+    const throttledChartRefresh = throttle(() => {
+      // 强制重新渲染图表
+      setChartKey(prev => prev + 1);
+      
+      // 触发窗口resize事件，让图表重新计算尺寸
+      window.dispatchEvent(new Event('resize'));
+    }, 300); // 300ms节流延迟
+
+    // 监听窗口大小变化
+    const handleResize = () => {
+      throttledChartRefresh();
+    };
+
+    // 监听拖拽相关事件
+    const handleDragEnd = () => {
+      // 拖拽结束后延迟刷新，确保容器尺寸已稳定
+      setTimeout(throttledChartRefresh, 100);
+    };
+
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('dragend', handleDragEnd);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('dragend', handleDragEnd);
+    };
+  }, []); // 空依赖数组，只在组件挂载时设置监听器
+
+  // 动态调整雷达图高度以匹配表格高度
+  useEffect(() => {
+    const adjustRadarHeight = () => {
+      const tableContainer = document.querySelector('.character-attributes-table')?.closest('div');
+      const radarContainer = document.getElementById('radar-chart-container');
+      
+      if (tableContainer && radarContainer) {
+        const tableHeight = tableContainer.getBoundingClientRect().height;
+        // 设置雷达图容器高度与表格一致，但最小保持400px
+        const targetHeight = Math.max(tableHeight, 400);
+        radarContainer.style.height = `${targetHeight}px`;
+      }
+    };
+
+    // 节流后的高度调整函数
+    const throttledAdjustHeight = throttle(adjustRadarHeight, 200);
+
+    // 初始调整
+    adjustRadarHeight();
+    
+    // 监听窗口大小变化
+    window.addEventListener('resize', throttledAdjustHeight);
+    
+    // 监听表格数据变化（通过selectedRowKeys变化触发）
+    const timer = setTimeout(throttledAdjustHeight, 100);
+    
+    return () => {
+      window.removeEventListener('resize', throttledAdjustHeight);
+      clearTimeout(timer);
+    };
+  }, [selectedRowKeys]);
 
   // 表格列定义
   const columns: ColumnsType<{ key: string; character: string; [key: string]: string }> = [
@@ -330,7 +371,7 @@ const CharacterDataView: React.FC = () => {
         </div>
         <div className="card-body">
           <div style={{ marginBottom: '10px', color: 'var(--color-text-2)', fontSize: '14px' }}>
-            提示：可勾选其他角色进行对比
+            提示：可勾选多个角色进行对比
           </div>
           <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
             {/* 角色属性表格 */}
@@ -346,10 +387,11 @@ const CharacterDataView: React.FC = () => {
               />
             </div>
             
-            {/* 雷达图容器 - 固定高度防止下移 */}
+            {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
             <div 
               className={`radar-chart-container ${isTransitioning ? 'theme-transitioning' : ''}`}
-              style={{ flex: '1', minWidth: '400px', height: '500px' }}
+              style={{ flex: '1', minWidth: '400px', minHeight: '400px' }}
+              id="radar-chart-container"
             >
               {selectedRowKeys.length > 0 ? (
                 <Radar
@@ -358,7 +400,7 @@ const CharacterDataView: React.FC = () => {
                   xField="item"       // 用于X轴（雷达图的各个顶点）的字段
                   yField="score"      // 用于Y轴（数值）的字段
                   colorField="type"   // 用于区分不同角色的字段
-                  height={450}        // 雷达图高度，与容器高度匹配
+                  height={400}        // 雷达图高度，稍小于容器高度
                   theme={currentTheme}        // 根据当前主题动态设置
                   
                   // 坐标轴配置
@@ -376,13 +418,6 @@ const CharacterDataView: React.FC = () => {
                       gridLineDash: [0, 0],
                       gridAreaFill: (_: unknown, index: number) => {
                         return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
-                      },
-                      tick: {
-                        formatter: (value: number) => {
-                          // 直接映射数值到等级（1→D，2→C，...，5→S）
-                          const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                          return levelMap[value] || ''; // 只显示有效等级，过滤0
-                        }
                       },
                     },
                   }}
@@ -407,11 +442,11 @@ const CharacterDataView: React.FC = () => {
                   }}
                   
                   // 图例配置
-                  legend={{
-                    position: 'bottom',     // 图例在底部
-                    layout: 'horizontal',   // 水平布局
-                    itemSpacing: 16,        // 图例项间距
-                  }}
+                  // legend={{
+                  //   position: 'bottom',     // 图例在底部
+                  //   layout: 'horizontal',   // 水平布局
+                  //   itemSpacing: 16,        // 图例项间距
+                  // }}
                   
                   // 填充区域样式
                   area={{
@@ -429,10 +464,10 @@ const CharacterDataView: React.FC = () => {
                 />
               ) : (
                 // 空状态显示
-                <div 
-                  className={`radar-wrapper ${isTransitioning ? 'theme-transitioning' : ''}`}
-                  style={{ height: '450px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
-                >
+                                  <div 
+                    className={`radar-wrapper ${isTransitioning ? 'theme-transitioning' : ''}`}
+                    style={{ height: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
+                  >
                   <Radar
                     key={`radar-empty-${chartKey}`}
                     data={radarAttributes.map(attr => ({
