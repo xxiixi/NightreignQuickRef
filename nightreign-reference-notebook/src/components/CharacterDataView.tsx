@@ -202,43 +202,7 @@ const DodgeFramesComparison = () => {
         textBaseline: 'bottom',
         position: 'inside',
       },
-      interaction: {
-        tooltip: {
-          render: (_e: any, { title, items }: any) => {
-            const total = totalFrames[title] || 0;
-            return (
-              <div key={title} style={{ color: 'var(--color-text-1)' }}>
-                <h4 style={{ color: 'var(--color-text-1)', margin: '0 0 8px 0' }}>
-                  {title} 总帧长 <b style={{ color: 'var(--color-text-1)' }}>{total}</b>
-                </h4>
-                {items.map((item: any, index: number) => {
-                  const { name, value, color } = item;
-                  return (
-                    <div key={index}>
-                      <div style={{ margin: 0, display: 'flex', justifyContent: 'space-between' }}>
-                        <div>
-                          <span
-                            style={{
-                              display: 'inline-block',
-                              width: 6,
-                              height: 6,
-                              borderRadius: '50%',
-                              backgroundColor: color,
-                              marginRight: 6,
-                            }}
-                          ></span>
-                          <span style={{ color: 'var(--color-text-1)' }}>{name}</span>
-                        </div>
-                        <b style={{ color: 'var(--color-text-1)' }}>{value}</b>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          },
-        },
-      },
+      tooltip: false,
       axis: {
         x: {
           label: {
