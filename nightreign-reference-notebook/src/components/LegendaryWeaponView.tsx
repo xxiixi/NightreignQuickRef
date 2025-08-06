@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Carousel, Steps } from 'antd';
 import type { TableColumnsType } from 'antd';
-import weaponCharacterData from '../data/zh-CN/weapon_character.json';
-import weaponEffectData from '../data/zh-CN/weapon_effect.json';
 
 // 传说武器数据结构
 interface WeaponCharacter {
@@ -19,6 +17,13 @@ interface WeaponEffect {
     描述: string;
     削韧: string;
   };
+}
+
+// 数据接口
+interface DataState {
+  weaponCharacterData: TransformedWeaponCharacter[];
+  weaponEffectData: TransformedWeaponEffect[];
+  loading: boolean;
 }
 
 // 转换后的数据结构
@@ -145,9 +150,36 @@ const ColorLegend = () => {
 const LegendaryWeaponView: React.FC = () => {
   const [currentStep, setCurrentStep] = React.useState(0);
   const carouselRef = React.useRef<React.ElementRef<typeof Carousel>>(null);
+  const [dataState, setDataState] = useState<DataState>({
+    weaponCharacterData: [],
+    weaponEffectData: [],
+    loading: true,
+  });
 
-  const weaponData = transformData(weaponCharacterData as WeaponCharacter[]);
-  const effectData = transformEffectData(weaponEffectData as WeaponEffect[]);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const weaponCharacterRes = await import('../data/zh-CN/weapon_character.json');
+        const weaponEffectRes = await import('../data/zh-CN/weapon_effect.json');
+        setDataState({
+          weaponCharacterData: transformData(weaponCharacterRes.default as WeaponCharacter[]),
+          weaponEffectData: transformEffectData(weaponEffectRes.default as WeaponEffect[]),
+          loading: false,
+        });
+      } catch (error) {
+        console.error('Failed to load data:', error);
+        setDataState({
+          weaponCharacterData: [],
+          weaponEffectData: [],
+          loading: false,
+        });
+      }
+    };
+
+    loadData();
+  }, []);
+
+  const { weaponCharacterData, weaponEffectData, loading } = dataState;
 
   // 表格列定义
   const columns: TableColumnsType<TransformedWeaponCharacter> = [
@@ -235,7 +267,7 @@ const LegendaryWeaponView: React.FC = () => {
       <Table
         className="heatmap-table"
         columns={columns}
-        dataSource={weaponData}
+        dataSource={weaponCharacterData}
         rowKey="weapon_id"
         pagination={false}
         size="small"
@@ -248,7 +280,7 @@ const LegendaryWeaponView: React.FC = () => {
     <div className="legendary-weapon-table-container">
       <Table
         columns={effectColumns}
-        dataSource={effectData}
+        dataSource={weaponEffectData}
         rowKey="weapon_id"
         pagination={false}
         size="small"
@@ -273,6 +305,14 @@ const LegendaryWeaponView: React.FC = () => {
       />
     </div>
   );
+
+  if (loading) {
+    return (
+      <div className="legendary-weapon-container" style={{ padding: '16px', textAlign: 'center' }}>
+        <div>加载中...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="legendary-weapon-container" style={{ padding: '16px' }}>

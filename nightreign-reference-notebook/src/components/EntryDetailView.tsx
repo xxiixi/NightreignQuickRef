@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
-import { Table, Input, Select, message, Tabs, Tag } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Table, Input, Select, message, Tabs, Tag, Spin } from 'antd';
 import type { TableColumnsType } from 'antd';
-import outsiderEntries from '../data/zh-CN/outsider_entries_zh-CN.json';
-import talismanEntries from '../data/zh-CN/talisman_entries_zh-CN.json';
-import inGameEntries from '../data/zh-CN/in-game_entries_zh-CN.json';
-import otherEntries from '../data/zh-CN/other_entries_zh-CN.json';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
 
 const { Search } = Input;
+
+// 数据接口
+interface DataState {
+  outsiderEntries: EntryData[];
+  talismanEntries: EntryData[];
+  inGameEntries: EntryData[];
+  otherEntries: EntryData[];
+  loading: boolean;
+}
 
 const outsiderTypeOptions = [
   { value: '能力', label: '能力' },
@@ -66,6 +71,46 @@ const EntryDetailView: React.FC = () => {
   const [selectedOtherTypes, setSelectedOtherTypes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [activeEntryTab, setActiveEntryTab] = useState('局外词条');
+  const [data, setData] = useState<DataState>({
+    outsiderEntries: [],
+    talismanEntries: [],
+    inGameEntries: [],
+    otherEntries: [],
+    loading: true
+  });
+
+  // 动态加载数据
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [
+          outsiderEntries,
+          talismanEntries,
+          inGameEntries,
+          otherEntries
+        ] = await Promise.all([
+          import('../data/zh-CN/outsider_entries_zh-CN.json'),
+          import('../data/zh-CN/talisman_entries_zh-CN.json'),
+          import('../data/zh-CN/in-game_entries_zh-CN.json'),
+          import('../data/zh-CN/other_entries_zh-CN.json')
+        ]);
+
+        setData({
+          outsiderEntries: outsiderEntries.default,
+          talismanEntries: talismanEntries.default,
+          inGameEntries: inGameEntries.default,
+          otherEntries: otherEntries.default,
+          loading: false
+        });
+      } catch (error) {
+        console.error('Failed to load data:', error);
+        message.error('数据加载失败');
+        setData(prev => ({ ...prev, loading: false }));
+      }
+    };
+
+    loadData();
+  }, []);
 
   // 搜索过滤函数
   const filterData = (data: EntryData[], searchValue: string, types?: string[]) => {
@@ -220,41 +265,41 @@ const EntryDetailView: React.FC = () => {
 
   // 渲染表格内容
   const renderTableContent = (tabKey: string) => {
-    let data: EntryData[] = [];
+    let tableData: EntryData[] = [];
     let columns: TableColumnsType<EntryData>;
     
     switch (tabKey) {
       case '局外词条':
-        data = outsiderEntries as EntryData[];
+        tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        data = filterData(data, searchKeyword, selectedTypes);
+        tableData = filterData(tableData, searchKeyword, selectedTypes);
         break;
       case '护符词条':
-        data = talismanEntries as EntryData[];
+        tableData = data.talismanEntries;
         columns = talismanColumns;
-        data = filterData(data, searchKeyword);
+        tableData = filterData(tableData, searchKeyword);
         break;
       case '局内词条':
-        data = inGameEntries as EntryData[];
+        tableData = data.inGameEntries;
         columns = inGameColumns;
-        data = filterData(data, searchKeyword);
+        tableData = filterData(tableData, searchKeyword);
         break;
       case '其他词条':
-        data = otherEntries as EntryData[];
+        tableData = data.otherEntries;
         columns = otherColumns;
-        data = filterData(data, searchKeyword, selectedOtherTypes);
+        tableData = filterData(tableData, searchKeyword, selectedOtherTypes);
         break;
       default:
-        data = outsiderEntries as EntryData[];
+        tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        data = filterData(data, searchKeyword, selectedTypes);
+        tableData = filterData(tableData, searchKeyword, selectedTypes);
     }
 
     // 表格样式
     return (
       <Table
         columns={columns}
-        dataSource={data}
+        dataSource={tableData}
         rowKey="entry_id"
         pagination={{ 
           current: currentPage,
@@ -267,12 +312,21 @@ const EntryDetailView: React.FC = () => {
         }}
         scroll={{ x: tabKey === '局外词条' ? 900 : tabKey === '护符词条' ? 800 : activeEntryTab === '局内词条' ? 700 : 650 }}
         size="middle"
+        loading={data.loading}
       />
     );
   };
 
   // 渲染搜索和筛选器的函数
   const renderSearchAndFilter = (tabKey: string) => {
+    if (data.loading) {
+      return (
+        <div className="loading-container">
+          <Spin tip="加载中..." />
+        </div>
+      );
+    }
+
     if (tabKey === '局外词条') {
       return (
         <div className="filter-search-row">

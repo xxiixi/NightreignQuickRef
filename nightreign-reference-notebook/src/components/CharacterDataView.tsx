@@ -3,8 +3,6 @@ import { Typography, Table, Alert } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
 import { throttle } from 'lodash';
-import characterStatesData from '../data/zh-CN/character_states.json';
-import magicMoveData from '../data/zh-CN/magic_move_list.json';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
 
@@ -16,6 +14,13 @@ interface MagicMove {
   属性图标: string;
   混合魔法: string;
   混合魔法效果: string;
+}
+
+// 数据接口
+interface DataState {
+  characterStatesData: CharacterData[];
+  magicMoveData: MagicMove[];
+  loading: boolean;
 }
 
 // 闪避无敌帧对比组件
@@ -302,11 +307,41 @@ interface CharacterData {
 }
 
 const CharacterDataView: React.FC = () => {
-  // 直接使用导入的角色数据
-  const characterData: CharacterData = characterStatesData[0] || {};
+  // 数据状态
+  const [data, setData] = useState<DataState>({
+    characterStatesData: [],
+    magicMoveData: [],
+    loading: true
+  });
+
+  // 动态加载数据
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [characterStates, magicMoves] = await Promise.all([
+          import('../data/zh-CN/character_states.json'),
+          import('../data/zh-CN/magic_move_list.json')
+        ]);
+
+        setData({
+          characterStatesData: characterStates.default,
+          magicMoveData: magicMoves.default,
+          loading: false
+        });
+      } catch (error) {
+        console.error('Failed to load character data:', error);
+        setData(prev => ({ ...prev, loading: false }));
+      }
+    };
+
+    loadData();
+  }, []);
+
+  // 直接使用加载的角色数据
+  const characterData: CharacterData = data.characterStatesData[0] || {};
 
   // 隐士出招表数据
-  const magicMoves: MagicMove[] = magicMoveData || [];
+  const magicMoves: MagicMove[] = data.magicMoveData || [];
 
   // 隐士出招表列配置
   const magicMoveColumns: ColumnsType<MagicMove> = [
