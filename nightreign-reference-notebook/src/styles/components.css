@@ -61,7 +61,8 @@ body[tomato-theme="dark"] .app-container {
 }
 
 .content-wrapper {
-  max-width: 74%;
+  max-width: 1280px;
+  width: 70%;
   margin: 0 auto;
   background-color: var(--content-bg);
   border-radius: 12px;
@@ -69,7 +70,6 @@ body[tomato-theme="dark"] .app-container {
   padding: 10px 40px;
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 200px);
 }
 
 /* ===== 顶部导航栏 ===== */

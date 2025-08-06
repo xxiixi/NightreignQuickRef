@@ -6,7 +6,8 @@
 }
 
 .content-wrapper.card-item {
-  max-width: 70%;
+  max-width: 1100px;
+  width: 70%;
   margin: 0 auto 30px auto;
   min-height: auto;
   padding: 0;
