@@ -4,10 +4,11 @@ import { geekblue } from '@ant-design/colors';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
-import EntryDetailView from './components/EntryDetailView';
-import OtherFunctionView from './components/OtherFunctionView';
-import LegendaryWeaponView from './components/LegendaryWeaponView';
-import CharacterDataView from './components/CharacterDataView';
+import FunctionMenu from './components/FunctionMenu';
+import EntryDetailView from './pages/EntryDetailView';
+import OtherFunctionView from './pages/OtherFunctionView';
+import LegendaryWeaponView from './pages/LegendaryWeaponView';
+import CharacterDataView from './pages/CharacterDataView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
 
 function App() {
@@ -78,11 +79,12 @@ function App() {
       }}
     >
       <div className="app-container">
+        <FunctionMenu onTabChange={setActiveTab} />
+        
         <Header
           isDarkMode={isDarkMode}
           onToggleTheme={handleToggleTheme}
           onToggleLanguage={handleToggleLanguage}
-          onTabChange={setActiveTab}
         />
 
         <Navigation

@@ -322,7 +322,7 @@ const EntryDetailView: React.FC = () => {
     if (data.loading) {
       return (
         <div className="loading-container">
-          <Spin tip="加载中..." />
+          <Spin spinning={true} />
         </div>
       );
     }
