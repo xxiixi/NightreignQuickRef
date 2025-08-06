@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Typography, Table, Alert } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
+import { throttle } from 'lodash';
 import characterStatesData from '../data/zh-CN/character_states.json';
 import magicMoveData from '../data/zh-CN/magic_move_list.json';
 import { getCurrentTheme } from '../utils/themeUtils';
@@ -28,25 +29,7 @@ const DodgeFramesComparison = () => {
     // 动画状态
     const [isTransitioning, setIsTransitioning] = useState(false);
     
-    // 节流函数 - 用于防止频繁的图表刷新
-    const throttle = (func: Function, delay: number) => {
-      let timeoutId: ReturnType<typeof setTimeout>;
-      let lastExecTime = 0;
-      return (...args: any[]) => {
-        const currentTime = Date.now();
-        
-        if (currentTime - lastExecTime > delay) {
-          func.apply(null, args);
-          lastExecTime = currentTime;
-        } else {
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(() => {
-            func.apply(null, args);
-            lastExecTime = Date.now();
-          }, delay - (currentTime - lastExecTime));
-        }
-      };
-    };
+
     
     // 监听主题变化
     useEffect(() => {
@@ -331,29 +314,40 @@ const CharacterDataView: React.FC = () => {
       title: '属性痕',
       dataIndex: '属性痕',
       key: '属性痕',
-      width: 120,
+      width: '15%',
       align: 'center',
     },
     {
       title: '属性图标',
       dataIndex: '属性图标',
       key: '属性图标',
-      width: 100,
+      width: '15%',
       align: 'center',
     },
     {
       title: '混合魔法',
       dataIndex: '混合魔法',
       key: '混合魔法',
-      width: 150,
+      width: '15%',
       align: 'center',
     },
     {
       title: '混合魔法效果',
       dataIndex: '混合魔法效果',
       key: '混合魔法效果',
-      ellipsis: true,
+      ellipsis: false,
       align: 'left',
+      render: (text: string) => (
+        <div style={{ 
+          wordBreak: 'break-word', 
+          whiteSpace: 'pre-wrap',
+          textAlign: 'left',
+          lineHeight: '1.5',
+          padding: '4px 0'
+        }}>
+          {text}
+        </div>
+      ),
     },
   ];
 
@@ -377,27 +371,7 @@ const CharacterDataView: React.FC = () => {
   
   // 动画状态
   const [isTransitioning, setIsTransitioning] = useState(false);
-  
-  // 节流函数 - 用于防止频繁的图表刷新
-  const throttle = (func: Function, delay: number) => {
-    let timeoutId: ReturnType<typeof setTimeout>;
-    let lastExecTime = 0;
-    return (...args: any[]) => {
-      const currentTime = Date.now();
-      
-      if (currentTime - lastExecTime > delay) {
-        func.apply(null, args);
-        lastExecTime = currentTime;
-      } else {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-          func.apply(null, args);
-          lastExecTime = Date.now();
-        }, delay - (currentTime - lastExecTime));
-      }
-    };
-  };
-  
+
   // 监听主题变化
   useEffect(() => {
     const checkTheme = () => {
@@ -818,6 +792,11 @@ const CharacterDataView: React.FC = () => {
             size="small"
             bordered
             rowKey={(record) => record.属性痕}
+            scroll={{ x: '100%' }}
+            style={{ 
+              wordBreak: 'break-word',
+              whiteSpace: 'pre-wrap'
+            }}
           />
         </div>
       </div>
