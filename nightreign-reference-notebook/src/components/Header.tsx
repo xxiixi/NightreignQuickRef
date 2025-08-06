@@ -124,17 +124,23 @@ const Header: React.FC<HeaderProps> = ({
               <Tooltip title="查看访问量" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
-                    <div style={{ padding: '8px' }}>
-                      <div>
-                        本站总访问量 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{sitePv}</span> 次
+                    <div style={{ padding: '5px' }}>
+                      <div style={{ fontSize: '12px' }}>
+                        本站总访客数 <span style={{ color: '#1890ff' }}>{siteUv}</span> 人
                       </div>
-                      <div style={{ marginTop: '4px' }}>
-                        本站总访客数 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{siteUv}</span> 人
+                      <div style={{ fontSize: '12px' }}>
+                        本站总访问量 <span style={{ color: '#1890ff' }}>{sitePv}</span> 次
                       </div>
-                      <div style={{ marginTop: '4px' }}>
-                        本页访问量 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{pagePv}</span> 次
+                      <div style={{ fontSize: '12px' }}>
+                        本页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
                       </div>
-                      <div style={{ marginTop: '4px', fontSize: '12px', color: '#999' }}>
+                      <div style={{ 
+                        marginTop: '4px', 
+                        borderTop: '1px solid rgba(198, 198, 198, 0.2)', 
+                        paddingTop: '4px', 
+                        fontSize: '12px', 
+                        color: '#999' 
+                      }}>
                         统计服务: Vercount
                       </div>
                     </div>

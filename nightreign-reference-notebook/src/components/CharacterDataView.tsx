@@ -237,7 +237,7 @@ const DodgeFramesComparison = () => {
       <div className="content-wrapper card-item">
         <div className="card-header">
           <Title level={5} className="character-card-title">
-            闪避无敌帧对比
+           翻滚/闪避 帧数对比
           </Title>
         </div>
         <div className="card-body">
