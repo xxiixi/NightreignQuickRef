@@ -19,7 +19,7 @@ export default defineConfig({
       }
     },
     // 增加警告阈值，避免误报
-    chunkSizeWarningLimit: 1000
+    chunkSizeWarningLimit: 2500
   },
   // 优化依赖预构建
   optimizeDeps: {
