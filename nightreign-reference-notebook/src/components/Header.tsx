@@ -11,7 +11,7 @@ interface HeaderProps {
   onToggleLanguage: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({
+const Header: React.FC<HeaderProps> = React.memo(({
   isDarkMode,
   onToggleTheme,
   onToggleLanguage
@@ -115,6 +115,6 @@ const Header: React.FC<HeaderProps> = ({
       </div>
     </>
   );
-};
+});
 
 export default Header; 

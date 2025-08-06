@@ -5,7 +5,7 @@ interface NavigationProps {
   onTabChange: (tab: string) => void;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
+const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChange }) => {
   return (
     <div className="custom-buttons-container">
       <div className={`custom-tab-button ${activeTab === '词条详细数据' ? 'active' : ''}`}>
@@ -30,6 +30,6 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Navigation; 

@@ -4,7 +4,7 @@ import { HeartOutlined, GithubOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
-const Footer: React.FC = () => {
+const Footer: React.FC = React.memo(() => {
   return (
     <div className="footer">
       <Space direction="vertical" size="small" align="center">
@@ -37,6 +37,6 @@ const Footer: React.FC = () => {
       </Space>
     </div>
   );
-};
+});
 
 export default Footer; 
