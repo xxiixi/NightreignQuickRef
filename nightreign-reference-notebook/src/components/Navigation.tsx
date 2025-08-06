@@ -18,8 +18,8 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
           传说武器详情
         </a>
       </div>
-      <div className={`custom-tab-button ${activeTab === '功能3' ? 'active' : ''}`}>
-        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('功能3'); }}>
+      <div className={`custom-tab-button ${activeTab === '角色数据' ? 'active' : ''}`}>
+        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('角色数据'); }}>
           角色数据
         </a>
       </div>

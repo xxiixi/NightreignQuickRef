@@ -57,7 +57,7 @@ function App() {
         return <EntryDetailView />;
       case '传说武器详情':
         return <LegendaryWeaponView />;
-      case '功能3':
+      case '角色数据':
         return <CharacterDataView />;
       case '功能4':
         return <OtherFunctionView functionName="功能4" />;
@@ -90,7 +90,7 @@ function App() {
           onTabChange={setActiveTab}
         />
 
-        {activeTab === '功能3' ? (
+        {activeTab === '角色数据' ? (
           renderContent()
         ) : (
           <div className="content-wrapper">

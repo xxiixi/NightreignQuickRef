@@ -117,8 +117,8 @@ body[tomato-theme="dark"] .logo-container:hover {
 }
 
 .logo-container img {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 4px;
   object-fit: cover;
   transition: transform 0.2s ease;
@@ -133,7 +133,8 @@ body[tomato-theme="dark"] .logo-container:hover {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(0, 0, 0, 0.06);
-  min-width: 280px;
+  min-width: 100px;
+  max-width: 200px;
 }
 
 [data-theme="dark"] .logo-dropdown .ant-dropdown-menu,
