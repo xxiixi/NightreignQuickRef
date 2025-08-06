@@ -5,6 +5,7 @@ import { Radar, Column } from '@ant-design/plots';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
+import invincibleFramesData from '../data/zh-CN/invincible_frames.json';
 
 const { Title, Text } = Typography;
 
@@ -13,6 +14,8 @@ interface MagicMove {
   属性痕: string;
   属性图标: string;
   混合魔法: string;
+  总伤害: string;
+  持续时间: string;
   混合魔法效果: string;
 }
 
@@ -126,31 +129,8 @@ const DodgeFramesComparison = () => {
       return () => clearTimeout(timer);
     }, []);
     
-    // 整理数据格式（符合堆叠Column图表要求）
-    const frameData = [
-      { name: "追踪者（翻滚）", type: "无敌帧", value: 13 },
-      { name: "追踪者（翻滚）", type: "非无敌帧", value: 7 },
-      { name: "铁之眼（翻滚）", type: "无敌帧", value: 13 },
-      { name: "铁之眼（翻滚）", type: "非无敌帧", value: 7 },
-      { name: "复仇者（翻滚）", type: "无敌帧", value: 13 },
-      { name: "复仇者（翻滚）", type: "非无敌帧", value: 7 },
-      { name: "执行者（翻滚）", type: "无敌帧", value: 13 },
-      { name: "执行者（翻滚）", type: "非无敌帧", value: 7 },
-      { name: "守护者（闪避）", type: "无敌帧", value: 10 },
-      { name: "守护者（闪避）", type: "非无敌帧", value: 7 },
-      { name: "无赖（翻滚）", type: "无敌帧", value: 12 },
-      { name: "无赖（翻滚）", type: "非无敌帧", value: 9 },
-      { name: "隐士（闪避）", type: "无敌帧", value: 15 },
-      { name: "隐士（闪避）", type: "非无敌帧", value: 5 },
-      { name: "女爵（闪避）", type: "无敌帧", value: 10 },
-      { name: "女爵（闪避）", type: "非无敌帧", value: 3 },
-      { name: "女爵（双重踏步）", type: "无敌帧", value: 11 },
-      { name: "女爵（双重踏步）", type: "非无敌帧", value: 8 },
-      { name: "女爵（后空翻）", type: "无敌帧", value: 11 },
-      { name: "女爵（后空翻）", type: "非无敌帧", value: 8 },
-      { name: "女爵（闪身）", type: "无敌帧", value: 6 },
-      { name: "女爵（闪身）", type: "非无敌帧", value: 6 }
-    ];
+    // 使用从JSON文件导入的数据
+    const frameData = invincibleFramesData;
 
     // 计算每个角色的总帧数用于顶部注释
     const totalFrames: { [key: string]: number } = {};
@@ -171,7 +151,7 @@ const DodgeFramesComparison = () => {
         position: 'top',
         textAlign: 'center',
         fontSize: 14,
-        fill: currentTheme === 'dark' ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.85)',
+        fill: currentTheme === 'dark' ? 'rgba(232, 232, 232, 0.85)' : 'rgb(0, 158, 231)',
       },
       tooltip: false,
     }));
@@ -191,6 +171,11 @@ const DodgeFramesComparison = () => {
         position: 'inside',
       },
       tooltip: false,
+      scale: {
+        y: {
+          domainMax: 60,
+        },
+      },
       axis: {
         x: {
           label: {
@@ -256,6 +241,9 @@ const DodgeFramesComparison = () => {
           </Title>
         </div>
         <div className="card-body">
+          <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
+            提示：图中为60帧情况下的数据（1帧即1/60秒）
+          </div>
           <div 
             className={`dodge-frames-chart-container ${isTransitioning ? 'theme-transitioning' : ''}`}
             style={{ 
@@ -275,15 +263,19 @@ const DodgeFramesComparison = () => {
             description={
               <div className="dodge-frames-tips">
                 <div className="tip-item">
-                  1. 黑夜君临中没有负重影响人物翻滚 / 闪避的机制，角色重按决定回避性能，人物体型 / 身高与回避性能无关。（ 1 帧，即 1/30 秒）
+                  1. 黑夜君临中没有负重影响人物翻滚 / 闪避的机制，角色直接决定回避性能，人物体型 / 身高与回避性能无关。
                 </div>
                 
                 <div className="tip-item">
                   2. 蓝色部分表示 "无敌帧"，绿色部分表示非无敌帧。从0帧开始，非无敌帧结束后即可自由移动。（无敌帧 + 非无敌帧 = 翻滚/闪避动画总帧长）
                 </div>
-                
+
                 <div className="tip-item">
                   3. 如果角色在动作的无敌帧结束前执行了其他动作（如进行轻攻击），那无敌帧会在执行其他动作的瞬间中断，同时这也会减少整个闪避动作的位移距离。
+                </div>
+
+                <div className="tip-item">
+                    4. 各数值对应的秒数计算：帧数数值× (1/60秒); 举例: 追踪者翻滚总时长为40帧，在60帧情况下，对应的时长为 40×(1/60)s = 2/3s ≈ 0.67s
                 </div>
               </div>
             }
@@ -349,21 +341,35 @@ const CharacterDataView: React.FC = () => {
       title: '属性痕',
       dataIndex: '属性痕',
       key: '属性痕',
-      width: '15%',
+      width: '12%',
       align: 'center',
     },
     {
       title: '属性图标',
       dataIndex: '属性图标',
       key: '属性图标',
-      width: '15%',
+      width: '12%',
       align: 'center',
     },
     {
       title: '混合魔法',
       dataIndex: '混合魔法',
       key: '混合魔法',
-      width: '15%',
+      width: '12%',
+      align: 'center',
+    },
+    {
+      title: '总伤害',
+      dataIndex: '总伤害',
+      key: '总伤害',
+      width: '9%',
+      align: 'center',
+    },
+    {
+      title: '持续时间',
+      dataIndex: '持续时间',
+      key: '持续时间',
+      width: '9%',
       align: 'center',
     },
     {
@@ -820,6 +826,9 @@ const CharacterDataView: React.FC = () => {
           </Title>
         </div>
         <div className="card-body">
+          <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
+            提示：总伤害为角色15级时数据
+          </div>
           <Table
             dataSource={magicMoves}
             columns={magicMoveColumns}

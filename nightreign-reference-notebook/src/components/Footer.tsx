@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
           </a>
         </Text>
         <Text type="secondary" className="footer-text">
-          © {new Date().getFullYear()} NightreignQuickRef · All Rights Reserved · Last updated: August 4, 2025
+          © {new Date().getFullYear()} NightreignQuickRef · All Rights Reserved · Last updated: August 6, 2025
         </Text>
       </Space>
     </div>

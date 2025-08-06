@@ -154,7 +154,7 @@ const Header: React.FC<HeaderProps> = ({
                   content={
                     <div style={{ padding: '8px' }}>
                         <a 
-                          href="https://github.com/xxiixi/NightreignQuickRef/tree/main/reference/raw_data" 
+                          href="https://github.com/xxiixi/NightreignQuickRef/tree/main/reference" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="footer-link"

@@ -135,3 +135,15 @@
     执行者
 -----------------------------------------
 特定武器
+
+## 参考列表
+
+### 【艾尔登法环：黑夜君临】全角色回避翻滚动作，无敌帧分析对比！
+
+https://www.bilibili.com/video/BV1LvuVzuEqo?buvid=XY5BE8950C8CC4AA8B07EBC9B4DE33F7B4011&from_spmid=main.my-history.0.0&is_story_h5=false&mid=faGN3hFyzP2Mp23Yr98MOg%3D%3D&plat_id=116&share_from=ugc&share_medium=android&share_plat=android&share_session_id=9978f5e2-1f48-4148-bcd3-b64d47773aaf&share_source=QQ&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1754465400&unique_k=CyJwQiY&up_id=292847
+
+
+### 隐士出招表
+
+https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a
+
