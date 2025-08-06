@@ -82,6 +82,7 @@ function App() {
           isDarkMode={isDarkMode}
           onToggleTheme={handleToggleTheme}
           onToggleLanguage={handleToggleLanguage}
+          onTabChange={setActiveTab}
         />
 
         <Navigation

@@ -93,6 +93,75 @@ body[tomato-theme="dark"] .app-container {
 
 .top-bar-left {
   flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.logo-container:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .logo-container:hover,
+body[tomato-theme="dark"] .logo-container:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.logo-container img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  transition: transform 0.2s ease;
+}
+
+.logo-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Logo功能导航菜单样式 */
+.logo-dropdown .ant-dropdown-menu {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  min-width: 280px;
+}
+
+[data-theme="dark"] .logo-dropdown .ant-dropdown-menu,
+body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu {
+  background: #1f1f1f;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.logo-dropdown .ant-dropdown-menu-item {
+  padding: 16px 20px;
+  border-radius: 6px;
+  margin: 4px 6px;
+  transition: all 0.2s ease;
+}
+
+.logo-dropdown .ant-dropdown-menu-item:hover {
+  background: var(--geekblue-1);
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover,
+body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover {
+  background: var(--geekblue-6);
+}
+
+.logo-dropdown .ant-dropdown-menu-item:active {
+  transform: translateX(2px);
 }
 
 .top-bar-right {
