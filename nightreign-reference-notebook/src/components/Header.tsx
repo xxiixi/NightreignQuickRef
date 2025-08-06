@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Space, Button, Tooltip, Dropdown, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, TranslationOutlined, SmileOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, TranslationOutlined, SmileOutlined, ReadOutlined } from '@ant-design/icons';
 import logoImage from '../assets/logo-circle.png';
 
 const { Title, Text } = Typography;
@@ -82,64 +82,90 @@ const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
+      {/* 固定在左上角的logo按钮 */}
+      <div className="fixed-logo">
+        <Tooltip title="功能导航" placement="right">
+          <Dropdown 
+            menu={menu} 
+            open={logoDropdownVisible}
+            onOpenChange={setLogoDropdownVisible}
+            placement="bottomLeft"
+            trigger={['click']}
+            overlayClassName="logo-dropdown"
+          >
+            <div 
+              className="logo-container"
+              onClick={handleLogoClick}
+              style={{ cursor: 'pointer' }}
+            >
+              <img 
+                src={logoImage} 
+                alt="Nightreign Logo" 
+              />
+            </div>
+          </Dropdown>
+        </Tooltip>
+      </div>
+
       <div className="top-bar">
         <div className="top-bar-content">
-          <div className="top-bar-left">
-            <Tooltip title="功能导航" placement="right">
-              <Dropdown 
-                menu={menu} 
-                open={logoDropdownVisible}
-                onOpenChange={setLogoDropdownVisible}
-                placement="bottomLeft"
-                trigger={['click']}
-                overlayClassName="logo-dropdown"
-              >
-                <div 
-                  className="logo-container"
-                  onClick={handleLogoClick}
-                  style={{ cursor: 'pointer' }}
+          <div className="top-bar-right">
+            <Space size="middle">
+              <Tooltip title={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"} placement="bottom">
+                <Button
+                  type="text"
+                  icon={isDarkMode ? <MoonOutlined /> : <SunOutlined />}
+                  onClick={onToggleTheme}
+                  className="theme-toggle-btn"
+                />
+              </Tooltip>
+              <Tooltip title="查看访问量" placement="bottom" className="theme-toggle-btn">
+                <Popover
+                  content={
+                    <div style={{ padding: '8px' }}>
+                      <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                      </span>
+                      <br />
+                      <span id="busuanzi_container_site_uv">
+                        本站总访客数<span id="busuanzi_value_site_uv"></span>人
+                      </span>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
                 >
-                  <img 
-                    src={logoImage} 
-                    alt="Nightreign Logo" 
-                  />
-                </div>
-              </Dropdown>
-            </Tooltip>
-          </div>
-            <div className="top-bar-right">
-              <Space size="middle">
-                <Tooltip title={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"} placement="bottom">
                   <Button
                     type="text"
-                    icon={isDarkMode ? <MoonOutlined /> : <SunOutlined />}
-                    onClick={onToggleTheme}
-                    className="theme-toggle-btn"
+                    icon={<SmileOutlined />}
+                    className="visits-counter-btn"
                   />
-                </Tooltip>
-                <Tooltip title="查看访问量" placement="bottom" className="theme-toggle-btn">
-                  <Popover
-                    content={
-                                            <div style={{ padding: '8px' }}>
-                        <span id="busuanzi_container_site_pv">
-                          本站总访问量<span id="busuanzi_value_site_pv"></span>次
-                        </span>
-                        <br />
-                        <span id="busuanzi_container_site_uv">
-                          本站总访客数<span id="busuanzi_value_site_uv"></span>人
-                        </span>
-                      </div>
-                    }
-                    placement="bottom"
-                    trigger="click"
-                  >
-                    <Button
-                      type="text"
-                      icon={<SmileOutlined />}
-                      className="visits-counter-btn"
-                    />
-                  </Popover>
-                </Tooltip>
+                </Popover>
+              </Tooltip>
+              <Tooltip title="查看数据来源" placement="bottom" className="theme-toggle-btn">
+                <Popover
+                  content={
+                    <div style={{ padding: '8px' }}>
+                        <a 
+                          href="https://github.com/xxiixi/NightreignQuickRef/tree/main/reference/raw_data" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="footer-link"
+                        >
+                          reference/raw_data
+                        </a>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
+                >
+                  <Button
+                    type="text"
+                    icon={<ReadOutlined />}
+                    className="visits-counter-btn"
+                  />
+                </Popover>
+              </Tooltip>
               <Tooltip title="切换语言功能尚未开发" placement="bottom">
                 <Button
                   type="text"
@@ -148,10 +174,10 @@ const Header: React.FC<HeaderProps> = ({
                   className="language-toggle-btn"
                 />
               </Tooltip>
-            </Space>
-          </div>
+          </Space>
         </div>
       </div>
+    </div>
 
       <div className="header">
         <Title level={1} className="main-title">

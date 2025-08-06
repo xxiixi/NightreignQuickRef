@@ -77,7 +77,6 @@ body[tomato-theme="dark"] .app-container {
   width: 100%;
   text-align: center;
   padding: 15px 20px;
-  position: sticky;
   top: 0;
   z-index: var(--z-sticky);
 }
@@ -87,15 +86,11 @@ body[tomato-theme="dark"] .app-container {
   max-width: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
-.top-bar-left {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
+/* 移除top-bar-left，因为logo按钮已经固定在左上角 */
 
 .logo-container {
   display: flex;
@@ -741,6 +736,14 @@ body[tomato-theme="dark"] .custom-card .ant-card-head-title {
 [data-theme="dark"] .custom-card .ant-card-body,
 body[tomato-theme="dark"] .custom-card .ant-card-body {
   background: var(--content-bg);
+}
+
+/* 固定在左上角的logo按钮 */
+.fixed-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
 }
 
 /* ===== 响应式设计 ===== */
