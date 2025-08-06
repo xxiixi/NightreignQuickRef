@@ -19,7 +19,8 @@
     "antd": "^5.26.7",
     "lodash": "^4.17.21",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "vercount-react": "^0.1.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",

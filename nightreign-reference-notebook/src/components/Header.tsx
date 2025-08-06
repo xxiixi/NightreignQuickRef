@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Dropdown, Popover } from 'antd';
 import { MoonOutlined, SunOutlined, TranslationOutlined, SmileOutlined, ReadOutlined } from '@ant-design/icons';
 import logoImage from '../assets/logo-circle.png';
@@ -19,6 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   onTabChange
 }) => {
   const [logoDropdownVisible, setLogoDropdownVisible] = useState(false);
+  const { sitePv, pagePv, siteUv } = useVercount();
 
   // 功能导航菜单项
   const logoMenuItems = [
@@ -123,15 +125,17 @@ const Header: React.FC<HeaderProps> = ({
                 <Popover
                   content={
                     <div style={{ padding: '8px' }}>
-                      <span id="busuanzi_container_site_pv">
-                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
-                      </span>
-                      <br />
-                      <span id="busuanzi_container_site_uv">
-                        本站总访客数<span id="busuanzi_value_site_uv"></span>人
-                      </span>
+                      <div>
+                        本站总访问量 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{sitePv}</span> 次
+                      </div>
+                      <div style={{ marginTop: '4px' }}>
+                        本站总访客数 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{siteUv}</span> 人
+                      </div>
+                      <div style={{ marginTop: '4px' }}>
+                        本页访问量 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{pagePv}</span> 次
+                      </div>
                       <div style={{ marginTop: '4px', fontSize: '12px', color: '#999' }}>
-                        不蒜子版本: 2.3
+                        统计服务: Vercount
                       </div>
                     </div>
                   }
