@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Typography, Space, Button, Tooltip, Dropdown, Popover } from 'antd';
 import { MoonOutlined, SunOutlined, TranslationOutlined, SmileOutlined, ReadOutlined } from '@ant-design/icons';
 import logoImage from '../assets/logo-circle.png';
@@ -19,35 +19,6 @@ const Header: React.FC<HeaderProps> = ({
   onTabChange
 }) => {
   const [logoDropdownVisible, setLogoDropdownVisible] = useState(false);
-  const [visitStats, setVisitStats] = useState({ site_pv: 0, site_uv: 0 });
-
-  // 处理不蒜子统计数据
-  useEffect(() => {
-    const handleBusuanziCallback = (data: { site_pv: number; site_uv: number }) => {
-      if (data && typeof data.site_pv !== 'undefined' && typeof data.site_uv !== 'undefined') {
-        setVisitStats({
-          site_pv: data.site_pv,
-          site_uv: data.site_uv
-        });
-      }
-    };
-
-    // 监听不蒜子回调
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).BusuanziCallback_421754404863 = handleBusuanziCallback;
-
-    // 如果数据已经存在，直接设置
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    if ((window as any).busuanziData) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      handleBusuanziCallback((window as any).busuanziData);
-    }
-
-    return () => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      delete (window as any).BusuanziCallback_421754404863;
-    };
-  }, []);
 
   // 功能导航菜单项
   const logoMenuItems = [
@@ -152,14 +123,15 @@ const Header: React.FC<HeaderProps> = ({
                 <Popover
                   content={
                     <div style={{ padding: '8px' }}>
-                      <div>
-                        本站总访问量 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{visitStats.site_pv}</span> 次
-                      </div>
-                      <div style={{ marginTop: '4px' }}>
-                        本站总访客数 <span style={{ fontWeight: 'bold', color: '#1890ff' }}>{visitStats.site_uv}</span> 人
-                      </div>
+                      <span id="busuanzi_container_site_pv">
+                        本站总访问量<span id="busuanzi_value_site_pv"></span>次
+                      </span>
+                      <br />
+                      <span id="busuanzi_container_site_uv">
+                        本站总访客数<span id="busuanzi_value_site_uv"></span>人
+                      </span>
                       <div style={{ marginTop: '4px', fontSize: '12px', color: '#999' }}>
-                        不蒜子版本: 2.4
+                        不蒜子版本: 2.3
                       </div>
                     </div>
                   }
