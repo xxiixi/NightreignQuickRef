@@ -8,16 +8,6 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChange }) => {
   return (
     <div className="custom-buttons-container">
-      <div className={`custom-tab-button ${activeTab === '词条详细数据' ? 'active' : ''}`}>
-        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('词条详细数据'); }}>
-          词条详细数据
-        </a>
-      </div>
-      <div className={`custom-tab-button ${activeTab === '传说武器详情' ? 'active' : ''}`}>
-        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('传说武器详情'); }}>
-          传说武器详情
-        </a>
-      </div>
       <div className={`custom-tab-button ${activeTab === '角色数据' ? 'active' : ''}`}>
         <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('角色数据'); }}>
           角色数据
@@ -26,6 +16,16 @@ const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChan
       <div className={`custom-tab-button ${activeTab === '功能4' ? 'active' : ''}`}>
         <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('功能4'); }}>
           功能4
+        </a>
+      </div>
+      <div className={`custom-tab-button ${activeTab === '传说武器详情' ? 'active' : ''}`}>
+        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('传说武器详情'); }}>
+          传说武器详情
+        </a>
+      </div>
+      <div className={`custom-tab-button ${activeTab === '词条详细数据' ? 'active' : ''}`}>
+        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('词条详细数据'); }}>
+          词条详细数据
         </a>
       </div>
     </div>

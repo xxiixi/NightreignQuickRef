@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Carousel, Steps } from 'antd';
 import type { TableColumnsType } from 'antd';
+import DataManager from '../utils/dataManager';
 
 // 传说武器数据结构
 interface WeaponCharacter {
@@ -159,11 +160,12 @@ const LegendaryWeaponView: React.FC = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const weaponCharacterRes = await import('../data/zh-CN/weapon_character.json');
-        const weaponEffectRes = await import('../data/zh-CN/weapon_effect.json');
+        const dataManager = DataManager.getInstance();
+        await dataManager.waitForData();
+        
         setDataState({
-          weaponCharacterData: transformData(weaponCharacterRes.default as WeaponCharacter[]),
-          weaponEffectData: transformEffectData(weaponEffectRes.default as WeaponEffect[]),
+          weaponCharacterData: transformData(dataManager.getWeaponCharacter() as WeaponCharacter[]),
+          weaponEffectData: transformEffectData(dataManager.getWeaponEffect() as WeaponEffect[]),
           loading: false,
         });
       } catch (error) {

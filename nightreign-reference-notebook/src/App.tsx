@@ -5,16 +5,19 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
 import FunctionMenu from './components/FunctionMenu';
+import LoadingSpinner from './components/LoadingSpinner';
 import EntryDetailView from './pages/EntryDetailView';
 import OtherFunctionView from './pages/OtherFunctionView';
 import LegendaryWeaponView from './pages/LegendaryWeaponView';
 import CharacterDataView from './pages/CharacterDataView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
+import DataManager from './utils/dataManager';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('词条详细数据');
+  const [activeTab, setActiveTab] = useState('角色数据');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isEnglish, setIsEnglish] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   // 主题切换函数
   const handleToggleTheme = () => {
@@ -27,18 +30,26 @@ function App() {
     } else {
       document.body.removeAttribute('tomato-theme');
     }
-    
-    // 保存到localStorage
     localStorage.setItem('theme', newTheme ? 'dark' : 'light');
     
     // 触发自定义主题变化事件
     window.dispatchEvent(new Event('themeChange'));
   };
 
-  // 语言切换函数
+  // 语言切换
   const handleToggleLanguage = () => {
     setIsEnglish(!isEnglish);
   };
+
+  // 预加载所有数据
+  useEffect(() => {
+    const dataManager = DataManager.getInstance();
+    dataManager.preloadAllData().then(() => {
+      setIsDataLoaded(true);
+    }).catch((error) => {
+      console.error('数据预加载失败:', error);
+    });
+  }, []);
 
   // 初始化主题
   useEffect(() => {
@@ -66,6 +77,24 @@ function App() {
         return <EntryDetailView />;
     }
   };
+
+  // 如果数据还未加载完成，显示加载动画
+  if (!isDataLoaded) {
+    return (
+      <ConfigProvider
+        theme={{
+          algorithm: isDarkMode ? theme.darkAlgorithm : undefined,
+          token: {
+            colorPrimary: isDarkMode ? geekblue[4] : geekblue[6],
+            colorPrimaryHover: isDarkMode ? geekblue[3] : geekblue[5],
+            colorPrimaryActive: isDarkMode ? geekblue[5] : geekblue[7],
+          },
+        }}
+      >
+        <LoadingSpinner message="正在加载游戏数据，请稍候..." />
+      </ConfigProvider>
+    );
+  }
 
   return (
     <ConfigProvider

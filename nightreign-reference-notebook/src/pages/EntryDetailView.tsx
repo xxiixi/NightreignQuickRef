@@ -3,6 +3,7 @@ import { Table, Input, Select, message, Tabs, Tag, Spin } from 'antd';
 import type { TableColumnsType } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
+import DataManager from '../utils/dataManager';
 
 const { Search } = Input;
 
@@ -79,27 +80,18 @@ const EntryDetailView: React.FC = () => {
     loading: true
   });
 
-  // 动态加载数据
+  // 从DataManager获取数据
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [
-          outsiderEntries,
-          talismanEntries,
-          inGameEntries,
-          otherEntries
-        ] = await Promise.all([
-          import('../data/zh-CN/outsider_entries_zh-CN.json'),
-          import('../data/zh-CN/talisman_entries_zh-CN.json'),
-          import('../data/zh-CN/in-game_entries_zh-CN.json'),
-          import('../data/zh-CN/other_entries_zh-CN.json')
-        ]);
+        const dataManager = DataManager.getInstance();
+        await dataManager.waitForData();
 
         setData({
-          outsiderEntries: outsiderEntries.default,
-          talismanEntries: talismanEntries.default,
-          inGameEntries: inGameEntries.default,
-          otherEntries: otherEntries.default,
+          outsiderEntries: dataManager.getOutsiderEntries(),
+          talismanEntries: dataManager.getTalismanEntries(),
+          inGameEntries: dataManager.getInGameEntries(),
+          otherEntries: dataManager.getOtherEntries(),
           loading: false
         });
       } catch (error) {

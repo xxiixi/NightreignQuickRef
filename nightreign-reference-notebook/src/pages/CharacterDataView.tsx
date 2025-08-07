@@ -5,7 +5,7 @@ import { Radar, Column } from '@ant-design/plots';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
-import invincibleFramesData from '../data/zh-CN/invincible_frames.json';
+import DataManager from '../utils/dataManager';
 
 const { Title, Text } = Typography;
 
@@ -28,35 +28,16 @@ interface DataState {
 
 // 闪避无敌帧对比组件
 const DodgeFramesComparison = () => {
-    // 当前主题状态
     const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
-    
-    // 强制重新渲染的key
     const [chartKey, setChartKey] = useState(0);
+    const [frameData, setFrameData] = useState<Array<{name: string; type: string; value: number}>>([]);
     
-    // 动画状态
-    const [isTransitioning, setIsTransitioning] = useState(false);
-    
-
-    
-    // 监听主题变化
     useEffect(() => {
       const checkTheme = () => {
         const newTheme = getCurrentTheme();
         if (newTheme !== currentTheme) {
-          // 开始过渡动画
-          setIsTransitioning(true);
-          
-          // 延迟更新主题，让动画有时间执行
-          setTimeout(() => {
-            setCurrentTheme(newTheme);
-            setChartKey(prev => prev + 1);
-            
-            // 动画结束后恢复状态
-            setTimeout(() => {
-              setIsTransitioning(false);
-            }, 300);
-          }, 150);
+          setCurrentTheme(newTheme);
+          setChartKey(prev => prev + 1);
         }
       };
       
@@ -129,12 +110,24 @@ const DodgeFramesComparison = () => {
       return () => clearTimeout(timer);
     }, []);
     
-    // 使用从JSON文件导入的数据
-    const frameData = invincibleFramesData;
+    // 加载无敌帧数据
+    useEffect(() => {
+      const loadFrameData = async () => {
+        try {
+          const dataManager = DataManager.getInstance();
+          await dataManager.waitForData();
+          setFrameData(dataManager.getInvincibleFrames());
+        } catch (error) {
+          console.error('Failed to load frame data:', error);
+        }
+      };
+      
+      loadFrameData();
+    }, []);
 
     // 计算每个角色的总帧数用于顶部注释
     const totalFrames: { [key: string]: number } = {};
-    frameData.forEach(item => {
+    frameData.forEach((item: {name: string; type: string; value: number}) => {
       if (!totalFrames[item.name]) {
         totalFrames[item.name] = 0;
       }
@@ -245,7 +238,7 @@ const DodgeFramesComparison = () => {
             提示：图中为60帧情况下的数据（1帧即1/60秒）
           </div>
           <div 
-            className={`dodge-frames-chart-container ${isTransitioning ? 'theme-transitioning' : ''}`}
+            className="dodge-frames-chart-container"
             style={{ 
               height: 400, 
               width: '100%',
@@ -306,18 +299,16 @@ const CharacterDataView: React.FC = () => {
     loading: true
   });
 
-  // 动态加载数据
+  // 从DataManager获取数据
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [characterStates, magicMoves] = await Promise.all([
-          import('../data/zh-CN/character_states.json'),
-          import('../data/zh-CN/magic_move_list.json')
-        ]);
+        const dataManager = DataManager.getInstance();
+        await dataManager.waitForData();
 
         setData({
-          characterStatesData: characterStates.default,
-          magicMoveData: magicMoves.default,
+          characterStatesData: dataManager.getCharacterStates(),
+          magicMoveData: dataManager.getMagicMoveList(),
           loading: false
         });
       } catch (error) {
@@ -409,28 +400,14 @@ const CharacterDataView: React.FC = () => {
   
   // 强制重新渲染的key
   const [chartKey, setChartKey] = useState(0);
-  
-  // 动画状态
-  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // 监听主题变化
   useEffect(() => {
     const checkTheme = () => {
       const newTheme = getCurrentTheme();
       if (newTheme !== currentTheme) {
-        // 开始过渡动画
-        setIsTransitioning(true);
-        
-        // 延迟更新主题，让动画有时间执行
-        setTimeout(() => {
-          setCurrentTheme(newTheme);
-          setChartKey(prev => prev + 1);
-          
-          // 动画结束后恢复状态
-          setTimeout(() => {
-            setIsTransitioning(false);
-          }, 300);
-        }, 150);
+        setCurrentTheme(newTheme);
+        setChartKey(prev => prev + 1);
       }
     };
     
@@ -675,7 +652,7 @@ const CharacterDataView: React.FC = () => {
             
             {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
             <div 
-              className={`radar-chart-container ${isTransitioning ? 'theme-transitioning' : ''}`}
+              className="radar-chart-container"
               style={{ flex: '1', minWidth: '400px', minHeight: '400px' }}
               id="radar-chart-container"
             >
@@ -763,7 +740,7 @@ const CharacterDataView: React.FC = () => {
               ) : (
                 // 空状态显示
                 <div 
-                  className={`radar-wrapper ${isTransitioning ? 'theme-transitioning' : ''}`}
+                  className="radar-wrapper"
                   style={{ height: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
                 >
                   <Radar
