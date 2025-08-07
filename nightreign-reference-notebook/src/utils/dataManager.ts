@@ -5,9 +5,9 @@ import { message } from 'antd';
 export interface EntryData {
   entry_id: string;
   entry_name: string;
-  entry_type?: string;
-  explanation?: string;
-  superposability?: string;
+  entry_type?: string | null;
+  explanation: string | null;
+  superposability?: string | null;
   talisman?: string;
 }
 
