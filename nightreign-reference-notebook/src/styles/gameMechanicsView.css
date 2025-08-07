@@ -16,8 +16,8 @@
 /* 板块网格布局 */
 .mechanics-grid {
   display: grid;
-  gap: 24px;
-  margin-bottom: 30px;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 /* 单列布局 */
