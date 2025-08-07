@@ -1,5 +1,5 @@
-import { Typography, Timeline } from 'antd';
-import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, PauseCircleTwoTone, SafetyOutlined, ThunderboltOutlined, ThunderboltTwoTone } from '@ant-design/icons';
+import { Typography, Timeline, Table, Alert } from 'antd';
+import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, SafetyOutlined, ThunderboltOutlined, ThunderboltTwoTone } from '@ant-design/icons';
 import '../styles/gameMechanicsView.css';
 
 const { Title, Text } = Typography;
@@ -129,99 +129,147 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
+                  <MoneyCollectOutlined />
                     升级所需卢恩
                   </Title>
                 </div>
                 <div className="card-body">
-                  <div className="rune-table-container">
-                    <div className="rune-grid">
-                      {/* 第一列：等级1-5 */}
-                      <div className="rune-column">
-                        <div className="rune-column-header">等级 1-5</div>
-                        <div className="rune-row">
-                          <span className="rune-level">1</span>
-                          <span className="rune-amount">--</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">2</span>
-                          <span className="rune-amount">3,698</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">3</span>
-                          <span className="rune-amount">7,922</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">4</span>
-                          <span className="rune-amount">12,348</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">5</span>
-                          <span className="rune-amount">16,978</span>
-                        </div>
-                      </div>
-
-                      {/* 第二列：等级6-10 */}
-                      <div className="rune-column">
-                        <div className="rune-column-header">等级 6-10</div>
-                        <div className="rune-row">
-                          <span className="rune-level">6</span>
-                          <span className="rune-amount">21,818</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">7</span>
-                          <span className="rune-amount">26,869</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">8</span>
-                          <span className="rune-amount">32,137</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">9</span>
-                          <span className="rune-amount">37,624</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">10</span>
-                          <span className="rune-amount">43,335</span>
-                        </div>
-                      </div>
-
-                      {/* 第三列：等级11-15 */}
-                      <div className="rune-column">
-                        <div className="rune-column-header">等级 11-15</div>
-                        <div className="rune-row">
-                          <span className="rune-level">11</span>
-                          <span className="rune-amount">49,271</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">12</span>
-                          <span className="rune-amount">55,439</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">13</span>
-                          <span className="rune-amount">61,840</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">14</span>
-                          <span className="rune-amount">68,479</span>
-                        </div>
-                        <div className="rune-row">
-                          <span className="rune-level">15</span>
-                          <span className="rune-amount">75,358</span>
-                        </div>
-                      </div>
+                  <div className="runes-table-container">
+                    {/* 第一栏 - 1-5级 */}
+                    <div className="runes-column">
+                      <Table
+                        dataSource={[
+                          { key: '1', level: '1', runes: '--' },
+                          { key: '2', level: '2', runes: '3,698' },
+                          { key: '3', level: '3', runes: '7,922' },
+                          { key: '4', level: '4', runes: '12,348' },
+                          { key: '5', level: '5', runes: '16,978' },
+                        ]}
+                        columns={[
+                          {
+                            title: '等级',
+                            dataIndex: 'level',
+                            key: 'level',
+                            width: '50%',
+                          },
+                          {
+                            title: '所需卢恩',
+                            dataIndex: 'runes',
+                            key: 'runes',
+                            width: '50%',
+                            render: (text) => (
+                              <span style={{ color: '#1890ff', fontWeight: 'bold' }}>
+                                {text}
+                              </span>
+                            )
+                          }
+                        ]}
+                        pagination={false}
+                        size="small"
+                        style={{ marginTop: '8px' }}
+                      />
                     </div>
-                    <div className="rune-total">
-                      <div className="weapon-level-note">
-                        3级可使用蓝色武器; 7级可使用紫色武器; 10级可使用金色武器
-                      </div>
-                      <div className="rune-total-info">
-                        <span className="rune-total-label">| 总计</span>
-                        <span className="rune-total-amount">513,336</span>
-                      </div>
+
+                    {/* 第二栏 - 6-10级 */}
+                    <div className="runes-column">
+                      <Table
+                        dataSource={[
+                          { key: '6', level: '6', runes: '21,818' },
+                          { key: '7', level: '7', runes: '26,869' },
+                          { key: '8', level: '8', runes: '32,137' },
+                          { key: '9', level: '9', runes: '37,624' },
+                          { key: '10', level: '10', runes: '43,335' },
+                        ]}
+                        columns={[
+                          {
+                            title: '等级',
+                            dataIndex: 'level',
+                            key: 'level',
+                            width: '50%',
+                          },
+                          {
+                            title: '所需卢恩',
+                            dataIndex: 'runes',
+                            key: 'runes',
+                            width: '50%',
+                            render: (text) => (
+                              <span style={{ color: '#1890ff', fontWeight: 'bold' }}>
+                                {text}
+                              </span>
+                            )
+                          }
+                        ]}
+                        pagination={false}
+                        size="small"
+                        style={{ marginTop: '8px' }}
+                      />
+                    </div>
+
+                    <div className="runes-column">
+                      <Table
+                        dataSource={[
+                          { key: '11', level: '11', runes: '49,271' },
+                          { key: '12', level: '12', runes: '55,439' },
+                          { key: '13', level: '13', runes: '61,840' },
+                          { key: '14', level: '14', runes: '68,479' },
+                          { key: '15', level: '15', runes: '75,358' },
+                        ]}
+                        columns={[
+                          {
+                            title: '等级',
+                            dataIndex: 'level',
+                            key: 'level',
+                            width: '50%',
+                            render: (text, record) => (
+                              <span style={{ 
+                                fontWeight: record.key === 'total' ? 'bold' : 'normal',
+                                color: record.key === 'total' ? '#1890ff' : 'inherit'
+                              }}>
+                                {text}
+                              </span>
+                            )
+                          },
+                          {
+                            title: '所需卢恩',
+                            dataIndex: 'runes',
+                            key: 'runes',
+                            width: '50%',
+                            render: (text) => (
+                              <span style={{ 
+                                fontWeight: 'bold',
+                                color: '#1890ff'
+                              }}>
+                                {text}
+                              </span>
+                            )
+                          }
+                        ]}
+                        pagination={false}
+                        size="small"
+                        style={{ marginTop: '8px' }}
+                      />
                     </div>
                   </div>
                 </div>
-              </div>
+                                                                     {/* 升级所需卢恩注释信息 */}
+                   <Alert
+                     description={
+                       <div className="dodge-frames-tips">
+                         <div className="tip-item">
+                           角色升至15级总共需要卢恩：<strong style={{ color: '#1890ff' }}>513,336</strong>
+                         </div>
+                         <div className="tip-item">
+                           角色3级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
+                           7级可使用<strong style={{ color: '#722ed1' }}>紫色武器</strong>，
+                           10级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
+                         </div>
+                       </div>
+                     }
+                     type="info"
+                     showIcon={false}
+                     style={{ marginTop: '10px' }}
+                   />
+                </div>
             </div>
           </div>
 

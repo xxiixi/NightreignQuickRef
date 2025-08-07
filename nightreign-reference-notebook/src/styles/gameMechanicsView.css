@@ -275,18 +275,38 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   padding-bottom: 8px;
   border-bottom: 2px solid var(--color-primary-300);
   font-size: var(--font-size-md);
+  margin-bottom: 8px;
 }
 
-.rune-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
+/* Ant Design Table 样式 */
+.rune-table {
+  background: transparent;
+}
+
+.rune-table .ant-table {
+  background: transparent;
+}
+
+.rune-table .ant-table-thead > tr > th {
+  background: var(--color-primary-50);
+  border-bottom: 1px solid var(--color-primary-200);
+  color: var(--color-title-primary);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  padding: 8px 4px;
+  font-size: var(--font-size-sm);
+}
+
+.rune-table .ant-table-tbody > tr > td {
   border-bottom: 1px solid var(--color-primary-100);
+  padding: 6px 4px;
+  text-align: center;
+  color: var(--color-text-1);
+  font-size: var(--font-size-sm);
 }
 
-.rune-row:last-child {
-  border-bottom: none;
+.rune-table .ant-table-tbody > tr:hover > td {
+  background: var(--color-primary-25);
 }
 
 .rune-level {
@@ -344,35 +364,59 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   }
 }
 
-/* 深色模式表格适配 */
-[data-theme="dark"] .rune-column,
-body[tomato-theme="dark"] .rune-column {
-  background: var(--color-primary-900);
-  border-color: var(--color-primary-700);
+/* 卢恩表格3栏布局样式 */
+.runes-table-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 8px;
 }
 
-[data-theme="dark"] .rune-column-header,
-body[tomato-theme="dark"] .rune-column-header {
-  border-bottom-color: var(--color-primary-600);
+.runes-column {
+  display: flex;
+  flex-direction: column;
 }
 
-[data-theme="dark"] .rune-row,
-body[tomato-theme="dark"] .rune-row {
-  border-bottom-color: var(--color-primary-800);
+.runes-column .ant-table {
+  font-size: 12px;
 }
 
-[data-theme="dark"] .rune-amount,
-body[tomato-theme="dark"] .rune-amount {
-  color: var(--color-primary-400);
+.runes-column .ant-table-thead > tr > th {
+  padding: 6px 4px;
+  font-size: 12px;
+  text-align: center;
 }
 
-[data-theme="dark"] .rune-total,
-body[tomato-theme="dark"] .rune-total {
-  background: var(--color-primary-900);
-  border-color: var(--color-primary-600);
+.runes-column .ant-table-tbody > tr > td {
+  padding: 4px 4px;
+  font-size: 12px;
+  text-align: center;
 }
 
-[data-theme="dark"] .rune-total-amount,
-body[tomato-theme="dark"] .rune-total-amount {
-  color: var(--color-primary-400);
-} 
+/* 响应式布局 - 小屏幕时变为单列 */
+@media (max-width: 768px) {
+  .runes-table-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.game-mechanics-container .ant-alert {
+  border-radius: 8px !important;
+  transition: all var(--transition-normal) !important;
+  border: 1px solid #d9d9d9 !important;
+  background: var(--content-bg) !important;
+}
+
+.game-mechanics-container .ant-alert:hover {
+  border-color: #1890ff !important;
+}
+
+.game-mechanics-container .ant-alert-info {
+  background: var(--content-bg) !important;
+}
+
+.game-mechanics-container .ant-alert-description {
+  color: var(--color-text-2);
+}
+
