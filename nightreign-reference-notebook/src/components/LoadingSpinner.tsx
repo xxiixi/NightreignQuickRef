@@ -6,7 +6,7 @@ interface LoadingSpinnerProps {
 }
 
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ 
-  message = '正在加载数据，请稍候...' 
+  message = 'Loading' 
 }) => {
   return (
     <div className="loading-container">

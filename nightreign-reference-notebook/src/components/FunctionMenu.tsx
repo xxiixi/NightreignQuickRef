@@ -27,7 +27,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
       children: '查看角色相关数据，包括角色属性、无敌帧长度对比、隐士出招表。'
     },
     {
-      key: '功能4',
+      key: '游戏机制',
       label: '其他功能',
       children: '更多功能模块，持续开发中...'
     }

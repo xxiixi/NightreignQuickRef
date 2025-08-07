@@ -13,7 +13,7 @@
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3) inset;
 }
 .loader:after {
-  box-shadow: 0 2px 0 #0984ff inset;
+  box-shadow: 0 3px 0 #0256ff inset;
   animation: rotate 2s linear infinite;
 }
 

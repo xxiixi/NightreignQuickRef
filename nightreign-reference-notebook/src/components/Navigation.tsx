@@ -13,9 +13,9 @@ const Navigation: React.FC<NavigationProps> = React.memo(({ activeTab, onTabChan
           角色数据
         </a>
       </div>
-      <div className={`custom-tab-button ${activeTab === '功能4' ? 'active' : ''}`}>
-        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('功能4'); }}>
-          功能4
+      <div className={`custom-tab-button ${activeTab === '游戏机制' ? 'active' : ''}`}>
+        <a href="#" onClick={(e) => { e.preventDefault(); onTabChange('游戏机制'); }}>
+          游戏机制
         </a>
       </div>
       <div className={`custom-tab-button ${activeTab === '传说武器详情' ? 'active' : ''}`}>

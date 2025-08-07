@@ -7,7 +7,7 @@ import Navigation from './components/Navigation';
 import FunctionMenu from './components/FunctionMenu';
 import LoadingSpinner from './components/LoadingSpinner';
 import EntryDetailView from './pages/EntryDetailView';
-import OtherFunctionView from './pages/OtherFunctionView';
+import GameMechanicsView from './pages/GameMechanicsView';
 import LegendaryWeaponView from './pages/LegendaryWeaponView';
 import CharacterDataView from './pages/CharacterDataView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
@@ -71,8 +71,8 @@ function App() {
         return <LegendaryWeaponView />;
       case '角色数据':
         return <CharacterDataView />;
-      case '功能4':
-        return <OtherFunctionView functionName="功能4" />;
+      case '游戏机制':
+        return <GameMechanicsView functionName="游戏机制" />;
       default:
         return <EntryDetailView />;
     }
@@ -91,7 +91,7 @@ function App() {
           },
         }}
       >
-        <LoadingSpinner message="正在加载游戏数据，请稍候..." />
+        <LoadingSpinner message="正在加载数据，请稍候..." />
       </ConfigProvider>
     );
   }
@@ -121,7 +121,7 @@ function App() {
           onTabChange={setActiveTab}
         />
 
-        {activeTab === '角色数据' ? (
+        {activeTab === '角色数据' || activeTab === '游戏机制' ? (
           renderContent()
         ) : (
           <div className="content-wrapper">

@@ -1,0 +1,242 @@
+/* GameMechanicsView 组件专用样式 */
+
+.game-mechanics-container {
+  padding: 20px 0;
+  max-width: 100%;
+}
+
+/* 主布局容器 - 可配置最大宽度 */
+.mechanics-layout {
+  width: 70%;
+  max-width: var(--mechanics-container-width, 1200px);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 板块网格布局 */
+.mechanics-grid {
+  display: grid;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+/* 单列布局 */
+.mechanics-grid.single-column {
+  grid-template-columns: 1fr;
+}
+
+/* 双列布局 */
+.mechanics-grid.two-columns {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 三列布局 */
+.mechanics-grid.three-columns {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+/* 自定义列宽布局 */
+.mechanics-grid.custom-columns {
+  grid-template-columns: var(--mechanics-grid-columns, 1fr 1fr);
+}
+
+/* 响应式布局 */
+@media (max-width: 1024px) {
+  .mechanics-grid.two-columns,
+  .mechanics-grid.three-columns,
+  .mechanics-grid.custom-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mechanics-layout {
+    padding: 0 16px;
+  }
+  
+  .mechanics-grid {
+    gap: 16px;
+  }
+}
+
+/* 新卡片样式 - 融合设计 */
+.mechanic-card {
+  background: var(--content-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  height: fit-content;
+  min-height: 200px;
+  position: relative;
+  border: 1px solid var(--theme-border);
+}
+
+.mechanic-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 新卡片内容布局 */
+.mechanic-card .card-content {
+  padding: 24px;
+  position: relative;
+}
+
+/* 标题区域 - 与内容融合 */
+.mechanic-card .card-title-section {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--color-primary-100);
+  position: relative;
+}
+
+.mechanic-card .card-title-section::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--color-primary-500);
+  border-radius: 1px;
+}
+
+/* 卡片标题样式 */
+.mechanic-card-title {
+  margin: 0 !important;
+  color: var(--color-title-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mechanic-card-title .anticon {
+  font-size: 18px;
+  color: var(--color-primary-500);
+}
+
+/* 卡片内容区域 */
+.mechanic-card .card-body {
+  padding: 5px;
+}
+
+/* 时间轴样式优化 */
+.mechanic-timeline {
+  margin-top: 16px;
+}
+
+.mechanic-timeline .ant-timeline {
+  width: 100%;
+  margin-left: -35px;
+  margin-bottom: -40px;
+}
+.mechanic-timeline .ant-timeline-item-label {
+  color: var(--color-text-2);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.mechanic-timeline .ant-timeline-item-content {
+  color: var(--color-text-1);
+  font-size: var(--font-size-sm);
+}
+
+/* 机制内容样式 */
+.mechanic-content {
+  color: var(--color-text-1);
+  line-height: var(--line-height-relaxed);
+}
+
+.mechanic-content h4 {
+  color: var(--color-title-secondary);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 12px;
+  font-size: var(--font-size-md);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mechanic-content h4::before {
+  content: '•';
+  color: var(--color-primary-500);
+  font-weight: bold;
+}
+
+.mechanic-content p {
+  margin-bottom: 8px;
+  font-size: var(--font-size-sm);
+  padding-left: 16px;
+  position: relative;
+}
+
+.mechanic-content p::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--color-text-3);
+  font-size: 12px;
+}
+
+/* 开发中占位符样式 */
+.mechanics-development-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--color-text-2);
+}
+
+.mechanics-development-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 12px;
+  color: var(--color-text-1);
+}
+
+.mechanics-development-text {
+  font-size: var(--font-size-md);
+  color: var(--color-text-2);
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mechanic-card {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.mechanic-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.mechanic-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* 深色模式适配 */
+[data-theme="dark"] .mechanic-card,
+body[tomato-theme="dark"] .mechanic-card {
+  background: var(--content-bg);
+  border-color: var(--theme-border);
+}
+
+[data-theme="dark"] .mechanic-card:hover,
+body[tomato-theme="dark"] .mechanic-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .mechanic-card .card-title-section,
+body[tomato-theme="dark"] .mechanic-card .card-title-section {
+  border-bottom-color: var(--color-primary-800);
+} 
