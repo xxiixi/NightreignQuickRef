@@ -123,7 +123,109 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
             </div>
           </div>
 
-          {/* 第二行 - 防御机制 - 使用百分比宽度 */}
+          {/* 第二行 - 升级所需卢恩 - 横向展示，5级一列 */}
+          <div className="mechanics-grid single-column">
+            <div className="mechanic-card">
+              <div className="card-content">
+                <div className="card-title-section">
+                  <Title level={5} className="mechanic-card-title">
+                    升级所需卢恩
+                  </Title>
+                </div>
+                <div className="card-body">
+                  <div className="rune-table-container">
+                    <div className="rune-grid">
+                      {/* 第一列：等级1-5 */}
+                      <div className="rune-column">
+                        <div className="rune-column-header">等级 1-5</div>
+                        <div className="rune-row">
+                          <span className="rune-level">1</span>
+                          <span className="rune-amount">--</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">2</span>
+                          <span className="rune-amount">3,698</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">3</span>
+                          <span className="rune-amount">7,922</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">4</span>
+                          <span className="rune-amount">12,348</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">5</span>
+                          <span className="rune-amount">16,978</span>
+                        </div>
+                      </div>
+
+                      {/* 第二列：等级6-10 */}
+                      <div className="rune-column">
+                        <div className="rune-column-header">等级 6-10</div>
+                        <div className="rune-row">
+                          <span className="rune-level">6</span>
+                          <span className="rune-amount">21,818</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">7</span>
+                          <span className="rune-amount">26,869</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">8</span>
+                          <span className="rune-amount">32,137</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">9</span>
+                          <span className="rune-amount">37,624</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">10</span>
+                          <span className="rune-amount">43,335</span>
+                        </div>
+                      </div>
+
+                      {/* 第三列：等级11-15 */}
+                      <div className="rune-column">
+                        <div className="rune-column-header">等级 11-15</div>
+                        <div className="rune-row">
+                          <span className="rune-level">11</span>
+                          <span className="rune-amount">49,271</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">12</span>
+                          <span className="rune-amount">55,439</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">13</span>
+                          <span className="rune-amount">61,840</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">14</span>
+                          <span className="rune-amount">68,479</span>
+                        </div>
+                        <div className="rune-row">
+                          <span className="rune-level">15</span>
+                          <span className="rune-amount">75,358</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="rune-total">
+                      <div className="weapon-level-note">
+                        3级可使用蓝色武器; 7级可使用紫色武器; 10级可使用金色武器
+                      </div>
+                      <div className="rune-total-info">
+                        <span className="rune-total-label">| 总计</span>
+                        <span className="rune-total-amount">513,336</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* 第三行 - 防御机制 - 使用百分比宽度 */}
           <div className="mechanics-grid custom-columns" style={{ '--mechanics-grid-columns': '60% 40%' } as React.CSSProperties}>
             <div className="mechanic-card">
               <div className="card-content">

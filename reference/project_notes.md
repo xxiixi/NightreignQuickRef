@@ -174,3 +174,10 @@
 
 [链接](https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a)
 
+### Day-Length
+
+[link](https://mobalytics.gg/elden-ring-nightreign/guides/day-length)
+
+### Level up
+
+[link](https://game8.co/games/Elden-Ring-Nightreign/archives/522643)

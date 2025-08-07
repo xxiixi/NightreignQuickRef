@@ -85,7 +85,6 @@
 
 /* 标题区域 - 与内容融合 */
 .mechanic-card .card-title-section {
-  margin-bottom: 20px;
   padding-bottom: 16px;
   border-bottom: 2px solid var(--color-primary-100);
   position: relative;
@@ -105,22 +104,35 @@
 /* 卡片标题样式 */
 .mechanic-card-title {
   margin: 0 !important;
-  color: var(--color-title-primary);
   font-weight: var(--font-weight-semibold);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .mechanic-card-title .anticon {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--color-primary-500);
+}
+
+/* 武器等级注释样式 */
+.weapon-level-note {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-2);
+  line-height: 1.4;
+}
+
+/* 深色模式武器等级注释适配 */
+[data-theme="dark"] .weapon-level-note,
+body[tomato-theme="dark"] .weapon-level-note {
+  color: var(--color-text-2);
 }
 
 /* 卡片内容区域 */
 .mechanic-card .card-body {
   padding: 5px;
+  margin-top: 10px;
 }
 
 /* 时间轴样式优化 */
@@ -239,4 +251,128 @@ body[tomato-theme="dark"] .mechanic-card:hover {
 [data-theme="dark"] .mechanic-card .card-title-section,
 body[tomato-theme="dark"] .mechanic-card .card-title-section {
   border-bottom-color: var(--color-primary-800);
+}
+
+/* 升级所需卢恩表格样式 */
+
+.rune-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.rune-column {
+  background: var(--color-primary-25);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  border: 1px solid var(--color-primary-200);
+}
+
+.rune-column-header {
+  text-align: center;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-title-primary);
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-primary-300);
+  font-size: var(--font-size-md);
+}
+
+.rune-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-primary-100);
+}
+
+.rune-row:last-child {
+  border-bottom: none;
+}
+
+.rune-level {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-1);
+  font-size: var(--font-size-sm);
+}
+
+.rune-amount {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+  font-size: var(--font-size-sm);
+}
+
+.rune-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-primary-50);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  /* border: 2px solid var(--color-primary-300); */
+  margin-top: 8px;
+}
+
+.rune-total-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rune-total-label {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-title-primary);
+  font-size: var(--font-size-sm);
+}
+
+.rune-total-amount {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-600);
+  font-size: var(--font-size-sm);
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+  .rune-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .rune-total {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+/* 深色模式表格适配 */
+[data-theme="dark"] .rune-column,
+body[tomato-theme="dark"] .rune-column {
+  background: var(--color-primary-900);
+  border-color: var(--color-primary-700);
+}
+
+[data-theme="dark"] .rune-column-header,
+body[tomato-theme="dark"] .rune-column-header {
+  border-bottom-color: var(--color-primary-600);
+}
+
+[data-theme="dark"] .rune-row,
+body[tomato-theme="dark"] .rune-row {
+  border-bottom-color: var(--color-primary-800);
+}
+
+[data-theme="dark"] .rune-amount,
+body[tomato-theme="dark"] .rune-amount {
+  color: var(--color-primary-400);
+}
+
+[data-theme="dark"] .rune-total,
+body[tomato-theme="dark"] .rune-total {
+  background: var(--color-primary-900);
+  border-color: var(--color-primary-600);
+}
+
+[data-theme="dark"] .rune-total-amount,
+body[tomato-theme="dark"] .rune-total-amount {
+  color: var(--color-primary-400);
 } 
