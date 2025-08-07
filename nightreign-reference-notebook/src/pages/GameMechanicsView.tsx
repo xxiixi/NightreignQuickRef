@@ -1,32 +1,16 @@
-import { Typography, Timeline, Table, Alert, Empty, Checkbox, Select, Button, Card, Space, Divider, Tag } from 'antd';
+import { Typography, Timeline, Table, Alert, Empty, Select, Button, Card, Divider, Tag } from 'antd';
 import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, ExclamationCircleOutlined, HeartOutlined } from '@ant-design/icons';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import recoverCalculateData from '../data/zh-CN/recover_calculate.json';
 import '../styles/gameMechanicsView.css';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-interface RecoverItem {
-  id: number;
-  name: string;
-  description: string;
-  category: string;
-}
-
 interface GameMechanicsViewProps {
   functionName: string;
 }
 
-/**
- * 2. 自定义列宽配置：
- *    - 使用 custom-columns 类名
- *    - 通过 --mechanics-grid-columns 变量设置
- *    - 示例：'2fr 1fr' (左侧占2份，右侧占1份)
- *    - 示例：'60% 40%' (左侧60%，右侧40%)
- *    - 示例：'1fr 1fr 1fr' (三等分)
- * 
- */
 const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) => {
   // 获取category对应的颜色
   const getCategoryColor = (category: string): string => {
@@ -120,7 +104,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
           baseFocusRecovery = 0.3; // 恢复30%专注值
           calculationSteps.push(`应用 ${item.name}: 专注值恢复 ${(baseFocusRecovery * 100).toFixed(0)}%`);
           break;
-        case 2: // 使用圣杯瓶时，连同回复周围我方人物
+        case 2: // 使用圣杯瓶时，连同恢复周围我方人物
           baseHealthRecovery = 0.5;
           baseHealthRecoveryAlly = 0.3;
           if (baseFocusRecovery != 0) {
@@ -128,21 +112,21 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
           }
           calculationSteps.push(`应用 ${item.name}: 回血量变为 ${(baseHealthRecovery * 100).toFixed(0)}%, 队友回血量 ${(baseHealthRecoveryAlly * 100).toFixed(0)}%`);
           break;
-        case 3: // 提升圣杯瓶回复量20%
+        case 3: // 提升圣杯瓶恢复量20%
           baseHealthRecovery *= 1.2;
           calculationSteps.push(`应用 ${item.name}: 回血量 × 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
           break;
-        case 4: // 提升圣杯瓶回复量20%
+        case 4: // 提升圣杯瓶恢复量20%
           baseHealthRecovery *= 1.2;
           calculationSteps.push(`应用 ${item.name}: 回血量 × 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
           break;
-        case 5: // 提升圣杯瓶回复量20%
+        case 5: // 提升圣杯瓶恢复量20%
           baseHealthRecovery *= 1.2;
           calculationSteps.push(`应用 ${item.name}: 回血量 × 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
           break;
         case 6: // 使用圣杯瓶时，改为缓慢恢复
           baseHealthRecovery = 0.01 * 81; // 1% × 81秒 = 81%
-          calculationSteps.push(`应用 ${item.name}: 回血量变为 ${(baseHealthRecovery * 100).toFixed(0)}% (1% × 81秒)`);
+          calculationSteps.push(`应用缓慢恢复: 回血量百分比为 1% × 81次 =  ${(baseHealthRecovery * 100).toFixed(0)}%`);
           if(baseHealthRecoveryAlly!==0){
             baseHealthRecoveryAlly = 0.05+(0.01 * 41);
           }
@@ -378,10 +362,10 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                     回血量计算器
                   </Title>
                 </div>
-                                 <div className="card-body">
+                  <div className="card-body">
                    <div style={{ display: 'flex', gap: '24px', minHeight: '500px' }}>
                      {/* 左侧：选择区域 */}
-                     <div style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
+                     <div style={{ flex: '1.2', display: 'flex', flexDirection: 'column' }}>
                        {/* 角色选择 */}
                        <div style={{ marginBottom: '20px' }}>
                          <Text strong>选择角色：</Text>
@@ -472,8 +456,24 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                          </div>
                        </div>
 
+                       {/* 备注信息 */}
+                       <div style={{ marginTop: '16px', marginBottom: '12px' }}>
+                         <div style={{ 
+                           backgroundColor: '#f6f8fa', 
+                           padding: '12px', 
+                           borderRadius: '6px',
+                           border: '1px solid #e1e4e8'
+                         }}>
+                           <div style={{ fontSize: '12px', color: '#666', lineHeight: '1.6' }}>
+                             <div style={{ marginBottom: '4px' }}>• 角色血量和蓝量均为 15 级时的数据</div>
+                             <div style={{ marginBottom: '4px' }}>• 红色圣杯瓶初始恢复量为角色总血量的 60%</div>
+                             <div>• 「提升圣杯瓶恢复量 20%」词条可叠加，此处仅显示 3 个（因叠加 3 个后恢复量已超 100%，故未添加更多）</div>
+                           </div>
+                         </div>
+                       </div>
+
                        {/* 计算按钮 */}
-                       <div style={{ marginTop: '16px' }}>
+                       <div style={{ marginTop: '8px' }}>
                          <Button 
                            type="primary" 
                            onClick={calculateRecovery}
@@ -487,72 +487,91 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                      </div>
 
                                             {/* 右侧：数据展示区域 */}
-                       <div style={{ flex: '1.2', display: 'flex', flexDirection: 'column' }}>
+                       <div style={{ flex: '1', display: 'flex', flexDirection: 'column' }}>
                          {/* 计算步骤 */}
-                         {calculationResult?.steps && (
-                           <Card size="small" title="计算步骤" style={{ flex: '1', marginBottom: '16px' }}>
-                             <div style={{ 
-                               backgroundColor: '#f5f5f5', 
-                               padding: '12px', 
-                               borderRadius: '6px',
-                               fontFamily: 'monospace',
-                               fontSize: '12px',
-                               lineHeight: '1.6',
-                               height: '100%',
-                               overflowY: 'auto'
-                             }}>
-                               {calculationResult.steps.map((step, index) => (
+                         <Card size="small" title="计算步骤" style={{ flex: '1', marginBottom: '16px' }}>
+                           <div style={{ 
+                             backgroundColor: '#f5f5f5', 
+                             padding: '12px', 
+                             borderRadius: '6px',
+                             fontFamily: 'monospace',
+                             fontSize: '12px',
+                             lineHeight: '1.6',
+                             height: '100%',
+                             overflowY: 'auto',
+                             minHeight: '328px'
+                           }}>
+                             {calculationResult?.steps ? (
+                               calculationResult.steps.map((step, index) => (
                                  <div key={index} style={{ marginBottom: '4px' }}>
                                    {step}
                                  </div>
-                               ))}
-                             </div>
-                           </Card>
-                         )}
+                               ))
+                             ) : (
+                               <div style={{ color: '#999', fontStyle: 'italic' }}>
+                                 请选择角色和效果后点击计算按钮
+                               </div>
+                             )}
+                           </div>
+                         </Card>
 
                          {/* 计算结果 */}
-                         {calculationResult && (
-                           <Card size="small" title="计算结果" style={{ flex: '0 0 auto' }}>
-                             <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
-                               {/* 自身恢复 */}
-                               <div style={{ flex: '1' }}>
-                                 <Text strong style={{ color: '#52c41a', fontSize: '14px' }}>自身恢复</Text>
-                                 <div style={{ marginTop: '8px' }}>
-                                   <div style={{ marginBottom: '4px' }}>
-                                     <Text>回血量: {calculationResult.selfHealth} 点</Text>
-                                     <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.selfHealthPercent}%)</Text>
-                                   </div>
-                                   {calculationResult.selfFocus > 0 && (
-                                     <div>
-                                       <Text>回蓝量: {calculationResult.selfFocus} 点</Text>
-                                       <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.selfFocusPercent}%)</Text>
+                         <Card size="small" title="计算结果" style={{ flex: '0 0 auto' }}>
+                           <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                             {/* 自身恢复 */}
+                             <div style={{ flex: '1' }}>
+                               <Text strong style={{ color: '#52c41a', fontSize: '14px' }}>自身恢复</Text>
+                               <div style={{ marginTop: '8px' }}>
+                                 {calculationResult ? (
+                                   <>
+                                     <div style={{ marginBottom: '4px' }}>
+                                       <Text>回血量: {calculationResult.selfHealth} 点</Text>
+                                       <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.selfHealthPercent}%)</Text>
                                      </div>
-                                   )}
-                                 </div>
-                               </div>
-
-                               {/* 分隔线 */}
-                               <Divider type="vertical" style={{ height: '60px', margin: '0 8px' }} />
-
-                               {/* 队友恢复 */}
-                               <div style={{ flex: '1' }}>
-                                 <Text strong style={{ color: '#1890ff', fontSize: '14px' }}>队友恢复</Text>
-                                 <div style={{ marginTop: '8px' }}>
-                                   <div style={{ marginBottom: '4px' }}>
-                                     <Text>回血量: {calculationResult.allyHealth} 点</Text>
-                                     <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.allyHealthPercent}%)</Text>
+                                     {calculationResult.selfFocus > 0 && (
+                                       <div>
+                                         <Text>回蓝量: {calculationResult.selfFocus} 点</Text>
+                                         <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.selfFocusPercent}%)</Text>
+                                       </div>
+                                     )}
+                                   </>
+                                 ) : (
+                                   <div style={{ color: '#999', fontStyle: 'italic' }}>
+                                     待计算
                                    </div>
-                                   {calculationResult.allyFocus > 0 && (
-                                     <div>
-                                       <Text>回蓝量: {calculationResult.allyFocus} 点</Text>
-                                       <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.allyFocusPercent}%)</Text>
-                                     </div>
-                                   )}
-                                 </div>
+                                 )}
                                </div>
                              </div>
-                           </Card>
-                         )}
+
+                             {/* 分隔线 */}
+                             <Divider type="vertical" style={{ height: '60px', margin: '0 8px' }} />
+
+                             {/* 队友恢复 */}
+                             <div style={{ flex: '1' }}>
+                               <Text strong style={{ color: '#1890ff', fontSize: '14px' }}>队友恢复</Text>
+                               <div style={{ marginTop: '8px' }}>
+                                 {calculationResult ? (
+                                   <>
+                                     <div style={{ marginBottom: '4px' }}>
+                                       <Text>回血量: {calculationResult.allyHealth} 点</Text>
+                                       <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.allyHealthPercent}%)</Text>
+                                     </div>
+                                     {calculationResult.allyFocus > 0 && (
+                                       <div>
+                                         <Text>回蓝量: {calculationResult.allyFocus} 点</Text>
+                                         <Text style={{ color: '#666', fontSize: '12px' }}> ({calculationResult.allyFocusPercent}%)</Text>
+                                       </div>
+                                     )}
+                                   </>
+                                 ) : (
+                                   <div style={{ color: '#999', fontStyle: 'italic' }}>
+                                     待计算
+                                   </div>
+                                 )}
+                               </div>
+                             </div>
+                           </div>
+                         </Card>
                        </div>
                    </div>
                  </div>
