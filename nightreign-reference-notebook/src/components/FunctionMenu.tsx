@@ -12,9 +12,14 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
   // 功能导航菜单项
   const logoMenuItems = [
     {
-      key: '词条详细数据',
-      label: '词条详细数据',
-      children: '包括局外词条(xxxx)、局内词条、护符词条等。'
+      key: '角色数据',
+      label: '角色数据',
+      children: '查看角色相关数据，包括角色属性、无敌帧长度对比、隐士出招表。'
+    },
+    {
+      key: '游戏机制',
+      label: '游戏机制',
+      children: '包括游戏内缩圈时间、升级所需卢恩、其他功能尚未完成。'
     },
     {
       key: '传说武器详情',
@@ -22,15 +27,10 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
       children: '查看不同角色使用传说武器的强度面板，以及各武器的庇佑效果。'
     },
     {
-      key: '角色数据',
-      label: '角色数据',
-      children: '查看角色相关数据，包括角色属性、无敌帧长度对比、隐士出招表。'
+      key: '词条详细数据',
+      label: '词条详细数据',
+      children: '包括局外词条(xxxx)、局内词条、护符词条等。'
     },
-    {
-      key: '游戏机制',
-      label: '其他功能',
-      children: '更多功能模块，持续开发中...'
-    }
   ];
 
   const handleLogoClick = () => {
