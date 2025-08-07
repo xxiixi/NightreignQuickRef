@@ -58,11 +58,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
     { value: 740, label: '隐士', focus: 195 },
   ];
 
-  // 多选框事件处理
-  const handleEffectChange = (checkedValues: string[]) => {
-    setSelectedEffects(checkedValues);
-  };
-
   // 计算回血量
   const calculateRecovery = () => {
     if (!selectedCharacter) {
