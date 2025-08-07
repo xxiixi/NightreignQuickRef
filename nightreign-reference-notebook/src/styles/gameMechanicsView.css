@@ -364,32 +364,32 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   }
 }
 
-/* 卢恩表格3栏布局样式 */
+/* 卢恩表格2栏布局样式 */
 .runes-table-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 8px;
+  width: 100%;
 }
 
 .runes-column {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .runes-column .ant-table {
-  font-size: 12px;
+  width: 100%;
 }
 
 .runes-column .ant-table-thead > tr > th {
   padding: 6px 4px;
-  font-size: 12px;
   text-align: center;
 }
 
 .runes-column .ant-table-tbody > tr > td {
   padding: 4px 4px;
-  font-size: 12px;
   text-align: center;
 }
 

@@ -1,5 +1,5 @@
-import { Typography, Timeline, Table, Alert } from 'antd';
-import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, SafetyOutlined, ThunderboltOutlined, ThunderboltTwoTone } from '@ant-design/icons';
+import { Typography, Timeline, Table, Alert, Empty } from 'antd';
+import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, ExclamationCircleOutlined } from '@ant-design/icons';
 import '../styles/gameMechanicsView.css';
 
 const { Title, Text } = Typography;
@@ -98,33 +98,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
               </div>
             </div>
 
-            {/* 右侧小卡片 */}
-            <div className="mechanic-card">
-              <div className="card-content">
-                <div className="card-title-section">
-                  <Title level={5} className="mechanic-card-title">
-                    战斗机制
-                  </Title>
-                </div>
-                <div className="card-body">
-                  <div className="mechanic-content">
-                    <h4>基础战斗</h4>
-                    <p>近战攻击：基础伤害</p>
-                    <p>远程攻击：魔法伤害</p>
-                    <p>闪避：无敌帧保护</p>
-                    
-                    <h4>特殊机制</h4>
-                    <p>连击系统：提升伤害</p>
-                    <p>暴击机制：随机触发</p>
-                    <p>元素克制：相性加成</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 第二行 - 升级所需卢恩 - 横向展示，5级一列 */}
-          <div className="mechanics-grid single-column">
+            {/* 右侧小卡片 - 升级所需卢恩 */}
             <div className="mechanic-card">
               <div className="card-content">
                 <div className="card-title-section">
@@ -135,7 +109,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                 </div>
                 <div className="card-body">
                   <div className="runes-table-container">
-                    {/* 第一栏 - 1-5级 */}
+                    {/* 第一栏 - 1-8级 */}
                     <div className="runes-column">
                       <Table
                         dataSource={[
@@ -144,41 +118,9 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                           { key: '3', level: '3', runes: '7,922' },
                           { key: '4', level: '4', runes: '12,348' },
                           { key: '5', level: '5', runes: '16,978' },
-                        ]}
-                        columns={[
-                          {
-                            title: '等级',
-                            dataIndex: 'level',
-                            key: 'level',
-                            width: '50%',
-                          },
-                          {
-                            title: '所需卢恩',
-                            dataIndex: 'runes',
-                            key: 'runes',
-                            width: '50%',
-                            render: (text) => (
-                              <span style={{ color: '#1890ff', fontWeight: 'bold' }}>
-                                {text}
-                              </span>
-                            )
-                          }
-                        ]}
-                        pagination={false}
-                        size="small"
-                        style={{ marginTop: '8px' }}
-                      />
-                    </div>
-
-                    {/* 第二栏 - 6-10级 */}
-                    <div className="runes-column">
-                      <Table
-                        dataSource={[
                           { key: '6', level: '6', runes: '21,818' },
                           { key: '7', level: '7', runes: '26,869' },
                           { key: '8', level: '8', runes: '32,137' },
-                          { key: '9', level: '9', runes: '37,624' },
-                          { key: '10', level: '10', runes: '43,335' },
                         ]}
                         columns={[
                           {
@@ -205,14 +147,18 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                       />
                     </div>
 
+                    {/* 第二栏 - 9-15级 */}
                     <div className="runes-column">
                       <Table
                         dataSource={[
+                          { key: '9', level: '9', runes: '37,624' },
+                          { key: '10', level: '10', runes: '43,335' },
                           { key: '11', level: '11', runes: '49,271' },
                           { key: '12', level: '12', runes: '55,439' },
                           { key: '13', level: '13', runes: '61,840' },
                           { key: '14', level: '14', runes: '68,479' },
                           { key: '15', level: '15', runes: '75,358' },
+                          { key: 'total', level: '总计', runes: '513,336' },
                         ]}
                         columns={[
                           {
@@ -220,14 +166,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                             dataIndex: 'level',
                             key: 'level',
                             width: '50%',
-                            render: (text, record) => (
-                              <span style={{ 
-                                fontWeight: record.key === 'total' ? 'bold' : 'normal',
-                                color: record.key === 'total' ? '#1890ff' : 'inherit'
-                              }}>
-                                {text}
-                              </span>
-                            )
                           },
                           {
                             title: '所需卢恩',
@@ -250,137 +188,43 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                       />
                     </div>
                   </div>
-                </div>
-                                                                     {/* 升级所需卢恩注释信息 */}
-                   <Alert
-                     description={
-                       <div className="dodge-frames-tips">
-                         <div className="tip-item">
-                           角色升至15级总共需要卢恩：<strong style={{ color: '#1890ff' }}>513,336</strong>
-                         </div>
-                         <div className="tip-item">
-                           角色3级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
-                           7级可使用<strong style={{ color: '#722ed1' }}>紫色武器</strong>，
-                           10级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
-                         </div>
-                       </div>
-                     }
-                     type="info"
-                     showIcon={false}
-                     style={{ marginTop: '10px' }}
-                   />
-                </div>
-            </div>
-          </div>
-
-          {/* 第三行 - 防御机制 - 使用百分比宽度 */}
-          <div className="mechanics-grid custom-columns" style={{ '--mechanics-grid-columns': '60% 40%' } as React.CSSProperties}>
-            <div className="mechanic-card">
-              <div className="card-content">
-                <div className="card-title-section">
-                  <Title level={5} className="mechanic-card-title">
-                    <SafetyOutlined />
-                    防御机制
-                  </Title>
-                </div>
-                <div className="card-body">
-                  <div className="mechanic-content">
-                    <h4>护盾系统</h4>
-                    <p>物理护盾：抵挡物理伤害</p>
-                    <p>魔法护盾：抵挡魔法伤害</p>
-                    <p>护盾恢复：时间自动恢复</p>
-                    
-                    <h4>闪避机制</h4>
-                    <p>完美闪避：无伤躲避</p>
-                    <p>无敌帧：短暂无敌时间</p>
-                    <p>闪避冷却：技能冷却时间</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mechanic-card">
-              <div className="card-content">
-                <div className="card-title-section">
-                  <Title level={5} className="mechanic-card-title">
-                    <ThunderboltOutlined />
-                    技能系统
-                  </Title>
-                </div>
-                <div className="card-body">
-                  <div className="mechanic-content">
-                    <h4>主动技能</h4>
-                    <p>攻击技能：造成伤害</p>
-                    <p>辅助技能：增益效果</p>
-                    <p>控制技能：限制敌人</p>
-                    
-                    <h4>被动技能</h4>
-                    <p>属性加成：永久提升</p>
-                    <p>特殊效果：触发条件</p>
-                    <p>技能组合：协同效果</p>
-                  </div>
+                  
+                  {/* 升级所需卢恩注释信息 */}
+                  <Alert
+                    description={
+                      <div className="dodge-frames-tips">
+                        <div className="tip-item">
+                          角色3级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
+                          7级可使用<strong style={{ color: '#722ed1' }}>紫色武器</strong>，
+                          10级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
+                        </div>
+                      </div>
+                    }
+                    type="info"
+                    showIcon={false}
+                    style={{ marginTop: '35px' }}
+                  />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* 第三行 - 其他机制 - 三等分布局 */}
-          <div className="mechanics-grid custom-columns" style={{ '--mechanics-grid-columns': '1fr 1fr 1fr' } as React.CSSProperties}>
+          {/* 其他功能尚未完成卡片 */}
+          <div className="mechanics-grid">
             <div className="mechanic-card">
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
-                    装备系统
+                    <ExclamationCircleOutlined />
+                    其他功能尚未完成
                   </Title>
                 </div>
                 <div className="card-body">
-                  <div className="mechanic-content">
-                    <h4>装备类型</h4>
-                    <p>武器：攻击力提升</p>
-                    <p>防具：防御力提升</p>
-                    <p>饰品：特殊效果</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mechanic-card">
-              <div className="card-content">
-                <div className="card-title-section">
-                  <Title level={5} className="mechanic-card-title">
-                    等级系统
-                  </Title>
-                </div>
-                <div className="card-body">
-                  <div className="mechanic-content">
-                    <h4>角色成长</h4>
-                    <p>经验获取：击败敌人</p>
-                    <p>等级提升：属性增强</p>
-                    <p>技能解锁：新技能获得</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="mechanic-card">
-              <div className="card-content">
-                <div className="card-title-section">
-                  <Title level={5} className="mechanic-card-title">
-                    道具系统
-                  </Title>
-                </div>
-                <div className="card-body">
-                  <div className="mechanic-content">
-                    <h4>道具类型</h4>
-                    <p>恢复道具：生命恢复</p>
-                    <p>增益道具：临时强化</p>
-                    <p>特殊道具：独特效果</p>
-                  </div>
+                  <Empty description="更多功能开发中..." />
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     );

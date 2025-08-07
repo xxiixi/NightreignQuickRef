@@ -646,7 +646,7 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
   padding: var(--spacing-lg);
-  margin: var(--spacing-xl) auto 0 auto;
+  margin: var(--spacing-sm) auto 0 auto;
   max-width: 100%;
 }
 
