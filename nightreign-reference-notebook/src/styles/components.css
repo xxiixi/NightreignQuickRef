@@ -67,9 +67,10 @@ body[tomato-theme="dark"] .app-container {
   background-color: var(--content-bg);
   border-radius: 12px;
   box-shadow: 0 4px 20px var(--content-shadow);
-  padding: 10px 40px;
+  padding: 10px 40px 30px 40px;
   display: flex;
   flex-direction: column;
+  height: auto;
 }
 
 /* ===== 顶部导航栏 ===== */
@@ -241,6 +242,16 @@ body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover {
 /* ===== 标签页组件 ===== */
 .tabs-container {
   flex: 1;
+}
+
+.steps-container {
+  max-width: 1280px;
+  width: 70%;
+  margin: 0 auto; /* 居中 */
+  background-color: var(--theme-bg-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px var(--content-shadow);
+  padding: 10px 40px 30px 40px;
 }
 
 .main-tabs {
@@ -611,14 +622,17 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   padding: 6px;
 }
 
+.legendary-weapon-content {
+  margin-top: 20px;
+  transition: all var(--transition-normal);
+}
+
 .legendary-weapon-steps-container {
   margin-bottom: 16px;
   margin-top: 10px;
 }
 
-.legendary-weapon-carousel {
-  margin-top: 16px;
-}
+
 
 .legendary-weapon-table-container {
   padding: 6px;
@@ -646,7 +660,7 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
   padding: var(--spacing-lg);
-  margin: var(--spacing-sm) auto 0 auto;
+  margin: var(--spacing-xl) auto 0 auto;
   max-width: 100%;
 }
 

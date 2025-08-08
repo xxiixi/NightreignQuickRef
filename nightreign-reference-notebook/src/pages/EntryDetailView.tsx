@@ -399,53 +399,60 @@ const EntryDetailView: React.FC = () => {
   };
 
   return (
-    <Tabs
-      activeKey={activeEntryTab}
-      onChange={(key) => setActiveEntryTab(key)}
-      items={[
-        {
-          key: '局外词条',
-          label: '局外词条',
-          children: (
-            <div>
-              {renderSearchAndFilter('局外词条')}
-              {renderTableContent('局外词条')}
-            </div>
-          ),
-        },
-        {
-          key: '护符词条',
-          label: '护符词条',
-          children: (
-            <div>
-              {renderSearchAndFilter('护符词条')}
-              {renderTableContent('护符词条')}
-            </div>
-          ),
-        },
-        {
-          key: '局内词条',
-          label: '局内词条',
-          children: (
-            <div>
-              {renderSearchAndFilter('局内词条')}
-              {renderTableContent('局内词条')}
-            </div>
-          ),
-        },
-        {
-          key: '其他词条',
-          label: '其他词条',
-          children: (
-            <div>
-              {renderSearchAndFilter('其他词条')}
-              {renderTableContent('其他词条')}
-            </div>
-          ),
-        },
-      ]}
-      className="custom-tabs"
-    />
+    <div className="content-wrapper">
+      <div className="tabs-container">
+        <Tabs
+          activeKey={activeEntryTab}
+          onChange={(key) => {
+            setActiveEntryTab(key);
+            setCurrentPage(1);
+          }}
+          items={[
+            {
+              key: '局外词条',
+              label: '局外词条',
+              children: (
+                <div>
+                  {renderSearchAndFilter('局外词条')}
+                  {renderTableContent('局外词条')}
+                </div>
+              ),
+            },
+            {
+              key: '护符词条',
+              label: '护符词条',
+              children: (
+                <div>
+                  {renderSearchAndFilter('护符词条')}
+                  {renderTableContent('护符词条')}
+                </div>
+              ),
+            },
+            {
+              key: '局内词条',
+              label: '局内词条',
+              children: (
+                <div>
+                  {renderSearchAndFilter('局内词条')}
+                  {renderTableContent('局内词条')}
+                </div>
+              ),
+            },
+            {
+              key: '其他词条',
+              label: '其他词条',
+              children: (
+                <div>
+                  {renderSearchAndFilter('其他词条')}
+                  {renderTableContent('其他词条')}
+                </div>
+              ),
+            },
+          ]}
+          className="custom-tabs"
+        />
+      </div>
+    </div>
   );
 };
 

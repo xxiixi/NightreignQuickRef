@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Carousel, Steps } from 'antd';
+import { Table, Steps } from 'antd';
 import type { TableColumnsType } from 'antd';
 import DataManager from '../utils/dataManager';
 
@@ -150,7 +150,6 @@ const ColorLegend = () => {
 
 const LegendaryWeaponView: React.FC = () => {
   const [currentStep, setCurrentStep] = React.useState(0);
-  const carouselRef = React.useRef<React.ElementRef<typeof Carousel>>(null);
   const [dataState, setDataState] = useState<DataState>({
     weaponCharacterData: [],
     weaponEffectData: [],
@@ -298,7 +297,6 @@ const LegendaryWeaponView: React.FC = () => {
         current={currentStep}
         onChange={(current) => {
           setCurrentStep(current);
-          carouselRef.current?.goTo(current);
         }}
         items={[
           { title: '全角色传说武器面板' },
@@ -317,19 +315,17 @@ const LegendaryWeaponView: React.FC = () => {
   }
 
   return (
-    <div className="legendary-weapon-container" style={{ padding: '16px' }}>
-      {customSteps}
-      <Carousel 
-        ref={carouselRef}
-        infinite={false}
-        dots={false}
-        beforeChange={(_from, to) => setCurrentStep(to)}
-        className="legendary-weapon-carousel"
-      >
-        <div>{firstTable}</div>
-        <div>{secondTable}</div>
-      </Carousel>
-    </div>
+    // <div className="content-wrapper">
+      <div className="steps-container">
+        <div className="legendary-weapon-container" style={{ padding: '16px' }}>
+          {customSteps}
+          <div className="legendary-weapon-content">
+            {currentStep === 0 && firstTable}
+            {currentStep === 1 && secondTable}
+          </div>
+        </div>
+      </div>
+    // </div>
   );
 };
 

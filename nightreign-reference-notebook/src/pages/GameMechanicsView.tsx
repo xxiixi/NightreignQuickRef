@@ -104,7 +104,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                     <div className="runes-column">
                       <Table
                         dataSource={[
-                          { key: '1', level: '1', runes: '--' },
+                          { key: '1', level: '1', runes: '0' },
                           { key: '2', level: '2', runes: '3,698' },
                           { key: '3', level: '3', runes: '7,922' },
                           { key: '4', level: '4', runes: '12,348' },
@@ -126,7 +126,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                             key: 'runes',
                             width: '50%',
                             render: (text) => (
-                              <span style={{ color: '#1890ff', fontWeight: 'bold' }}>
+                              <span style={{ color: '#1890ff' }}>
                                 {text}
                               </span>
                             )
@@ -134,6 +134,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                         ]}
                         pagination={false}
                         size="small"
+                        bordered
                         style={{ marginTop: '8px' }}
                       />
                     </div>
@@ -165,7 +166,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                             width: '50%',
                             render: (text) => (
                               <span style={{ 
-                                fontWeight: 'bold',
                                 color: '#1890ff'
                               }}>
                                 {text}
@@ -175,6 +175,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                         ]}
                         pagination={false}
                         size="small"
+                        bordered
                         style={{ marginTop: '8px' }}
                       />
                     </div>
@@ -182,18 +183,22 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   
                   {/* 升级所需卢恩注释信息 */}
                   <Alert
+                    // 加一个title：小提示
                     description={
                       <div className="dodge-frames-tips">
                         <div className="tip-item">
-                          角色3级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
+                          1. 角色3级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
                           7级可使用<strong style={{ color: '#722ed1' }}>紫色武器</strong>，
                           10级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
+                        </div>
+                        <div className="tip-item">
+                        2. 如果当前卢恩足够升级，左上角显示等级的数字左边会出现一个白色箭头(局内)。
                         </div>
                       </div>
                     }
                     type="info"
                     showIcon={false}
-                    style={{ marginTop: '35px' }}
+                    style={{ marginTop: '15px' }}
                   />
                 </div>
               </div>

@@ -121,15 +121,7 @@ function App() {
           onTabChange={setActiveTab}
         />
 
-        {activeTab === '角色数据' || activeTab === '游戏机制' ? (
-          renderContent()
-        ) : (
-          <div className="content-wrapper">
-            <div className="tabs-container">
-              {renderContent()}
-            </div>
-          </div>
-        )}
+        {renderContent()}
 
         <Footer />
       </div>
