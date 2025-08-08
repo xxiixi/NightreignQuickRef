@@ -184,6 +184,23 @@ const EntryDetailView: React.FC = () => {
   // 局外词条表格列定义
   const outsiderColumns: TableColumnsType<EntryData> = [
     {
+      title: 'ID',
+      dataIndex: 'entry_id',
+      key: 'entry_id',
+      width: '10%',
+      align: 'center',
+      onCell: () => ({
+        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+      }),
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
+    },
+    {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
@@ -230,11 +247,15 @@ const EntryDetailView: React.FC = () => {
       filteredValue: filteredInfo.superposability || null,
       onFilter: (value, record) => record.superposability === value,
     },
+  ];
+
+  // 护符词条表格列定义
+  const talismanColumns: TableColumnsType<EntryData> = [
     {
       title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: '5%',
+      width: '10%',
       align: 'center',
       onCell: () => ({
         style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
@@ -247,10 +268,6 @@ const EntryDetailView: React.FC = () => {
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
-  ];
-
-  // 护符词条表格列定义
-  const talismanColumns: TableColumnsType<EntryData> = [
     {
       title: '护符',
       dataIndex: 'talisman',
@@ -262,7 +279,48 @@ const EntryDetailView: React.FC = () => {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: '20%',
+      width: '30%',
+      sorter: (a, b) => {
+        const nameA = a.entry_name || '';
+        const nameB = b.entry_name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+    },
+    {
+      title: '解释',
+      dataIndex: 'explanation',
+      key: 'explanation',
+      width: '45%',
+      render: (text) => text || '-',
+    },
+  ];
+
+  // 局内词条表格列定义
+  const inGameColumns: TableColumnsType<EntryData> = [
+    {
+      title: 'ID',
+      dataIndex: 'entry_id',
+      key: 'entry_id',
+      width: '10%',
+      align: 'center',
+      onCell: () => ({
+        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+      }),
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
+    },
+    {
+      title: '词条名称',
+      dataIndex: 'entry_name',
+      key: 'entry_name',
+      width: '35%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
@@ -278,68 +336,27 @@ const EntryDetailView: React.FC = () => {
       width: '55%',
       render: (text) => text || '-',
     },
-    {
-      title: 'ID',
-      dataIndex: 'entry_id',
-      key: 'entry_id',
-      width: '10%',
-      align: 'center',
-      onCell: () => ({
-        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
-      }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
-    },
-  ];
-
-  // 局内词条表格列定义
-  const inGameColumns: TableColumnsType<EntryData> = [
-    {
-      title: '词条名称',
-      dataIndex: 'entry_name',
-      key: 'entry_name',
-      width: '25%',
-      sorter: (a, b) => {
-        const nameA = a.entry_name || '';
-        const nameB = b.entry_name || '';
-        return nameA.localeCompare(nameB, 'zh-CN');
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
-    },
-    {
-      title: '解释',
-      dataIndex: 'explanation',
-      key: 'explanation',
-      width: '65%',
-      render: (text) => text || '-',
-    },
-    {
-      title: 'ID',
-      dataIndex: 'entry_id',
-      key: 'entry_id',
-      width: '10%',
-      align: 'center',
-      onCell: () => ({
-        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
-      }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
-    },
   ];
 
   // 其他词条表格列定义
   const otherColumns: TableColumnsType<EntryData> = [
+    {
+      title: 'ID',
+      dataIndex: 'entry_id',
+      key: 'entry_id',
+      width: '10%',
+      align: 'center',
+      onCell: () => ({
+        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+      }),
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
+    },
     {
       title: '词条名称',
       dataIndex: 'entry_name',
@@ -368,23 +385,6 @@ const EntryDetailView: React.FC = () => {
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
-    },
-    {
-      title: 'ID',
-      dataIndex: 'entry_id',
-      key: 'entry_id',
-      width: '10%',
-      align: 'center',
-      onCell: () => ({
-        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
-      }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
   ];
 
