@@ -316,6 +316,7 @@ const LegendaryWeaponView: React.FC = () => {
         onChange={handleTableChange}
         pagination={false}
         size="small"
+        bordered
       />
     </div>
   );
