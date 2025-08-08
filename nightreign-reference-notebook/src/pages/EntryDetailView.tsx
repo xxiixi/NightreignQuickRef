@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Input, Select, message, Tabs, Tag, Spin, Button, Space } from 'antd';
+import { Table, Input, Select, message, Tabs, Tag, Spin, Button} from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
