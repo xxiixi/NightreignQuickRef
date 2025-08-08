@@ -78,53 +78,40 @@ function App() {
     }
   };
 
-  // 如果数据还未加载完成，显示加载动画
-  if (!isDataLoaded) {
-    return (
-      <ConfigProvider
-        theme={{
-          algorithm: isDarkMode ? theme.darkAlgorithm : undefined,
-          token: {
-            colorPrimary: isDarkMode ? geekblue[4] : geekblue[6],
-            colorPrimaryHover: isDarkMode ? geekblue[3] : geekblue[5],
-            colorPrimaryActive: isDarkMode ? geekblue[5] : geekblue[7],
-          },
-        }}
-      >
-        <LoadingSpinner message="正在加载数据，请稍候..." />
-      </ConfigProvider>
-    );
-  }
+  // 统一的主题配置
+  const themeConfig = {
+    algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+    token: {
+      colorPrimary: isDarkMode ? geekblue[4] : geekblue[6],
+      colorPrimaryHover: isDarkMode ? geekblue[3] : geekblue[5],
+      colorPrimaryActive: isDarkMode ? geekblue[5] : geekblue[7],
+    },
+  };
 
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: isDarkMode ? theme.darkAlgorithm : undefined,
-        token: {
-          colorPrimary: isDarkMode ? geekblue[4] : geekblue[6],
-          colorPrimaryHover: isDarkMode ? geekblue[3] : geekblue[5],
-          colorPrimaryActive: isDarkMode ? geekblue[5] : geekblue[7],
-        },
-      }}
-    >
-      <div className="app-container">
-        <FunctionMenu onTabChange={setActiveTab} />
-        
-        <Header
-          isDarkMode={isDarkMode}
-          onToggleTheme={handleToggleTheme}
-          onToggleLanguage={handleToggleLanguage}
-        />
+    <ConfigProvider theme={themeConfig}>
+      {!isDataLoaded ? (
+        <LoadingSpinner message="正在加载数据，请稍候..." />
+      ) : (
+        <div className="app-container">
+          <FunctionMenu onTabChange={setActiveTab} />
+          
+          <Header
+            isDarkMode={isDarkMode}
+            onToggleTheme={handleToggleTheme}
+            onToggleLanguage={handleToggleLanguage}
+          />
 
-        <Navigation
-          activeTab={activeTab}
-          onTabChange={setActiveTab}
-        />
+          <Navigation
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+          />
 
-        {renderContent()}
+          {renderContent()}
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      )}
     </ConfigProvider>
   );
 }

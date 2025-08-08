@@ -38,6 +38,7 @@
 /* 自定义列宽布局 */
 .mechanics-grid.custom-columns {
   grid-template-columns: var(--mechanics-grid-columns, 1fr 1fr);
+  align-items: stretch; /* 确保所有子元素高度相等 */
 }
 
 /* 响应式布局 */
@@ -46,6 +47,7 @@
   .mechanics-grid.three-columns,
   .mechanics-grid.custom-columns {
     grid-template-columns: 1fr;
+    align-items: stretch; /* 确保单列时也保持高度一致 */
   }
 }
 
@@ -66,10 +68,12 @@
   box-shadow: var(--shadow-md);
   transition: all var(--transition-normal);
   overflow: hidden;
-  height: fit-content;
+  height: 100%; /* 改为100%以确保在grid中拉伸到相同高度 */
   min-height: 200px;
   position: relative;
   border: 1px solid var(--theme-border);
+  display: flex;
+  flex-direction: column;
 }
 
 .mechanic-card:hover {
@@ -81,6 +85,9 @@
 .mechanic-card .card-content {
   padding: 24px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 /* 标题区域 - 与内容融合 */
@@ -133,6 +140,9 @@ body[tomato-theme="dark"] .weapon-level-note {
 .mechanic-card .card-body {
   padding: 5px;
   margin-top: 10px;
+  flex: 1; /* 让内容区域占据剩余空间 */
+  display: flex;
+  flex-direction: column;
 }
 
 /* 时间轴样式优化 */
