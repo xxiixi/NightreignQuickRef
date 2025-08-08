@@ -1,0 +1,293 @@
+/* RecoveryCalculator 组件专用样式 */
+
+/* 主容器 */
+.recovery-calculator {
+  display: flex;
+  gap: 24px;
+  min-height: 500px;
+}
+
+/* 左侧选择区域 */
+.recovery-calculator .selection-area {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 角色选择区域 */
+.recovery-calculator .character-selection {
+  margin-bottom: 20px;
+}
+
+.recovery-calculator .character-select {
+  width: 50%;
+  margin-top: 8px;
+}
+
+/* 回血效果选择区域 */
+.recovery-calculator .effects-selection {
+  flex: 1;
+}
+
+.recovery-calculator .effects-grid {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+/* 效果卡片 */
+.recovery-calculator .effect-card {
+  padding: 12px;
+  border: 1px solid var(--theme-border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  background-color: var(--content-bg);
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recovery-calculator .effect-card:hover {
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-md);
+}
+
+.recovery-calculator .effect-card.selected {
+  background-color: rgba(24, 144, 255, 0.1);
+  border-color: var(--color-primary-500);
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.15);
+}
+
+/* 效果卡片标题 */
+.recovery-calculator .effect-card-title {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 4px;
+  line-height: 1.3;
+  color: var(--theme-text-primary);
+}
+
+.recovery-calculator .effect-card-title.selected {
+  color: var(--color-primary-600);
+  font-weight: bold;
+}
+
+/* 效果卡片描述 */
+.recovery-calculator .effect-card-description {
+  font-size: 11px;
+  color: var(--theme-text-secondary);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+/* 效果卡片底部 */
+.recovery-calculator .effect-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 备注信息区域 */
+.recovery-calculator .notes-section {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+.recovery-calculator .notes-container {
+  background-color: var(--theme-bg-secondary);
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+}
+
+.recovery-calculator .notes-list {
+  font-size: 12px;
+  color: var(--theme-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 20px;
+}
+
+.recovery-calculator .notes-list li {
+  margin-bottom: 4px;
+}
+
+/* 计算按钮 */
+.recovery-calculator .calculate-button {
+  width: 100%;
+  height: 50px;
+}
+
+/* 右侧数据展示区域 */
+.recovery-calculator .results-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 计算步骤卡片 */
+.recovery-calculator .steps-card {
+  flex: 1;
+  margin-bottom: 16px;
+}
+
+.recovery-calculator .steps-content {
+  background-color: var(--theme-bg-tertiary);
+  padding: 12px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  height: 100%;
+  overflow-y: auto;
+  min-height: 328px;
+}
+
+.recovery-calculator .steps-content .step-item {
+  margin-bottom: 4px;
+  color: var(--theme-text-primary);
+}
+
+.recovery-calculator .steps-content .placeholder {
+  color: var(--theme-text-tertiary);
+  font-style: italic;
+}
+
+/* 计算结果卡片 */
+.recovery-calculator .results-card {
+  flex: 0 0 auto;
+}
+
+.recovery-calculator .results-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+/* 恢复结果区域 */
+.recovery-calculator .recovery-section {
+  flex: 1;
+}
+
+.recovery-calculator .recovery-title {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.recovery-calculator .recovery-title.self {
+  color: var(--color-success);
+}
+
+.recovery-calculator .recovery-title.ally {
+  color: var(--color-info);
+}
+
+.recovery-calculator .recovery-item {
+  margin-bottom: 4px;
+}
+
+.recovery-calculator .recovery-percentage {
+  color: var(--theme-text-secondary);
+  font-size: 12px;
+}
+
+.recovery-calculator .recovery-placeholder {
+  color: var(--theme-text-tertiary);
+  font-style: italic;
+}
+
+/* 分隔线 */
+.recovery-calculator .divider {
+  height: 60px;
+  margin: 0 8px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .recovery-calculator {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .recovery-calculator .effects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .recovery-calculator .character-select {
+    width: 100%;
+  }
+  
+  .recovery-calculator .results-content {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .recovery-calculator .divider {
+    display: none;
+  }
+}
+
+/* 黑暗模式适配 */
+[data-theme="dark"] .recovery-calculator .effect-card {
+  background-color: var(--theme-bg-primary);
+  border-color: var(--theme-border);
+}
+
+[data-theme="dark"] .recovery-calculator .effect-card:hover {
+  border-color: var(--color-primary-400);
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .recovery-calculator .effect-card.selected {
+  background-color: rgba(24, 144, 255, 0.2);
+  border-color: var(--color-primary-500);
+  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
+}
+
+[data-theme="dark"] .recovery-calculator .effect-card-title {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="dark"] .recovery-calculator .effect-card-title.selected {
+  color: var(--color-primary-200);
+  font-weight: bold;
+}
+
+[data-theme="dark"] .recovery-calculator .effect-card-description {
+  color: var(--theme-text-secondary);
+}
+
+[data-theme="dark"] .recovery-calculator .notes-container {
+  background-color: var(--theme-bg-secondary);
+  border-color: var(--theme-border);
+}
+
+[data-theme="dark"] .recovery-calculator .notes-list {
+  color: var(--theme-text-secondary);
+}
+
+[data-theme="dark"] .recovery-calculator .steps-content {
+  background-color: var(--theme-bg-tertiary);
+}
+
+[data-theme="dark"] .recovery-calculator .steps-content .step-item {
+  color: var(--theme-text-primary);
+}
+
+[data-theme="dark"] .recovery-calculator .steps-content .placeholder {
+  color: var(--theme-text-tertiary);
+}
+
+[data-theme="dark"] .recovery-calculator .recovery-placeholder {
+  color: var(--theme-text-tertiary);
+}
+
+[data-theme="dark"] .recovery-calculator .recovery-percentage {
+  color: var(--theme-text-secondary);
+} 
