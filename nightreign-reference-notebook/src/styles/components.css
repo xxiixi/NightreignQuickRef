@@ -130,7 +130,7 @@ body[tomato-theme="dark"] .logo-container:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(0, 0, 0, 0.06);
   min-width: 100px;
-  max-width: 200px;
+  max-width: 300px;
 }
 
 [data-theme="dark"] .logo-dropdown .ant-dropdown-menu,
@@ -154,7 +154,18 @@ body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu {
 
 [data-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover,
 body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover {
-  background: var(--geekblue-6);
+  background: var(--geekblue-9);
+}
+
+/* 黑暗模式下的菜单项文字颜色 */
+[data-theme="dark"] .logo-dropdown .ant-dropdown-menu-item,
+body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover,
+body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover {
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .logo-dropdown .ant-dropdown-menu-item:active {

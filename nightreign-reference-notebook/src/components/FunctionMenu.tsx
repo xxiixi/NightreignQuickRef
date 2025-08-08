@@ -19,7 +19,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
     {
       key: '游戏机制',
       label: '游戏机制',
-      children: '包括游戏内缩圈时间、升级所需卢恩、其他功能尚未完成。'
+      children: '包括游戏内缩圈时间、升级所需卢恩、血量恢复计算器。'
     },
     {
       key: '传说武器详情',
@@ -29,7 +29,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
     {
       key: '词条详细数据',
       label: '词条详细数据',
-      children: '包括局外词条(xxxx)、局内词条、护符词条等。'
+      children: '包括局外词条(按照遗物仪式分类)、局内词条（武器词条、掉落物词条）、护符词条等。'
     },
   ];
 
@@ -47,18 +47,18 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
     items: logoMenuItems.map(item => ({
       key: item.key,
       label: (
-        <div style={{ padding: '12px 0' }}>
+        <div>
           <div style={{ 
             fontWeight: 'bold', 
             marginBottom: '6px',
             fontSize: '14px',
-            color: '#1890ff'
+            color: 'var(--color-primary-500)'
           }}>
             {item.label}
           </div>
           <div style={{ 
             fontSize: '12px', 
-            color: '#666',
+            color: 'var(--color-text-2)',
             lineHeight: '1.4'
           }}>
             {item.children}
