@@ -3,6 +3,9 @@
 .character-data-container {
   padding: 20px 0;
   max-width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .content-wrapper.card-item {

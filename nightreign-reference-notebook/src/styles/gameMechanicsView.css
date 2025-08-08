@@ -3,6 +3,9 @@
 .game-mechanics-container {
   padding: 20px 0;
   max-width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 主布局容器 - 可配置最大宽度 */

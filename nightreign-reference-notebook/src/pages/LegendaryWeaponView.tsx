@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Steps } from 'antd';
-import type { TableColumnsType } from 'antd';
+import type { TableColumnsType, TableProps } from 'antd';
 import DataManager from '../utils/dataManager';
+
+type OnChange = NonNullable<TableProps<TransformedWeaponEffect>['onChange']>;
+type Filters = Parameters<OnChange>[1];
 
 // 传说武器数据结构
 interface WeaponCharacter {
@@ -150,6 +153,7 @@ const ColorLegend = () => {
 
 const LegendaryWeaponView: React.FC = () => {
   const [currentStep, setCurrentStep] = React.useState(0);
+  const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [dataState, setDataState] = useState<DataState>({
     weaponCharacterData: [],
     weaponEffectData: [],
@@ -181,6 +185,11 @@ const LegendaryWeaponView: React.FC = () => {
   }, []);
 
   const { weaponCharacterData, weaponEffectData, loading } = dataState;
+
+  // 表格变化处理函数
+  const handleTableChange: OnChange = (pagination, filters) => {
+    setFilteredInfo(filters);
+  };
 
   // 表格列定义
   const columns: TableColumnsType<TransformedWeaponCharacter> = [
@@ -238,6 +247,27 @@ const LegendaryWeaponView: React.FC = () => {
       key: '类型',
       width: 80,
       align: 'center' as const,
+      filters: [
+        { text: '直剑', value: '直剑' },
+        { text: '大剑', value: '大剑' },
+        { text: '特大剑', value: '特大剑' },
+        { text: '重刺剑', value: '重刺剑' },
+        { text: '大曲剑', value: '大曲剑' },
+        { text: '刀', value: '刀' },
+        { text: '大斧', value: '大斧' },
+        { text: '槌', value: '槌' },
+        { text: '大槌', value: '大槌' },
+        { text: '连枷', value: '连枷' },
+        { text: '矛', value: '矛' },
+        { text: '大矛', value: '大矛' },
+        { text: '鞭子', value: '鞭子' },
+        { text: '拳头', value: '拳头' },
+        { text: '特大武器', value: '特大武器' },
+        { text: '法杖', value: '法杖' },
+        { text: '大弓', value: '大弓' },
+      ],
+      filteredValue: filteredInfo.类型 || null,
+      onFilter: (value, record) => record.类型 === value,
     },
     {
       title: '特效',
@@ -283,6 +313,7 @@ const LegendaryWeaponView: React.FC = () => {
         columns={effectColumns}
         dataSource={weaponEffectData}
         rowKey="weapon_id"
+        onChange={handleTableChange}
         pagination={false}
         size="small"
       />

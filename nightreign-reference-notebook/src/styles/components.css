@@ -53,11 +53,18 @@ body[tomato-theme="dark"] {
   min-height: 100vh;
   background: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-primary-100) 100%);
   color: var(--theme-text-primary);
+  display: flex;
+  flex-direction: column;
 }
 
 [data-theme="dark"] .app-container,
 body[tomato-theme="dark"] .app-container {
   background: linear-gradient(135deg, #1f1f1f 0%, #0a0a0a 100%);
+}
+
+[data-theme="dark"] .steps-container,
+body[tomato-theme="dark"] .steps-container {
+  background-color: rgba(33, 33, 33, 0.7);
 }
 
 .content-wrapper {
@@ -71,6 +78,8 @@ body[tomato-theme="dark"] .app-container {
   display: flex;
   flex-direction: column;
   height: auto;
+  flex: 1;
+  margin-bottom: var(--spacing-2xl);
 }
 
 /* ===== 顶部导航栏 ===== */
@@ -259,10 +268,11 @@ body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover {
   max-width: 1280px;
   width: 70%;
   margin: 0 auto; /* 居中 */
-  background-color: var(--theme-bg-primary);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 12px;
   box-shadow: 0 4px 20px var(--content-shadow);
-  padding: 10px 40px 30px 40px;
+  padding: 10px;
+  margin-bottom: var(--spacing-2xl);
 }
 
 .main-tabs {
@@ -457,11 +467,18 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   width: auto;
 }
 
+.character-select {
+  min-width: 120px;
+  width: auto;
+  flex-shrink: 0;
+}
+
 .filter-search-row {
   display: flex;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-md);
   align-items: center;
+  flex-wrap: wrap;
 }
 
 /* ===== 表格组件 ===== */
@@ -487,12 +504,12 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
 }
 
 .ant-table .ant-tag {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  padding: 4px 10px;
-  min-width: 70px;
+  padding: 2px 6px;
+  min-width: 60px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
@@ -500,6 +517,8 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
+
 
 /* ===== 热力图表格特殊样式 ===== */
 .heatmap-table .ant-table-tbody > tr:hover > td {
@@ -671,7 +690,7 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
   padding: var(--spacing-lg);
-  margin: var(--spacing-xl) auto 0 auto;
+  margin-top: auto;
   max-width: 100%;
 }
 
@@ -828,12 +847,14 @@ body[tomato-theme="dark"] .loading-text {
 /* ===== 响应式设计 ===== */
 @media (max-width: 768px) {
   .content-wrapper,
+  .steps-container,
   .header,
-  .footer,
   .top-bar-content {
     max-width: 95%;
     padding: var(--spacing-lg);
   }
+  
+  /* 移动端不需要额外的底部内边距，因为使用了flexbox布局 */
   
   .main-title {
     font-size: var(--font-size-2xl) !important;
@@ -848,16 +869,34 @@ body[tomato-theme="dark"] .loading-text {
     font-size: var(--font-size-sm);
     padding: var(--spacing-xs) var(--spacing-sm);
   }
+
+  .filter-search-row {
+    gap: 8px;
+  }
+
+  .custom-search-input {
+    width: 200px;
+  }
+
+  .outsider-type-select {
+    min-width: 280px;
+  }
+
+  .character-select {
+    min-width: 100px;
+  }
 }
 
 @media (max-width: 480px) {
   .content-wrapper,
+  .steps-container,
   .header,
-  .footer,
   .top-bar-content {
     max-width: 98%;
     padding: var(--spacing-md);
   }
+  
+  /* 小屏幕不需要额外的底部内边距，因为使用了flexbox布局 */
   
   .main-title {
     font-size: var(--font-size-xl) !important;
@@ -865,5 +904,21 @@ body[tomato-theme="dark"] .loading-text {
   
   .top-bar {
     padding: var(--spacing-xs) var(--spacing-sm);
+  }
+
+  .filter-search-row {
+    gap: 6px;
+  }
+
+  .custom-search-input {
+    width: 180px;
+  }
+
+  .outsider-type-select {
+    min-width: 250px;
+  }
+
+  .character-select {
+    min-width: 90px;
   }
 } 

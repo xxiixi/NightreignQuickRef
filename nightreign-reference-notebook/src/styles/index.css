@@ -57,7 +57,7 @@ body {
               border-color var(--transition-normal);
 }
 
-.ant-table-thead > tr > th {
+/* .ant-table-thead > tr > th {
   transition: background-color var(--transition-normal), 
               color var(--transition-normal);
 }
@@ -65,7 +65,7 @@ body {
 .ant-table-tbody > tr > td {
   transition: background-color var(--transition-normal), 
               color var(--transition-normal);
-}
+} */
 
 /* 按钮动画 */
 .ant-btn {

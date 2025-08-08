@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Input, Select, message, Tabs, Tag, Spin } from 'antd';
-import type { TableColumnsType } from 'antd';
+import { Table, Input, Select, message, Tabs, Tag, Spin, Button, Space } from 'antd';
+import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
 import DataManager from '../utils/dataManager';
+
+type OnChange = NonNullable<TableProps<EntryData>['onChange']>;
+type Filters = Parameters<OnChange>[1];
+type GetSingle<T> = T extends (infer U)[] ? U : never;
+type Sorts = GetSingle<Parameters<OnChange>[2]>;
 
 const { Search } = Input;
 
@@ -32,6 +37,17 @@ const outsiderTypeOptions = [
   { value: '出击时的武器（附加）', label: '出击时的武器（附加）' },
   { value: '出击时的道具', label: '出击时的道具' },
   { value: '场地环境', label: '场地环境' },
+];
+
+const characterOptions = [
+  { value: '追踪者', label: '追踪者' },
+  { value: '守护者', label: '守护者' },
+  { value: '女爵', label: '女爵' },
+  { value: '执行者', label: '执行者' },
+  { value: '铁之眼', label: '铁之眼' },
+  { value: '复仇者', label: '复仇者' },
+  { value: '隐士', label: '隐士' },
+  { value: '无赖', label: '无赖' },
 ];
 
 const otherTypeOptions = [
@@ -66,12 +82,30 @@ const getTypeColor = (type: string | null | undefined): string => {
   return typeColorMap[type] || 'default';
 };
 
+const getSuperposabilityColor = (superposability: string | null | undefined): string => {
+  if (!superposability) return 'default';
+  
+  switch (superposability) {
+    case '可叠加':
+      return 'green';
+    case '不可叠加':
+      return 'red';
+    case '未知':
+      return 'orange';
+    default:
+      return 'default';
+  }
+};
+
 const EntryDetailView: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedOtherTypes, setSelectedOtherTypes] = useState<string[]>([]);
+  const [selectedCharacter, setSelectedCharacter] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
   const [activeEntryTab, setActiveEntryTab] = useState('局外词条');
+  const [filteredInfo, setFilteredInfo] = useState<Filters>({});
+  const [sortedInfo, setSortedInfo] = useState<Sorts>({});
   const [data, setData] = useState<DataState>({
     outsiderEntries: [],
     talismanEntries: [],
@@ -104,11 +138,35 @@ const EntryDetailView: React.FC = () => {
     loadData();
   }, []);
 
+  // 清除所有筛选和排序
+  const clearAll = () => {
+    setSearchKeyword('');
+    setSelectedTypes([]);
+    setSelectedOtherTypes([]);
+    setSelectedCharacter('');
+    setFilteredInfo({});
+    setSortedInfo({});
+    setCurrentPage(1);
+    message.success('已清除所有筛选和排序');
+  };
+
+  // 表格变化处理函数
+  const handleTableChange: OnChange = (pagination, filters, sorter) => {
+    setFilteredInfo(filters);
+    setSortedInfo(sorter as Sorts);
+  };
+
   // 搜索过滤函数
-  const filterData = (data: EntryData[], searchValue: string, types?: string[]) => {
+  const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string) => {
     let filtered = data;
     if (types && types.length > 0) {
       filtered = filtered.filter(item => types.includes(item.entry_type || ''));
+    }
+    if (character && character.trim()) {
+      filtered = filtered.filter(item => 
+        item.entry_name?.includes(character) || 
+        item.explanation?.includes(character)
+      );
     }
     if (!searchValue.trim()) return filtered;
     
@@ -129,20 +187,20 @@ const EntryDetailView: React.FC = () => {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: 170,
+      width: '30%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
         return nameA.localeCompare(nameB, 'zh-CN');
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
     },
     {
       title: '解释',
       dataIndex: 'explanation',
       key: 'explanation',
-      width: 270,
+      width: '40%',
       render: (text) => text || '-',
     },
     {
@@ -150,7 +208,7 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_type',
       key: 'entry_type',
       align: 'center',
-      width: 80,
+      width: '15%',
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
@@ -159,28 +217,35 @@ const EntryDetailView: React.FC = () => {
       title: '叠加性',
       dataIndex: 'superposability',
       key: 'superposability',
-      width: 55,
+      width: '12%',
       align: 'center',
+      render: (text) => text ? (
+        <Tag color={getSuperposabilityColor(text)}>{text}</Tag>
+      ) : '-',
       filters: [
         { text: '可叠加', value: '可叠加' },
         { text: '不可叠加', value: '不可叠加' },
         { text: '未知', value: '未知' },
       ],
+      filteredValue: filteredInfo.superposability || null,
       onFilter: (value, record) => record.superposability === value,
     },
     {
-      title: '词条ID',
+      title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: 50,
+      width: '5%',
       align: 'center',
+      onCell: () => ({
+        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+      }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
         const idB = b.entry_id || '';
         return idA.localeCompare(idB);
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
   ];
 
@@ -190,41 +255,45 @@ const EntryDetailView: React.FC = () => {
       title: '护符',
       dataIndex: 'talisman',
       key: 'talisman',
-      width: 100,
+      width: '15%',
       render: (text) => text || '-',
     },
     {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: 150,
+      width: '20%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
         return nameA.localeCompare(nameB, 'zh-CN');
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
     },
     {
       title: '解释',
       dataIndex: 'explanation',
       key: 'explanation',
-      width: 300,
+      width: '55%',
       render: (text) => text || '-',
     },
     {
-      title: '词条ID',
+      title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: 50,
+      width: '10%',
+      align: 'center',
+      onCell: () => ({
+        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+      }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
         const idB = b.entry_id || '';
         return idA.localeCompare(idB);
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
   ];
 
@@ -234,34 +303,38 @@ const EntryDetailView: React.FC = () => {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: 150,
+      width: '25%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
         return nameA.localeCompare(nameB, 'zh-CN');
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
     },
     {
       title: '解释',
       dataIndex: 'explanation',
       key: 'explanation',
-      width: 400,
+      width: '65%',
       render: (text) => text || '-',
     },
     {
-      title: '词条ID',
+      title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: 50,
+      width: '10%',
+      align: 'center',
+      onCell: () => ({
+        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+      }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
         const idB = b.entry_id || '';
         return idA.localeCompare(idB);
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
   ];
 
@@ -271,43 +344,47 @@ const EntryDetailView: React.FC = () => {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: 150,
+      width: '20%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
         return nameA.localeCompare(nameB, 'zh-CN');
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
     },
     {
       title: '解释',
       dataIndex: 'explanation',
       key: 'explanation',
-      width: 400,
+      width: '55%',
       render: (text) => text || '-',
     },
     {
       title: '词条类型',
       dataIndex: 'entry_type',
       key: 'entry_type',
-      width: 50,
+      width: '15%',
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
     },
     {
-      title: '词条ID',
+      title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: 50,
+      width: '10%',
+      align: 'center',
+      onCell: () => ({
+        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+      }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
         const idB = b.entry_id || '';
         return idA.localeCompare(idB);
       },
       sortDirections: ['ascend', 'descend'],
-      defaultSortOrder: 'ascend' as const,
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
     },
   ];
 
@@ -320,7 +397,7 @@ const EntryDetailView: React.FC = () => {
       case '局外词条':
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        tableData = filterData(tableData, searchKeyword, selectedTypes);
+        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter);
         break;
       case '护符词条':
         tableData = data.talismanEntries;
@@ -340,7 +417,7 @@ const EntryDetailView: React.FC = () => {
       default:
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        tableData = filterData(tableData, searchKeyword, selectedTypes);
+        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter);
     }
 
     // 表格样式
@@ -349,6 +426,7 @@ const EntryDetailView: React.FC = () => {
         columns={columns}
         dataSource={tableData}
         rowKey="entry_id"
+        onChange={handleTableChange}
         pagination={{ 
           current: currentPage,
           pageSize: 15,
@@ -358,8 +436,7 @@ const EntryDetailView: React.FC = () => {
           onChange: (page) => setCurrentPage(page),
           style: { marginTop: '25px' }
         }}
-        scroll={{ x: tabKey === '局外词条' ? 900 : tabKey === '护符词条' ? 800 : activeEntryTab === '局内词条' ? 700 : 650 }}
-        size="middle"
+        size="small"
         loading={data.loading}
       />
     );
@@ -378,77 +455,106 @@ const EntryDetailView: React.FC = () => {
     if (tabKey === '局外词条') {
       return (
         <div className="filter-search-row">
-          <Search 
-            placeholder={`搜索 ${tabKey} 关键字`}
-            onSearch={(value) => {
-              setSearchKeyword(value);
-              setCurrentPage(1);
-            }}
-            className="custom-search-input"
-            allowClear
-          />
-          <Select
-            className="outsider-type-select"
-            mode="multiple"
-            allowClear
-            tagRender={tagRender}
-            placeholder="按词条类型筛选（最多3项）"
-            value={selectedTypes}
-            onChange={(values) => {
-              if (values && values.length > 3) {
-                message.warning('最多只能选择3个词条类型');
-                return;
-              }
-              setSelectedTypes(values);
-              setCurrentPage(1);
-            }}
-            options={outsiderTypeOptions}
-            maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-            maxTagCount={3}
-            maxCount={3}
-          />
+          <Space>
+            <Search 
+              placeholder={`搜索 ${tabKey} 关键字`}
+              onSearch={(value) => {
+                setSearchKeyword(value);
+                setCurrentPage(1);
+              }}
+              className="custom-search-input"
+              allowClear
+            />
+            <Select
+              className="outsider-type-select"
+              mode="multiple"
+              allowClear
+              tagRender={tagRender}
+              placeholder="按词条类型筛选（最多3项）"
+              value={selectedTypes}
+              onChange={(values) => {
+                if (values && values.length > 3) {
+                  message.warning('最多只能选择3个词条类型');
+                  return;
+                }
+                setSelectedTypes(values);
+                setCurrentPage(1);
+              }}
+              options={outsiderTypeOptions}
+              maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+              maxTagCount={3}
+              maxCount={3}
+            />
+            <Select
+              className="character-select"
+              allowClear
+              placeholder="按角色筛选"
+              value={selectedCharacter || undefined}
+              onChange={(value) => {
+                setSelectedCharacter(value);
+                setCurrentPage(1);
+              }}
+              options={characterOptions}
+              notFoundContent="暂无角色"
+              showSearch={false}
+              style={{ minWidth: '120px' }}
+            />
+            <Button onClick={clearAll} type="default" size="middle">
+              清除所有
+            </Button>
+          </Space>
         </div>
       );
     } else if (tabKey === '其他词条') {
       return (
         <div className="filter-search-row">
-          <Search 
-            placeholder={`搜索 ${tabKey} 关键字`}
-            onSearch={(value) => {
-              setSearchKeyword(value);
-              setCurrentPage(1);
-            }}
-            className="custom-search-input"
-            allowClear
-          />
-          <Select
-            className="outsider-type-select"
-            mode="multiple"
-            allowClear
-            tagRender={tagRender}
-            placeholder="按词条类型筛选"
-            value={selectedOtherTypes}
-            onChange={(values) => {
-              setSelectedOtherTypes(values);
-              setCurrentPage(1);
-            }}
-            options={otherTypeOptions}
-            maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-          />
+          <Space>
+            <Search 
+              placeholder={`搜索 ${tabKey} 关键字`}
+              onSearch={(value) => {
+                setSearchKeyword(value);
+                setCurrentPage(1);
+              }}
+              className="custom-search-input"
+              allowClear
+            />
+            <Select
+              className="outsider-type-select"
+              mode="multiple"
+              allowClear
+              tagRender={tagRender}
+              placeholder="按词条类型筛选"
+              value={selectedOtherTypes}
+              onChange={(values) => {
+                setSelectedOtherTypes(values);
+                setCurrentPage(1);
+              }}
+              options={otherTypeOptions}
+              maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+            />
+            <Button onClick={clearAll} type="default" size="middle">
+              清除所有
+            </Button>
+          </Space>
         </div>
       );
     } else {
       return (
         <div className="search-container">
-          <Search 
-            placeholder={`搜索 ${tabKey} 关键字`}
-            onSearch={(value) => {
-              setSearchKeyword(value);
-              setCurrentPage(1);
-            }}
-            className="custom-search-input"
-            allowClear
-          />
+          <Space>
+            <Search 
+              placeholder={`搜索 ${tabKey} 关键字`}
+              onSearch={(value) => {
+                setSearchKeyword(value);
+                setCurrentPage(1);
+              }}
+              className="custom-search-input"
+              allowClear
+            />
+            <Button onClick={clearAll} type="default" size="middle">
+              清除所有
+            </Button>
+          </Space>
         </div>
       );
     }
