@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ConfigProvider, theme } from 'antd';
 import { geekblue } from '@ant-design/colors';
+import zhCN from 'antd/locale/zh_CN';
+import enUS from 'antd/locale/en_US';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
@@ -89,7 +91,10 @@ function App() {
   };
 
   return (
-    <ConfigProvider theme={themeConfig}>
+    <ConfigProvider 
+      theme={themeConfig}
+      locale={isEnglish ? enUS : zhCN}
+    >
       {!isDataLoaded ? (
         <LoadingSpinner message="正在加载数据，请稍候..." />
       ) : (

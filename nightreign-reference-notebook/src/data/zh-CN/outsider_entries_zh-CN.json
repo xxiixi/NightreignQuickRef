@@ -533,7 +533,7 @@
     },
     {
         "entry_id":"7020000",
-        "entry_name":"【追踪者】发动技艺时，能使出追加攻击(仅限大剑)",
+        "entry_name":"【追踪者】发动技艺时，轻攻击能使出缠绕火焰的追加攻击（仅限大剑）",
         "entry_type":"仅限特定角色",
         "explanation":"使用技艺后用大剑进行轻攻击，武器+20点火属性攻击力，持续20秒",
         "superposability":"不可叠加"
@@ -547,7 +547,7 @@
     },
     {
         "entry_id":"7030200",
-        "entry_name":"食用苔药、肉干等等道具时，能恢复血量",
+        "entry_name":"食用苔药等等道具时，能恢复血量",
         "entry_type":"恢复",
         "explanation":"使用对应道具后立即回复20点生命值，\n然后每秒回复最大生命值的0.5%+1，持续20秒",
         "superposability":"不可叠加"
@@ -575,7 +575,7 @@
     },
     {
         "entry_id":"7030900",
-        "entry_name":"涂抹油脂类道具时，能额外提升攻击力",
+        "entry_name":"涂抹油脂类道具时，能额外提升物理攻击力",
         "entry_type":"攻击力",
         "explanation":"30秒内，增加物理伤害+10%",
         "superposability":"不可叠加"
@@ -659,7 +659,7 @@
     },
     {
         "entry_id":"7033400",
-        "entry_name":"【守护者】在能力发动期间，能反弹受到的部分损伤",
+        "entry_name":"【守护者】在能力发动期间，防御成功时能形成冲击波",
         "entry_type":"仅限特定角色",
         "explanation":"造成固定100点物理伤害，5点削韧，3号冲击力",
         "superposability":"不可叠加"
@@ -792,7 +792,7 @@
     },
     {
         "entry_id":"7040500",
-        "entry_name":"提升投掷石头的攻击力",
+        "entry_name":"提升使用辉石、重力石道具的攻击力",
         "entry_type":"攻击力",
         "explanation":"投投掷石头造成的伤害+15%",
         "superposability":"可叠加"
@@ -932,14 +932,14 @@
     },
     {
         "entry_id":"7060000",
-        "entry_name":"每次打倒封印监牢里的囚犯，能永久性提升攻击力",
+        "entry_name":"每次打倒封印监牢里的囚犯，能提升攻击力",
         "entry_type":"攻击力",
         "explanation":"造成的伤害每次+5%，局内无限成长",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7060100",
-        "entry_name":"每次解开魔法师塔的机关，能永久性提升专注值上限",
+        "entry_name":"每次解开魔法师塔的机关，能提升专注值上限",
         "entry_type":"能力",
         "explanation":"专注值上限每次+18%，局内无限成长",
         "superposability":"不可叠加"
@@ -1184,7 +1184,7 @@
     },
     {
         "entry_id":"7100100",
-        "entry_name":"攻击成功时，能恢复精力",
+        "entry_name":"攻击命中时，能恢复精力",
         "entry_type":"恢复",
         "explanation":"攻击成功时，+2点精力值",
         "superposability":"不可叠加"
@@ -1527,7 +1527,7 @@
     },
     {
         "entry_id":"7150000",
-        "entry_name":"防御反击成功时，能额外提升自己目前的血量",
+        "entry_name":"防御反击成功时，能依照自己目前的血量提升伤害",
         "entry_type":"攻击力",
         "explanation":"提升防御反击伤害，提升数值为人物最大生命值的5%",
         "superposability":"不可叠加"

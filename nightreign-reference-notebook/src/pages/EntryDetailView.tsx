@@ -130,6 +130,13 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: 170,
+      sorter: (a, b) => {
+        const nameA = a.entry_name || '';
+        const nameB = b.entry_name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
     {
       title: '解释',
@@ -167,6 +174,13 @@ const EntryDetailView: React.FC = () => {
       key: 'entry_id',
       width: 50,
       align: 'center',
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
   ];
 
@@ -184,6 +198,13 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: 150,
+      sorter: (a, b) => {
+        const nameA = a.entry_name || '';
+        const nameB = b.entry_name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
     {
       title: '解释',
@@ -197,6 +218,13 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_id',
       key: 'entry_id',
       width: 50,
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
   ];
 
@@ -207,6 +235,13 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: 150,
+      sorter: (a, b) => {
+        const nameA = a.entry_name || '';
+        const nameB = b.entry_name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
     {
       title: '解释',
@@ -220,6 +255,13 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_id',
       key: 'entry_id',
       width: 50,
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
   ];
 
@@ -230,6 +272,13 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: 150,
+      sorter: (a, b) => {
+        const nameA = a.entry_name || '';
+        const nameB = b.entry_name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
     {
       title: '解释',
@@ -252,6 +301,13 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_id',
       key: 'entry_id',
       width: 50,
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      defaultSortOrder: 'ascend' as const,
     },
   ];
 
