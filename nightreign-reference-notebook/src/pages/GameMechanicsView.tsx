@@ -38,7 +38,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                         },
                         {
                           dot: <ThunderboltTwoTone />,
-                          children: '4 min',
+                          children: '4.5 min',
                         },
                         {
                           dot: <ClockCircleTwoTone />,
@@ -47,7 +47,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                         },
                         {
                           dot: <ThunderboltTwoTone />,
-                          children: '3.5 min',
+                          children: '3 min',
                         },
                         {
                           dot: <CheckCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,

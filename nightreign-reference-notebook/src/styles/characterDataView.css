@@ -11,21 +11,21 @@
 .content-wrapper.card-item {
   max-width: 1100px;
   width: 70%;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 20px auto;
   min-height: auto;
   padding: 0;
 }
 
 /* ===== 卡片列表组件 ===== */
 .card-item {
-  margin-bottom: 30px !important;
+  margin-bottom: 20px !important;
   transition: all var(--transition-normal);
   cursor: pointer;
   animation: fadeInUp 0.3s ease-out;
 }
 
 .card-item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
 }
 
