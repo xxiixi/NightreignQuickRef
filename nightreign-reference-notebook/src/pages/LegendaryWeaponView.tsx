@@ -187,7 +187,7 @@ const LegendaryWeaponView: React.FC = () => {
   const { weaponCharacterData, weaponEffectData, loading } = dataState;
 
   // 表格变化处理函数
-  const handleTableChange: OnChange = (pagination, filters) => {
+  const handleTableChange: OnChange = (_pagination, filters) => {
     setFilteredInfo(filters);
   };
 

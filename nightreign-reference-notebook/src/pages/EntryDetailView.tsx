@@ -151,7 +151,7 @@ const EntryDetailView: React.FC = () => {
   };
 
   // 表格变化处理函数
-  const handleTableChange: OnChange = (pagination, filters, sorter) => {
+  const handleTableChange: OnChange = (_pagination, filters, sorter) => {
     setFilteredInfo(filters);
     setSortedInfo(sorter as Sorts);
   };
