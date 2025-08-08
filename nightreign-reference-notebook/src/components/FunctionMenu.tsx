@@ -31,6 +31,11 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
       label: '词条详细数据',
       children: '包括局外词条(按照遗物仪式分类)、局内词条（武器词条、掉落物词条）、护符词条等。'
     },
+    {
+      key: '夜王Boss数据',
+      label: '夜王Boss数据',
+      children: '夜王Boss详情页面正在开发中，喵喵喵！'
+    },
   ];
 
   const handleLogoClick = () => {

@@ -921,4 +921,119 @@ body[tomato-theme="dark"] .loading-text {
   .character-select {
     min-width: 90px;
   }
+}
+
+/* ===== Boss数据页面样式 ===== */
+.boss-data-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: var(--spacing-sm);
+}
+
+.development-notice {
+  text-align: center;
+  background: #f0f5ff;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-lg);
+  max-width: 500px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.development-notice h2 {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 600;
+}
+
+.development-notice p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.6;
+}
+
+.construction-icon {
+  font-size: 4rem;
+  margin-top: var(--spacing-lg);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 暗色模式下的样式 */
+[data-theme="dark"] .development-notice,
+body[tomato-theme="dark"] .development-notice {
+  background: #262626;
+  border-color: var(--color-border-dark);
+}
+
+[data-theme="dark"] .development-notice h2,
+body[tomato-theme="dark"] .development-notice h2 {
+  color: var(--color-text-primary-dark);
+}
+
+[data-theme="dark"] .development-notice p,
+body[tomato-theme="dark"] .development-notice p {
+  color: var(--color-text-secondary-dark);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .boss-data-view {
+    padding: var(--spacing-lg);
+  }
+  
+  .development-notice {
+    padding: var(--spacing-xl);
+  }
+  
+  .development-notice h2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .development-notice p {
+    font-size: var(--font-size-md);
+  }
+  
+  .construction-icon {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .boss-data-view {
+    padding: var(--spacing-md);
+  }
+  
+  .development-notice {
+    padding: var(--spacing-lg);
+  }
+  
+  .development-notice h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .development-notice p {
+    font-size: var(--font-size-sm);
+  }
+  
+  .construction-icon {
+    font-size: 2.5rem;
+  }
 } 

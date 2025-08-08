@@ -12,6 +12,7 @@ import EntryDetailView from './pages/EntryDetailView';
 import GameMechanicsView from './pages/GameMechanicsView';
 import LegendaryWeaponView from './pages/LegendaryWeaponView';
 import CharacterDataView from './pages/CharacterDataView';
+import BossDataView from './pages/BossDataView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
 import DataManager from './utils/dataManager';
 
@@ -75,6 +76,8 @@ function App() {
         return <CharacterDataView />;
       case '游戏机制':
         return <GameMechanicsView functionName="游戏机制" />;
+      case '夜王Boss数据':
+        return <BossDataView />;
       default:
         return <EntryDetailView />;
     }
