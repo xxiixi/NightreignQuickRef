@@ -1,4 +1,4 @@
-import { Typography, Card, Select, Button, Divider, Tag } from 'antd';
+import { Typography, Card, Select, Button, Divider, Tag, Empty } from 'antd';
 import { HeartOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import recoverCalculateData from '../data/zh-CN/recover_calculate.json';
@@ -24,9 +24,10 @@ const RecoveryCalculator: React.FC = () => {
     }
   };
 
-  // 回血量计算器状态 - 初始选中追踪者
-  const [selectedCharacter, setSelectedCharacter] = useState<string>('1120'); // 追踪者的value
-  const [selectedEffects, setSelectedEffects] = useState<string[]>([]); // 不再默认选中红露滴圣杯瓶
+  // 回血量计算器状态 - 初始选中追踪者，队友选择女爵
+  const [selectedCharacter, setSelectedCharacter] = useState<string>('1120'); 
+  const [selectedAllyCharacter, setSelectedAllyCharacter] = useState<string>('860');
+  const [selectedEffects, setSelectedEffects] = useState<string[]>([]);
   const [calculationResult, setCalculationResult] = useState<{
     selfHealth: number;
     selfFocus: number;
@@ -56,14 +57,19 @@ const RecoveryCalculator: React.FC = () => {
 
   // 计算回血量
   const calculateRecovery = () => {
-    if (!selectedCharacter) {
+    if (!selectedCharacter || !selectedAllyCharacter) {
       return;
     }
 
     // 获取角色基础血量和蓝量
     const characterHealth = parseInt(selectedCharacter);
-    const selectedCharacterData = characterOptions.find(option => option.value === parseInt(selectedCharacter));
+    const allyCharacterHealth = parseInt(selectedAllyCharacter);
+
+    const selectedCharacterData = characterOptions.find(option => option.value.toString() === selectedCharacter);
+    const selectedAllyCharacterData = characterOptions.find(option => option.value.toString() === selectedAllyCharacter);
+
     const characterFocus = selectedCharacterData?.focus || 0;
+    const allyCharacterFocus = selectedAllyCharacterData?.focus || 0;
     
     // 基础回血量（红露滴圣杯瓶）
     let baseHealthRecovery = 0.6; // 60%生命值
@@ -82,10 +88,13 @@ const RecoveryCalculator: React.FC = () => {
 
     // 记录计算步骤
     const calculationSteps = [];
-    calculationSteps.push(`角色基础血量: ${characterHealth} 点`);
-    calculationSteps.push(`角色基础蓝量: ${characterFocus} 点`);
-    calculationSteps.push(`红露滴圣杯瓶初始回血量: ${(baseHealthRecovery * 100).toFixed(0)}%`);
-    calculationSteps.push(`--------------------------------`);
+    calculationSteps.push(`-------------基础信息-------------`);
+    calculationSteps.push(`【${selectedCharacterData?.label}-自己】基础血量: ${characterHealth} 点 | 基础蓝量: ${characterFocus} 点`);
+
+    calculationSteps.push(`【${selectedAllyCharacterData?.label}-队友】基础血量: ${allyCharacterHealth} 点 | 基础蓝量: ${allyCharacterFocus} 点`);
+
+    calculationSteps.push(`【基础回血量】红露滴圣杯瓶: ${(baseHealthRecovery * 100).toFixed(0)}%`);
+    calculationSteps.push(`------------应用不同效果------------`);
 
     // 应用选中的效果（按优先级顺序）
     sortedEffects.forEach(effectId => {
@@ -97,32 +106,52 @@ const RecoveryCalculator: React.FC = () => {
           baseFocusRecovery = 0.3; // 恢复30%专注值
           calculationSteps.push(`【应用】${item.name}: 专注值恢复 ${(baseFocusRecovery * 100).toFixed(0)}%`);
           break;
+
         case 2: // 使用圣杯瓶时，连同恢复周围我方人物
           baseHealthRecovery = 0.5;
           baseHealthRecoveryAlly = 0.3;
           if (baseFocusRecovery != 0) {
             baseFocusRecoveryAlly = 0.15;
           }
-          calculationSteps.push(`【应用】${item.name}: 回血量变为 ${(baseHealthRecovery * 100).toFixed(0)}%, 队友回血量 ${(baseHealthRecoveryAlly * 100).toFixed(0)}%`);
+          calculationSteps.push(`【应用】${item.name}:【基础回血量】变为${(baseHealthRecovery * 100).toFixed(0)}%，可以恢复队友血量${(baseHealthRecoveryAlly * 100).toFixed(0)}%`);
           break;
+
         case 3: // 提升圣杯瓶恢复量20%
           baseHealthRecovery *= 1.2;
-          calculationSteps.push(`【应用】${item.name}: 回血量 × 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
+          if (baseHealthRecovery > 1.0) {
+            calculationSteps.push(`【应用】${item.name}:【基础回血量】× 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}% (已达到最大值100%)`);
+            baseHealthRecovery = 1.0;
+          } else {
+            calculationSteps.push(`【应用】${item.name}:【基础回血量】× 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
+          }
           break;
+
         case 4: // 提升圣杯瓶恢复量20%
           baseHealthRecovery *= 1.2;
-          calculationSteps.push(`【应用】${item.name}: 回血量 × 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
+          if (baseHealthRecovery > 1.0) {
+            calculationSteps.push(`【应用】${item.name}:【基础回血量】× 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}% (已达到最大值100%)`);
+            baseHealthRecovery = 1.0;
+          } else {
+            calculationSteps.push(`【应用】${item.name}:【基础回血量】× 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
+          }
           break;
+
         case 5: // 提升圣杯瓶恢复量20%
           baseHealthRecovery *= 1.2;
-          calculationSteps.push(`【应用】${item.name}: 回血量 × 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
+          if (baseHealthRecovery > 1.0) {
+            calculationSteps.push(`【应用】${item.name}:【基础回血量】× 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}% (已达到最大值100%)`);
+            baseHealthRecovery = 1.0;
+          } else {
+            calculationSteps.push(`【应用】${item.name}:【基础回血量】× 1.2 = ${(baseHealthRecovery * 100).toFixed(0)}%`);
+          }
           break;
+
         case 6: // 使用圣杯瓶时，改为缓慢恢复
           baseHealthRecovery = 0.01 * 81; // 1% × 81次 = 81%
-          calculationSteps.push(`【应用】缓慢恢复: 回血量 × 0 + (1% × 81次) =  ${(baseHealthRecovery * 100).toFixed(0)}%`);
+          calculationSteps.push(`【应用】缓慢恢复:(【基础回血量】×0)+(1%×81) =  ${(baseHealthRecovery * 100).toFixed(0)}%`);
           if(baseHealthRecoveryAlly!==0){
             baseHealthRecoveryAlly = 0.05+(0.01 * 41);
-            calculationSteps.push(`【应用】缓慢恢复(队友): 5% + (1% × 41次) =  ${(baseHealthRecoveryAlly * 100).toFixed(0)}%`);
+            calculationSteps.push(`【应用】缓慢恢复(队友): 5%+(1%×41) =  ${(baseHealthRecoveryAlly * 100).toFixed(0)}%`);
           }
           break;
       }
@@ -132,8 +161,8 @@ const RecoveryCalculator: React.FC = () => {
     const result = {
       selfHealth: Math.floor(characterHealth * baseHealthRecovery), // 自己回血量（具体数值）
       selfFocus: Math.floor(characterFocus * baseFocusRecovery), // 自己回蓝量（基于角色实际蓝量）
-      allyHealth: Math.floor(characterHealth * baseHealthRecoveryAlly), // 队友回血量
-      allyFocus: Math.floor(characterFocus * baseFocusRecoveryAlly), // 队友回蓝量（基于角色实际蓝量）
+      allyHealth: Math.floor(allyCharacterHealth * baseHealthRecoveryAlly), // 队友回血量
+      allyFocus: Math.floor(allyCharacterFocus * baseFocusRecoveryAlly), // 队友回蓝量（基于角色实际蓝量）
       // 添加百分比数据
       selfHealthPercent: (baseHealthRecovery * 100).toFixed(0),
       selfFocusPercent: (baseFocusRecovery * 100).toFixed(0),
@@ -141,18 +170,16 @@ const RecoveryCalculator: React.FC = () => {
       allyFocusPercent: (baseFocusRecoveryAlly * 100).toFixed(0)
     };
 
-    // 添加最终计算结果到步骤中
-    calculationSteps.push(`--------------------------------`);
-    calculationSteps.push(`最终计算(喝一口的总恢复量):`);
-    calculationSteps.push(`自己回血量: ${characterHealth} × ${result.selfHealthPercent}% = ${result.selfHealth} 点`);
+    calculationSteps.push(`--------自己喝一口圣杯瓶的总效果--------`);
+    calculationSteps.push(`【${selectedCharacterData?.label}-自己】回血量: ${characterHealth} × ${result.selfHealthPercent}% = ${result.selfHealth} 点`);
     if (baseFocusRecovery > 0) {
-      calculationSteps.push(`自己回蓝量: ${characterFocus} × ${result.selfFocusPercent}% = ${result.selfFocus} 点`);
+      calculationSteps.push(`【${selectedCharacterData?.label}-自己】回蓝量: ${characterFocus} × ${result.selfFocusPercent}% = ${result.selfFocus} 点`);
     }
     if (baseHealthRecoveryAlly > 0) {
-      calculationSteps.push(`队友回血量: ${characterHealth} × ${result.allyHealthPercent}% = ${result.allyHealth} 点`);
+      calculationSteps.push(`【${selectedAllyCharacterData?.label}-队友】回血量: ${characterHealth} × ${result.allyHealthPercent}% = ${result.allyHealth} 点`);
     }
     if (baseFocusRecoveryAlly > 0) {
-      calculationSteps.push(`队友回蓝量: ${characterFocus} × ${result.allyFocusPercent}% = ${result.allyFocus} 点`);
+      calculationSteps.push(`【${selectedAllyCharacterData?.label}-队友】回蓝量: ${characterFocus} × ${result.allyFocusPercent}% = ${result.allyFocus} 点`);
     }
 
     setCalculationResult({ ...result, steps: calculationSteps });
@@ -164,24 +191,41 @@ const RecoveryCalculator: React.FC = () => {
       <div className="selection-area">
         {/* 角色选择 */}
         <div className="character-selection">
-          <Text strong>选择角色：</Text>
-          <Select
-            placeholder="请选择你的角色"
-            className="character-select"
-            value={selectedCharacter}
-            onChange={setSelectedCharacter}
-          >
-            {characterOptions.map(option => (
-              <Option key={option.value} value={option.value}>
-                {option.label} ( 血量: {option.value}, 蓝量: {option.focus} )
-              </Option>
-            ))}
-          </Select>
+          <div className="character-row">
+            <Text strong>选择我的角色:</Text>
+            <Select
+              placeholder="请选择你的角色"
+              className="character-select"
+              value={selectedCharacter}
+              onChange={setSelectedCharacter}
+            >
+              {characterOptions.map(option => (
+                <Option key={option.value} value={option.value.toString()}>
+                  {option.label} ( 血量: {option.value}, 蓝量: {option.focus} )
+                </Option>
+              ))}
+            </Select>
+          </div>
+
+          <div className="character-row">
+            <Text strong>选择队友的角色:</Text>
+            <Select
+              placeholder="请选择队友的角色"
+              className="character-select"
+              value={selectedAllyCharacter}
+              onChange={setSelectedAllyCharacter}
+            >
+              {characterOptions.map(option => (
+                <Option key={option.value} value={option.value.toString()}>
+                  {option.label} ( 血量: {option.value}, 蓝量: {option.focus} )
+                </Option>
+              ))}
+            </Select>
+          </div>
         </div>
 
         {/* 回血效果选择 - 网格布局，每行两个 */}
         <div className="effects-selection">
-          <Text strong>选择回血效果：</Text>
           <div className="effects-grid">
             {recoverEffects.map(item => (
               <div
@@ -221,10 +265,11 @@ const RecoveryCalculator: React.FC = () => {
         <div className="notes-section">
           <div className="notes-container">
             <ol className="notes-list">
-              <li>角色血量和蓝量均为 15 级时的数据；红色圣杯瓶初始恢复量为角色总血量的 60%。</li>
-              <li>缓慢恢复情况下，队友恢复的血量：立即回血(5%) + 持续回血(每0.1s恢复1%)；持续恢复4s，共计恢复41次。(计算累计恢复百分比： 0.05 + 0.01 * 41 = 0.46)。</li>
-              <li>缓慢恢复情况下，如果连着使用圣杯瓶，恢复持续时间会刷新为8s。</li>
-              <li>「提升圣杯瓶恢复量 20%」词条可叠加，此处仅显示3个 (因叠加3个后恢复量已超 100%，故未添加更多)。</li>
+              <li> 角色血量和蓝量均为「15 级」时的数据；角色默认携带「红露滴圣杯瓶」。</li>
+              <li>「缓慢恢复」情况下「队友」恢复量的计算说明：立即回血(5%) + 持续回血(每0.1s恢复1%)；持续恢复4s，共计恢复41次。</li>
+              <li>「缓慢恢复」情况下，如果连着使用圣杯瓶，恢复持续时间会刷新为8s。</li>
+              <li>「提升圣杯瓶恢复量 20%」词条对「缓慢恢复」、「征兆buff」以及队友回血量无效。</li>
+              <li>「提升圣杯瓶恢复量 20%」词条可叠加，此处仅展示3个。选择局外词条的情况下，若叠加4个，恢复量达到最大值(86% × 1.2 = 103.2%)。</li>
             </ol>
           </div>
         </div>
@@ -234,11 +279,10 @@ const RecoveryCalculator: React.FC = () => {
           <Button 
             type="primary" 
             onClick={calculateRecovery}
-            disabled={!selectedCharacter}
             icon={<HeartOutlined />}
             className="calculate-button"
           >
-            计算回血量
+            计算回血量（喝一口）
           </Button>
         </div>
       </div>
@@ -256,7 +300,7 @@ const RecoveryCalculator: React.FC = () => {
               ))
             ) : (
               <div className="placeholder">
-                请选择角色和效果后点击计算按钮
+                <Empty description="请点击计算按钮" />
               </div>
             )}
           </div>
