@@ -103,6 +103,7 @@ const EntryDetailView: React.FC = () => {
   const [selectedOtherTypes, setSelectedOtherTypes] = useState<string[]>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(20);
   const [activeEntryTab, setActiveEntryTab] = useState('局外词条');
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
@@ -147,6 +148,7 @@ const EntryDetailView: React.FC = () => {
     setFilteredInfo({});
     setSortedInfo({});
     setCurrentPage(1);
+    setPageSize(20); 
     message.success('已清除所有筛选和排序');
   };
 
@@ -190,7 +192,7 @@ const EntryDetailView: React.FC = () => {
       width: '10%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -258,7 +260,7 @@ const EntryDetailView: React.FC = () => {
       width: '10%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -306,7 +308,7 @@ const EntryDetailView: React.FC = () => {
       width: '10%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -347,7 +349,7 @@ const EntryDetailView: React.FC = () => {
       width: '10%',
       align: 'center',
       onCell: () => ({
-        style: { fontSize: '10px', color: 'var(--theme-text-tertiary)' }
+        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -420,25 +422,72 @@ const EntryDetailView: React.FC = () => {
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter);
     }
 
+    // 计算总页数
+    const totalPages = Math.ceil(tableData.length / pageSize);
+    
+    // 分页处理
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedData = tableData.slice(startIndex, endIndex);
+    
     // 表格样式
     return (
-      <Table
-        columns={columns}
-        dataSource={tableData}
-        rowKey="entry_id"
-        onChange={handleTableChange}
-        pagination={{ 
-          current: currentPage,
-          pageSize: 15,
-          showSizeChanger: false,
-          showQuickJumper: false,
-          showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，共 ${total} 条`,
-          onChange: (page) => setCurrentPage(page),
-          style: { marginTop: '25px' }
-        }}
-        size="small"
-        loading={data.loading}
-      />
+      <div>
+        <Table
+          columns={columns}
+          dataSource={paginatedData}
+          rowKey="entry_id"
+          onChange={handleTableChange}
+          pagination={false}
+          size="small"
+          loading={data.loading}
+        />
+        
+        {/* 自定义分页导航 */}
+        {!data.loading && tableData.length > 0 && (
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center', 
+            marginTop: '15px',
+            gap: '10px'
+          }}>
+            {/* 上一页/下一页按钮 */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              gap: '10px'
+            }}>
+              <Button 
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage <= 1}
+                size="middle"
+              >
+                上一页
+              </Button>
+              
+              <span style={{ 
+                margin: '0 15px',
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                第 {currentPage} 页，共 {totalPages} 页
+              </span>
+              
+              <Button 
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage >= totalPages}
+                size="middle"
+              >
+                下一页
+              </Button>
+            </div>
+            
+            
+          </div>
+        )}
+      </div>
     );
   };
 
@@ -454,108 +503,258 @@ const EntryDetailView: React.FC = () => {
 
     if (tabKey === '局外词条') {
       return (
-        <div className="filter-search-row">
-          <Space>
-            <Search 
-              placeholder={`搜索 ${tabKey} 关键字`}
-              onSearch={(value) => {
-                setSearchKeyword(value);
-                setCurrentPage(1);
-              }}
-              className="custom-search-input"
-              allowClear
-            />
-            <Select
-              className="outsider-type-select"
-              mode="multiple"
-              allowClear
-              tagRender={tagRender}
-              placeholder="按词条类型筛选（最多3项）"
-              value={selectedTypes}
-              onChange={(values) => {
-                if (values && values.length > 3) {
-                  message.warning('最多只能选择3个词条类型');
-                  return;
-                }
-                setSelectedTypes(values);
-                setCurrentPage(1);
-              }}
-              options={outsiderTypeOptions}
-              maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-              maxTagCount={3}
-              maxCount={3}
-            />
-            <Select
-              className="character-select"
-              allowClear
-              placeholder="按角色筛选"
-              value={selectedCharacter || undefined}
-              onChange={(value) => {
-                setSelectedCharacter(value);
-                setCurrentPage(1);
-              }}
-              options={characterOptions}
-              notFoundContent="暂无角色"
-              showSearch={false}
-              style={{ minWidth: '120px' }}
-            />
-            <Button onClick={clearAll} type="default" size="middle">
-              清除所有
-            </Button>
-          </Space>
-        </div>
+                 <div className="filter-search-row">
+           <div style={{ 
+             display: 'flex', 
+             justifyContent: 'space-between',
+             alignItems: 'center',
+             width: '100%'
+           }}>
+             {/* 左侧：搜索、多选、单选、清除 */}
+             <div style={{ 
+               display: 'flex', 
+               alignItems: 'center', 
+               gap: '12px',
+               flexWrap: 'wrap'
+             }}>
+               <Search 
+                 placeholder={`搜索 ${tabKey} 关键字`}
+                 onSearch={(value) => {
+                   setSearchKeyword(value);
+                   setCurrentPage(1);
+                 }}
+                 className="custom-search-input"
+                 allowClear
+               />
+               <Select
+                 className="outsider-type-select"
+                 mode="multiple"
+                 allowClear
+                 tagRender={tagRender}
+                 placeholder="按词条类型筛选（最多3项）"
+                 value={selectedTypes}
+                 onChange={(values) => {
+                   if (values && values.length > 3) {
+                     message.warning('最多只能选择3个词条类型');
+                     return;
+                   }
+                   setSelectedTypes(values);
+                   setCurrentPage(1);
+                 }}
+                 options={outsiderTypeOptions}
+                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                 maxTagCount={3}
+                 maxCount={3}
+               />
+               <Select
+                 className="character-select"
+                 allowClear
+                 placeholder="按角色筛选"
+                 value={selectedCharacter || undefined}
+                 onChange={(value) => {
+                   setSelectedCharacter(value);
+                   setCurrentPage(1);
+                 }}
+                 options={characterOptions}
+                 notFoundContent="暂无角色"
+                 showSearch={false}
+                 style={{ minWidth: '120px' }}
+               />
+               <Button onClick={clearAll} type="default" size="middle">
+                 清除所有
+               </Button>
+             </div>
+             
+             {/* 右侧：页面大小选择、总条数 */}
+             <div style={{ 
+               display: 'flex', 
+               alignItems: 'center', 
+               gap: '12px'
+             }}>
+               <span style={{ 
+                 color: 'var(--theme-text-secondary)',
+                 fontSize: '14px'
+               }}>
+                 每页显示
+               </span>
+               <Select
+                 value={pageSize.toString()}
+                 onChange={(value) => {
+                   setPageSize(Number(value));
+                   setCurrentPage(1);
+                 }}
+                 options={[
+                  { value: '15', label: '15 条' },
+                  { value: '20', label: '20 条' },
+                  { value: '30', label: '30 条' },
+                  { value: '50', label: '50 条' },
+                  { value: '80', label: '80 条' },
+                  { value: '100', label: '100 条' },
+                 ]}
+                 style={{ width: '100px' }}
+                 size="small"
+               />
+               <span style={{ 
+                 color: 'var(--theme-text-secondary)',
+                 fontSize: '14px'
+               }}>
+                 共 {data.outsiderEntries.length} 条记录
+               </span>
+             </div>
+           </div>
+         </div>
       );
     } else if (tabKey === '其他词条') {
       return (
-        <div className="filter-search-row">
-          <Space>
-            <Search 
-              placeholder={`搜索 ${tabKey} 关键字`}
-              onSearch={(value) => {
-                setSearchKeyword(value);
-                setCurrentPage(1);
-              }}
-              className="custom-search-input"
-              allowClear
-            />
-            <Select
-              className="outsider-type-select"
-              mode="multiple"
-              allowClear
-              tagRender={tagRender}
-              placeholder="按词条类型筛选"
-              value={selectedOtherTypes}
-              onChange={(values) => {
-                setSelectedOtherTypes(values);
-                setCurrentPage(1);
-              }}
-              options={otherTypeOptions}
-              maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-            />
-            <Button onClick={clearAll} type="default" size="middle">
-              清除所有
-            </Button>
-          </Space>
-        </div>
+                 <div className="filter-search-row">
+           <div style={{ 
+             display: 'flex', 
+             justifyContent: 'space-between',
+             alignItems: 'center',
+             width: '100%'
+           }}>
+             {/* 左侧：搜索、多选、清除 */}
+             <div style={{ 
+               display: 'flex', 
+               alignItems: 'center', 
+               gap: '12px',
+               flexWrap: 'wrap'
+             }}>
+               <Search 
+                 placeholder={`搜索 ${tabKey} 关键字`}
+                 onSearch={(value) => {
+                   setSearchKeyword(value);
+                   setCurrentPage(1);
+                 }}
+                 className="custom-search-input"
+                 allowClear
+               />
+               <Select
+                 className="outsider-type-select"
+                 mode="multiple"
+                 allowClear
+                 tagRender={tagRender}
+                 placeholder="按词条类型筛选"
+                 value={selectedOtherTypes}
+                 onChange={(values) => {
+                   setSelectedOtherTypes(values);
+                   setCurrentPage(1);
+                 }}
+                 options={otherTypeOptions}
+                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+               />
+               <Button onClick={clearAll} type="default" size="middle">
+                 清除所有
+               </Button>
+             </div>
+             
+             {/* 右侧：页面大小选择、总条数 */}
+             <div style={{ 
+               display: 'flex', 
+               alignItems: 'center', 
+               gap: '12px'
+             }}>
+               <span style={{ 
+                 color: 'var(--theme-text-secondary)',
+                 fontSize: '14px'
+               }}>
+                 每页显示
+               </span>
+               <Select
+                 value={pageSize.toString()}
+                 onChange={(value) => {
+                   setPageSize(Number(value));
+                   setCurrentPage(1);
+                 }}
+                 options={[
+                  { value: '15', label: '15 条' },
+                  { value: '20', label: '20 条' },
+                  { value: '30', label: '30 条' },
+                  { value: '50', label: '50 条' },
+                  { value: '80', label: '80 条' },
+                  { value: '100', label: '100 条' },
+                 ]}
+                 style={{ width: '100px' }}
+                 size="small"
+               />
+               <span style={{ 
+                 color: 'var(--theme-text-secondary)',
+                 fontSize: '14px'
+               }}>
+                 共 {data.otherEntries.length} 条记录
+               </span>
+             </div>
+           </div>
+         </div>
       );
     } else {
       return (
-        <div className="search-container">
-          <Space>
-            <Search 
-              placeholder={`搜索 ${tabKey} 关键字`}
-              onSearch={(value) => {
-                setSearchKeyword(value);
-                setCurrentPage(1);
-              }}
-              className="custom-search-input"
-              allowClear
-            />
-            <Button onClick={clearAll} type="default" size="middle">
-              清除所有
-            </Button>
-          </Space>
-        </div>
+                 <div className="search-container">
+           <div style={{ 
+             display: 'flex', 
+             justifyContent: 'space-between',
+             alignItems: 'center',
+             width: '100%'
+           }}>
+             {/* 左侧：搜索、清除 */}
+             <div style={{ 
+               display: 'flex', 
+               alignItems: 'center', 
+               gap: '12px',
+               flexWrap: 'wrap'
+             }}>
+               <Search 
+                 placeholder={`搜索 ${tabKey} 关键字`}
+                 onSearch={(value) => {
+                   setSearchKeyword(value);
+                   setCurrentPage(1);
+                 }}
+                 className="custom-search-input"
+                 allowClear
+               />
+               <Button onClick={clearAll} type="default" size="middle">
+                 清除所有
+               </Button>
+             </div>
+             
+             {/* 右侧：页面大小选择、总条数 */}
+             <div style={{ 
+               display: 'flex', 
+               alignItems: 'center', 
+               gap: '12px'
+             }}>
+               <span style={{ 
+                 color: 'var(--theme-text-secondary)',
+                 fontSize: '14px'
+               }}>
+                 每页显示
+               </span>
+               <Select
+                 value={pageSize.toString()}
+                 onChange={(value) => {
+                   setPageSize(Number(value));
+                   setCurrentPage(1);
+                 }}
+                 options={[
+                   { value: '15', label: '15 条' },
+                   { value: '20', label: '20 条' },
+                   { value: '30', label: '30 条' },
+                   { value: '50', label: '50 条' },
+                   { value: '80', label: '80 条' },
+                   { value: '100', label: '100 条' },
+                 ]}
+                 style={{ width: '100px' }}
+                 size="small"
+               />
+               <span style={{ 
+                 color: 'var(--theme-text-secondary)',
+                 fontSize: '14px'
+               }}>
+                 共 {tabKey === '护符词条' ? data.talismanEntries.length : data.inGameEntries.length} 条记录
+               </span>
+             </div>
+           </div>
+         </div>
       );
     }
   };

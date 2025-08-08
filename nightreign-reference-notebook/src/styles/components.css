@@ -504,7 +504,7 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
 }
 
 .ant-table .ant-tag {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   padding: 2px 6px;
   min-width: 60px;

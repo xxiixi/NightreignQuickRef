@@ -393,7 +393,7 @@ const CharacterDataView: React.FC = () => {
   const characterNames = Object.keys(characterData);
 
   // 选中的角色状态 - 默认选中追踪者和女爵
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '守护者', '女爵']);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '女爵']);
   
   // 当前主题状态
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
