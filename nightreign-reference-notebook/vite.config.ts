@@ -7,6 +7,10 @@ export default defineConfig({
     react()
   ],
   base: '/NightreignQuickRef/',
+  define: {
+    // 在构建时注入部署时间
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+  },
   build: {
     // 启用 Tree Shaking
     rollupOptions: {
