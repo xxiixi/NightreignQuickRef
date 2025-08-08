@@ -88,7 +88,7 @@ body[tomato-theme="dark"] .steps-container {
   text-align: center;
   padding: 15px 20px;
   top: 0;
-  z-index: var(--z-sticky);
+  z-index: 1000;
 }
 
 
@@ -102,83 +102,124 @@ body[tomato-theme="dark"] .steps-container {
 
 /* 移除top-bar-left，因为logo按钮已经固定在左上角 */
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  background: transparent;
-}
-
-.logo-container:hover {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="dark"] .logo-container:hover,
-body[tomato-theme="dark"] .logo-container:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.logo-container img {
-  width: 40px;
-  height: 40px;
-  border-radius: 4px;
+/* Logo图片样式 */
+.fixed-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
   object-fit: cover;
-  transition: transform 0.2s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  filter: drop-shadow(0 0 0 rgba(85, 165, 255, 0));
 }
 
-.logo-container:hover img {
-  transform: scale(1.05);
+.fixed-logo img:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 6px rgba(179, 164, 253, 0.4)) 
+          drop-shadow(0 0 12px rgba(179, 164, 253, 0.6)) 
+          drop-shadow(0 0 20px rgba(179, 164, 253, 0.8)) 
+          drop-shadow(0 0 30px rgba(179, 164, 253, 1));
 }
 
-/* Logo功能导航菜单样式 */
-.logo-dropdown .ant-dropdown-menu {
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  min-width: 100px;
-  max-width: 300px;
+/* 暗色模式下的发光效果 */
+[data-theme="dark"] .fixed-logo img:hover,
+body[tomato-theme="dark"] .fixed-logo img:hover {
+  filter: drop-shadow(0 0 6px rgba(102, 73, 251, 0.4)) 
+          drop-shadow(0 0 12px rgba(102, 73, 251, 0.6)) 
+          drop-shadow(0 0 20px rgba(102, 73, 251, 0.8)) 
+          drop-shadow(0 0 30px rgba(102, 73, 251, 1));
 }
 
-[data-theme="dark"] .logo-dropdown .ant-dropdown-menu,
-body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu {
-  background: #1f1f1f;
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+/* 功能导航菜单样式 */
+.function-menu-overlay {
+  animation: menuSlideIn 0.2s ease-out;
 }
 
-.logo-dropdown .ant-dropdown-menu-item {
-  padding: 16px 20px;
-  border-radius: 6px;
-  margin: 4px 6px;
-  transition: all 0.2s ease;
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.logo-dropdown .ant-dropdown-menu-item:hover {
-  background: var(--geekblue-1);
-  transform: translateX(4px);
+.function-menu .ant-menu-item {
+  padding: 12px 16px !important;
+  margin: 2px 8px !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
 }
 
-[data-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover,
-body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover {
-  background: var(--geekblue-9);
+.function-menu .ant-menu-item:hover {
+  background: var(--geekblue-1) !important;
+  transform: translateX(2px) !important;
 }
 
-/* 黑暗模式下的菜单项文字颜色 */
-[data-theme="dark"] .logo-dropdown .ant-dropdown-menu-item,
-body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item {
-  color: rgba(255, 255, 255, 0.85);
+.function-menu .ant-menu-submenu-title {
+  padding: 12px 16px !important;
+  margin: 2px 8px !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--color-primary-500) !important;
 }
 
-[data-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover,
-body[tomato-theme="dark"] .logo-dropdown .ant-dropdown-menu-item:hover {
-  color: rgba(255, 255, 255, 0.95);
+.function-menu .ant-menu-submenu-title:hover {
+  background: var(--geekblue-1) !important;
+  transform: translateX(2px) !important;
 }
 
-.logo-dropdown .ant-dropdown-menu-item:active {
-  transform: translateX(2px);
+.function-menu .ant-menu-submenu .ant-menu-item {
+  padding: 8px 16px 8px 32px !important;
+  margin: 1px 8px !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: var(--color-text-2) !important;
+}
+
+.function-menu .ant-menu-submenu .ant-menu-item:hover {
+  background: var(--geekblue-1) !important;
+  color: var(--color-text-1) !important;
+  transform: translateX(2px) !important;
+}
+
+/* 黑暗模式适配 */
+[data-theme="dark"] .function-menu .ant-menu-item,
+body[tomato-theme="dark"] .function-menu .ant-menu-item {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+[data-theme="dark"] .function-menu .ant-menu-item:hover,
+body[tomato-theme="dark"] .function-menu .ant-menu-item:hover {
+  background: var(--geekblue-9) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+[data-theme="dark"] .function-menu .ant-menu-submenu-title,
+body[tomato-theme="dark"] .function-menu .ant-menu-submenu-title {
+  color: var(--color-primary-400) !important;
+}
+
+[data-theme="dark"] .function-menu .ant-menu-submenu-title:hover,
+body[tomato-theme="dark"] .function-menu .ant-menu-submenu-title:hover {
+  background: var(--geekblue-9) !important;
+}
+
+[data-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item,
+body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+
+[data-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover,
+body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover {
+  background: var(--geekblue-9) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
 }
 
 .top-bar-right {
@@ -787,7 +828,7 @@ body[tomato-theme="dark"] .custom-card .ant-card-body {
   position: fixed;
   top: 20px;
   left: 20px;
-  z-index: 1000;
+  z-index: 1050;
 }
 
 /* 加载动画样式 */
