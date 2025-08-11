@@ -32,7 +32,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                       items={[
                         {
                           dot: <PauseCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,  
-                          children: 'Day 1 开始',
+                          children: 'Day 1 / Day 2 开始',
                           color: 'green',
                           label: '0:00',
                         },
@@ -78,7 +78,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                         },
                         {
                           dot: <HeartTwoTone twoToneColor="#eb2f96" />,
-                          children: 'Day 2 开始',
+                          children: 'Day 2 开始 / 最终Boss战',
                           color: 'green',
                           label: '0:00',
                         },
@@ -104,32 +104,38 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                     <div className="runes-column">
                       <Table
                         dataSource={[
-                          { key: '1', level: '1', runes: '0' },
-                          { key: '2', level: '2', runes: '3,698' },
-                          { key: '3', level: '3', runes: '7,922' },
-                          { key: '4', level: '4', runes: '12,348' },
-                          { key: '5', level: '5', runes: '16,978' },
-                          { key: '6', level: '6', runes: '21,818' },
-                          { key: '7', level: '7', runes: '26,869' },
-                          { key: '8', level: '8', runes: '32,137' },
+                          { key: '1', level: '1', runes: '0', totalCost: '-' },
+                          { key: '2', level: '2', runes: '3,698', totalCost: '3,698' },
+                          { key: '3', level: '3', runes: '7,922', totalCost: '11,620' },
+                          { key: '4', level: '4', runes: '12,348', totalCost: '23,968' },
+                          { key: '5', level: '5', runes: '16,978', totalCost: '40,946' },
+                          { key: '6', level: '6', runes: '21,818', totalCost: '62,764' },
+                          { key: '7', level: '7', runes: '26,869', totalCost: '89,633' },
+                          { key: '8', level: '8', runes: '32,137', totalCost: '121,770' },
                         ]}
                         columns={[
                           {
                             title: '等级',
                             dataIndex: 'level',
                             key: 'level',
-                            width: '50%',
+                            width: '33%',
                           },
                           {
                             title: '所需卢恩',
                             dataIndex: 'runes',
                             key: 'runes',
-                            width: '50%',
+                            width: '33%',
                             render: (text) => (
                               <span style={{ color: '#1890ff' }}>
                                 {text}
                               </span>
                             )
+                          },
+                          {
+                            title: '总成本',
+                            dataIndex: 'totalCost',
+                            key: 'totalCost',
+                            width: '34%',
                           }
                         ]}
                         pagination={false}
@@ -143,27 +149,27 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                     <div className="runes-column">
                       <Table
                         dataSource={[
-                          { key: '9', level: '9', runes: '37,624' },
-                          { key: '10', level: '10', runes: '43,335' },
-                          { key: '11', level: '11', runes: '49,271' },
-                          { key: '12', level: '12', runes: '55,439' },
-                          { key: '13', level: '13', runes: '61,840' },
-                          { key: '14', level: '14', runes: '68,479' },
-                          { key: '15', level: '15', runes: '75,358' },
-                          { key: 'total', level: '总计', runes: '513,336' },
+                          { key: '9', level: '9', runes: '37,624', totalCost: '159,394' },
+                          { key: '10', level: '10', runes: '43,335', totalCost: '202,729' },
+                          { key: '11', level: '11', runes: '49,271', totalCost: '252,000' },
+                          { key: '12', level: '12', runes: '55,439', totalCost: '307,439' },
+                          { key: '13', level: '13', runes: '61,840', totalCost: '369,279' },
+                          { key: '14', level: '14', runes: '68,479', totalCost: '437,758' },
+                          { key: '15', level: '15', runes: '75,358', totalCost: '513,116' },
+                          { key: 'total', level: '总计', runes: '513,336', totalCost: '-' },
                         ]}
                         columns={[
                           {
                             title: '等级',
                             dataIndex: 'level',
                             key: 'level',
-                            width: '50%',
+                            width: '33%',
                           },
                           {
                             title: '所需卢恩',
                             dataIndex: 'runes',
                             key: 'runes',
-                            width: '50%',
+                            width: '33%',
                             render: (text) => (
                               <span style={{ 
                                 color: '#1890ff'
@@ -171,6 +177,13 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                 {text}
                               </span>
                             )
+                          },
+                          {
+                            title: '总成本',
+                            dataIndex: 'totalCost',
+                            key: 'totalCost',
+                            width: '34%',
+
                           }
                         ]}
                         pagination={false}
@@ -187,9 +200,9 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                     description={
                       <div className="dodge-frames-tips">
                         <div className="tip-item">
-                          1. 角色3级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
-                          7级可使用<strong style={{ color: '#722ed1' }}>紫色武器</strong>，
-                          10级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
+                          1. 角色 3 级可使用<strong style={{ color: '#0360b8' }}>蓝色武器</strong>，
+                          7 级可使用<strong style={{ color: '#722ed1' }}>紫色武器</strong>，
+                          10 级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
                         </div>
                         <div className="tip-item">
                         2. 如果当前卢恩足够升级，左上角显示等级的数字左边会出现一个白色箭头(局内)。

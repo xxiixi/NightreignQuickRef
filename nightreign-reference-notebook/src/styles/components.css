@@ -531,7 +531,7 @@ body[tomato-theme="dark"] .custom-tab-button::after {
 
 .ant-table-thead > tr > th {
   background: var(--table-header-bg);
-  font-weight: 600;
+  font-weight: normal !important;
   border-bottom: 2px solid var(--color-text-2);
 }
 

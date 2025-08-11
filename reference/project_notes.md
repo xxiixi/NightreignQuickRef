@@ -22,6 +22,9 @@
 
 [【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区](https://www.bilibili.com/video/BV1M18jzQE9X/?spm_id_from=333.1391.0.0&vd_source=37640654dbdd4ab80b471a16ac6da3c0)
 
+### wiki
+
+https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki
 
 ## 词条整理（根据局内分类手动整理）
 1. 能力值：提升血量上限、提升专注值上限、提升精力上限、生命力、集中力、耐力、力气、灵巧、智力、信仰、感应、强韧度、每次解开魔法师塔的机关能提升专注值上限

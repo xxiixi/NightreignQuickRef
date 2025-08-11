@@ -439,11 +439,11 @@ const BossDataView: React.FC = () => {
     <div className="boss-data-view-container">
 
       {/* 双表格布局 */}
-      <Row gutter={16}>
+      {/* <Row gutter={16}> */}
         {/* 上方表格：血量 + 吸收 */}
-        <Col span={24}>
+        {/* <Col span={24}> */}
           <Card 
-            title={<span className="table-title">Table 1</span>}
+            title={<span className="table-title">🌙全夜王基础数据表</span>}
             className="boss-card"
           >
             <Table
@@ -455,16 +455,17 @@ const BossDataView: React.FC = () => {
               size="small"
               bordered
               footer={defaultFooter}
+              style={{ marginBottom: '24px' }}
             />
-          </Card>
-        </Col>
+          {/* </Card> */}
+        {/* </Col> */}
 
         {/* 下方表格：抗性 + 韧性 */}
-        <Col span={24}>
-          <Card 
-            title={<span className="table-title">Table 2</span>}
+        {/* <Col span={24}> */}
+          {/* <Card 
+            // title={<span className="table-title">Table 2</span>}
             className="boss-card-bottom"
-          >
+          > */}
             <Table
               columns={rightColumns}
               dataSource={filteredData}
@@ -475,8 +476,8 @@ const BossDataView: React.FC = () => {
               bordered
             />
           </Card>
-        </Col>
-      </Row>
+        {/* </Col> */}
+      {/* </Row> */}
     </div>
   );
 };

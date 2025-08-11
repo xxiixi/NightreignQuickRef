@@ -207,7 +207,7 @@
     "strikeAbsorption": 0.9,
     "pierceAbsorption": 1,
     "magicAbsorption": 1,
-    "fireAbsorption": 12,
+    "fireAbsorption": 1.2,
     "lightningAbsorption": 1,
     "holyAbsorption": 1.35,
     "poisonResistance": "无效",

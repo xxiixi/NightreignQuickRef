@@ -29,17 +29,20 @@
   font-size: 16px;
 }
 
-/* 卡片样式 */
+/* 卡片样式 - 使用百分比宽度，与传说武器详情页面保持一致 */
 .boss-card {
-  max-width: 1000px;
+  max-width: 1300px;
+  min-width: 1000px;
+  width: 70%;
   margin: 0 auto;
 }
 
-.boss-card-bottom {
-  max-width: 1000px;
+/* .boss-card-bottom {
+  max-width: 1300px;
+  width: 70%;
   margin: 0 auto;
   margin-top: 24px;
-}
+} */
 
 /* 页脚样式 */
 .footer-text {
@@ -48,7 +51,8 @@
   color: var(--text-secondary);
 }
 
-/* 容器样式 */
+/* 容器样式 - 使用百分比宽度 */
 .boss-data-view-container {
   padding: 24px;
+  width: 100%;
 }
