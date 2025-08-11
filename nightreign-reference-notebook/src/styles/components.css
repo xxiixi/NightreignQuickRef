@@ -726,6 +726,20 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   margin: 0 auto;
 }
 
+/* 隔行变色样式 */
+.table-row-even {
+  background-color: var(--content-bg);
+}
+
+.table-row-odd {
+  background-color: var(--geekblue-1);
+}
+
+[data-theme="dark"] .table-row-odd,
+body[tomato-theme="dark"] .table-row-odd {
+  background-color: var(--color-neutral-900);
+}
+
 /* ===== 页脚组件 ===== */
 .footer {
   text-align: center;
