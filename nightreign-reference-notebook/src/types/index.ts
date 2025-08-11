@@ -8,6 +8,30 @@ export interface EntryData {
   talisman?: string;
 }
 
+// Boss数据接口
+export interface BossData {
+  id: number;
+  name: string;
+  baseHealth: number;
+  normalAbsorption: number;
+  slashAbsorption: number;
+  strikeAbsorption: number;
+  pierceAbsorption: number;
+  magicAbsorption: number;
+  fireAbsorption: number;
+  lightningAbsorption: number;
+  holyAbsorption: number;
+  poisonResistance: number | string;
+  scarletRotResistance: number | string;
+  bleedResistance: number | string;
+  deathBlightResistance: number | string;
+  frostResistance: number | string;
+  sleepResistance: number | string;
+  madnessResistance: number | string;
+  basePoise: number;
+  nightreignHealthMultiplier: number | string;
+}
+
 // 词条类型颜色映射
 export const typeColorMap: Record<string, string> = {
   '能力': 'blue',
