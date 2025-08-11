@@ -137,8 +137,8 @@ const BossDataView: React.FC = () => {
     {
       title: '攻击类别',
       children: [
-        {
-                        title: (
+                {
+          title: (
                 <div className="damage-type-container">
                   <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
                   <span>普通</span>
@@ -148,6 +148,11 @@ const BossDataView: React.FC = () => {
           key: 'normalAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
                     {
               title: (
@@ -160,6 +165,11 @@ const BossDataView: React.FC = () => {
           key: 'slashAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
                     {
               title: (
@@ -172,6 +182,11 @@ const BossDataView: React.FC = () => {
           key: 'strikeAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
                     {
               title: (
@@ -184,6 +199,11 @@ const BossDataView: React.FC = () => {
           key: 'pierceAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
       ],
     },
@@ -201,6 +221,11 @@ const BossDataView: React.FC = () => {
           key: 'magicAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
                     {
               title: (
@@ -213,6 +238,11 @@ const BossDataView: React.FC = () => {
           key: 'fireAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
                     {
               title: (
@@ -225,6 +255,11 @@ const BossDataView: React.FC = () => {
           key: 'lightningAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
                     {
               title: (
@@ -237,6 +272,11 @@ const BossDataView: React.FC = () => {
           key: 'holyAbsorption',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+              {value}
+            </span>
+          ),
         },
       ],
     },
@@ -403,7 +443,7 @@ const BossDataView: React.FC = () => {
         {/* 上方表格：血量 + 吸收 */}
         <Col span={24}>
           <Card 
-            title={<span className="table-title">💖 血量与吸收</span>}
+            title={<span className="table-title">Table 1</span>}
             className="boss-card"
           >
             <Table
@@ -422,7 +462,7 @@ const BossDataView: React.FC = () => {
         {/* 下方表格：抗性 + 韧性 */}
         <Col span={24}>
           <Card 
-            title={<span className="table-title">🛡️ 抗性与韧性</span>}
+            title={<span className="table-title">Table 2</span>}
             className="boss-card-bottom"
           >
             <Table

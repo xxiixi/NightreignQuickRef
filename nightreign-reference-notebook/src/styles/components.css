@@ -488,7 +488,7 @@ body[tomato-theme="dark"] .custom-tab-button::after {
 .custom-buttons-container {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
   margin-bottom: var(--spacing-xl);
   padding: 0 var(--spacing-md);
 }

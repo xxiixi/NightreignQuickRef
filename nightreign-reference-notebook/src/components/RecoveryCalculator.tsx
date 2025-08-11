@@ -265,7 +265,7 @@ const RecoveryCalculator: React.FC = () => {
         <div className="notes-section">
           <div className="notes-container">
             <ol className="notes-list">
-              <li> 角色血量和蓝量均为「15 级」时的数据；角色默认携带「红露滴圣杯瓶」。</li>
+              <li> 角色血量和蓝量均为「15 级」时的数据；初始「红露滴圣杯瓶」回血量为60%。</li>
               <li>「缓慢恢复」情况下「队友」恢复量的计算说明：立即回血(5%) + 持续回血(每0.1s恢复1%)；持续恢复4s，共计恢复41次。</li>
               <li>「缓慢恢复」情况下，如果连着使用圣杯瓶，恢复持续时间会刷新为8s。</li>
               <li>「提升圣杯瓶恢复量 20%」词条对「缓慢恢复」、「征兆buff」以及队友回血量无效。</li>
