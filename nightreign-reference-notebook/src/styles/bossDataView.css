@@ -1,0 +1,54 @@
+/* BossDataView 图片样式 */
+
+/* 图片容器通用样式 */
+.damage-type-container,
+.resistance-type-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* 表格标题中的图片样式 */
+.damage-type-header img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Boss图片样式 */
+.boss-image {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+}
+
+/* 表格标题样式 */
+.table-title {
+  text-align: center;
+  font-size: 16px;
+}
+
+/* 卡片样式 */
+.boss-card {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.boss-card-bottom {
+  max-width: 1000px;
+  margin: 0 auto;
+  margin-top: 24px;
+}
+
+/* 页脚样式 */
+.footer-text {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* 容器样式 */
+.boss-data-view-container {
+  padding: 24px;
+}

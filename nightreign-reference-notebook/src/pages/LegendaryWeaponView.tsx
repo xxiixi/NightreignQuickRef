@@ -317,7 +317,7 @@ const LegendaryWeaponView: React.FC = () => {
         pagination={false}
         size="small"
         bordered
-        rowClassName={(record, index) => 
+        rowClassName={(_record, index) => 
           index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
         }
       />

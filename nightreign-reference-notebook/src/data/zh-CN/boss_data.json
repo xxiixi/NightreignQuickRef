@@ -113,7 +113,7 @@
     "id": 6,
     "name": "\"深海黑夜\"玛丽斯",
     "baseHealth": 3584,
-    "nightreignHealthMultiplier": "二阶段血量:8320",
+    "nightreignHealthMultiplier": "二阶段:8320",
     "normalAbsorption": 1,
     "slashAbsorption": 1.15,
     "strikeAbsorption": 0.8,
