@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Row, Col, Card, Image } from 'antd';
+import { Table, Card, Image } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData } from '../types';
 import bossData from '../data/zh-CN/boss_data.json';
@@ -437,13 +437,8 @@ const BossDataView: React.FC = () => {
 
   return (
     <div className="boss-data-view-container">
-
-      {/* 双表格布局 */}
-      {/* <Row gutter={16}> */}
-        {/* 上方表格：血量 + 吸收 */}
-        {/* <Col span={24}> */}
           <Card 
-            title={<span className="table-title">🌙全夜王基础数据表</span>}
+            title={<span className="table-title">🌙 全夜王基础数据表</span>}
             className="boss-card"
           >
             <Table
@@ -457,15 +452,6 @@ const BossDataView: React.FC = () => {
               footer={defaultFooter}
               style={{ marginBottom: '24px' }}
             />
-          {/* </Card> */}
-        {/* </Col> */}
-
-        {/* 下方表格：抗性 + 韧性 */}
-        {/* <Col span={24}> */}
-          {/* <Card 
-            // title={<span className="table-title">Table 2</span>}
-            className="boss-card-bottom"
-          > */}
             <Table
               columns={rightColumns}
               dataSource={filteredData}
@@ -476,8 +462,6 @@ const BossDataView: React.FC = () => {
               bordered
             />
           </Card>
-        {/* </Col> */}
-      {/* </Row> */}
     </div>
   );
 };
