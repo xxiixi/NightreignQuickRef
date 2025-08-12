@@ -354,103 +354,76 @@ const CharacterDataView: React.FC = () => {
             const characterData = jsonData[characterName];
 
             if (characterData && characterData.length > 0) {
-              // 获取列名（排除HP、FP、ST）
+              // 获取列名（排除HP、FP、ST和等级）
               const columnKeys = Object.keys(characterData[0]).filter(key => 
-                !['HP', 'FP', 'ST'].includes(key)
+                !['HP', 'FP', 'ST', '等级'].includes(key)
               );
               
-                             const columns: ColumnsType<any> = columnKeys.map((key) => {
-                 // 检查是否是等级、总点数、增加点数列
-                 const isSpecialColumn = ['等级', '总点数', '增加点数'].includes(key);
-                 
-                 // 定义列宽度
-                 const getColumnWidth = (columnKey: string) => {
-                   switch (columnKey) {
-                     case '等级':
-                       return 100;
-                     case '总点数':
-                       return 100;
-                     case '增加点数':
-                       return 100;
-                     case 'HP':
-                       return 70;
-                     case 'FP':
-                       return 70;
-                     case 'ST':
-                       return 70;
-                     case '力量':
-                       return 70;
-                     case '灵巧':
-                       return 70;
-                     case '智力':
-                       return 70;
-                     case '信仰':
-                       return 70;
-                     case '感应':
-                       return 70;
-                     default:
-                       return columnKey.length > 4 ? 120 : 70;
-                   }
-                 };
-                 
-                 return {
-                   title: isSpecialColumn ? (
-                     <span style={{ 
-                       fontWeight: 'bold', 
-                       color: 'var(--color-primary-500)',
-                       fontSize: '13px'
-                     }}>
-                       {key === '等级' ? '等级(Lv)' : key}
-                     </span>
-                   ) : key,
-                   dataIndex: key,
-                   key,
-                   align: 'center' as const,
-                   width: getColumnWidth(key),
-                   ellipsis: { showTitle: false },
-                   render: (value: any) => {
-                     if (isSpecialColumn) {
-                       return (
-                         <span style={{ 
-                           fontWeight: 'bold', 
-                           color: 'var(--color-text-1)',
-                           fontSize: '13px'
-                         }}>
-                           {key === '等级' ? (value ? `Lv${value}` : '-') : (value || '-')}
-                         </span>
-                       );
-                     }
-                     return (
-                       <span style={{ color: 'var(--color-text-1)' }}>
-                         {value || '-'}
-                       </span>
-                     );
-                   },
-                   onCell: (record, index) => {
-                     if (isSpecialColumn) {
-                       return {
-                         style: {
-                           backgroundColor: 'var(--content-bg)',
-                         }
-                       };
-                     }
-                     return {};
-                   }
-                 };
-               });
 
-              const data = characterData.map((row: any, index: number) => {
-                const filteredRow: any = { key: `${characterName}-${index}` };
-                columnKeys.forEach(key => {
-                  filteredRow[key] = row[key];
-                });
-                return filteredRow;
+
+              // 调换行列：将属性作为行，等级作为列
+              const transposedData = columnKeys.map((attrKey) => {
+                const row: any = { attribute: attrKey };
+                // 为每个等级创建列
+                for (let lv = 1; lv <= 15; lv++) {
+                  const levelData = characterData.find((item: any) => item.等级 === lv);
+                  row[`Lv${lv}`] = levelData ? levelData[attrKey] : '';
+                }
+                return row;
               });
+
+              // 创建新的列定义
+              const transposedColumns: ColumnsType<any> = [
+                {
+                  title: '等级',
+                  dataIndex: 'attribute',
+                  key: 'attribute',
+                  width: 100,
+                  fixed: 'left',
+                  align: 'center' as const,
+                  render: (text: string) => {
+                    const isSpecialAttr = ['总点数', '增加点数'].includes(text);
+                    return (
+                      <span style={{ 
+                        fontWeight: isSpecialAttr ? 'bold' : 'normal',
+                        color: isSpecialAttr ? 'var(--color-primary-500)' : 'var(--color-text-1)',
+                        fontSize: '13px'
+                      }}>
+                        {text}
+                      </span>
+                    );
+                  },
+                  onCell: () => ({
+                    style: {
+                      backgroundColor: 'var(--content-bg)',
+                    }
+                  })
+                },
+                ...Array.from({ length: 15 }, (_, i) => ({
+                  title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>,
+                  dataIndex: `Lv${i + 1}`,
+                  key: `Lv${i + 1}`,
+                  width: 60,
+                  align: 'center' as const,
+                  render: (value: any, record: any) => {
+                    const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
+                    return (
+                      <span style={{ 
+                        fontWeight: isSpecialAttr ? 'bold' : 'normal',
+                        color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                        fontSize: '13px'
+                      }}>
+                        {value || '-'}
+                      </span>
+                    );
+                  }
+                }))
+              ];
 
               tabs.push({ 
                 name: characterName, 
-                columns, 
-                data 
+                columns: transposedColumns, 
+                data: transposedData 
               });
 
               // 提取 HP/FP/ST 数据：按等级聚合到 Lv1..Lv15
