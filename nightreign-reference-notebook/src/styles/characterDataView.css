@@ -9,7 +9,7 @@
 }
 
 .content-wrapper.card-item {
-  max-width: 1100px;
+  max-width: 1280px;
   width: 70%;
   margin: 0 auto 20px auto;
   min-height: auto;
@@ -250,5 +250,46 @@ body[tomato-theme="dark"] .card-item .card-body {
   
   .character-attribute-value {
     font-size: 12px;
+  }
+} 
+
+/* ===== 表格与雷达图宽度比例控制 ===== */
+
+/* 默认比例：表格40%，雷达图60% */
+.character-attributes-table-container {
+  flex: 0.6 !important;
+  min-width: 0;
+}
+
+.radar-chart-container {
+  flex: 0.4 !important;
+  min-width: 330px;
+  min-height: 330px;
+}
+
+
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+  /* 中等屏幕：自动调整为50-50 */
+  .character-attributes-table-container {
+    flex: 0.5 !important;
+  }
+  
+  .radar-chart-container {
+    flex: 0.5 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 小屏幕：垂直堆叠 */
+  .character-attributes-table-container,
+  .radar-chart-container {
+    flex: 1 !important;
+    min-width: 100% !important;
+  }
+  
+  .radar-chart-container {
+    min-height: 350px;
   }
 } 

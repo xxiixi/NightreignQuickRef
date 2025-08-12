@@ -9,20 +9,9 @@ import DataManager from '../utils/dataManager';
 
 const { Title, Text } = Typography;
 
-// 魔法招式接口
-interface MagicMove {
-  属性痕: string;
-  属性图标: string;
-  混合魔法: string;
-  总伤害: string;
-  持续时间: string;
-  混合魔法效果: string;
-}
-
 // 数据接口
 interface DataState {
   characterStatesData: CharacterData[];
-  magicMoveData: MagicMove[];
   loading: boolean;
 }
 
@@ -295,7 +284,6 @@ const CharacterDataView: React.FC = () => {
   // 数据状态
   const [data, setData] = useState<DataState>({
     characterStatesData: [],
-    magicMoveData: [],
     loading: true
   });
 
@@ -323,7 +311,6 @@ const CharacterDataView: React.FC = () => {
 
         setData({
           characterStatesData: dataManager.getCharacterStates(),
-          magicMoveData: dataManager.getMagicMoveList(),
           loading: false
         });
 
@@ -372,14 +359,85 @@ const CharacterDataView: React.FC = () => {
                 !['HP', 'FP', 'ST'].includes(key)
               );
               
-              const columns: ColumnsType<any> = columnKeys.map((key) => ({
-                title: key,
-                dataIndex: key,
-                key,
-                align: 'center',
-                width: key.length > 4 ? 120 : 80,
-                ellipsis: { showTitle: false },
-              }));
+                             const columns: ColumnsType<any> = columnKeys.map((key) => {
+                 // 检查是否是等级、总点数、增加点数列
+                 const isSpecialColumn = ['等级', '总点数', '增加点数'].includes(key);
+                 
+                 // 定义列宽度
+                 const getColumnWidth = (columnKey: string) => {
+                   switch (columnKey) {
+                     case '等级':
+                       return 100;
+                     case '总点数':
+                       return 100;
+                     case '增加点数':
+                       return 100;
+                     case 'HP':
+                       return 70;
+                     case 'FP':
+                       return 70;
+                     case 'ST':
+                       return 70;
+                     case '力量':
+                       return 70;
+                     case '灵巧':
+                       return 70;
+                     case '智力':
+                       return 70;
+                     case '信仰':
+                       return 70;
+                     case '感应':
+                       return 70;
+                     default:
+                       return columnKey.length > 4 ? 120 : 70;
+                   }
+                 };
+                 
+                 return {
+                   title: isSpecialColumn ? (
+                     <span style={{ 
+                       fontWeight: 'bold', 
+                       color: 'var(--color-primary-500)',
+                       fontSize: '13px'
+                     }}>
+                       {key === '等级' ? '等级(Lv)' : key}
+                     </span>
+                   ) : key,
+                   dataIndex: key,
+                   key,
+                   align: 'center' as const,
+                   width: getColumnWidth(key),
+                   ellipsis: { showTitle: false },
+                   render: (value: any) => {
+                     if (isSpecialColumn) {
+                       return (
+                         <span style={{ 
+                           fontWeight: 'bold', 
+                           color: 'var(--color-text-1)',
+                           fontSize: '13px'
+                         }}>
+                           {key === '等级' ? (value ? `Lv${value}` : '-') : (value || '-')}
+                         </span>
+                       );
+                     }
+                     return (
+                       <span style={{ color: 'var(--color-text-1)' }}>
+                         {value || '-'}
+                       </span>
+                     );
+                   },
+                   onCell: (record, index) => {
+                     if (isSpecialColumn) {
+                       return {
+                         style: {
+                           backgroundColor: 'var(--content-bg)',
+                         }
+                       };
+                     }
+                     return {};
+                   }
+                 };
+               });
 
               const data = characterData.map((row: any, index: number) => {
                 const filteredRow: any = { key: `${characterName}-${index}` };
@@ -435,66 +493,6 @@ const CharacterDataView: React.FC = () => {
 
   // 直接使用加载的角色数据
   const characterData: CharacterData = data.characterStatesData[0] || {};
-
-  // 隐士出招表数据
-  const magicMoves: MagicMove[] = data.magicMoveData || [];
-
-  // 隐士出招表列配置
-  const magicMoveColumns: ColumnsType<MagicMove> = [
-    {
-      title: '属性痕',
-      dataIndex: '属性痕',
-      key: '属性痕',
-      width: '12%',
-      align: 'center',
-    },
-    {
-      title: '属性图标',
-      dataIndex: '属性图标',
-      key: '属性图标',
-      width: '12%',
-      align: 'center',
-    },
-    {
-      title: '混合魔法',
-      dataIndex: '混合魔法',
-      key: '混合魔法',
-      width: '12%',
-      align: 'center',
-    },
-    {
-      title: '总伤害',
-      dataIndex: '总伤害',
-      key: '总伤害',
-      width: '9%',
-      align: 'center',
-    },
-    {
-      title: '持续时间',
-      dataIndex: '持续时间',
-      key: '持续时间',
-      width: '9%',
-      align: 'center',
-    },
-    {
-      title: '混合魔法效果',
-      dataIndex: '混合魔法效果',
-      key: '混合魔法效果',
-      ellipsis: false,
-      align: 'left',
-      render: (text: string) => (
-        <div style={{ 
-          wordBreak: 'break-word', 
-          whiteSpace: 'pre-wrap',
-          textAlign: 'left',
-          lineHeight: '1.5',
-          padding: '4px 0'
-        }}>
-          {text}
-        </div>
-      ),
-    },
-  ];
 
   // 获取所有属性名称
   const getAttributeNames = () => {
@@ -619,6 +617,7 @@ const CharacterDataView: React.FC = () => {
       key: 'character',
       width: 60,
       fixed: 'left',
+      align: 'center' as const,
       render: (text: string) => (
         <Text style={{ color: 'var(--color-text-1)' }}>
           {text}
@@ -749,15 +748,16 @@ const CharacterDataView: React.FC = () => {
           <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
             提示：可勾选多个角色进行对比
           </div>
-          <div style={{ display: 'flex', gap: '20px', marginTop: '20px' }}>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
             {/* 角色属性表格 */}
-            <div style={{ flex: '1', minWidth: '0' }}>
+            <div className="character-attributes-table-container">
               <Table
                 rowSelection={rowSelection}
                 columns={columns}
                 dataSource={generateTableData()}
                 pagination={false}
                 size="middle"
+                bordered
                 scroll={{ x: 'max-content' }}
                 className="character-attributes-table"
               />
@@ -766,7 +766,6 @@ const CharacterDataView: React.FC = () => {
             {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
             <div 
               className="radar-chart-container"
-              style={{ flex: '1', minWidth: '400px', minHeight: '400px' }}
               id="radar-chart-container"
             >
               {selectedRowKeys.length > 0 ? (
@@ -925,16 +924,51 @@ const CharacterDataView: React.FC = () => {
               <>
                 {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
                <Tabs
+                 type="card"
                  items={[
                    {
                      key: 'hp',
-                     label: '1-15级血量成长',
+                     label: '❤️ 血量值成长',
                      children: (
                        <Table
                          dataSource={hpData}
+                         rowClassName={(_record, index) => 
+                           index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
+                         }
                          columns={[
-                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
-                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
+                           { 
+                             title: '角色', 
+                             dataIndex: 'character', 
+                             key: 'character', 
+                             width: 100, 
+                             fixed: 'left', 
+                             align: 'center' as const,
+                             render: (text: string) => (
+                               <span style={{ 
+                                 fontWeight: 'bold', 
+                                 color: 'var(--color-text-1)',
+                                 fontSize: '13px'
+                               }}>
+                                 {text}
+                               </span>
+                             )
+                           },
+                           ...Array.from({ length: 15 }, (_, i) => ({ 
+                             title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>, 
+                             dataIndex: `Lv${i + 1}`, 
+                             key: `Lv${i + 1}`, 
+                             width: 60, 
+                             align: 'center' as const,
+                             render: (value: any) => (
+                               <span style={{ 
+                                 fontWeight: '500', 
+                                 color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                                 fontSize: '13px'
+                               }}>
+                                 {value || '-'}
+                               </span>
+                             )
+                           }))
                          ]}
                          pagination={false}
                          size="small"
@@ -947,13 +981,47 @@ const CharacterDataView: React.FC = () => {
                    },
                    {
                      key: 'fp',
-                     label: '1-15级专注值成长',
+                     label: '💙 专注值成长',
                      children: (
                        <Table
                          dataSource={fpData}
+                         rowClassName={(_record, index) => 
+                           index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
+                         }
                          columns={[
-                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
-                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
+                           { 
+                             title: '角色', 
+                             dataIndex: 'character', 
+                             key: 'character', 
+                             width: 100, 
+                             fixed: 'left', 
+                             align: 'center' as const,
+                             render: (text: string) => (
+                               <span style={{ 
+                                 fontWeight: 'bold', 
+                                 color: 'var(--color-text-1)',
+                                 fontSize: '13px'
+                               }}>
+                                 {text}
+                               </span>
+                             )
+                           },
+                           ...Array.from({ length: 15 }, (_, i) => ({ 
+                             title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>, 
+                             dataIndex: `Lv${i + 1}`, 
+                             key: `Lv${i + 1}`, 
+                             width: 60, 
+                             align: 'center' as const,
+                             render: (value: any) => (
+                               <span style={{ 
+                                 fontWeight: '500', 
+                                 color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                                 fontSize: '13px'
+                               }}>
+                                 {value || '-'}
+                               </span>
+                             )
+                           }))
                          ]}
                          pagination={false}
                          size="small"
@@ -966,13 +1034,47 @@ const CharacterDataView: React.FC = () => {
                    },
                    {
                      key: 'st',
-                     label: '1-15级耐力值成长',
+                     label: '💚 耐力值成长',
                      children: (
                        <Table
                          dataSource={stData}
+                         rowClassName={(_record, index) => 
+                           index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
+                         }
                          columns={[
-                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
-                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
+                           { 
+                             title: '角色', 
+                             dataIndex: 'character', 
+                             key: 'character', 
+                             width: 100, 
+                             fixed: 'left', 
+                             align: 'center' as const,
+                             render: (text: string) => (
+                               <span style={{ 
+                                 fontWeight: 'bold', 
+                                 color: 'var(--color-text-1)',
+                                 fontSize: '13px'
+                               }}>
+                                 {text}
+                               </span>
+                             )
+                           },
+                           ...Array.from({ length: 15 }, (_, i) => ({ 
+                             title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>, 
+                             dataIndex: `Lv${i + 1}`, 
+                             key: `Lv${i + 1}`, 
+                             width: 60, 
+                             align: 'center' as const,
+                             render: (value: any) => (
+                               <span style={{ 
+                                 fontWeight: '500', 
+                                 color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                                 fontSize: '13px'
+                               }}>
+                                 {value || '-'}
+                               </span>
+                             )
+                           }))
                          ]}
                          pagination={false}
                          size="small"
@@ -990,6 +1092,7 @@ const CharacterDataView: React.FC = () => {
                
                 {/* 角色详细数据标签页 */}
                <Tabs
+                 type="card"
                  items={jsonTabs.map((tab: any) => ({
                    key: tab.name,
                    label: tab.name,
@@ -1001,6 +1104,9 @@ const CharacterDataView: React.FC = () => {
                        size="small"
                        bordered
                        scroll={{ x: 'max-content' }}
+                       rowClassName={(_record, index) => 
+                         index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
+                       }
                        style={{ 
                          wordBreak: 'break-word',
                          whiteSpace: 'pre-wrap'
@@ -1020,32 +1126,7 @@ const CharacterDataView: React.FC = () => {
       <DodgeFramesComparison />
 
 
-      {/* 隐士出招表 */}
-      <div className="content-wrapper card-item">
-        <div className="card-header">
-          <Title level={5} className="character-card-title">
-            隐士出招表
-          </Title>
-        </div>
-        <div className="card-body">
-          <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
-            提示：总伤害为角色15级时数据
-          </div>
-          <Table
-            dataSource={magicMoves}
-            columns={magicMoveColumns}
-            pagination={false}
-            size="small"
-            bordered
-            rowKey={(record) => record.属性痕}
-            scroll={{ x: '100%' }}
-            style={{ 
-              wordBreak: 'break-word',
-              whiteSpace: 'pre-wrap'
-            }}
-          />
-        </div>
-      </div>
+      
       {/* ----------------- */}
     </div>
   );

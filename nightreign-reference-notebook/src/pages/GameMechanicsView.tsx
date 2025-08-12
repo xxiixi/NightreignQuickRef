@@ -1,7 +1,9 @@
-import { Typography, Timeline, Table, Alert, Empty } from 'antd';
-import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, ExclamationCircleOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
+import { Typography, Timeline, Table, Alert } from 'antd';
+import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import '../styles/gameMechanicsView.css';
+import DataManager, { type MagicMove } from '../utils/dataManager';
 
 const { Title, Text } = Typography;
 
@@ -10,6 +12,43 @@ interface GameMechanicsViewProps {
 }
 
 const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) => {
+  // 隐士出招表数据
+  const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const dataManager = DataManager.getInstance();
+        await dataManager.waitForData();
+        setMagicMoves(dataManager.getMagicMoveList());
+      } catch (error) {
+        // no-op; GameMechanicsView 其他区域仍可渲染
+        console.error('Failed to load magic moves:', error);
+      }
+    };
+    loadData();
+  }, []);
+
+  const magicMoveColumns = [
+    { title: '属性痕', dataIndex: '属性痕', key: '属性痕', width: '12%', align: 'center' as const },
+    { title: '属性图标', dataIndex: '属性图标', key: '属性图标', width: '12%', align: 'center' as const },
+    { title: '混合魔法', dataIndex: '混合魔法', key: '混合魔法', width: '12%', align: 'center' as const },
+    { title: '总伤害', dataIndex: '总伤害', key: '总伤害', width: '9%', align: 'center' as const },
+    { title: '持续时间', dataIndex: '持续时间', key: '持续时间', width: '9%', align: 'center' as const },
+    {
+      title: '混合魔法效果',
+      dataIndex: '混合魔法效果',
+      key: '混合魔法效果',
+      ellipsis: false,
+      align: 'left' as const,
+      render: (text: string) => (
+        <div style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap', textAlign: 'left', lineHeight: '1.5', padding: '4px 0' }}>
+          {text}
+        </div>
+      ),
+    },
+  ];
+
   if (functionName === '游戏机制') {
     return (
       <div className="game-mechanics-container" style={{ '--mechanics-container-width': '1400px' } as React.CSSProperties}>
@@ -234,18 +273,30 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
             </div>
           </div>
 
-          {/* 其他功能尚未完成卡片 */}
+          {/* 隐士出招表 */}
           <div className="mechanics-grid">
             <div className="mechanic-card">
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
-                    <ExclamationCircleOutlined />
-                    其他功能尚未完成
+                    <ThunderboltTwoTone />
+                    隐士出招表
                   </Title>
                 </div>
                 <div className="card-body">
-                  <Empty description="更多功能开发中..." />
+                  <Table
+                    dataSource={magicMoves}
+                    columns={magicMoveColumns}
+                    pagination={false}
+                    size="small"
+                    bordered
+                    rowKey={(record) => (record as MagicMove).属性痕}
+                    scroll={{ x: '100%' }}
+                    style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                    footer={() => (
+                      <div className="footer-text">备注：总伤害为角色 15 级时测试数据</div>
+                    )}
+                  />
                 </div>
               </div>
             </div>

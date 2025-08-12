@@ -16,18 +16,19 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
       key: '角色数据',
       label: '角色数据',
       children: [
-        { key: '角色属性数据', label: '角色属性数据' },
-        { key: '无敌帧长度对比', label: '无敌帧长度对比' },
-        { key: '隐士出招表', label: '隐士出招表' }
+        { key: '角色属性数据', label: '角色基础属性对比' },
+        { key: '角色详细数据', label: '角色等级成长数据' },
+        { key: '无敌帧长度对比', label: '翻滚/闪避无敌帧对比' }
       ]
     },
     {
       key: '游戏机制',
       label: '游戏机制',
       children: [
-        { key: '游戏内缩圈时间', label: '游戏内缩圈时间' },
-        { key: '升级所需卢恩', label: '升级所需卢恩' },
-        { key: '血量恢复计算器', label: '血量恢复计算器' }
+        { key: '游戏时间机制', label: '游戏时间机制与缩圈' },
+        { key: '升级所需卢恩', label: '升级所需卢恩统计' },
+        { key: '血量恢复计算器', label: '血量恢复计算器' },
+        { key: '隐士出招表', label: '隐士混合魔法出招表' }
       ]
     },
     {
@@ -42,16 +43,17 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
       key: '词条详细数据',
       label: '词条详细数据',
       children: [
-        { key: '局外词条', label: '局外词条(按照遗物仪式分类)' },
+        { key: '局外词条', label: '局外词条 (按照遗物仪式分类)' },
+        { key: '护符词条', label: '护符词条' },
         { key: '局内词条', label: '局内词条（武器词条、掉落物词条）' },
-        { key: '护符词条', label: '护符词条' }
+        { key: '其他词条', label: '其他词条' }
       ]
     },
     {
       key: '夜王Boss数据',
       label: '夜王Boss数据',
       children: [
-        { key: '夜王Boss详情', label: '夜王Boss详情页面正在开发中，喵喵喵！' }
+        { key: '夜王Boss详情', label: '夜王Boss详情页面' }
       ]
     },
   ];
@@ -70,9 +72,8 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
       ).find(subItem => subItem.key === key);
       
       if (subMenuItem) {
-        // TODO: 后续可以实现子菜单项的导航
+        // 导航到父菜单，后续可以实现子菜单项的精确导航
         console.log('子菜单项点击:', subMenuItem);
-        // 暂时导航到父菜单
         onTabChange(subMenuItem.parentKey);
         setMenuVisible(false);
       }
