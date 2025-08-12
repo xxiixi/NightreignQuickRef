@@ -1,12 +1,11 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Typography, Table, Alert, Tabs } from 'antd';
+import { Typography, Table, Alert, Tabs, Divider } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
 import DataManager from '../utils/dataManager';
-import * as XLSX from 'xlsx';
 
 const { Title, Text } = Typography;
 
@@ -300,10 +299,9 @@ const CharacterDataView: React.FC = () => {
     loading: true
   });
 
-  // Excel（职业数据）标签页状态
-  const [excelTabs, setExcelTabs] = useState<Array<{ name: string; columns: ColumnsType<any>; data: any[] }>>([]);
-  const [excelLoading, setExcelLoading] = useState<boolean>(true);
-  const [excelError, setExcelError] = useState<string | null>(null);
+  // JSON（职业数据）标签页状态
+  const [jsonTabs, setJsonTabs] = useState<Array<{ name: string; columns: ColumnsType<any>; data: any[] }>>([]);
+  const [jsonError, setJsonError] = useState<string | null>(null);
   const [hpData, setHpData] = useState<Array<{ character: string; [key: string]: string | number }>>([]);
   const [fpData, setFpData] = useState<Array<{ character: string; [key: string]: string | number }>>([]);
   const [stData, setStData] = useState<Array<{ character: string; [key: string]: string | number }>>([]);
@@ -316,7 +314,7 @@ const CharacterDataView: React.FC = () => {
     <div className="footer-text">局内等级/艾尔登法环本体等级</div>
   );
 
-  // 从DataManager获取数据
+  // 从DataManager获取数据并加载JSON数据
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -328,29 +326,27 @@ const CharacterDataView: React.FC = () => {
           magicMoveData: dataManager.getMagicMoveList(),
           loading: false
         });
+
+        // 加载JSON数据
+        await loadJsonData();
       } catch (error) {
         console.error('Failed to load character data:', error);
         setData(prev => ({ ...prev, loading: false }));
       }
     };
 
-    loadData();
-  }, []);
-
-  // 加载 Excel（所有角色）到 Tabs
-  useEffect(() => {
-    const loadExcel = async () => {
+    const loadJsonData = async () => {
       try {
         // 所有角色文件列表
         const characterFiles = [
-          '追踪者.xlsx',
-          '女爵.xlsx',
-          '隐士.xlsx',
-          '铁之眼.xlsx',
-          '无赖.xlsx',
-          '执行者.xlsx', 
-          '守护者.xlsx',
-          '复仇者.xlsx',
+          '追踪者.json',
+          '女爵.json',
+          '隐士.json',
+          '铁之眼.json',
+          '无赖.json',
+          '执行者.json', 
+          '守护者.json',
+          '复仇者.json',
         ];
         const tabs: Array<{ name: string; columns: ColumnsType<any>; data: any[] }> = [];
         const hpRows: Array<{ character: string; [key: string]: string | number }> = [];
@@ -359,105 +355,83 @@ const CharacterDataView: React.FC = () => {
 
         for (const fileName of characterFiles) {
           try {
-            const excelUrl = new URL(`../data/character-info/${fileName}`, import.meta.url).href;
-            const response = await fetch(excelUrl);
+            const jsonUrl = new URL(`../data/character-info/${fileName}`, import.meta.url).href;
+            const response = await fetch(jsonUrl);
             if (!response.ok) {
               console.warn(`无法加载 ${fileName}: ${response.status}`);
               continue;
             }
             
-            const arrayBuffer = await response.arrayBuffer();
-            const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+            const jsonData = await response.json();
+            const characterName = fileName.replace('.json', '');
+            const characterData = jsonData[characterName];
 
-            // 获取第一个工作表
-            const firstSheetName = workbook.SheetNames[0];
-            const worksheet = workbook.Sheets[firstSheetName];
-            const jsonRows: Array<Record<string, any>> = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
+            if (characterData && characterData.length > 0) {
+              // 获取列名（排除HP、FP、ST）
+              const columnKeys = Object.keys(characterData[0]).filter(key => 
+                !['HP', 'FP', 'ST'].includes(key)
+              );
+              
+              const columns: ColumnsType<any> = columnKeys.map((key) => ({
+                title: key,
+                dataIndex: key,
+                key,
+                align: 'center',
+                width: key.length > 4 ? 120 : 80,
+                ellipsis: { showTitle: false },
+              }));
 
-                                      if (jsonRows.length > 0) {
-               const columnKeys = Object.keys(jsonRows[0]);
-               // 移除后三列
-               const filteredColumnKeys = columnKeys.slice(0, -3);
-               const columns: ColumnsType<any> = filteredColumnKeys.map((key) => ({
-                 title: key,
-                 dataIndex: key,
-                 key,
-                 align: 'center',
-                 width: key.length > 4 ? 120 : 80,
-                  ellipsis: { showTitle: false },
-               }));
+              const data = characterData.map((row: any, index: number) => {
+                const filteredRow: any = { key: `${characterName}-${index}` };
+                columnKeys.forEach(key => {
+                  filteredRow[key] = row[key];
+                });
+                return filteredRow;
+              });
 
-               const data = jsonRows.map((row, index) => {
-                 // 只保留前几列的数据，移除后三列
-                 const filteredRow: any = { key: `${fileName.replace('.xlsx', '')}-${index}` };
-                 filteredColumnKeys.forEach(key => {
-                   filteredRow[key] = row[key];
-                 });
-                 return filteredRow;
-               });
+              tabs.push({ 
+                name: characterName, 
+                columns, 
+                data 
+              });
 
-               tabs.push({ 
-                 name: fileName.replace('.xlsx', ''), 
-                 columns, 
-                 data 
-               });
+              // 提取 HP/FP/ST 数据：按等级聚合到 Lv1..Lv15
+              const buildRow = (statKey: string) => {
+                const row: any = { character: characterName };
+                for (let lv = 1; lv <= 15; lv++) {
+                  const levelData = characterData.find((item: any) => item.等级 === lv);
+                  row[`Lv${lv}`] = levelData ? levelData[statKey] : '';
+                }
+                return row;
+              };
 
-               // 提取 HP/FP/ST 数据：按等级聚合到 Lv1..Lv15（FP/ST 与 HP 完全相同的获取方式）
-               const characterName = fileName.replace('.xlsx', '');
-               const hpKey = columnKeys.find(k => k.trim().toLowerCase() === 'hp');
-               const fpKey = columnKeys.find(k => k.trim().toLowerCase() === 'fp');
-               const stKey = columnKeys.find(k => k.trim().toLowerCase() === 'st');
-               const levelKey = columnKeys.find(k => {
-                 const key = String(k).trim().toLowerCase();
-                 return key === '等级' || key === 'lv' || key === 'level';
-               });
-
-               const buildRow = (statKey?: string) => {
-                 if (!statKey) return null;
-                 const row: any = { character: characterName };
-                 for (let lv = 1; lv <= 15; lv++) row[`Lv${lv}`] = '';
-                 jsonRows.forEach((r, idx) => {
-                   let levelNum = 0;
-                   if (levelKey) {
-                     const raw = r[levelKey];
-                     levelNum = parseInt(String(raw).replace(/[^0-9]/g, ''), 10);
-                   } else {
-                     // 没有等级列则按行序推断等级（从 1 开始）
-                     levelNum = idx + 1;
-                   }
-                   if (Number.isFinite(levelNum) && levelNum >= 1 && levelNum <= 15) {
-                     row[`Lv${levelNum}`] = r[statKey];
-                   }
-                 });
-                 return row;
-               };
-
-               const hpRow = buildRow(hpKey);
-               const fpRow = buildRow(fpKey);
-               const stRow = buildRow(stKey);
-               if (hpRow) hpRows.push(hpRow);
-               if (fpRow) fpRows.push(fpRow);
-               if (stRow) stRows.push(stRow);
-             }
+              const hpRow = buildRow('HP');
+              const fpRow = buildRow('FP');
+              const stRow = buildRow('ST');
+              
+              hpRows.push(hpRow);
+              fpRows.push(fpRow);
+              stRows.push(stRow);
+            }
           } catch (fileError) {
             console.warn(`加载 ${fileName} 失败:`, fileError);
           }
         }
 
-        setExcelTabs(tabs);
+        setJsonTabs(tabs);
         setHpData(hpRows);
         setFpData(fpRows);
         setStData(stRows);
       } catch (err) {
-        console.error('加载 Excel 失败:', err);
-        setExcelError('Excel 加载失败，请稍后重试');
-      } finally {
-        setExcelLoading(false);
+        console.error('加载 JSON 失败:', err);
+        setJsonError('JSON 加载失败，请稍后重试');
       }
     };
 
-    loadExcel();
+    loadData();
   }, []);
+
+
 
   // 直接使用加载的角色数据
   const characterData: CharacterData = data.characterStatesData[0] || {};
@@ -935,9 +909,118 @@ const CharacterDataView: React.FC = () => {
         </div>
       </div>
 
+      {/* 角色详细数据 */}
+      <div className="content-wrapper card-item">
+         <div className="card-header">
+           <Title level={5} className="character-card-title">
+             角色详细数据
+           </Title>
+         </div>
+         <div className="card-body">
+           {jsonError ? (
+             <Alert type="error" message={jsonError} />
+           ) : jsonTabs.length === 0 ? (
+             <Alert type="info" message="正在加载角色数据..." />
+           ) : (
+              <>
+                {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
+               <Tabs
+                 items={[
+                   {
+                     key: 'hp',
+                     label: '1-15级血量成长',
+                     children: (
+                       <Table
+                         dataSource={hpData}
+                         columns={[
+                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
+                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
+                         ]}
+                         pagination={false}
+                         size="small"
+                         bordered
+                         scroll={{ x: 'max-content' }}
+                         style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                          footer={topTablesFooter}
+                       />
+                     )
+                   },
+                   {
+                     key: 'fp',
+                     label: '1-15级专注值成长',
+                     children: (
+                       <Table
+                         dataSource={fpData}
+                         columns={[
+                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
+                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
+                         ]}
+                         pagination={false}
+                         size="small"
+                         bordered
+                         scroll={{ x: 'max-content' }}
+                         style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                          footer={topTablesFooter}
+                       />
+                     )
+                   },
+                   {
+                     key: 'st',
+                     label: '1-15级耐力值成长',
+                     children: (
+                       <Table
+                         dataSource={stData}
+                         columns={[
+                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
+                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
+                         ]}
+                         pagination={false}
+                         size="small"
+                         bordered
+                         scroll={{ x: 'max-content' }}
+                         style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                          footer={topTablesFooter}
+                       />
+                     )
+                   }
+                 ]}
+                 style={{ marginBottom: 30 }}
+               />
+               <Divider />
+               
+                {/* 角色详细数据标签页 */}
+               <Tabs
+                 items={jsonTabs.map((tab: any) => ({
+                   key: tab.name,
+                   label: tab.name,
+                   children: (
+                     <Table
+                       dataSource={tab.data}
+                       columns={tab.columns}
+                       pagination={false}
+                       size="small"
+                       bordered
+                       scroll={{ x: 'max-content' }}
+                       style={{ 
+                         wordBreak: 'break-word',
+                         whiteSpace: 'pre-wrap'
+                        }}
+                        footer={bottomTablesFooter}
+                     />
+                   ),
+                 }))}
+               />
+             </>
+           )}
+         </div>
+       </div>
+
+
       {/* 闪避无敌帧对比 */}
       <DodgeFramesComparison />
 
+
+      {/* 隐士出招表 */}
       <div className="content-wrapper card-item">
         <div className="card-header">
           <Title level={5} className="character-card-title">
@@ -963,119 +1046,7 @@ const CharacterDataView: React.FC = () => {
           />
         </div>
       </div>
-
-             {/* 角色详细数据（来自 Excel） */}
-       <div className="content-wrapper card-item">
-         <div className="card-header">
-           <Title level={5} className="character-card-title">
-             角色详细数据
-           </Title>
-         </div>
-         <div className="card-body">
-           {excelError ? (
-             <Alert type="error" message={excelError} />
-           ) : excelTabs.length === 0 ? (
-             <Alert type="info" message="正在加载角色数据..." />
-           ) : (
-              <>
-                {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
-               <Tabs
-                 items={[
-                   {
-                     key: 'hp',
-                     label: '1-15级血量成长',
-                     children: (
-                       <Table
-                         dataSource={hpData}
-                         columns={[
-                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
-                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
-                         ]}
-                         pagination={false}
-                         size="small"
-                         bordered
-                         loading={excelLoading}
-                         scroll={{ x: 'max-content' }}
-                         style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-                          footer={topTablesFooter}
-                       />
-                     )
-                   },
-                   {
-                     key: 'fp',
-                     label: '1-15级专注值成长',
-                     children: (
-                       <Table
-                         dataSource={fpData}
-                         columns={[
-                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
-                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
-                         ]}
-                         pagination={false}
-                         size="small"
-                         bordered
-                         loading={excelLoading}
-                         scroll={{ x: 'max-content' }}
-                         style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-                          footer={topTablesFooter}
-                       />
-                     )
-                   },
-                   {
-                     key: 'st',
-                     label: '1-15级耐力值成长',
-                     children: (
-                       <Table
-                         dataSource={stData}
-                         columns={[
-                           { title: '角色', dataIndex: 'character', key: 'character', width: 100, fixed: 'left', align: 'center' as const },
-                           ...Array.from({ length: 15 }, (_, i) => ({ title: `Lv${i + 1}`, dataIndex: `Lv${i + 1}`, key: `Lv${i + 1}`, width: 60, align: 'center' as const }))
-                         ]}
-                         pagination={false}
-                         size="small"
-                         bordered
-                         loading={excelLoading}
-                         scroll={{ x: 'max-content' }}
-                         style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
-                          footer={topTablesFooter}
-                       />
-                     )
-                   }
-                 ]}
-                 style={{ marginBottom: 20 }}
-               />
-               
-                {/* 角色详细数据标签页 */}
-               <Tabs
-                 items={excelTabs.map((tab) => ({
-                   key: tab.name,
-                   label: tab.name,
-                   children: (
-                     <Table
-                       dataSource={tab.data}
-                       columns={tab.columns}
-                       pagination={false}
-                       size="small"
-                       bordered
-                       loading={excelLoading}
-                       scroll={{ x: 'max-content' }}
-                       style={{ 
-                         wordBreak: 'break-word',
-                         whiteSpace: 'pre-wrap'
-                        }}
-                        footer={bottomTablesFooter}
-                     />
-                   ),
-                 }))}
-               />
-             </>
-           )}
-         </div>
-       </div>
-      
-
-
-
+      {/* ----------------- */}
     </div>
   );
 };
