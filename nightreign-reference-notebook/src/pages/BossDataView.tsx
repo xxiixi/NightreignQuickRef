@@ -60,6 +60,12 @@ const BossDataView: React.FC = () => {
     </div>
   );
 
+  const resistanceFooter = () => (
+    <div className="footer-text">
+      抗性：' - ' 表示对该Boss无效 (即boss不吃该属性异常)
+    </div>
+  );
+
   // 左侧表格列定义：血量 + 吸收
   const leftColumns: ColumnsType<BossData> = [
     {
@@ -460,6 +466,7 @@ const BossDataView: React.FC = () => {
               pagination={false}
               size="small"
               bordered
+              footer={resistanceFooter}
             />
           </Card>
     </div>

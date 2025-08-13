@@ -15,10 +15,10 @@
     "poisonResistance": 542,
     "scarletRotResistance": 252,
     "bleedResistance": 252,
-    "deathBlightResistance": "无效",
+    "deathBlightResistance": "-",
     "frostResistance": 542,
     "sleepResistance": 154,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 120
   },
   {
@@ -37,10 +37,10 @@
     "poisonResistance": 154,
     "scarletRotResistance": 154,
     "bleedResistance": 542,
-    "deathBlightResistance": "无效",
+    "deathBlightResistance": "-",
     "frostResistance": 154,
     "sleepResistance": 154,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 150
   },
   {
@@ -59,10 +59,10 @@
     "poisonResistance": 542,
     "scarletRotResistance": 154,
     "bleedResistance": 154,
-    "deathBlightResistance": "无效",
+    "deathBlightResistance": "-",
     "frostResistance": 154,
     "sleepResistance": 542,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 100
   },
   {
@@ -81,10 +81,10 @@
     "poisonResistance": 252,
     "scarletRotResistance": 154,
     "bleedResistance": 154,
-    "deathBlightResistance": "无效",
+    "deathBlightResistance": "-",
     "frostResistance": 154,
     "sleepResistance": 542,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 150
   },
   {
@@ -100,13 +100,13 @@
     "fireAbsorption": 1,
     "lightningAbsorption": 1,
     "holyAbsorption": 1,
-    "poisonResistance": "无效",
-    "scarletRotResistance": "无效",
-    "bleedResistance": "无效",
-    "deathBlightResistance": "无效",
-    "frostResistance": "无效",
-    "sleepResistance": "无效",
-    "madnessResistance": "无效",
+    "poisonResistance": "-",
+    "scarletRotResistance": "-",
+    "bleedResistance": "-",
+    "deathBlightResistance": "-",
+    "frostResistance": "-",
+    "sleepResistance": "-",
+    "madnessResistance": "-",
     "basePoise": 100
   },
   {
@@ -122,13 +122,13 @@
     "fireAbsorption": 0.5,
     "lightningAbsorption": 1.4,
     "holyAbsorption": 0.85,
-    "poisonResistance": "无效",
+    "poisonResistance": "-",
     "scarletRotResistance": 252,
-    "bleedResistance": "无效",
-    "deathBlightResistance": "无效",
+    "bleedResistance": "-",
+    "deathBlightResistance": "-",
     "frostResistance": 1252,
-    "sleepResistance": "无效",
-    "madnessResistance": "无效",
+    "sleepResistance": "-",
+    "madnessResistance": "-",
     "basePoise": 150
   },
   {
@@ -147,9 +147,9 @@
     "poisonResistance": 154,
     "scarletRotResistance": 154,
     "bleedResistance": 252,
-    "deathBlightResistance": "无效",
+    "deathBlightResistance": "-",
     "frostResistance": 252,
-    "sleepResistance": "无效",
+    "sleepResistance": "-",
     "madnessResistance": 154,
     "basePoise": 120
   },
@@ -169,10 +169,10 @@
     "poisonResistance": 154,
     "scarletRotResistance": 154,
     "bleedResistance": 154,
-    "deathBlightResistance": "无效",
+    "deathBlightResistance": "-",
     "frostResistance": 154,
     "sleepResistance": 154,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 155
   },
   {
@@ -191,10 +191,10 @@
     "poisonResistance": 252,
     "scarletRotResistance": 252,
     "bleedResistance": 252,
-    "deathBlightResistance": "无效",
+    "deathBlightResistance": "-",
     "frostResistance": 542,
     "sleepResistance": 542,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 160
   },
   {
@@ -210,13 +210,13 @@
     "fireAbsorption": 1.2,
     "lightningAbsorption": 1,
     "holyAbsorption": 1.35,
-    "poisonResistance": "无效",
+    "poisonResistance": "-",
     "scarletRotResistance": 252,
-    "bleedResistance": "无效",
-    "deathBlightResistance": "无效",
-    "frostResistance": "无效",
+    "bleedResistance": "-",
+    "deathBlightResistance": "-",
+    "frostResistance": "-",
     "sleepResistance": 542,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 130
   },
   {
@@ -232,13 +232,13 @@
     "fireAbsorption": 1,
     "lightningAbsorption": 1.2,
     "holyAbsorption": 1.2,
-    "poisonResistance": "无效",
+    "poisonResistance": "-",
     "scarletRotResistance": 252,
-    "bleedResistance": "无效",
-    "deathBlightResistance": "无效",
-    "frostResistance": "无效",
+    "bleedResistance": "-",
+    "deathBlightResistance": "-",
+    "frostResistance": "-",
     "sleepResistance": 542,
-    "madnessResistance": "无效",
+    "madnessResistance": "-",
     "basePoise": 130
   }
 ]

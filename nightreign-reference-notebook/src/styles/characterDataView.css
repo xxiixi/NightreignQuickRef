@@ -255,19 +255,43 @@ body[tomato-theme="dark"] .card-item .card-body {
 
 /* ===== 表格与雷达图宽度比例控制 ===== */
 
-/* 默认比例：表格40%，雷达图60% */
+/* 默认比例：表格60%，雷达图40% */
 .character-attributes-table-container {
   flex: 0.6 !important;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-attributes-table-container .ant-table-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.character-attributes-table-container .ant-table {
+  flex: 1;
+  height: 350px;
+}
+
+.character-attributes-table-container .ant-table-wrapper {
+  height: 350px;
 }
 
 .radar-chart-container {
   flex: 0.4 !important;
-  min-width: 330px;
-  min-height: 330px;
+  min-width: 250px;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
+/* 黑暗模式下选中行样式 */
+[data-theme="dark"] .character-attributes-table .ant-table-tbody > tr.ant-table-row-selected > td,
+body[tomato-theme="dark"] .character-attributes-table .ant-table-tbody > tr.ant-table-row-selected > td {
+  background-color: #000000 !important;
+}
 
 /* 响应式调整 */
 @media (max-width: 1200px) {

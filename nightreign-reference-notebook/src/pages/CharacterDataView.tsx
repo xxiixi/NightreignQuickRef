@@ -289,7 +289,6 @@ const CharacterDataView: React.FC = () => {
 
   // JSON（职业数据）标签页状态
   const [jsonTabs, setJsonTabs] = useState<Array<{ name: string; columns: ColumnsType<any>; data: any[] }>>([]);
-  const [jsonError, setJsonError] = useState<string | null>(null);
   const [hpData, setHpData] = useState<Array<{ character: string; [key: string]: string | number }>>([]);
   const [fpData, setFpData] = useState<Array<{ character: string; [key: string]: string | number }>>([]);
   const [stData, setStData] = useState<Array<{ character: string; [key: string]: string | number }>>([]);
@@ -381,23 +380,27 @@ const CharacterDataView: React.FC = () => {
                   width: 100,
                   fixed: 'left',
                   align: 'center' as const,
-                  render: (text: string) => {
-                    const isSpecialAttr = ['总点数', '增加点数'].includes(text);
-                    return (
-                      <span style={{ 
-                        fontWeight: isSpecialAttr ? 'bold' : 'normal',
-                        color: isSpecialAttr ? 'var(--color-primary-500)' : 'var(--color-text-1)',
-                        fontSize: '13px'
-                      }}>
-                        {text}
-                      </span>
-                    );
-                  },
-                  onCell: () => ({
-                    style: {
-                      backgroundColor: 'var(--content-bg)',
-                    }
-                  })
+                  render: (text: string) => (
+                    <span style={{ 
+                      fontWeight: 'bold', 
+                      color: 'var(--color-text-1)',
+                      fontSize: '13px'
+                    }}>
+                      {text}
+                    </span>
+                  ),
+                  onCell: (record) => {
+                    const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
+                    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                                     document.body.getAttribute('tomato-theme') === 'dark';
+                    return {
+                      style: {
+                        backgroundColor: isSpecialAttr 
+                          ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
+                          : 'var(--content-bg)',
+                      }
+                    };
+                  }
                 },
                 ...Array.from({ length: 15 }, (_, i) => ({
                   title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>,
@@ -416,6 +419,18 @@ const CharacterDataView: React.FC = () => {
                         {value || '-'}
                       </span>
                     );
+                  },
+                  onCell: (record) => {
+                    const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
+                    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                                     document.body.getAttribute('tomato-theme') === 'dark';
+                    return {
+                      style: {
+                        backgroundColor: isSpecialAttr 
+                          ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
+                          : 'transparent',
+                      }
+                    };
                   }
                 }))
               ];
@@ -455,7 +470,6 @@ const CharacterDataView: React.FC = () => {
         setStData(stRows);
       } catch (err) {
         console.error('加载 JSON 失败:', err);
-        setJsonError('JSON 加载失败，请稍后重试');
       }
     };
 
@@ -562,8 +576,8 @@ const CharacterDataView: React.FC = () => {
       
       if (tableContainer && radarContainer) {
         const tableHeight = tableContainer.getBoundingClientRect().height;
-        // 设置雷达图容器高度与表格一致，但最小保持400px
-        const targetHeight = Math.max(tableHeight, 400);
+        // 设置雷达图容器高度与表格一致，但最小保持350px
+        const targetHeight = Math.max(tableHeight, 350);
         radarContainer.style.height = `${targetHeight}px`;
       }
     };
@@ -577,8 +591,12 @@ const CharacterDataView: React.FC = () => {
     // 监听表格数据变化（通过selectedRowKeys变化触发）
     const timer = setTimeout(throttledAdjustHeight, 100);
     
+    // 监听窗口大小变化
+    window.addEventListener('resize', throttledAdjustHeight);
+    
     return () => {
       clearTimeout(timer);
+      window.removeEventListener('resize', throttledAdjustHeight);
     };
   }, [selectedRowKeys]);
 
@@ -729,10 +747,11 @@ const CharacterDataView: React.FC = () => {
                 columns={columns}
                 dataSource={generateTableData()}
                 pagination={false}
-                size="middle"
+                size="small"
                 bordered
-                scroll={{ x: 'max-content' }}
+                scroll={{ x: 'max-content', y: 350 }}
                 className="character-attributes-table"
+                style={{ height: '350px' }}
               />
             </div>
             
@@ -748,7 +767,8 @@ const CharacterDataView: React.FC = () => {
                   xField="item"       // 用于X轴（雷达图的各个顶点）的字段
                   yField="score"      // 用于Y轴（数值）的字段
                   colorField="type"   // 用于区分不同角色的字段
-                  height={400}        // 雷达图高度，稍小于容器高度
+                  height={350}        // 雷达图高度
+                  autoFit={true}      // 自适应容器大小
                   theme={currentTheme}        // 根据当前主题动态设置
                   
                   // 坐标轴配置
@@ -889,11 +909,7 @@ const CharacterDataView: React.FC = () => {
            </Title>
          </div>
          <div className="card-body">
-           {jsonError ? (
-             <Alert type="error" message={jsonError} />
-           ) : jsonTabs.length === 0 ? (
-             <Alert type="info" message="正在加载角色数据..." />
-           ) : (
+           {jsonTabs.length > 0 && (
               <>
                 {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
                <Tabs
@@ -910,7 +926,7 @@ const CharacterDataView: React.FC = () => {
                          }
                          columns={[
                            { 
-                             title: '角色', 
+                             title: '等级', 
                              dataIndex: 'character', 
                              key: 'character', 
                              width: 100, 
@@ -963,7 +979,7 @@ const CharacterDataView: React.FC = () => {
                          }
                          columns={[
                            { 
-                             title: '角色', 
+                             title: '等级', 
                              dataIndex: 'character', 
                              key: 'character', 
                              width: 100, 
@@ -1016,7 +1032,7 @@ const CharacterDataView: React.FC = () => {
                          }
                          columns={[
                            { 
-                             title: '角色', 
+                             title: '等级', 
                              dataIndex: 'character', 
                              key: 'character', 
                              width: 100, 
@@ -1077,9 +1093,6 @@ const CharacterDataView: React.FC = () => {
                        size="small"
                        bordered
                        scroll={{ x: 'max-content' }}
-                       rowClassName={(_record, index) => 
-                         index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
-                       }
                        style={{ 
                          wordBreak: 'break-word',
                          whiteSpace: 'pre-wrap'
