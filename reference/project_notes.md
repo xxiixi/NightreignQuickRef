@@ -23,7 +23,7 @@
 [【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区](https://www.bilibili.com/video/BV1M18jzQE9X/?spm_id_from=333.1391.0.0&vd_source=37640654dbdd4ab80b471a16ac6da3c0)
 
 ### 角色各等级属性点数
-[黑夜君临：渡夜者各等级属性点数一览]([https://www.youtube.com/watch?v=ztsyTDzF9Zg](https://www.bilibili.com/video/BV1p5ThzfEy7?vd_source=37640654dbdd4ab80b471a16ac6da3c0&spm_id_from=333.788.videopod.sections))
+[黑夜君临：渡夜者各等级属性点数一览](https://www.bilibili.com/video/BV1p5ThzfEy7?vd_source=37640654dbdd4ab80b471a16ac6da3c0&spm_id_from=333.788.videopod.sections)
 
 ### 复活机制解析
 [黑夜君临：复活机制解析](https://www.bilibili.com/video/BV1TnNLzXESx?vd_source=37640654dbdd4ab80b471a16ac6da3c0&spm_id_from=333.788.videopod.sections)
