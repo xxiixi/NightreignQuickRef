@@ -1167,3 +1167,46 @@ body[tomato-theme="dark"] .development-notice p {
     font-size: 2.5rem;
   }
 } 
+
+/* InfoPopover 组件样式 */
+.info-popover-trigger {
+  color: #8c8c8c;
+  transition: color 0.3s ease;
+}
+
+[data-theme='dark'] .info-popover-trigger {
+  color: #595959;
+}
+
+.info-popover-trigger:hover {
+  color: var(--primary-color);
+  background-color: transparent !important;
+}
+
+.info-popover-overlay .ant-popover-inner {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.info-popover-overlay .ant-popover-title {
+  font-weight: 600;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.info-popover-overlay .ant-popover-inner-content {
+  color: var(--text-color);
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+/* 在标题旁边显示时的样式 */
+.title-with-info {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.title-with-info .ant-typography {
+  margin: 0;
+} 

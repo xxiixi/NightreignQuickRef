@@ -6,6 +6,7 @@ import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
 import DataManager from '../utils/dataManager';
+import InfoPopover from '../components/InfoPopover';
 
 const { Title, Text } = Typography;
 
@@ -218,9 +219,26 @@ const DodgeFramesComparison = () => {
     return (
       <div className="content-wrapper card-item">
         <div className="card-header">
-          <Title level={5} className="character-card-title">
-           翻滚/闪避 帧数对比
-          </Title>
+          <div className="title-with-info">
+            <Title level={5} >
+              翻滚/闪避 帧数对比
+            </Title>
+            <InfoPopover
+              title="数据参考来源"
+              content={
+                <div>
+                  <a 
+                    href="https://www.bilibili.com/video/BV1LvuVzuEqo" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ color: '#1890ff', textDecoration: 'underline' }}
+                  >
+                    【艾尔登法环：黑夜君临】全角色回避翻滚动作，无敌帧分析对比！
+                  </a>
+                </div>
+              }
+            />
+          </div>
         </div>
         <div className="card-body">
           <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
@@ -736,9 +754,20 @@ const CharacterDataView: React.FC = () => {
     <div className="character-data-container">
       <div className="content-wrapper card-item">
         <div className="card-header">
-          <Title level={5} className="character-card-title">
-            基础属性
-          </Title>
+          <div className="title-with-info">
+            <Title level={5} >
+              基础属性
+            </Title>
+            <InfoPopover
+              title="数据参考来源"
+              content={
+                <div>
+                  黑夜君临游戏内数据
+                </div>
+              }
+              placement="right"
+            />
+          </div>
         </div>
         <div className="card-body">
           <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
@@ -909,8 +938,8 @@ const CharacterDataView: React.FC = () => {
       <div className="content-wrapper card-item">
          <div className="card-header">
            <Title level={5} className="character-card-title">
-             角色详细数据
-           </Title>
+               角色详细数据
+             </Title>
          </div>
          <div className="card-body">
            {jsonTabs.length > 0 && (
