@@ -69,15 +69,74 @@ const Header: React.FC<HeaderProps> = React.memo(({
               <Tooltip title="查看数据来源" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
-                    <div style={{ padding: '8px' }}>
-                        <a 
-                          href="https://github.com/xxiixi/NightreignQuickRef/tree/main/reference" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="footer-link"
-                        >
-                          reference/raw_data
-                        </a>
+                    <div style={{ padding: '8px', maxWidth: '300px' }}>
+                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                        数据来源链接 🔗
+                      </div>
+                      <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                        <div style={{ marginBottom: '4px' }}>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://www.bilibili.com/video/BV1LvuVzuEqo" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            🎯 翻滚/闪避无敌帧分析
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            🧙‍♂️ 隐士出招表
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://mobalytics.gg/elden-ring-nightreign/guides/day-length" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            ⏰ 每日缩圈时间
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://game8.co/games/Elden-Ring-Nightreign/archives/522643" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            💰 角色升级所需卢恩
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://www.bilibili.com/video/BV1M18jzQE9X" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            🏺 血量恢复计算器
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            📚 官方 Wiki
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   }
                   placement="bottom"

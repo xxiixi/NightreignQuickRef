@@ -4,7 +4,6 @@ import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTon
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import '../styles/gameMechanicsView.css';
 import DataManager, { type MagicMove } from '../utils/dataManager';
-import InfoPopover from '../components/InfoPopover';
 
 const { Title, Text } = Typography;
 
@@ -59,29 +58,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
           <div className="mechanics-grid custom-columns" style={{ '--mechanics-grid-columns': '1.2fr 2fr' } as React.CSSProperties}>
             <div className="mechanic-card">
               <div className="card-content">
-                                  <div className="card-title-section">
-                    <div className="title-with-info">
-                      <Title level={5} className="mechanic-card-title">
-                        <ClockCircleOutlined />
-                        游戏时间机制
-                      </Title>
-                      <InfoPopover
-                        title="数据参考来源"
-                        content={
-                          <div>
-                            <a 
-                              href="https://mobalytics.gg/elden-ring-nightreign/guides/day-length" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              style={{ color: '#1890ff', textDecoration: 'underline' }}
-                            >
-                              Mobalytics - Day Length Guide
-                            </a>
-                          </div>
-                        }
-                      />
-                    </div>
-                  </div>
+                <div className="card-title-section">
+                  <Title level={5} className="mechanic-card-title">
+                    <ClockCircleOutlined />
+                    游戏时间机制
+                  </Title>
+                </div>
                 <div className="card-body">
                   <div className="mechanic-timeline">
                     <Timeline
@@ -149,29 +131,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
             {/* 右侧小卡片 - 升级所需卢恩 */}
             <div className="mechanic-card">
               <div className="card-content">
-                                  <div className="card-title-section">
-                    <div className="title-with-info">
-                      <Title level={5} className="mechanic-card-title">
-                        <MoneyCollectOutlined />
-                        升级所需卢恩
-                      </Title>
-                      <InfoPopover
-                        title="数据参考来源"
-                        content={
-                          <div>
-                            <a 
-                              href="https://game8.co/games/Elden-Ring-Nightreign/archives/522643" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              style={{ color: '#1890ff', textDecoration: 'underline' }}
-                            >
-                              Game8 - Level Up Guide
-                            </a>
-                          </div>
-                        }
-                      />
-                    </div>
-                  </div>
+                <div className="card-title-section">
+                  <Title level={5} className="mechanic-card-title">
+                  <MoneyCollectOutlined />
+                    升级所需卢恩
+                  </Title>
+                </div>
                 <div className="card-body">
                   <div className="runes-table-container">
                     {/* 第一栏 - 1-8级 */}
@@ -295,29 +260,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
           <div className="mechanics-grid">
             <div className="mechanic-card">
               <div className="card-content">
-                                  <div className="card-title-section">
-                    <div className="title-with-info">
-                      <Title level={5} className="mechanic-card-title">
-                        <HeartTwoTone twoToneColor="#eb2f96" />
-                        回血量计算器
-                      </Title>
-                      <InfoPopover
-                        title="数据参考来源"
-                        content={
-                          <div>
-                            <a 
-                              href="https://www.bilibili.com/video/BV1M18jzQE9X" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              style={{ color: '#1890ff', textDecoration: 'underline' }}
-                            >
-                              【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区
-                            </a>
-                          </div>
-                        }
-                      />
-                    </div>
-                  </div>
+                <div className="card-title-section">
+                  <Title level={5} className="mechanic-card-title">
+                    <HeartTwoTone twoToneColor="#eb2f96" />
+                    回血量计算器
+                  </Title>
+                </div>
                   <div className="card-body">
                   <RecoveryCalculator />
                  </div>
@@ -329,29 +277,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
           <div className="mechanics-grid">
             <div className="mechanic-card">
               <div className="card-content">
-                                  <div className="card-title-section">
-                    <div className="title-with-info">
-                      <Title level={5} className="mechanic-card-title">
-                        <ThunderboltTwoTone />
-                        隐士出招表
-                      </Title>
-                      <InfoPopover
-                        title="数据参考来源"
-                        content={
-                          <div>
-                            <a 
-                              href="https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a" 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              style={{ color: '#1890ff', textDecoration: 'underline' }}
-                            >
-                              小黑盒 - 隐士出招表
-                            </a>
-                          </div>
-                        }
-                      />
-                    </div>
-                  </div>
+                <div className="card-title-section">
+                  <Title level={5} className="mechanic-card-title">
+                    <ThunderboltTwoTone />
+                    隐士出招表
+                  </Title>
+                </div>
                 <div className="card-body">
                   <Table
                     dataSource={magicMoves}
