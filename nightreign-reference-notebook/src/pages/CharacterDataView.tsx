@@ -300,6 +300,11 @@ const CharacterDataView: React.FC = () => {
   const bottomTablesFooter = () => (
     <div className="footer-text">局内等级/艾尔登法环本体等级</div>
   );
+  const characterAttributesFooter = () => (
+    <div className="footer-text" >
+      提示：可勾选多个角色进行对比
+    </div>
+  );
 
   // 从DataManager获取数据并加载JSON数据
   useEffect(() => {
@@ -420,7 +425,7 @@ const CharacterDataView: React.FC = () => {
                       </span>
                     );
                   },
-                  onCell: (record) => {
+                  onCell: (record: { attribute: string }) => {
                     const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
                     const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
                                      document.body.getAttribute('tomato-theme') === 'dark';
@@ -736,10 +741,7 @@ const CharacterDataView: React.FC = () => {
           </Title>
         </div>
         <div className="card-body">
-          <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
-            提示：可勾选多个角色进行对比
-          </div>
-          <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
             {/* 角色属性表格 */}
             <div className="character-attributes-table-container">
               <Table
@@ -749,10 +751,12 @@ const CharacterDataView: React.FC = () => {
                 pagination={false}
                 size="small"
                 bordered
-                scroll={{ x: 'max-content', y: 350 }}
+                scroll={{ x: 'max-content' }}
                 className="character-attributes-table"
-                style={{ height: '350px' }}
-              />
+                // style={{ height: '350px' }}
+                style={{ wordBreak: 'break-word', whiteSpace: 'pre-wrap' }}
+                footer={characterAttributesFooter}
+                />
             </div>
             
             {/* 雷达图容器 - 动态高度响应拖拽和窗口变化 */}
@@ -767,7 +771,7 @@ const CharacterDataView: React.FC = () => {
                   xField="item"       // 用于X轴（雷达图的各个顶点）的字段
                   yField="score"      // 用于Y轴（数值）的字段
                   colorField="type"   // 用于区分不同角色的字段
-                  height={350}        // 雷达图高度
+                  height={380}        // 雷达图高度
                   autoFit={true}      // 自适应容器大小
                   theme={currentTheme}        // 根据当前主题动态设置
                   

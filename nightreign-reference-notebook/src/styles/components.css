@@ -497,6 +497,7 @@ body[tomato-theme="dark"] .custom-tab-button::after {
 .search-container {
   margin-bottom: var(--spacing-md);
   display: flex;
+  width: 100%;
 }
 
 .custom-search-input {
@@ -520,6 +521,49 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   margin-bottom: var(--spacing-md);
   align-items: center;
   flex-wrap: wrap;
+}
+
+.filter-search-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.pagination-label {
+  color: var(--theme-text-secondary);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.total-count {
+  color: var(--theme-text-secondary);
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.page-size-select {
+  width: 100px;
+  flex-shrink: 0;
 }
 
 /* ===== 表格组件 ===== */
@@ -744,8 +788,8 @@ body[tomato-theme="dark"] .table-row-odd {
 .footer {
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
-  padding: var(--spacing-lg);
-  margin-top: auto;
+  /* padding: var(--spacing-md); */
+  /* margin-top: auto; */
   max-width: 100%;
 }
 
@@ -756,8 +800,11 @@ body[tomato-theme="dark"] .footer {
 
 .footer-text {
   font-size: var(--font-size-xs);
-  color: var(--theme-text-primary);
+  /* color: var(--theme-text-primary); */
   font-weight: var(--font-weight-medium);
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--theme-text-secondary);
 }
 
 .footer-link {
@@ -929,6 +976,18 @@ body[tomato-theme="dark"] .loading-text {
     gap: 8px;
   }
 
+  .filter-search-content {
+    gap: 8px;
+  }
+
+  .filter-controls {
+    gap: 8px;
+  }
+
+  .pagination-controls {
+    gap: 8px;
+  }
+
   .custom-search-input {
     width: 200px;
   }
@@ -963,6 +1022,22 @@ body[tomato-theme="dark"] .loading-text {
 
   .filter-search-row {
     gap: 6px;
+  }
+
+  .filter-search-content {
+    gap: 6px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-controls {
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .pagination-controls {
+    gap: 6px;
+    justify-content: center;
   }
 
   .custom-search-input {

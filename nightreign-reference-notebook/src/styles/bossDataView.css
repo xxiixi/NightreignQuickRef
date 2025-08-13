@@ -44,13 +44,6 @@
   margin-top: 24px;
 } */
 
-/* 页脚样式 */
-.footer-text {
-  padding: 12px 16px;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
 /* 容器样式 - 使用百分比宽度 */
 .boss-data-view-container {
   padding: 24px;

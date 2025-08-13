@@ -271,11 +271,11 @@ body[tomato-theme="dark"] .card-item .card-body {
 
 .character-attributes-table-container .ant-table {
   flex: 1;
-  height: 350px;
+  /* height: 350px; 移除固定高度，让footer可见 */
 }
 
 .character-attributes-table-container .ant-table-wrapper {
-  height: 350px;
+  /* height: 350px; 移除固定高度，让footer可见 */
 }
 
 .radar-chart-container {
