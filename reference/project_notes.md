@@ -22,11 +22,17 @@
 
 [【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区](https://www.bilibili.com/video/BV1M18jzQE9X/?spm_id_from=333.1391.0.0&vd_source=37640654dbdd4ab80b471a16ac6da3c0)
 
-### wiki
+### 角色各等级属性点数
+[黑夜君临：渡夜者各等级属性点数一览]([https://www.youtube.com/watch?v=ztsyTDzF9Zg](https://www.bilibili.com/video/BV1p5ThzfEy7?vd_source=37640654dbdd4ab80b471a16ac6da3c0&spm_id_from=333.788.videopod.sections))
 
-https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki
+### 复活机制解析
+[黑夜君临：复活机制解析](https://www.bilibili.com/video/BV1TnNLzXESx?vd_source=37640654dbdd4ab80b471a16ac6da3c0&spm_id_from=333.788.videopod.sections)
 
-## 词条整理（根据局内分类手动整理）
+### 图片来源
+[nightreign wiki](https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki)
+
+---
+### 词条整理（根据局内分类手动整理）
 1. 能力值：提升血量上限、提升专注值上限、提升精力上限、生命力、集中力、耐力、力气、灵巧、智力、信仰、感应、强韧度、每次解开魔法师塔的机关能提升专注值上限
 2. 攻击力：提升物理攻击力、提升魔力属性攻击力、提升火属性攻击力、提升雷属性攻击力、提升圣属性攻击力、强化轻攻击的第一记攻击、强化致命一击、强化咆哮与吐息、提升双手共持时造成失去平衡的能力、提升双手各持时造成失去平衡的能力、切换武器时能提升物理攻击力、附加属性攻击力时能提升属性攻击力、受到攻击时能提升攻击力、每次打倒封印监牢里的囚犯能提升攻击力、每次打倒黑夜入侵者能提升攻击力、强化防御反击、防御反击成功时能依照自己目前的血量提升伤害、涂抹油脂类道具时能额外提升物理攻击力、提升投掷壶的攻击力、提升投掷小刀的攻击力、提升使用辉石和重力石道具的攻击力、强化调香术
 3. 技艺/绝招：缩短技艺的冷却时间、加快累积绝招量表、提升打倒敌人时绝招量表的累积量、使出致命一击时加快累积绝招量表、防御成功时能累积绝招量表
