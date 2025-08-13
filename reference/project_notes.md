@@ -2,6 +2,9 @@
 
 ## 参考列表
 
+## 词条数据参考
+[【艾尔登法环：黑夜君临】全词条汇总！遗物+护符+武器固有效果+武器随机buff](https://www.bilibili.com/video/BV1GfMSzvE3V/?spm_id_from=333.1387.upload.video_card.click&vd_source=37640654dbdd4ab80b471a16ac6da3c0)
+
 ### 翻滚/闪避无敌帧参考
 
 [【艾尔登法环：黑夜君临】全角色回避翻滚动作，无敌帧分析对比！](https://www.bilibili.com/video/BV1LvuVzuEqo?buvid=XY5BE8950C8CC4AA8B07EBC9B4DE33F7B4011&from_spmid=main.my-history.0.0&is_story_h5=false&mid=faGN3hFyzP2Mp23Yr98MOg%3D%3D&plat_id=116&share_from=ugc&share_medium=android&share_plat=android&share_session_id=9978f5e2-1f48-4148-bcd3-b64d47773aaf&share_source=QQ&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1754465400&unique_k=CyJwQiY&up_id=292847)
