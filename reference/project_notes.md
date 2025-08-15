@@ -15,11 +15,11 @@
 
 ### 每日缩圈时间参考
 
-[link](https://mobalytics.gg/elden-ring-nightreign/guides/day-length)
+[mobalytics.gg](https://mobalytics.gg/elden-ring-nightreign/guides/day-length)
 
 ### 角色升级所需卢恩参考
 
-[link](https://game8.co/games/Elden-Ring-Nightreign/archives/522643)
+[game8.co/games](https://game8.co/games/Elden-Ring-Nightreign/archives/522643)
 
 ### 血量恢复计算器参考
 

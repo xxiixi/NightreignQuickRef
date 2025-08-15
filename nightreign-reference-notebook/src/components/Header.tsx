@@ -75,6 +75,14 @@ const Header: React.FC<HeaderProps> = React.memo(({
                       </div>
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://www.bilibili.com/video/BV1GfMSzvE3V" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            📋 全词条汇总
+                          </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
                           <a 
@@ -124,6 +132,26 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             className="footer-link"
                           >
                             🏺 血量恢复计算器
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://www.bilibili.com/video/BV1p5ThzfEy7" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            📊 角色各等级属性点数
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
+                            href="https://www.bilibili.com/video/BV1TnNLzXESx" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            💀 复活机制解析
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
