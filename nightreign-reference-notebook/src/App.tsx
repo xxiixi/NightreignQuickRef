@@ -15,9 +15,10 @@ import CharacterDataView from './pages/CharacterDataView';
 import BossDataView from './pages/BossDataView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
 import DataManager from './utils/dataManager';
+import { getDefaultPage } from './config/navigationConfig';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('角色数据');
+  const [activeTab, setActiveTab] = useState(getDefaultPage());
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isEnglish, setIsEnglish] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);

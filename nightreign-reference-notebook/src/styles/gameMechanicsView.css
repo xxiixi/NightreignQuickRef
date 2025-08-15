@@ -345,16 +345,6 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 .game-mechanics-container .ant-alert {
   border-radius: 8px !important;
   transition: all var(--transition-normal) !important;
-  border: 1px solid #d9d9d9 !important;
-  background: var(--content-bg) !important;
-}
-
-.game-mechanics-container .ant-alert:hover {
-  border-color: #1890ff !important;
-}
-
-.game-mechanics-container .ant-alert-info {
-  background: var(--content-bg) !important;
 }
 
 .game-mechanics-container .ant-alert-description {

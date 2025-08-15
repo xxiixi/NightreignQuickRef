@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Tooltip, Menu } from 'antd';
 import logoImage from '../assets/logo-circle.png';
+import { getMainNavigationOrder } from '../config/navigationConfig';
 
 interface FunctionMenuProps {
   onTabChange: (tab: string) => void;
@@ -8,7 +9,7 @@ interface FunctionMenuProps {
 
 const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
   const [menuVisible, setMenuVisible] = useState(false);
-  const [openKeys, setOpenKeys] = useState<string[]>(['角色数据', '游戏机制', '传说武器详情', '词条详细数据', '夜王Boss数据']);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   // 功能导航菜单项 - 使用Menu组件的数据结构
   const menuItems = [
@@ -58,6 +59,15 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
     },
   ];
 
+  // 根据配置文件中的顺序重新排列菜单项
+  const getOrderedMenuItems = () => {
+    const order = getMainNavigationOrder();
+    return order.map(key => {
+      const item = menuItems.find(item => item.key === key);
+      return item!;
+    });
+  };
+
   const handleMenuClick = ({ key }: { key: string }) => {
     // 检查是否是主菜单项
     const mainMenuItem = menuItems.find(item => item.key === key);
@@ -93,9 +103,9 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
           onClick={() => setMenuVisible(!menuVisible)}
           style={{
             cursor: 'pointer',
-            width: '50px',
-            height: '50px',
-            borderRadius: '25px',
+            width: 'clamp(30px, 5vw, 50px)',
+            height: 'clamp(30px, 5vw, 50px)',
+            borderRadius: '50%',
             objectFit: 'cover',
             transition: 'transform 0.3s ease'
           }}
@@ -108,20 +118,23 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
           className="function-menu-overlay"
           style={{
             position: 'fixed',
-            top: '70px',
-            left: '20px',
+            top: 'clamp(60px, 8vh, 80px)',
+            left: 'clamp(60px, 3vw, 80px)',
             zIndex: 1040,
             backgroundColor: 'var(--content-bg)',
-            borderRadius: '8px',
+            borderRadius: 'clamp(6px, 1vw, 12px)',
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
             border: '1px solid rgba(0, 0, 0, 0.06)',
-            minWidth: '280px',
-            maxWidth: '320px'
+            minWidth: 'clamp(200px, 25vw, 280px)',
+            maxWidth: 'clamp(250px, 30vw, 350px)',
+            maxHeight: 'calc(100vh - clamp(120px, 15vh, 180px))',
+            overflowY: 'auto',
+            overflowX: 'hidden'
           }}
         >
           <Menu
             mode="inline"
-            items={menuItems}
+            items={getOrderedMenuItems()}
             onClick={handleMenuClick}
             openKeys={openKeys}
             onOpenChange={handleOpenChange}

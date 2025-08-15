@@ -203,20 +203,6 @@ body[tomato-theme="dark"] .card-item .card-body {
 }
 
 /* Alert 组件样式优化 */
-.character-data-container .ant-alert {
-  border-radius: 8px !important;
-  transition: all var(--transition-normal) !important;
-  border: 1px solid #d9d9d9 !important;
-  background: var(--content-bg) !important;
-}
-
-.character-data-container .ant-alert:hover {
-  border-color: #1890ff !important;
-}
-
-.character-data-container .ant-alert-info {
-  background: var(--content-bg) !important;
-}
 
 .character-data-container .ant-alert-message {
   color: var(--color-text-1);
