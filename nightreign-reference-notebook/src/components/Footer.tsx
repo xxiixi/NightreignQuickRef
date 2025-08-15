@@ -8,7 +8,7 @@ const { Text } = Typography;
 const formatBuildTime = (buildTime: string): string => {
   try {
     const date = new Date(buildTime);
-    return date.toLocaleDateString('zh-CN', {
+    return date.toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'

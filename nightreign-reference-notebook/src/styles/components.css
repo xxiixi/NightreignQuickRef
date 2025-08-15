@@ -788,8 +788,8 @@ body[tomato-theme="dark"] .table-row-odd {
 .footer {
   text-align: center;
   background: rgba(0, 0, 0, 0.05);
-  /* padding: var(--spacing-md); */
-  /* margin-top: auto; */
+  padding: var(--spacing-lg);
+  margin-top: auto;
   max-width: 100%;
 }
 
