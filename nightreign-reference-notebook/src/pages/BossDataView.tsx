@@ -52,7 +52,7 @@ const BossDataView: React.FC = () => {
     } else if (numValue <= 542) {
       return 'resistance-high'; // 高抗性 - 红色
     } else {
-      return 'resistance-very-high'; // 极高抗性 - 深红褐色
+      return ''; 
     }
   };
 

@@ -56,7 +56,7 @@
   text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-/* 抗性数值颜色类 */
+/* 抗性数值颜色类 - 浅色模式 */
 .resistance-low {
   color: #237804 !important; /* 深绿色 */
 }
@@ -69,15 +69,32 @@
   color: #cf1322 !important; /* 深红色 */
 }
 
-.resistance-very-high {
-  color: #a8071a !important; /* 深红褐色 */
-}
-
-/* 吸收数值颜色类 */
+/* 吸收数值颜色类 - 浅色模式 */
 .absorption-weak {
   color: #237804 !important; /* 深绿色 - 弱吸收，容易受到伤害 */
 }
 
 .absorption-strong {
   color: #cf1322 !important; /* 深红色 - 强吸收，抗性较强 */
+}
+
+/* 深色模式下的颜色覆盖 */
+body[tomato-theme="dark"] .resistance-low {
+  color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
+}
+
+body[tomato-theme="dark"] .resistance-medium {
+  color: #faad14 !important; /* 浅橙色 - 深色模式下更清晰 */
+}
+
+body[tomato-theme="dark"] .resistance-high {
+  color: #ff4d4f !important; /* 浅红色 - 深色模式下更清晰 */
+}
+
+body[tomato-theme="dark"] .absorption-weak {
+  color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
+}
+
+body[tomato-theme="dark"] .absorption-strong {
+  color: #ff4d4f !important; /* 浅红色 - 深色模式下更清晰 */
 }
