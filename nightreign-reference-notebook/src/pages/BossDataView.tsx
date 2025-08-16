@@ -37,6 +37,40 @@ import deathBlightResistance from '../assets/Resistances/blight_status_effect_el
 const BossDataView: React.FC = () => {
   const [filteredData] = useState<BossData[]>(bossData);
 
+  // 根据抗性数值返回CSS类名
+  const getResistanceClass = (value: number | string): string => {
+    if (value === '-' || value === null || value === undefined) {
+      return '';
+    }
+    
+    const numValue = typeof value === 'string' ? parseInt(value) : value;
+    
+    if (numValue <= 154) {
+      return 'resistance-low'; // 低抗性 - 绿色
+    } else if (numValue <= 252) {
+      return 'resistance-medium'; // 中等抗性 - 橙色
+    } else if (numValue <= 542) {
+      return 'resistance-high'; // 高抗性 - 红色
+    } else {
+      return 'resistance-very-high'; // 极高抗性 - 深红褐色
+    }
+  };
+
+  // 根据吸收数值返回CSS类名
+  const getAbsorptionClass = (value: number): string => {
+    if (value === null || value === undefined) {
+      return '';
+    }
+    
+    if (value > 1) {
+      return 'absorption-weak'; // 弱吸收 - 绿色（容易受到伤害）
+    } else if (value < 1) {
+      return 'absorption-strong'; // 强吸收 - 红色（抗性较强）
+    } else {
+      return ''; // 正常吸收 - 默认颜色
+    }
+  };
+
   // Boss名称到图片的映射
   const bossImageMap: { [key: string]: string } = {
     '"黑夜野兽"格拉狄乌斯': nightOfTheBeast,
@@ -155,7 +189,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -172,7 +206,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -189,7 +223,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -206,7 +240,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -228,7 +262,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -245,7 +279,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -262,7 +296,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -279,7 +313,7 @@ const BossDataView: React.FC = () => {
           width: 60,
           align: 'center',
           render: (value) => (
-            <span style={{ color: value > 1 ? '#52c41a' : value < 1 ? '#ff4d4f' : 'inherit' }}>
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
               {value}
             </span>
           ),
@@ -364,6 +398,11 @@ const BossDataView: React.FC = () => {
           key: 'poisonResistance',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
         },
         {
           title: (
@@ -376,6 +415,11 @@ const BossDataView: React.FC = () => {
           key: 'scarletRotResistance',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
         },
         {
           title: (
@@ -388,6 +432,11 @@ const BossDataView: React.FC = () => {
           key: 'bleedResistance',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
         },
         {
           title: (
@@ -400,6 +449,11 @@ const BossDataView: React.FC = () => {
           key: 'frostResistance',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
         },
         {
           title: (
@@ -412,6 +466,11 @@ const BossDataView: React.FC = () => {
           key: 'sleepResistance',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
         },
         {
           title: (
@@ -424,6 +483,11 @@ const BossDataView: React.FC = () => {
           key: 'madnessResistance',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
         },
         {
           title: (
@@ -436,6 +500,11 @@ const BossDataView: React.FC = () => {
           key: 'deathBlightResistance',
           width: 60,
           align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
         },
       ],
     },

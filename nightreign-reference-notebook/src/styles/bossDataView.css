@@ -49,3 +49,35 @@
   padding: 24px;
   width: 100%;
 }
+
+/* 抗性数值颜色样式 - 确保在浅色和深色模式下都清晰可见 */
+.resistance-value {
+  font-weight: 500;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* 抗性数值颜色类 */
+.resistance-low {
+  color: #237804 !important; /* 深绿色 */
+}
+
+.resistance-medium {
+  color: #d48806 !important; /* 深橙色 */
+}
+
+.resistance-high {
+  color: #cf1322 !important; /* 深红色 */
+}
+
+.resistance-very-high {
+  color: #a8071a !important; /* 深红褐色 */
+}
+
+/* 吸收数值颜色类 */
+.absorption-weak {
+  color: #237804 !important; /* 深绿色 - 弱吸收，容易受到伤害 */
+}
+
+.absorption-strong {
+  color: #cf1322 !important; /* 深红色 - 强吸收，抗性较强 */
+}
