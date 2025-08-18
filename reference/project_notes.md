@@ -31,6 +31,9 @@
 ### 复活机制解析
 [黑夜君临：复活机制解析](https://www.bilibili.com/video/BV1TnNLzXESx?vd_source=37640654dbdd4ab80b471a16ac6da3c0&spm_id_from=333.788.videopod.sections)
 
+### 永夜山羊罪人NPC预设一览
+[永夜山羊罪人NPC预设一览及仇恨机制](https://www.bilibili.com/opus/1100871642065666054)
+
 ### 图片来源
 [nightreign wiki](https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki)
 

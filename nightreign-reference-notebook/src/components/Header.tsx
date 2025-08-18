@@ -136,6 +136,16 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         </div>
                         <div style={{ marginBottom: '4px' }}>
                           <a 
+                            href="https://www.bilibili.com/opus/1100871642065666054" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            🐐 永夜山羊罪人NPC预设一览
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
                             href="https://www.bilibili.com/video/BV1p5ThzfEy7" 
                             target="_blank" 
                             rel="noopener noreferrer"
