@@ -1,7 +1,8 @@
 /* CharacterDataView 组件专用样式 */
 
 .character-data-container {
-  padding: 20px 0;
+  /* padding: 20px 0; */
+  padding-bottom: 25px;
   max-width: 100%;
   flex: 1;
   display: flex;

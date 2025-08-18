@@ -46,8 +46,33 @@
 
 /* 容器样式 - 使用百分比宽度 */
 .boss-data-view-container {
-  padding: 24px;
+  /* padding: 24px; */
+  padding-bottom: 40px;
   width: 100%;
+}
+
+/* Tabs组件样式 - 现在在卡片内部 */
+.boss-card .ant-tabs {
+  width: 100%;
+}
+
+.boss-card .ant-tabs-nav {
+  margin-bottom: 24px;
+  justify-content: center;
+}
+
+.boss-card .ant-tabs-tab {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+}
+
+.boss-card .ant-tabs-tab-active {
+  font-weight: 600;
+}
+
+.boss-card .ant-tabs-content-holder {
+  padding: 0;
 }
 
 /* 抗性数值颜色样式 - 确保在浅色和深色模式下都清晰可见 */

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Table, Card, Image } from 'antd';
+import { Table, Card, Image, Tabs } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData } from '../types';
 import bossData from '../data/zh-CN/boss_data.json';
+import sinnerList from '../data/zh-CN/sinner_list.json';
 import '../styles/bossDataView.css';
 
 // 导入boss图片
@@ -510,34 +511,161 @@ const BossDataView: React.FC = () => {
     },
   ];
 
+  // 定义罪人数据类型
+  interface SinnerData {
+    key: string;
+    characterName: string;
+    buildIndex: number;
+    leftHand: string;
+    rightHand: string;
+    consumable: string;
+  }
+
+  // 处理罪人数据，转换为表格格式
+  const processSinnerData = (): SinnerData[] => {
+    const sinnerTableData: SinnerData[] = [];
+    
+    Object.entries(sinnerList).forEach(([characterName, builds]) => {
+      builds.forEach((build: { 左手: string | string[]; 右手: string | string[]; 消耗品: string }, index: number) => {
+        sinnerTableData.push({
+          key: `${characterName}-${index}`,
+          characterName,
+          buildIndex: index + 1,
+          leftHand: Array.isArray(build.左手) ? build.左手.join(' + ') : build.左手,
+          rightHand: Array.isArray(build.右手) ? build.右手.join(' + ') : build.右手,
+          consumable: build.消耗品
+        });
+      });
+    });
+    
+    return sinnerTableData;
+  };
+
+  // 罪人装备配置表格列定义
+  const sinnerColumns: ColumnsType<SinnerData> = [
+    {
+      title: '角色名称',
+      dataIndex: 'characterName',
+      key: 'characterName',
+      width: 100,
+      align: 'center',
+      render: (text) => <strong>{text}</strong>,
+      onCell: (record) => {
+        const currentIndex = processSinnerData().findIndex(item => 
+          item.characterName === record.characterName && item.buildIndex === record.buildIndex
+        );
+        
+        // 计算相同角色的行数
+        let rowSpan = 1;
+        const allData = processSinnerData();
+        for (let i = currentIndex + 1; i < allData.length; i++) {
+          if (allData[i].characterName === record.characterName) {
+            rowSpan++;
+          } else {
+            break;
+          }
+        }
+        
+        // 如果是相同角色的第一行，设置rowSpan
+        if (currentIndex === 0 || allData[currentIndex - 1]?.characterName !== record.characterName) {
+          return { rowSpan };
+        }
+        
+        // 否则隐藏单元格
+        return { rowSpan: 0 };
+      },
+    },
+    {
+      title: '配置',
+      dataIndex: 'buildIndex',
+      key: 'buildIndex',
+      width: 60,
+      align: 'center',
+      render: (text) => `配置${text}`,
+    },
+    {
+      title: '左手装备',
+      dataIndex: 'leftHand',
+      key: 'leftHand',
+      width: 200,
+      align: 'center',
+    },
+    {
+      title: '右手装备',
+      dataIndex: 'rightHand',
+      key: 'rightHand',
+      width: 200,
+      align: 'center',
+    },
+    {
+      title: '消耗品',
+      dataIndex: 'consumable',
+      key: 'consumable',
+      width: 120,
+      align: 'center',
+    },
+  ];
+
+  const sinnerFooter = () => (
+    <div className="footer-text">
+      *双人1.1倍血量/三人1.2倍血量 *每个NPC基础数据均为满级 *每个NPC自带仇恨-6的BUFF
+    </div>
+  );
+
   return (
     <div className="boss-data-view-container">
-          <Card 
-            title={<span className="table-title">🌙 全夜王基础数据表</span>}
-            className="boss-card"
-          >
-            <Table
-              columns={leftColumns}
-              dataSource={filteredData}
-              rowKey="id"
-              scroll={{ x: 800 }}
-              pagination={false}
-              size="small"
-              bordered
-              footer={defaultFooter}
-              style={{ marginBottom: '24px' }}
-            />
-            <Table
-              columns={rightColumns}
-              dataSource={filteredData}
-              rowKey="id"
-              scroll={{ x: 600 }}
-              pagination={false}
-              size="small"
-              bordered
-              footer={resistanceFooter}
-            />
-          </Card>
+      <Card className="boss-card">
+        <Tabs
+          defaultActiveKey="boss-data"
+          items={[
+            {
+              key: 'boss-data',
+              label: '🌙 夜王基础数据',
+              children: (
+                <>
+                  <Table
+                    columns={leftColumns}
+                    dataSource={filteredData}
+                    rowKey="id"
+                    scroll={{ x: 800 }}
+                    pagination={false}
+                    size="small"
+                    bordered
+                    footer={defaultFooter}
+                    style={{ marginBottom: '24px' }}
+                  />
+                  <Table
+                    columns={rightColumns}
+                    dataSource={filteredData}
+                    rowKey="id"
+                    scroll={{ x: 600 }}
+                    pagination={false}
+                    size="small"
+                    bordered
+                    footer={resistanceFooter}
+                  />
+                </>
+              ),
+            },
+            {
+              key: 'sinner-data',
+              label: '🐐 永夜山羊召唤罪人详情',
+              children: (
+                <Table
+                  columns={sinnerColumns}
+                  dataSource={processSinnerData()}
+                  rowKey="key"
+                  scroll={{ x: 700 }}
+                  pagination={false}
+                  size="small"
+                  bordered
+                  footer={sinnerFooter}
+                />
+              ),
+            },
+          ]}
+        />
+      </Card>
     </div>
   );
 };
