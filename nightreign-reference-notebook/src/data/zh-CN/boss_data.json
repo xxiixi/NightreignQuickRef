@@ -135,7 +135,7 @@
     "id": 7,
     "name": "\"黑夜之魔\"利普拉",
     "baseHealth": 3686,
-    "nightreignHealthMultiplier": 1.2,
+    "nightreignHealthMultiplier": 1.4,
     "normalAbsorption": 1,
     "slashAbsorption": 1.1,
     "strikeAbsorption": 1,
