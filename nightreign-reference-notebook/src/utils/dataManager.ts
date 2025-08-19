@@ -11,6 +11,14 @@ export interface EntryData {
   talisman?: string;
 }
 
+export interface EnhancementCategory {
+  category: string;
+  applicable_scope: {
+    [key: string]: string[];
+  };
+  notes: string[];
+}
+
 export interface WeaponCharacter {
   [weaponName: string]: {
     [characterName: string]: number;
@@ -86,7 +94,8 @@ class DataManager {
         weaponEffect,
         characterStates,
         magicMoveList,
-        invincibleFrames
+        invincibleFrames,
+        enhancementCategories
       ] = await Promise.all([
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
@@ -96,7 +105,8 @@ class DataManager {
         import('../data/zh-CN/weapon_effect.json'),
         import('../data/zh-CN/character_states.json'),
         import('../data/zh-CN/magic_move_list.json'),
-        import('../data/zh-CN/invincible_frames.json')
+        import('../data/zh-CN/invincible_frames.json'),
+        import('../data/zh-CN/enhancement_categories.json')
       ]);
 
       // 存储数据到缓存
@@ -109,6 +119,7 @@ class DataManager {
       this.dataCache.set('characterStates', characterStates.default);
       this.dataCache.set('magicMoveList', magicMoveList.default);
       this.dataCache.set('invincibleFrames', invincibleFrames.default);
+      this.dataCache.set('enhancementCategories', enhancementCategories.default);
 
       this.isLoaded = true;
       console.log('所有数据预加载完成');
@@ -154,6 +165,10 @@ class DataManager {
 
   public getInvincibleFrames(): InvincibleFrame[] {
     return this.dataCache.get('invincibleFrames') || [];
+  }
+
+  public getEnhancementCategories(): EnhancementCategory[] {
+    return this.dataCache.get('enhancementCategories') || [];
   }
 
   // 检查是否已加载

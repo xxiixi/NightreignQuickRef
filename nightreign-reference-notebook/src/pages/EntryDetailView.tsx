@@ -4,6 +4,13 @@ import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
 import DataManager from '../utils/dataManager';
+import type { EnhancementCategory } from '../utils/dataManager';
+
+// 扩展的强化类别接口，用于表格显示
+interface EnhancedEnhancementCategory extends EnhancementCategory {
+  skillType?: string;
+  skills?: string[];
+}
 
 type OnChange = NonNullable<TableProps<EntryData>['onChange']>;
 type Filters = Parameters<OnChange>[1];
@@ -18,6 +25,7 @@ interface DataState {
   talismanEntries: EntryData[];
   inGameEntries: EntryData[];
   otherEntries: EntryData[];
+  enhancementCategories: EnhancementCategory[];
   loading: boolean;
 }
 
@@ -112,6 +120,7 @@ const EntryDetailView: React.FC = () => {
     talismanEntries: [],
     inGameEntries: [],
     otherEntries: [],
+    enhancementCategories: [],
     loading: true
   });
 
@@ -127,6 +136,7 @@ const EntryDetailView: React.FC = () => {
           talismanEntries: dataManager.getTalismanEntries(),
           inGameEntries: dataManager.getInGameEntries(),
           otherEntries: dataManager.getOtherEntries(),
+          enhancementCategories: dataManager.getEnhancementCategories(),
           loading: false
         });
       } catch (error) {
@@ -158,6 +168,12 @@ const EntryDetailView: React.FC = () => {
     setSortedInfo(sorter as Sorts);
   };
 
+  // 强化类别表格变化处理函数
+  const handleEnhancementTableChange: TableProps<EnhancementCategory>['onChange'] = (_pagination, filters, sorter) => {
+    setFilteredInfo(filters);
+    setSortedInfo(sorter as Sorts);
+  };
+
   // 搜索过滤函数
   const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string) => {
     let filtered = data;
@@ -181,6 +197,42 @@ const EntryDetailView: React.FC = () => {
       item.talisman?.toLowerCase().includes(searchLower) ||
       item.entry_id?.toLowerCase().includes(searchLower)
     );
+  };
+
+
+
+  // 强化类别转换后数据的搜索过滤函数
+  const filterTransformedEnhancementData = (data: EnhancedEnhancementCategory[], searchValue: string) => {
+    if (!searchValue.trim()) return data;
+    
+    const searchLower = searchValue.toLowerCase();
+    return data.filter(item => 
+      item.category.toLowerCase().includes(searchLower) ||
+      (item.skillType && item.skillType.toLowerCase().includes(searchLower)) ||
+      (item.skills && item.skills.some(skill => 
+        skill.toLowerCase().includes(searchLower)
+      )) ||
+      (item.notes && item.notes.some(note => 
+        note.toLowerCase().includes(searchLower)
+      ))
+    );
+  };
+
+  // 将强化类别数据转换为支持rowSpan的格式
+  const transformEnhancementData = (data: EnhancementCategory[]): EnhancedEnhancementCategory[] => {
+    const transformedData: EnhancedEnhancementCategory[] = [];
+    
+    data.forEach(item => {
+      Object.entries(item.applicable_scope).forEach(([skillType, skills]) => {
+        transformedData.push({
+          ...item,
+          skillType,
+          skills,
+        });
+      });
+    });
+    
+    return transformedData;
   };
 
   // 局外词条表格列定义
@@ -390,8 +442,108 @@ const EntryDetailView: React.FC = () => {
     },
   ];
 
+  // 创建强化类别表格列定义
+  const createEnhancementColumns = (paginatedData: EnhancedEnhancementCategory[]): TableColumnsType<EnhancedEnhancementCategory> => {
+    // 计算rowSpan信息
+    const rowSpanInfo = new Map<string, { firstIndex: number; count: number }>();
+    
+    paginatedData.forEach((item, index) => {
+      if (!rowSpanInfo.has(item.category)) {
+        const categoryRows = paginatedData.filter(row => row.category === item.category);
+        rowSpanInfo.set(item.category, {
+          firstIndex: index,
+          count: categoryRows.length
+        });
+      }
+    });
+
+    return [
+      {
+        title: '强化类别',
+        dataIndex: 'category',
+        key: 'category',
+        width: '15%',
+        align: 'center',
+        sorter: (a: EnhancedEnhancementCategory, b: EnhancedEnhancementCategory) => a.category.localeCompare(b.category, 'zh-CN'),
+        sortDirections: ['ascend', 'descend'] as const,
+        sortOrder: sortedInfo.columnKey === 'category' ? sortedInfo.order : null,
+        onCell: (record: EnhancedEnhancementCategory, index?: number) => {
+          const info = rowSpanInfo.get(record.category);
+          if (info && index === info.firstIndex) {
+            return { rowSpan: info.count };
+          }
+          return { rowSpan: 0 };
+        },
+      },
+      {
+        title: '技能类型',
+        dataIndex: 'skillType',
+        key: 'skillType',
+        width: '10%',
+        align: 'center',
+        render: (_: unknown, record: EnhancedEnhancementCategory) => {
+          if (!record.skillType) return '';
+          
+          const getSkillTypeColor = (skillType: string): string => {
+            switch (skillType) {
+              case '祷告':
+                return 'cyan';
+              case '战灰':
+                return 'green';
+              case '武器':
+                return 'red';
+              case '魔法':
+                return 'purple';
+              case '技艺':
+                return 'blue';
+              case '道具':
+                return 'orange';
+              default:
+                return 'default';
+            }
+          };
+          
+          return (
+            <Tag color={getSkillTypeColor(record.skillType)}>
+              {record.skillType}
+            </Tag>
+          );
+        },
+      },
+      {
+        title: '技能列表',
+        dataIndex: 'skills',
+        key: 'skills',
+        width: '45%',
+        render: (_: unknown, record: EnhancedEnhancementCategory) => {
+          return record.skills ? record.skills.join('、') : '';
+        },
+      },
+      {
+        title: '备注',
+        dataIndex: 'notes',
+        key: 'notes',
+        width: '25%',
+        render: (notes: string[]) => {
+          return notes && notes.length > 0 ? notes.join('; ') : '-';
+        },
+        onCell: (record: EnhancedEnhancementCategory, index?: number) => {
+          const info = rowSpanInfo.get(record.category);
+          if (info && index === info.firstIndex) {
+            return { rowSpan: info.count };
+          }
+          return { rowSpan: 0 };
+        },
+      },
+    ];
+  };
+
   // 渲染表格内容
   const renderTableContent = (tabKey: string) => {
+    if (tabKey === '强化类别') {
+      return renderEnhancementTable();
+    }
+
     let tableData: EntryData[] = [];
     let columns: TableColumnsType<EntryData>;
     
@@ -491,12 +643,133 @@ const EntryDetailView: React.FC = () => {
     );
   };
 
+  // 渲染强化类别表格
+  const renderEnhancementTable = () => {
+    const transformedData = transformEnhancementData(data.enhancementCategories);
+    const filteredData = filterTransformedEnhancementData(transformedData, searchKeyword);
+    const totalPages = Math.ceil(filteredData.length / pageSize);
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedData = filteredData.slice(startIndex, endIndex);
+
+
+
+    return (
+      <div>
+        <Table<EnhancedEnhancementCategory>
+          columns={createEnhancementColumns(paginatedData)}
+          dataSource={paginatedData}
+          rowKey={(record) => `${record.category}-${record.skillType}`}
+          onChange={handleEnhancementTableChange}
+          pagination={false}
+          size="small"
+          bordered
+          loading={data.loading}
+        />
+        
+        {/* 自定义分页导航 */}
+        {!data.loading && filteredData.length > 0 && (
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center', 
+            marginTop: '15px',
+            gap: '10px'
+          }}>
+            {/* 上一页/下一页按钮 */}
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              gap: '10px'
+            }}>
+              <Button 
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage <= 1}
+                size="middle"
+              >
+                上一页
+              </Button>
+              
+              <span style={{ 
+                margin: '0 15px',
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                第 {currentPage} 页，共 {totalPages} 页
+              </span>
+              
+              <Button 
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage >= totalPages}
+                size="middle"
+              >
+                下一页
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   // 渲染搜索和筛选器的函数
   const renderSearchAndFilter = (tabKey: string) => {
     if (data.loading) {
       return (
         <div className="loading-container">
           <Spin spinning={true} />
+        </div>
+      );
+    }
+
+    if (tabKey === '强化类别') {
+      return (
+        <div className="search-container">
+          <div className="filter-search-content">
+            {/* 左侧：搜索、清除 */}
+            <div className="filter-controls">
+              <Search 
+                placeholder={`搜索 ${tabKey} 关键字`}
+                onSearch={(value) => {
+                  setSearchKeyword(value);
+                  setCurrentPage(1);
+                }}
+                className="custom-search-input"
+                allowClear
+              />
+              <Button onClick={clearAll} type="default" size="middle">
+                清除所有
+              </Button>
+            </div>
+            
+            {/* 右侧：页面大小选择、总条数 */}
+            <div className="pagination-controls">
+              <span className="pagination-label">
+                每页显示
+              </span>
+              <Select
+                value={pageSize.toString()}
+                onChange={(value) => {
+                  setPageSize(Number(value));
+                  setCurrentPage(1);
+                }}
+                options={[
+                  { value: '15', label: '15 条' },
+                  { value: '20', label: '20 条' },
+                  { value: '30', label: '30 条' },
+                  { value: '50', label: '50 条' },
+                  { value: '80', label: '80 条' },
+                  { value: '100', label: '100 条' },
+                ]}
+                className="page-size-select"
+                size="small"
+              />
+              <span className="total-count">
+                共 {transformEnhancementData(data.enhancementCategories).length} 条记录
+              </span>
+            </div>
+          </div>
         </div>
       );
     }
@@ -745,6 +1018,16 @@ const EntryDetailView: React.FC = () => {
                 <div>
                   {renderSearchAndFilter('其他词条')}
                   {renderTableContent('其他词条')}
+                </div>
+              ),
+            },
+            {
+              key: '强化类别',
+              label: '强化类别',
+              children: (
+                <div>
+                  {renderSearchAndFilter('强化类别')}
+                  {renderTableContent('强化类别')}
                 </div>
               ),
             },
