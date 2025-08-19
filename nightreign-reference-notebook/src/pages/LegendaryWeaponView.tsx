@@ -350,7 +350,6 @@ const LegendaryWeaponView: React.FC = () => {
   }
 
   return (
-    // <div className="content-wrapper">
       <div className="steps-container">
         <div className="legendary-weapon-container" style={{ padding: '16px' }}>
           {customSteps}
@@ -360,7 +359,6 @@ const LegendaryWeaponView: React.FC = () => {
           </div>
         </div>
       </div>
-    // </div>
   );
 };
 

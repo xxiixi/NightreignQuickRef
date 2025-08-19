@@ -24,7 +24,6 @@ interface DataState {
   outsiderEntries: EntryData[];
   talismanEntries: EntryData[];
   inGameEntries: EntryData[];
-  otherEntries: EntryData[];
   enhancementCategories: EnhancementCategory[];
   loading: boolean;
 }
@@ -58,7 +57,20 @@ const characterOptions = [
   { value: '无赖', label: '无赖' },
 ];
 
-const otherTypeOptions = [
+
+
+// 添加局内词条类型选项
+const inGameTypeOptions = [
+  { value: '能力', label: '能力' },
+  { value: '攻击力', label: '攻击力' },
+  { value: '强化', label: '强化' },
+  { value: '恢复', label: '恢复' },
+  { value: '减伤率', label: '减伤率' },
+  { value: '技艺/绝招', label: '技艺/绝招' },
+  { value: '额外效果', label: '额外效果' },
+  { value: '武器属性', label: '武器属性' },
+  { value: '附加异常状态', label: '附加异常状态' },
+  { value: '对异常状态的抵抗力', label: '对异常状态的抵抗力' },
   { value: '庇佑', label: '庇佑' },
   { value: '不甘', label: '不甘' },
 ];
@@ -108,7 +120,7 @@ const getSuperposabilityColor = (superposability: string | null | undefined): st
 const EntryDetailView: React.FC = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [selectedOtherTypes, setSelectedOtherTypes] = useState<string[]>([]);
+  const [selectedInGameTypes, setSelectedInGameTypes] = useState<string[]>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<string>('');
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
@@ -119,7 +131,6 @@ const EntryDetailView: React.FC = () => {
     outsiderEntries: [],
     talismanEntries: [],
     inGameEntries: [],
-    otherEntries: [],
     enhancementCategories: [],
     loading: true
   });
@@ -135,7 +146,6 @@ const EntryDetailView: React.FC = () => {
           outsiderEntries: dataManager.getOutsiderEntries(),
           talismanEntries: dataManager.getTalismanEntries(),
           inGameEntries: dataManager.getInGameEntries(),
-          otherEntries: dataManager.getOtherEntries(),
           enhancementCategories: dataManager.getEnhancementCategories(),
           loading: false
         });
@@ -153,7 +163,7 @@ const EntryDetailView: React.FC = () => {
   const clearAll = () => {
     setSearchKeyword('');
     setSelectedTypes([]);
-    setSelectedOtherTypes([]);
+    setSelectedInGameTypes([]);
     setSelectedCharacter('');
     setFilteredInfo({});
     setSortedInfo({});
@@ -175,10 +185,13 @@ const EntryDetailView: React.FC = () => {
   };
 
   // 搜索过滤函数
-  const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string) => {
+  const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[]) => {
     let filtered = data;
     if (types && types.length > 0) {
       filtered = filtered.filter(item => types.includes(item.entry_type || ''));
+    }
+    if (inGameTypes && inGameTypes.length > 0) {
+      filtered = filtered.filter(item => inGameTypes.includes(item.entry_type || ''));
     }
     if (character && character.trim()) {
       filtered = filtered.filter(item => 
@@ -201,22 +214,7 @@ const EntryDetailView: React.FC = () => {
 
 
 
-  // 强化类别转换后数据的搜索过滤函数
-  const filterTransformedEnhancementData = (data: EnhancedEnhancementCategory[], searchValue: string) => {
-    if (!searchValue.trim()) return data;
-    
-    const searchLower = searchValue.toLowerCase();
-    return data.filter(item => 
-      item.category.toLowerCase().includes(searchLower) ||
-      (item.skillType && item.skillType.toLowerCase().includes(searchLower)) ||
-      (item.skills && item.skills.some(skill => 
-        skill.toLowerCase().includes(searchLower)
-      )) ||
-      (item.notes && item.notes.some(note => 
-        note.toLowerCase().includes(searchLower)
-      ))
-    );
-  };
+
 
   // 将强化类别数据转换为支持rowSpan的格式
   const transformEnhancementData = (data: EnhancementCategory[]): EnhancedEnhancementCategory[] => {
@@ -357,7 +355,7 @@ const EntryDetailView: React.FC = () => {
       title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: '10%',
+      width: '8%',
       align: 'center',
       onCell: () => ({
         style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
@@ -374,48 +372,7 @@ const EntryDetailView: React.FC = () => {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: '35%',
-      sorter: (a, b) => {
-        const nameA = a.entry_name || '';
-        const nameB = b.entry_name || '';
-        return nameA.localeCompare(nameB, 'zh-CN');
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
-    },
-    {
-      title: '解释',
-      dataIndex: 'explanation',
-      key: 'explanation',
-      width: '55%',
-      render: (text) => text || '-',
-    },
-  ];
-
-  // 其他词条表格列定义
-  const otherColumns: TableColumnsType<EntryData> = [
-    {
-      title: 'ID',
-      dataIndex: 'entry_id',
-      key: 'entry_id',
-      width: '10%',
-      align: 'center',
-      onCell: () => ({
-        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
-      }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
-    },
-    {
-      title: '词条名称',
-      dataIndex: 'entry_name',
-      key: 'entry_name',
-      width: '20%',
+      width: '25%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
@@ -435,12 +392,15 @@ const EntryDetailView: React.FC = () => {
       title: '词条类型',
       dataIndex: 'entry_type',
       key: 'entry_type',
-      width: '15%',
+      align: 'center',
+      width: '12%',
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
     },
   ];
+
+
 
   // 创建强化类别表格列定义
   const createEnhancementColumns = (paginatedData: EnhancedEnhancementCategory[]): TableColumnsType<EnhancedEnhancementCategory> => {
@@ -459,7 +419,7 @@ const EntryDetailView: React.FC = () => {
 
     return [
       {
-        title: '强化类别',
+        title: '强化类别词条适用范围',
         dataIndex: 'category',
         key: 'category',
         width: '15%',
@@ -540,7 +500,7 @@ const EntryDetailView: React.FC = () => {
 
   // 渲染表格内容
   const renderTableContent = (tabKey: string) => {
-    if (tabKey === '强化类别') {
+    if (tabKey === '强化类别词条适用范围') {
       return renderEnhancementTable();
     }
 
@@ -561,12 +521,7 @@ const EntryDetailView: React.FC = () => {
       case '局内词条':
         tableData = data.inGameEntries;
         columns = inGameColumns;
-        tableData = filterData(tableData, searchKeyword);
-        break;
-      case '其他词条':
-        tableData = data.otherEntries;
-        columns = otherColumns;
-        tableData = filterData(tableData, searchKeyword, selectedOtherTypes);
+        tableData = filterData(tableData, searchKeyword, selectedInGameTypes);
         break;
       default:
         tableData = data.outsiderEntries;
@@ -599,15 +554,51 @@ const EntryDetailView: React.FC = () => {
         {!data.loading && tableData.length > 0 && (
           <div style={{ 
             display: 'flex', 
-            flexDirection: 'column',
+            justifyContent: 'space-between', 
             alignItems: 'center', 
             marginTop: '15px',
-            gap: '10px'
+            padding: '0 16px'
           }}>
-            {/* 上一页/下一页按钮 */}
+            {/* 左侧：每页显示选择器 */}
             <div style={{ 
               display: 'flex', 
-              justifyContent: 'center', 
+              alignItems: 'center', 
+              gap: '8px'
+            }}>
+              <span style={{ 
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                每页显示
+              </span>
+              <Select
+                value={pageSize.toString()}
+                onChange={(value) => {
+                  setPageSize(Number(value));
+                  setCurrentPage(1);
+                }}
+                options={[
+                  { value: '15', label: '15 条' },
+                  { value: '20', label: '20 条' },
+                  { value: '30', label: '30 条' },
+                  { value: '50', label: '50 条' },
+                  { value: '80', label: '80 条' },
+                  { value: '100', label: '100 条' },
+                ]}
+                size="small"
+                style={{ width: '100px' }}
+              />
+              <span style={{ 
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                共 {tableData.length} 条记录
+              </span>
+            </div>
+            
+            {/* 右侧：分页按钮 */}
+            <div style={{ 
+              display: 'flex', 
               alignItems: 'center', 
               gap: '10px'
             }}>
@@ -635,8 +626,6 @@ const EntryDetailView: React.FC = () => {
                 下一页
               </Button>
             </div>
-            
-            
           </div>
         )}
       </div>
@@ -646,11 +635,10 @@ const EntryDetailView: React.FC = () => {
   // 渲染强化类别表格
   const renderEnhancementTable = () => {
     const transformedData = transformEnhancementData(data.enhancementCategories);
-    const filteredData = filterTransformedEnhancementData(transformedData, searchKeyword);
-    const totalPages = Math.ceil(filteredData.length / pageSize);
+    const totalPages = Math.ceil(transformedData.length / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
-    const paginatedData = filteredData.slice(startIndex, endIndex);
+    const paginatedData = transformedData.slice(startIndex, endIndex);
 
 
 
@@ -668,18 +656,54 @@ const EntryDetailView: React.FC = () => {
         />
         
         {/* 自定义分页导航 */}
-        {!data.loading && filteredData.length > 0 && (
+        {!data.loading && transformedData.length > 0 && (
           <div style={{ 
             display: 'flex', 
-            flexDirection: 'column',
+            justifyContent: 'space-between', 
             alignItems: 'center', 
             marginTop: '15px',
-            gap: '10px'
+            padding: '0 16px'
           }}>
-            {/* 上一页/下一页按钮 */}
+            {/* 左侧：每页显示选择器 */}
             <div style={{ 
               display: 'flex', 
-              justifyContent: 'center', 
+              alignItems: 'center', 
+              gap: '8px'
+            }}>
+              <span style={{ 
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                每页显示
+              </span>
+              <Select
+                value={pageSize.toString()}
+                onChange={(value) => {
+                  setPageSize(Number(value));
+                  setCurrentPage(1);
+                }}
+                options={[
+                  { value: '15', label: '15 条' },
+                  { value: '20', label: '20 条' },
+                  { value: '30', label: '30 条' },
+                  { value: '50', label: '50 条' },
+                  { value: '80', label: '80 条' },
+                  { value: '100', label: '100 条' },
+                ]}
+                size="small"
+                style={{ width: '100px' }}
+              />
+              <span style={{ 
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                共 {transformedData.length} 条记录
+              </span>
+            </div>
+            
+            {/* 右侧：分页按钮 */}
+            <div style={{ 
+              display: 'flex', 
               alignItems: 'center', 
               gap: '10px'
             }}>
@@ -723,55 +747,8 @@ const EntryDetailView: React.FC = () => {
       );
     }
 
-    if (tabKey === '强化类别') {
-      return (
-        <div className="search-container">
-          <div className="filter-search-content">
-            {/* 左侧：搜索、清除 */}
-            <div className="filter-controls">
-              <Search 
-                placeholder={`搜索 ${tabKey} 关键字`}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
-                className="custom-search-input"
-                allowClear
-              />
-              <Button onClick={clearAll} type="default" size="middle">
-                清除所有
-              </Button>
-            </div>
-            
-            {/* 右侧：页面大小选择、总条数 */}
-            <div className="pagination-controls">
-              <span className="pagination-label">
-                每页显示
-              </span>
-              <Select
-                value={pageSize.toString()}
-                onChange={(value) => {
-                  setPageSize(Number(value));
-                  setCurrentPage(1);
-                }}
-                options={[
-                  { value: '15', label: '15 条' },
-                  { value: '20', label: '20 条' },
-                  { value: '30', label: '30 条' },
-                  { value: '50', label: '50 条' },
-                  { value: '80', label: '80 条' },
-                  { value: '100', label: '100 条' },
-                ]}
-                className="page-size-select"
-                size="small"
-              />
-              <span className="total-count">
-                共 {transformEnhancementData(data.enhancementCategories).length} 条记录
-              </span>
-            </div>
-          </div>
-        </div>
-      );
+    if (tabKey === '强化类别词条适用范围') {
+      return null;
     }
 
     if (tabKey === '局外词条') {
@@ -794,20 +771,14 @@ const EntryDetailView: React.FC = () => {
                 mode="multiple"
                 allowClear
                 tagRender={tagRender}
-                placeholder="按词条类型筛选（最多3项）"
+                placeholder="按词条类型筛选"
                 value={selectedTypes}
                 onChange={(values) => {
-                  if (values && values.length > 3) {
-                    message.warning('最多只能选择3个词条类型');
-                    return;
-                  }
                   setSelectedTypes(values);
                   setCurrentPage(1);
                 }}
                 options={outsiderTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                maxTagCount={3}
-                maxCount={3}
               />
               <Select
                 className="character-select"
@@ -827,95 +798,7 @@ const EntryDetailView: React.FC = () => {
               </Button>
             </div>
             
-            {/* 右侧：页面大小选择、总条数 */}
-            <div className="pagination-controls">
-              <span className="pagination-label">
-                每页显示
-              </span>
-              <Select
-                value={pageSize.toString()}
-                onChange={(value) => {
-                  setPageSize(Number(value));
-                  setCurrentPage(1);
-                }}
-                options={[
-                 { value: '15', label: '15 条' },
-                 { value: '20', label: '20 条' },
-                 { value: '30', label: '30 条' },
-                 { value: '50', label: '50 条' },
-                 { value: '80', label: '80 条' },
-                 { value: '100', label: '100 条' },
-                ]}
-                className="page-size-select"
-                size="small"
-              />
-              <span className="total-count">
-                共 {data.outsiderEntries.length} 条记录
-              </span>
-            </div>
-          </div>
-        </div>
-      );
-    } else if (tabKey === '其他词条') {
-      return (
-        <div className="filter-search-row">
-          <div className="filter-search-content">
-            {/* 左侧：搜索、多选、清除 */}
-            <div className="filter-controls">
-              <Search 
-                placeholder={`搜索 ${tabKey} 关键字`}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
-                className="custom-search-input"
-                allowClear
-              />
-              <Select
-                className="outsider-type-select"
-                mode="multiple"
-                allowClear
-                tagRender={tagRender}
-                placeholder="按词条类型筛选"
-                value={selectedOtherTypes}
-                onChange={(values) => {
-                  setSelectedOtherTypes(values);
-                  setCurrentPage(1);
-                }}
-                options={otherTypeOptions}
-                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-              />
-              <Button onClick={clearAll} type="default" size="middle">
-                清除所有
-              </Button>
-            </div>
-            
-            {/* 右侧：页面大小选择、总条数 */}
-            <div className="pagination-controls">
-              <span className="pagination-label">
-                每页显示
-              </span>
-              <Select
-                value={pageSize.toString()}
-                onChange={(value) => {
-                  setPageSize(Number(value));
-                  setCurrentPage(1);
-                }}
-                options={[
-                 { value: '15', label: '15 条' },
-                 { value: '20', label: '20 条' },
-                 { value: '30', label: '30 条' },
-                 { value: '50', label: '50 条' },
-                 { value: '80', label: '80 条' },
-                 { value: '100', label: '100 条' },
-                ]}
-                className="page-size-select"
-                size="small"
-              />
-              <span className="total-count">
-                共 {data.otherEntries.length} 条记录
-              </span>
-            </div>
+
           </div>
         </div>
       );
@@ -934,37 +817,28 @@ const EntryDetailView: React.FC = () => {
                 className="custom-search-input"
                 allowClear
               />
+              {tabKey === '局内词条' && (
+                <Select
+                  className="in-game-type-select"
+                  mode="multiple"
+                  allowClear
+                  tagRender={tagRender}
+                  placeholder="按词条类型筛选"
+                  value={selectedInGameTypes}
+                  onChange={(values) => {
+                    setSelectedInGameTypes(values);
+                    setCurrentPage(1);
+                  }}
+                  options={inGameTypeOptions}
+                  maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                />
+              )}
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>
             </div>
             
-            {/* 右侧：页面大小选择、总条数 */}
-            <div className="pagination-controls">
-              <span className="pagination-label">
-                每页显示
-              </span>
-              <Select
-                value={pageSize.toString()}
-                onChange={(value) => {
-                  setPageSize(Number(value));
-                  setCurrentPage(1);
-                }}
-                options={[
-                  { value: '15', label: '15 条' },
-                  { value: '20', label: '20 条' },
-                  { value: '30', label: '30 条' },
-                  { value: '50', label: '50 条' },
-                  { value: '80', label: '80 条' },
-                  { value: '100', label: '100 条' },
-                ]}
-                className="page-size-select"
-                size="small"
-              />
-              <span className="total-count">
-                共 {tabKey === '护符词条' ? data.talismanEntries.length : data.inGameEntries.length} 条记录
-              </span>
-            </div>
+
           </div>
         </div>
       );
@@ -973,8 +847,11 @@ const EntryDetailView: React.FC = () => {
 
   return (
     <div className="content-wrapper">
-      <div className="tabs-container">
         <Tabs
+          type="card"
+          style={{ 
+            marginTop: '20px',
+          }}
           activeKey={activeEntryTab}
           onChange={(key) => {
             setActiveEntryTab(key);
@@ -992,16 +869,6 @@ const EntryDetailView: React.FC = () => {
               ),
             },
             {
-              key: '护符词条',
-              label: '护符词条',
-              children: (
-                <div>
-                  {renderSearchAndFilter('护符词条')}
-                  {renderTableContent('护符词条')}
-                </div>
-              ),
-            },
-            {
               key: '局内词条',
               label: '局内词条',
               children: (
@@ -1012,29 +879,28 @@ const EntryDetailView: React.FC = () => {
               ),
             },
             {
-              key: '其他词条',
-              label: '其他词条',
+              key: '护符词条',
+              label: '护符词条',
               children: (
                 <div>
-                  {renderSearchAndFilter('其他词条')}
-                  {renderTableContent('其他词条')}
+                  {renderSearchAndFilter('护符词条')}
+                  {renderTableContent('护符词条')}
                 </div>
               ),
             },
             {
-              key: '强化类别',
-              label: '强化类别',
+              key: '强化类别词条适用范围',
+              label: '强化类别词条适用范围',
               children: (
                 <div>
-                  {renderSearchAndFilter('强化类别')}
-                  {renderTableContent('强化类别')}
+                  {renderSearchAndFilter('强化类别词条适用范围')}
+                  {renderTableContent('强化类别词条适用范围')}
                 </div>
               ),
             },
           ]}
           className="custom-tabs"
         />
-      </div>
     </div>
   );
 };

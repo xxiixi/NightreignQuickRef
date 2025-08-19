@@ -34,11 +34,12 @@ export interface BossData {
 
 // 词条类型颜色映射
 export const typeColorMap: Record<string, string> = {
+  // 局外词条
   '能力': 'blue',
   '攻击力': 'red',
   '技艺/绝招': 'orange',
   '魔法/祷告': 'purple',
-  '减伤率': 'green',
+  '减伤率': 'default',
   '对异常状态的抵抗力': 'cyan',
   '恢复': 'lime',
   '行动': 'geekblue',
@@ -49,6 +50,11 @@ export const typeColorMap: Record<string, string> = {
   '出击时的武器（附加）': 'blue',
   '出击时的道具': 'orange',
   '场地环境': 'green',
+  // 局内词条
   '庇佑': 'purple',
   '不甘': 'volcano',
+  '额外效果': 'cyan',
+  '武器属性': 'geekblue',
+  '附加异常状态': 'yellow',
+  '强化': 'magenta',
 }; 

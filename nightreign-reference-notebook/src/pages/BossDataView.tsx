@@ -616,6 +616,7 @@ const BossDataView: React.FC = () => {
     <div className="boss-data-view-container">
       <Card className="boss-card">
         <Tabs
+          style={{ marginTop: '5px' }}
           type="card"
           defaultActiveKey="boss-data"
           items={[

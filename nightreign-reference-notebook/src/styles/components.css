@@ -68,11 +68,12 @@ body[tomato-theme="dark"] .steps-container {
 }
 
 .content-wrapper {
-  max-width: 1280px;
+  max-width: 1300px;
+  min-width: 1000px;
   width: 70%;
   margin: 0 auto;
-  background-color: var(--content-bg);
-  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
   box-shadow: 0 4px 20px var(--content-shadow);
   padding: 10px 40px 30px 40px;
   display: flex;
@@ -80,6 +81,11 @@ body[tomato-theme="dark"] .steps-container {
   height: auto;
   flex: 1;
   margin-bottom: var(--spacing-2xl);
+}
+
+/* 深色模式下的content-wrapper背景 */
+body[tomato-theme="dark"] .content-wrapper {
+  background-color: rgba(33, 33, 33, 0.7);
 }
 
 /* ===== 顶部导航栏 ===== */
@@ -99,8 +105,6 @@ body[tomato-theme="dark"] .steps-container {
   justify-content: flex-end;
   align-items: center;
 }
-
-/* 移除top-bar-left，因为logo按钮已经固定在左上角 */
 
 /* Logo图片样式 */
 .fixed-logo img {
@@ -301,16 +305,13 @@ body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover 
 }
 
 /* ===== 标签页组件 ===== */
-.tabs-container {
-  flex: 1;
-}
-
 .steps-container {
-  max-width: 1280px;
+  max-width: 1300px;
+  min-width: 1000px;
   width: 70%;
   margin: 0 auto; /* 居中 */
-  background-color: rgba(255, 255, 255, 0.6);
-  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
   box-shadow: 0 4px 20px var(--content-shadow);
   padding: 10px;
   margin-bottom: var(--spacing-2xl);
@@ -502,9 +503,15 @@ body[tomato-theme="dark"] .custom-tab-button::after {
 
 .custom-search-input {
   width: 250px;
+  min-width: 200px;
 }
 
 .outsider-type-select {
+  min-width: 350px;
+  width: auto;
+}
+
+.in-game-type-select {
   min-width: 350px;
   width: auto;
 }
@@ -735,6 +742,7 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
 /* ===== 传说武器视图组件 ===== */
 .legendary-weapon-container {
   padding: 6px;
+  width: 100%;
 }
 
 .legendary-weapon-content {
