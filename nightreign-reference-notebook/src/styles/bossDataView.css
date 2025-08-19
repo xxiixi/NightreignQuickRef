@@ -36,14 +36,9 @@
   width: 70%;
   margin: 0 auto;
   border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: var(--content-bg);
   box-shadow: 0 4px 20px var(--content-shadow);
   padding: 0px 10px;
-}
-
-/* 深色模式下的卡片背景 */
-body[tomato-theme="dark"] .boss-card {
-  background-color: rgba(33, 33, 33, 0.7);
 }
 
 

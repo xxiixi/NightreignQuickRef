@@ -45,9 +45,9 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange }) => {
       label: '词条详细数据',
       children: [
         { key: '局外词条', label: '局外词条 (按照遗物仪式分类)' },
-        { key: '护符词条', label: '护符词条' },
         { key: '局内词条', label: '局内词条（武器词条、掉落物词条）' },
-        { key: '其他词条', label: '其他词条' }
+        { key: '护符词条', label: '护符词条' },
+        { key: '强化类别词条适用范围', label: '强化类别词条适用范围' }
       ]
     },
     {

@@ -72,7 +72,7 @@ body[tomato-theme="dark"] .steps-container {
   min-width: 1000px;
   width: 70%;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: var(--content-bg);
   border-radius: 15px;
   box-shadow: 0 4px 20px var(--content-shadow);
   padding: 10px 40px 30px 40px;
@@ -81,11 +81,6 @@ body[tomato-theme="dark"] .steps-container {
   height: auto;
   flex: 1;
   margin-bottom: var(--spacing-2xl);
-}
-
-/* 深色模式下的content-wrapper背景 */
-body[tomato-theme="dark"] .content-wrapper {
-  background-color: rgba(33, 33, 33, 0.7);
 }
 
 /* ===== 顶部导航栏 ===== */
@@ -105,6 +100,8 @@ body[tomato-theme="dark"] .content-wrapper {
   justify-content: flex-end;
   align-items: center;
 }
+
+/* 移除top-bar-left，因为logo按钮已经固定在左上角 */
 
 /* Logo图片样式 */
 .fixed-logo img {
@@ -310,7 +307,7 @@ body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover 
   min-width: 1000px;
   width: 70%;
   margin: 0 auto; /* 居中 */
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.6);
   border-radius: 15px;
   box-shadow: 0 4px 20px var(--content-shadow);
   padding: 10px;
