@@ -239,10 +239,10 @@ const EntryDetailView: React.FC = () => {
       title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: '10%',
+      width: '8%',
       align: 'center',
       onCell: () => ({
-        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
+        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -307,10 +307,10 @@ const EntryDetailView: React.FC = () => {
       title: 'ID',
       dataIndex: 'entry_id',
       key: 'entry_id',
-      width: '10%',
+      width: '8%',
       align: 'center',
       onCell: () => ({
-        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
+        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -358,7 +358,7 @@ const EntryDetailView: React.FC = () => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: {fontSize: '12px', color: 'var(--theme-text-secondary)' }
+        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -419,7 +419,7 @@ const EntryDetailView: React.FC = () => {
 
     return [
       {
-        title: '强化类别词条适用范围',
+        title: '强化类别',
         dataIndex: 'category',
         key: 'category',
         width: '15%',
@@ -547,6 +547,7 @@ const EntryDetailView: React.FC = () => {
           onChange={handleTableChange}
           pagination={false}
           size="small"
+          bordered
           loading={data.loading}
         />
         
