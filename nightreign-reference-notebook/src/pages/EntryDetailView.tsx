@@ -865,7 +865,7 @@ const EntryDetailView: React.FC = () => {
                 fontWeight: 'bold',
                 margin: 0
               }}>
-                恶魔的添翼:卢恩-增伤关系图
+                🪬 恶魔的添翼:卢恩-增伤关系图
               </h3>
               <Button.Group size="small">
                 <Button 
@@ -1006,32 +1006,8 @@ const EntryDetailView: React.FC = () => {
       );
     }
 
-    if (tabKey === '强化类别词条适用范围') {
+    if (tabKey === '强化类别词条适用范围' || tabKey === '特殊事件及地形效果') {
       return null;
-    }
-
-    if (tabKey === '特殊事件及地形效果') {
-      return (
-        <div className="search-container">
-          <div className="filter-search-content">
-            {/* 左侧：搜索、清除 */}
-            <div className="filter-controls">
-              <Search 
-                placeholder={`搜索 ${tabKey} 关键字`}
-                onSearch={(value) => {
-                  setSearchKeyword(value);
-                  setCurrentPage(1);
-                }}
-                className="custom-search-input"
-                allowClear
-              />
-              <Button onClick={clearAll} type="default" size="middle">
-                清除所有
-              </Button>
-            </div>
-          </div>
-        </div>
-      );
     }
 
     if (tabKey === '局外词条') {
@@ -1143,7 +1119,7 @@ const EntryDetailView: React.FC = () => {
           items={[
             {
               key: '局外词条',
-              label: '局外词条',
+              label: '🔴 局外词条',
               children: (
                 <div>
                   {renderSearchAndFilter('局外词条')}
@@ -1153,7 +1129,7 @@ const EntryDetailView: React.FC = () => {
             },
             {
               key: '局内词条',
-              label: '局内词条',
+              label: '🟠 局内词条',
               children: (
                 <div>
                   {renderSearchAndFilter('局内词条')}
@@ -1163,7 +1139,7 @@ const EntryDetailView: React.FC = () => {
             },
             {
               key: '护符词条',
-              label: '护符词条',
+              label: '🟡 护符词条',
               children: (
                 <div>
                   {renderSearchAndFilter('护符词条')}
@@ -1172,22 +1148,22 @@ const EntryDetailView: React.FC = () => {
               ),
             },
             {
-              key: '特殊事件及地形效果',
-              label: '特殊事件及地形效果',
-              children: (
-                <div>
-                  {renderSearchAndFilter('特殊事件及地形效果')}
-                  {renderTableContent('特殊事件及地形效果')}
-                </div>
-              ),
-            },
-            {
               key: '强化类别词条适用范围',
-              label: '强化类别词条适用范围',
+              label: '🟢 强化类别词条适用范围',
               children: (
                 <div>
                   {renderSearchAndFilter('强化类别词条适用范围')}
                   {renderTableContent('强化类别词条适用范围')}
+                </div>
+              ),
+            },
+            {
+              key: '特殊事件及地形效果',
+              label: '🔵 特殊事件及地形效果',
+              children: (
+                <div>
+                  {renderSearchAndFilter('特殊事件及地形效果')}
+                  {renderTableContent('特殊事件及地形效果')}
                 </div>
               ),
             },
