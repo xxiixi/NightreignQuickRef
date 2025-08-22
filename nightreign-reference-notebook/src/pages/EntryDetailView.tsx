@@ -7,6 +7,7 @@ import DataManager from '../utils/dataManager';
 import type { EnhancementCategory } from '../utils/dataManager';
 import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
+import { throttle } from 'lodash';
 
 // 扩展的强化类别接口，用于表格显示
 interface EnhancedEnhancementCategory extends EnhancementCategory {
@@ -291,6 +292,53 @@ const EntryDetailView: React.FC = () => {
       mediaQuery.removeEventListener('change', handleMediaChange);
     };
   }, [currentTheme]);
+
+  // 处理窗口大小变化和拖拽导致的图表刷新问题
+  useEffect(() => {
+    // 节流后的图表刷新函数
+    const throttledChartRefresh = throttle(() => {
+      // 强制重新渲染图表
+      setChartKey(prev => prev + 1);
+    }, 300); // 300ms节流延迟
+
+    // 监听窗口大小变化
+    const handleResize = () => {
+      throttledChartRefresh();
+    };
+
+    // 监听拖拽相关事件
+    const handleDragEnd = () => {
+      setTimeout(throttledChartRefresh, 100);
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('dragend', handleDragEnd);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('dragend', handleDragEnd);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 监听标签页切换，确保图表正确渲染
+  useEffect(() => {
+    if (activeEntryTab === '特殊事件及地形效果') {
+      const timer = setTimeout(() => {
+        setChartKey(prev => prev + 1);
+        window.dispatchEvent(new Event('resize'));
+      }, 200);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [activeEntryTab]);
 
   // 从DataManager获取数据
   useEffect(() => {
@@ -882,8 +930,11 @@ const EntryDetailView: React.FC = () => {
                 </Button>
               </Button.Group>
             </div>
-            <div style={{ height: '400px' }}>
-              <Line key={`line-chart-${chartKey}`} {...lineConfig} />
+            <div 
+              id="line-chart-container"
+              style={{ height: '400px' }}
+            >
+              <Line key={`line-chart-${chartKey}-${activeEntryTab}`} {...lineConfig} />
             </div>
           </div>
         )}
