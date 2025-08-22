@@ -184,7 +184,7 @@ class DataManager {
               continue;
           }
           
-          characterDetailData[chineseName] = characterModule.default[chineseName];
+          characterDetailData[chineseName] = (characterModule.default as any)[chineseName];
         } catch (error) {
           console.warn(`无法加载角色详细数据文件 ${fileName}:`, error);
         }
