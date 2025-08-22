@@ -86,6 +86,10 @@
   color: #9f00c7 !important;
 }
 
+.absorption-default {
+  color: #5e9400 !important;
+}
+
 /* 深色模式下的颜色覆盖 */
 body[tomato-theme="dark"] .resistance-low {
   color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
@@ -97,6 +101,70 @@ body[tomato-theme="dark"] .resistance-medium {
 
 body[tomato-theme="dark"] .resistance-high {
   color: #ff4d4f !important; /* 浅红色 - 深色模式下更清晰 */
+}
+
+/* 野生Boss筛选器样式 */
+.wild-boss-filter-container {
+  margin-bottom: 16px;
+}
+
+.filter-inputs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  /* padding: 10px; */
+  /* background-color: var(--theme-bg-secondary); */
+  /* border-radius: 8px; */
+  /* border: 1px solid var(--theme-border); */
+}
+
+.filter-inputs .ant-input {
+  border-radius: 6px;
+}
+
+.filter-inputs .ant-select {
+  border-radius: 6px;
+}
+
+.filter-inputs .ant-btn {
+  border-radius: 6px;
+  height: 32px;
+  padding: 4px 16px;
+}
+
+/* 位置标签样式 */
+.location-tag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.location-tag .ant-tag {
+  margin: 0;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 2px 6px;
+  line-height: 1.2;
+}
+
+/* 深色模式下的筛选器样式 */
+body[tomato-theme="dark"] .filter-inputs {
+  background-color: var(--theme-bg-secondary);
+  border-color: var(--theme-border);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .filter-inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-inputs .ant-input,
+  .filter-inputs .ant-select {
+    width: 100% !important;
+  }
 }
 
 body[tomato-theme="dark"] .absorption-1 {
@@ -111,6 +179,39 @@ body[tomato-theme="dark"] .absorption-3 {
   color: #ff292c !important; /* 浅红色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption- {
-  color: #cd29f6 !important; /* 亮红色 - 深色模式下更清晰 */
+body[tomato-theme="dark"] .absorption-4 {
+  color: #cd29f6 !important; /* 亮紫色 - 深色模式下更清晰 */
+}
+
+body[tomato-theme="dark"] .absorption-default {
+  color: rgb(92, 156, 2) !important; 
+}
+
+/* 表头固定样式 */
+.ant-table-sticky-header {
+  background-color: var(--content-bg);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.ant-table-sticky-header .ant-table-thead > tr > th {
+  background-color: var(--content-bg);
+  border-bottom: 1px solid var(--theme-border);
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* 确保表头在滚动时保持可见 */
+.ant-table-wrapper .ant-table-sticky-header {
+  overflow: visible;
+}
+
+/* 深色模式下的表头样式 */
+body[tomato-theme="dark"] .ant-table-sticky-header {
+  background-color: var(--content-bg);
+}
+
+body[tomato-theme="dark"] .ant-table-sticky-header .ant-table-thead > tr > th {
+  background-color: var(--content-bg);
+  border-bottom-color: var(--theme-border);
 }

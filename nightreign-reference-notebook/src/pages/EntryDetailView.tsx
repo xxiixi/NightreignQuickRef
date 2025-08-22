@@ -1170,7 +1170,7 @@ const EntryDetailView: React.FC = () => {
           items={[
             {
               key: '局外词条',
-              label: '🔴 局外词条',
+              label: '🌕 局外词条',
               children: (
                 <div>
                   {renderSearchAndFilter('局外词条')}
@@ -1180,7 +1180,7 @@ const EntryDetailView: React.FC = () => {
             },
             {
               key: '局内词条',
-              label: '🟠 局内词条',
+              label: '🌖 局内词条',
               children: (
                 <div>
                   {renderSearchAndFilter('局内词条')}
@@ -1190,7 +1190,7 @@ const EntryDetailView: React.FC = () => {
             },
             {
               key: '护符词条',
-              label: '🟡 护符词条',
+              label: '🌗 护符词条',
               children: (
                 <div>
                   {renderSearchAndFilter('护符词条')}
@@ -1200,7 +1200,7 @@ const EntryDetailView: React.FC = () => {
             },
             {
               key: '强化类别词条适用范围',
-              label: '🟢 强化类别词条适用范围',
+              label: '🌘 强化类别词条适用范围',
               children: (
                 <div>
                   {renderSearchAndFilter('强化类别词条适用范围')}
@@ -1210,7 +1210,7 @@ const EntryDetailView: React.FC = () => {
             },
             {
               key: '特殊事件及地形效果',
-              label: '🔵 特殊事件及地形效果',
+              label: '🌑 特殊事件及地形效果',
               children: (
                 <div>
                   {renderSearchAndFilter('特殊事件及地形效果')}

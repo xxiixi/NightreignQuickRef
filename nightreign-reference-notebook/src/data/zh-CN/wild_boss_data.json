@@ -1,22 +1,5 @@
 [
   {
-    "name": "训练场人偶士兵",
-    "normal": 1,
-    "strike": 1.1,
-    "slash": 0.9,
-    "pierce": 0.9,
-    "magic": 1,
-    "fire": 1.2,
-    "lightning": 1,
-    "holy": 1,
-    "basePoise": 30,
-    "bleed": 112,
-    "poison": 112,
-    "scarletRot": 112,
-    "frost": 112,
-    "location": "训练场"
-  },
-  {
     "name": "铁处女",
     "normal": 0.9,
     "strike": 1,
@@ -65,7 +48,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 154,
-    "location": "要塞、矿洞、雪山、腐败森林"
+    "location": "要塞、矿洞、山顶、腐败森林"
   },
   {
     "name": "魔像守卫",
@@ -116,7 +99,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "教堂、火山"
+    "location": "教堂、火山口"
   },
   {
     "name": "灵庙骑士",
@@ -337,7 +320,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 252,
-    "location": "营地、火山"
+    "location": "营地、火山口"
   },
   {
     "name": "癫火山妖",
@@ -762,7 +745,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外蓝名、主城地下、火山"
+    "location": "野外蓝名、主城地下、火山口"
   },
   {
     "name": "接肢贵族",
@@ -813,7 +796,7 @@
     "poison": 84,
     "scarletRot": 84,
     "frost": 112,
-    "location": "野外蓝名、火山、第一夜"
+    "location": "野外蓝名、火山口、第一夜"
   },
   {
     "name": "黄金河马",
@@ -1000,7 +983,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 542,
-    "location": "野外红名、主城楼顶、火山、腐败森林"
+    "location": "野外红名、主城楼顶、火山口、腐败森林"
   },
   {
     "name": "丘陵飞龙",
@@ -1034,7 +1017,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "火山"
+    "location": "火山口"
   },
   {
     "name": "英雄石像鬼",
@@ -1051,7 +1034,7 @@
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": "免疫",
-    "location": "火山、第一夜"
+    "location": "火山口、第一夜"
   },
   {
     "name": "飞龙",
@@ -1068,7 +1051,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 252,
-    "location": "火山、雪山"
+    "location": "火山口、山顶"
   },
   {
     "name": "坠星兽物/坠星成兽",
@@ -1085,7 +1068,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": "免疫",
-    "location": "火山、第二夜、突发事件"
+    "location": "火山口、第二夜、突发事件"
   },
   {
     "name": "雪原山妖",
@@ -1102,7 +1085,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 542,
-    "location": "雪山"
+    "location": "山顶"
   },
   {
     "name": "巨鸦",
@@ -1119,7 +1102,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 112,
-    "location": "雪山"
+    "location": "山顶"
   },
   {
     "name": "亚人剑圣",
@@ -1136,7 +1119,7 @@
     "poison": 84,
     "scarletRot": 84,
     "frost": 112,
-    "location": "雪山、第一夜"
+    "location": "山顶、第一夜"
   },
   {
     "name": "山顶冰龙",
@@ -1153,7 +1136,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 542,
-    "location": "雪山"
+    "location": "山顶"
   },
   {
     "name": "无头山妖",

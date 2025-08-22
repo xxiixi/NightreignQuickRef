@@ -1,4 +1,22 @@
-  [{
+  [
+    {
+      "name": "训练场人偶士兵",
+      "normal": 1,
+      "strike": 1.1,
+      "slash": 0.9,
+      "pierce": 0.9,
+      "magic": 1,
+      "fire": 1.2,
+      "lightning": 1,
+      "holy": 1,
+      "basePoise": 30,
+      "bleed": 112,
+      "poison": 112,
+      "scarletRot": 112,
+      "frost": 112,
+      "location": "训练场"
+    },
+    {
     "name": "追踪者",
     "normal": 0.81,
     "strike": 0.81,

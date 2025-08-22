@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Table, Card, Image, Tabs } from 'antd';
+import { Table, Card, Image, Tabs, Select, Input, Button, Tag } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData, WildBossData } from '../types';
 import bossData from '../data/zh-CN/night_king_data.json';
@@ -38,7 +39,108 @@ import deathBlightResistance from '../assets/Resistances/blight_status_effect_el
 
 const BossDataView: React.FC = () => {
   const [filteredData] = useState<BossData[]>(bossData);
-  const [filteredWildBossData] = useState<WildBossData[]>(wildBossData);
+  const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
+
+  // 位置颜色映射
+  const locationColorMap: Record<string, string> = {
+    '要塞': 'default',
+    '监牢': 'orange',
+    '教堂': 'default',
+    '遗迹': 'default',
+    '营地': 'default',
+    '矿洞': 'default',
+    '主城': 'gold',
+    '主城地下': 'gold',
+    '主城楼顶': 'gold',
+    '野外蓝名': 'blue',
+    '野外红名': 'red',
+    '火山口': 'volcano',
+    '山顶': 'cyan',
+    '隐城': 'purple',
+    '腐败森林': 'magenta',
+    '第一夜': 'green',
+    '第二夜': 'green',
+    '突发事件': 'yellow',
+  };
+
+  // 获取位置颜色
+  const getLocationColor = (location: string | null | undefined): string => {
+    if (!location) return 'default';
+    return locationColorMap[location] || 'default';
+  };
+
+  // 标签渲染函数
+  const locationTagRender = (props: { label: React.ReactNode; value: string; closable?: boolean; onClose?: () => void }) => {
+    const { label, value, closable, onClose } = props;
+    const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+    };
+    
+    const color = getLocationColor(value);
+    
+    return (
+      <Tag
+        color={color}
+        onMouseDown={onPreventMouseDown}
+        closable={closable}
+        onClose={onClose}
+        style={{ marginInlineEnd: 2 }}
+      >
+        {label}
+      </Tag>
+    );
+  };
+
+  // 获取所有唯一的位置选项
+  const getLocationOptions = () => {
+    const locations = new Set<string>();
+    wildBossData.forEach(boss => {
+      if (boss.location) {
+        // 处理多个位置用逗号分隔的情况
+        const locationList = boss.location.split('、');
+        locationList.forEach(loc => {
+          locations.add(loc.trim());
+        });
+      }
+    });
+    
+    return Array.from(locations).sort().map(location => ({
+      value: location,
+      label: location
+    }));
+  };
+
+  // 过滤野生Boss数据
+  const getFilteredWildBossData = () => {
+    let filtered = wildBossData;
+    
+    // 按位置筛选
+    if (selectedLocations.length > 0) {
+      filtered = filtered.filter(boss => {
+        if (!boss.location) return false;
+        const bossLocations = boss.location.split('、').map(loc => loc.trim());
+        return selectedLocations.some(selectedLoc => bossLocations.includes(selectedLoc));
+      });
+    }
+    
+    // 按搜索关键词筛选（仅搜索Boss名称）
+    if (wildBossSearchKeyword.trim()) {
+      const searchLower = wildBossSearchKeyword.toLowerCase();
+      filtered = filtered.filter(boss => 
+        boss.name.toLowerCase().includes(searchLower)
+      );
+    }
+    
+    return filtered;
+  };
+
+  // 清除野生Boss筛选
+  const clearWildBossFilters = () => {
+    setWildBossSearchKeyword('');
+    setSelectedLocations([]);
+  };
 
   // 根据抗性数值返回CSS类名
   const getResistanceClass = (value: number | string): string => {
@@ -78,7 +180,7 @@ const BossDataView: React.FC = () => {
         return 'absorption-2'; 
       }
     } else {
-      return ''; // 正常吸收 - 默认颜色 
+      return 'absorption-default'; // 正常吸收 - 默认颜色 
     }
   };
 
@@ -636,8 +738,21 @@ const BossDataView: React.FC = () => {
       title: '位置',
       dataIndex: 'location',
       key: 'location',
-      width: 120,
+      width: 140,
       align: 'center',
+        render: (text) => (
+        <span className="location-tag">
+          {text ? text.split('、').map((loc: string) => (
+            <Tag
+              key={loc}
+              color={getLocationColor(loc)}
+              style={{ marginInlineEnd: 2}}
+            >
+              {loc}
+            </Tag>
+          )) : null}
+        </span>
+      ),
     },
     {
       title: '攻击类别',
@@ -929,19 +1044,40 @@ const BossDataView: React.FC = () => {
             },
             {
               key: 'wild-boss-data',
-              label: '🗡️ 野生Boss数据',
+              label: '☠️ 野生Boss数据',
               children: (
-                <Table
-                  columns={wildBossColumns}
-                  dataSource={filteredWildBossData}
-                  rowKey="name"
-                  scroll={{ x: 1000, y: 'calc(100vh - 250px)' }}
-                  pagination={false}
-                  size="small"
-                  bordered
-                  footer={wildBossFooter}
-                  sticky
-                />
+                <div className="wild-boss-filter-container">
+                  <div className="filter-inputs">
+                    <Input
+                      placeholder="搜索Boss名称"
+                      prefix={<SearchOutlined />}
+                      style={{ width: 200}}
+                      value={wildBossSearchKeyword}
+                      onChange={(e) => setWildBossSearchKeyword(e.target.value)}
+                    />
+                    <Select
+                      mode="multiple"
+                      placeholder="选择位置"
+                      options={getLocationOptions()}
+                      value={selectedLocations}
+                      onChange={setSelectedLocations}
+                      tagRender={locationTagRender}
+                      style={{ minWidth: 200, maxWidth: 400}}
+                    />
+                    <Button onClick={clearWildBossFilters}>清除筛选</Button>
+                  </div>
+                  <Table
+                    columns={wildBossColumns}
+                    dataSource={getFilteredWildBossData()}
+                    rowKey="name"
+                    pagination={false}
+                    size="small"
+                    bordered
+                    footer={wildBossFooter}
+                    sticky={{ offsetHeader: 0 }}
+                    scroll={{ x: 1000, y: 700 }}
+                  />
+                </div>
               ),
             },
           ]}
