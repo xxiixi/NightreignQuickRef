@@ -318,163 +318,129 @@ const CharacterDataView: React.FC = () => {
           loading: false
         });
 
-        // 加载JSON数据
-        await loadJsonData();
-      } catch (error) {
-        console.error('Failed to load character data:', error);
-        setData(prev => ({ ...prev, loading: false }));
-      }
-    };
-
-    const loadJsonData = async () => {
-      try {
-        // 所有角色文件列表
-        const characterFiles = [
-          '追踪者.json',
-          '女爵.json',
-          '隐士.json',
-          '铁之眼.json',
-          '无赖.json',
-          '执行者.json', 
-          '守护者.json',
-          '复仇者.json',
-        ];
+        // 使用预加载的角色详细数据
+        const characterDetailData = dataManager.getCharacterDetailData();
         const tabs: Array<{ name: string; columns: ColumnsType<any>; data: any[] }> = [];
         const hpRows: Array<{ character: string; [key: string]: string | number }> = [];
         const fpRows: Array<{ character: string; [key: string]: string | number }> = [];
         const stRows: Array<{ character: string; [key: string]: string | number }> = [];
 
-        for (const fileName of characterFiles) {
-          try {
-            const jsonUrl = new URL(`../data/character-info/${fileName}`, import.meta.url).href;
-            const response = await fetch(jsonUrl);
-            if (!response.ok) {
-              console.warn(`无法加载 ${fileName}: ${response.status}`);
-              continue;
-            }
-            
-            const jsonData = await response.json();
-            const characterName = fileName.replace('.json', '');
-            const characterData = jsonData[characterName];
+        // 处理每个角色的详细数据
+        Object.entries(characterDetailData).forEach(([characterName, characterData]) => {
+          if (characterData && characterData.length > 0) {
+            // 获取列名（排除HP、FP、ST和等级）
+            const columnKeys = Object.keys(characterData[0]).filter(key => 
+              !['HP', 'FP', 'ST', '等级'].includes(key)
+            );
 
-            if (characterData && characterData.length > 0) {
-              // 获取列名（排除HP、FP、ST和等级）
-              const columnKeys = Object.keys(characterData[0]).filter(key => 
-                !['HP', 'FP', 'ST', '等级'].includes(key)
-              );
-              
+            // 调换行列：将属性作为行，等级作为列
+            const transposedData = columnKeys.map((attrKey) => {
+              const row: any = { attribute: attrKey };
+              // 为每个等级创建列
+              for (let lv = 1; lv <= 15; lv++) {
+                const levelData = characterData.find((item: any) => item.等级 === lv);
+                row[`Lv${lv}`] = levelData ? levelData[attrKey] : '';
+              }
+              return row;
+            });
 
-
-              // 调换行列：将属性作为行，等级作为列
-              const transposedData = columnKeys.map((attrKey) => {
-                const row: any = { attribute: attrKey };
-                // 为每个等级创建列
-                for (let lv = 1; lv <= 15; lv++) {
-                  const levelData = characterData.find((item: any) => item.等级 === lv);
-                  row[`Lv${lv}`] = levelData ? levelData[attrKey] : '';
+            // 创建新的列定义
+            const transposedColumns: ColumnsType<any> = [
+              {
+                title: '等级',
+                dataIndex: 'attribute',
+                key: 'attribute',
+                width: 100,
+                fixed: 'left',
+                align: 'center' as const,
+                render: (text: string) => (
+                  <span style={{ 
+                    fontWeight: 'bold', 
+                    color: 'var(--color-text-1)',
+                    fontSize: '13px'
+                  }}>
+                    {text}
+                  </span>
+                ),
+                onCell: (record) => {
+                  const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
+                  const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                                   document.body.getAttribute('tomato-theme') === 'dark';
+                  return {
+                    style: {
+                      backgroundColor: isSpecialAttr 
+                        ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
+                        : 'var(--content-bg)',
+                    }
+                  };
                 }
-                return row;
-              });
-
-              // 创建新的列定义
-              const transposedColumns: ColumnsType<any> = [
-                {
-                  title: '等级',
-                  dataIndex: 'attribute',
-                  key: 'attribute',
-                  width: 100,
-                  fixed: 'left',
-                  align: 'center' as const,
-                  render: (text: string) => (
+              },
+              ...Array.from({ length: 15 }, (_, i) => ({
+                title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>,
+                dataIndex: `Lv${i + 1}`,
+                key: `Lv${i + 1}`,
+                width: 60,
+                align: 'center' as const,
+                render: (value: any, record: any) => {
+                  const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
+                  return (
                     <span style={{ 
-                      fontWeight: 'bold', 
-                      color: 'var(--color-text-1)',
+                      fontWeight: isSpecialAttr ? 'bold' : 'normal',
+                      color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
                       fontSize: '13px'
                     }}>
-                      {text}
+                      {value || '-'}
                     </span>
-                  ),
-                  onCell: (record) => {
-                    const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
-                    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                                     document.body.getAttribute('tomato-theme') === 'dark';
-                    return {
-                      style: {
-                        backgroundColor: isSpecialAttr 
-                          ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
-                          : 'var(--content-bg)',
-                      }
-                    };
-                  }
+                  );
                 },
-                ...Array.from({ length: 15 }, (_, i) => ({
-                  title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>,
-                  dataIndex: `Lv${i + 1}`,
-                  key: `Lv${i + 1}`,
-                  width: 60,
-                  align: 'center' as const,
-                  render: (value: any, record: any) => {
-                    const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
-                    return (
-                      <span style={{ 
-                        fontWeight: isSpecialAttr ? 'bold' : 'normal',
-                        color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
-                        fontSize: '13px'
-                      }}>
-                        {value || '-'}
-                      </span>
-                    );
-                  },
-                  onCell: (record: { attribute: string }) => {
-                    const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
-                    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                                     document.body.getAttribute('tomato-theme') === 'dark';
-                    return {
-                      style: {
-                        backgroundColor: isSpecialAttr 
-                          ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
-                          : 'transparent',
-                      }
-                    };
-                  }
-                }))
-              ];
-
-              tabs.push({ 
-                name: characterName, 
-                columns: transposedColumns, 
-                data: transposedData 
-              });
-
-              // 提取 HP/FP/ST 数据：按等级聚合到 Lv1..Lv15
-              const buildRow = (statKey: string) => {
-                const row: any = { character: characterName };
-                for (let lv = 1; lv <= 15; lv++) {
-                  const levelData = characterData.find((item: any) => item.等级 === lv);
-                  row[`Lv${lv}`] = levelData ? levelData[statKey] : '';
+                onCell: (record: { attribute: string }) => {
+                  const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
+                  const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                                   document.body.getAttribute('tomato-theme') === 'dark';
+                  return {
+                    style: {
+                      backgroundColor: isSpecialAttr 
+                        ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
+                        : 'transparent',
+                    }
+                  };
                 }
-                return row;
-              };
+              }))
+            ];
 
-              const hpRow = buildRow('HP');
-              const fpRow = buildRow('FP');
-              const stRow = buildRow('ST');
-              
-              hpRows.push(hpRow);
-              fpRows.push(fpRow);
-              stRows.push(stRow);
-            }
-          } catch (fileError) {
-            console.warn(`加载 ${fileName} 失败:`, fileError);
+            tabs.push({ 
+              name: characterName, 
+              columns: transposedColumns, 
+              data: transposedData 
+            });
+
+            // 提取 HP/FP/ST 数据：按等级聚合到 Lv1..Lv15
+            const buildRow = (statKey: string) => {
+              const row: any = { character: characterName };
+              for (let lv = 1; lv <= 15; lv++) {
+                const levelData = characterData.find((item: any) => item.等级 === lv);
+                row[`Lv${lv}`] = levelData ? levelData[statKey] : '';
+              }
+              return row;
+            };
+
+            const hpRow = buildRow('HP');
+            const fpRow = buildRow('FP');
+            const stRow = buildRow('ST');
+            
+            hpRows.push(hpRow);
+            fpRows.push(fpRow);
+            stRows.push(stRow);
           }
-        }
+        });
 
         setJsonTabs(tabs);
         setHpData(hpRows);
         setFpData(fpRows);
         setStData(stRows);
-      } catch (err) {
-        console.error('加载 JSON 失败:', err);
+      } catch (error) {
+        console.error('Failed to load character data:', error);
+        setData(prev => ({ ...prev, loading: false }));
       }
     };
 

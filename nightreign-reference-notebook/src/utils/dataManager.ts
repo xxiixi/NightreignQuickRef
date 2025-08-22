@@ -57,6 +57,17 @@ export interface InvincibleFrame {
   value: number;
 }
 
+// 角色详细数据接口
+export interface CharacterDetailData {
+  [characterName: string]: Array<{
+    等级: number;
+    HP: number;
+    FP: number;
+    ST: number;
+    [key: string]: any;
+  }>;
+}
+
 // 全局数据存储
 class DataManager {
   private static instance: DataManager;
@@ -85,6 +96,18 @@ class DataManager {
 
   private async loadData(): Promise<void> {
     try {
+      // 角色详细数据文件列表
+      const characterDetailFiles = [
+        '追踪者.json',
+        '女爵.json',
+        '隐士.json',
+        '铁之眼.json',
+        '无赖.json',
+        '执行者.json', 
+        '守护者.json',
+        '复仇者.json',
+      ];
+
       const [
         outsiderEntries,
         talismanEntries,
@@ -95,7 +118,8 @@ class DataManager {
         magicMoveList,
         invincibleFrames,
         enhancementCategories,
-        inGameSpecialBuff
+        inGameSpecialBuff,
+        characterData
       ] = await Promise.all([
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
@@ -106,8 +130,21 @@ class DataManager {
         import('../data/zh-CN/magic_move_list.json'),
         import('../data/zh-CN/invincible_frames.json'),
         import('../data/zh-CN/enhancement_categories.json'),
-        import('../data/zh-CN/in-game_special_buff.json')
+        import('../data/zh-CN/in-game_special_buff.json'),
+        import('../data/character-info/character_data.json')
       ]);
+
+      // 加载角色详细数据
+      const characterDetailData: { [key: string]: any } = {};
+      for (const fileName of characterDetailFiles) {
+        try {
+          const characterModule = await import(`../data/character-info/${fileName}`);
+          const characterName = fileName.replace('.json', '');
+          characterDetailData[characterName] = characterModule.default[characterName];
+        } catch (error) {
+          console.warn(`无法加载角色详细数据文件 ${fileName}:`, error);
+        }
+      }
 
       // 存储数据到缓存
       this.dataCache.set('outsiderEntries', outsiderEntries.default);
@@ -120,6 +157,8 @@ class DataManager {
       this.dataCache.set('invincibleFrames', invincibleFrames.default);
       this.dataCache.set('enhancementCategories', enhancementCategories.default);
       this.dataCache.set('inGameSpecialBuff', inGameSpecialBuff.default);
+      this.dataCache.set('characterData', characterData.default);
+      this.dataCache.set('characterDetailData', characterDetailData);
 
       this.isLoaded = true;
       console.log('所有数据预加载完成');
@@ -169,6 +208,14 @@ class DataManager {
 
   public getInGameSpecialBuff(): any[] {
     return this.dataCache.get('inGameSpecialBuff') || [];
+  }
+
+  public getCharacterData(): any {
+    return this.dataCache.get('characterData') || {};
+  }
+
+  public getCharacterDetailData(): { [key: string]: any } {
+    return this.dataCache.get('characterDetailData') || {};
   }
 
   // 检查是否已加载
