@@ -96,17 +96,29 @@ class DataManager {
 
   private async loadData(): Promise<void> {
     try {
-      // 角色详细数据文件列表
+      // 角色详细数据文件列表（英文文件名）
       const characterDetailFiles = [
-        '追踪者.json',
-        '女爵.json',
-        '隐士.json',
-        '铁之眼.json',
-        '无赖.json',
-        '执行者.json', 
-        '守护者.json',
-        '复仇者.json',
+        'tracker.json',
+        'duchess.json',
+        'hermit.json',
+        'iron-eye.json',
+        'rogue.json',
+        'executor.json', 
+        'guardian.json',
+        'avenger.json',
       ];
+
+      // 文件名到中文名称的映射
+      const fileNameToChineseName: { [key: string]: string } = {
+        'tracker.json': '追踪者',
+        'duchess.json': '女爵',
+        'hermit.json': '隐士',
+        'iron-eye.json': '铁之眼',
+        'rogue.json': '无赖',
+        'executor.json': '执行者',
+        'guardian.json': '守护者',
+        'avenger.json': '复仇者',
+      };
 
       const [
         outsiderEntries,
@@ -138,9 +150,41 @@ class DataManager {
       const characterDetailData: { [key: string]: any } = {};
       for (const fileName of characterDetailFiles) {
         try {
-          const characterModule = await import(`../data/character-info/${fileName}`);
-          const characterName = fileName.replace('.json', '');
-          characterDetailData[characterName] = characterModule.default[characterName];
+          // 使用具体的文件路径来避免动态导入警告
+          const chineseName = fileNameToChineseName[fileName];
+          let characterModule;
+          
+          switch (fileName) {
+            case 'tracker.json':
+              characterModule = await import('../data/character-info/tracker.json');
+              break;
+            case 'duchess.json':
+              characterModule = await import('../data/character-info/duchess.json');
+              break;
+            case 'hermit.json':
+              characterModule = await import('../data/character-info/hermit.json');
+              break;
+            case 'iron-eye.json':
+              characterModule = await import('../data/character-info/iron-eye.json');
+              break;
+            case 'rogue.json':
+              characterModule = await import('../data/character-info/rogue.json');
+              break;
+            case 'executor.json':
+              characterModule = await import('../data/character-info/executor.json');
+              break;
+            case 'guardian.json':
+              characterModule = await import('../data/character-info/guardian.json');
+              break;
+            case 'avenger.json':
+              characterModule = await import('../data/character-info/avenger.json');
+              break;
+            default:
+              console.warn(`未知的角色文件: ${fileName}`);
+              continue;
+          }
+          
+          characterDetailData[chineseName] = characterModule.default[chineseName];
         } catch (error) {
           console.warn(`无法加载角色详细数据文件 ${fileName}:`, error);
         }
