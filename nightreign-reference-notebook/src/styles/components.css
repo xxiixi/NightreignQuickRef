@@ -489,6 +489,7 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-xl);
   padding: 0 var(--spacing-md);
+  margin-top: var(--spacing-md);
 }
 
 /* ===== 搜索组件 ===== */

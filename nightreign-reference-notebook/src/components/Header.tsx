@@ -202,11 +202,11 @@ const Header: React.FC<HeaderProps> = React.memo(({
 
       <div className="header">
         <Title level={1} className="main-title">
-          Nightreign Reference Notebook
+          《艾尔登法环:黑夜君临》速查手册
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
           <Text type="secondary" className="subtitle-text">
-            黑夜君临内容速查工具，可快速检索条目信息，后续会添加更多内容
+            黑夜君临数据、机制速查工具，可快速检索条目信息，后续会添加更多内容
           </Text>
         </Space>
       </div>
