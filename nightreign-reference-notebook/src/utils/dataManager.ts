@@ -94,7 +94,8 @@ class DataManager {
         characterStates,
         magicMoveList,
         invincibleFrames,
-        enhancementCategories
+        enhancementCategories,
+        inGameSpecialBuff
       ] = await Promise.all([
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
@@ -104,7 +105,8 @@ class DataManager {
         import('../data/zh-CN/character_states.json'),
         import('../data/zh-CN/magic_move_list.json'),
         import('../data/zh-CN/invincible_frames.json'),
-        import('../data/zh-CN/enhancement_categories.json')
+        import('../data/zh-CN/enhancement_categories.json'),
+        import('../data/zh-CN/in-game_special_buff.json')
       ]);
 
       // 存储数据到缓存
@@ -117,6 +119,7 @@ class DataManager {
       this.dataCache.set('magicMoveList', magicMoveList.default);
       this.dataCache.set('invincibleFrames', invincibleFrames.default);
       this.dataCache.set('enhancementCategories', enhancementCategories.default);
+      this.dataCache.set('inGameSpecialBuff', inGameSpecialBuff.default);
 
       this.isLoaded = true;
       console.log('所有数据预加载完成');
@@ -162,6 +165,10 @@ class DataManager {
 
   public getEnhancementCategories(): EnhancementCategory[] {
     return this.dataCache.get('enhancementCategories') || [];
+  }
+
+  public getInGameSpecialBuff(): any[] {
+    return this.dataCache.get('inGameSpecialBuff') || [];
   }
 
   // 检查是否已加载

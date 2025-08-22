@@ -57,4 +57,10 @@ export const typeColorMap: Record<string, string> = {
   '武器属性': 'geekblue',
   '附加异常状态': 'yellow',
   '强化': 'magenta',
+  // 特殊事件及地形效果
+  '特殊事件': 'green',
+  '特殊地形：隐城': 'purple',
+  '特殊地形：腐败森林': 'red',
+  '特殊地形：山顶': 'cyan',
+  '特殊地形：火山口': 'volcano',
 }; 

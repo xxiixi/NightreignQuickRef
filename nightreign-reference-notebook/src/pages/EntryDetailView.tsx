@@ -25,6 +25,7 @@ interface DataState {
   talismanEntries: EntryData[];
   inGameEntries: EntryData[];
   enhancementCategories: EnhancementCategory[];
+  inGameSpecialBuff: EntryData[];
   loading: boolean;
 }
 
@@ -132,6 +133,7 @@ const EntryDetailView: React.FC = () => {
     talismanEntries: [],
     inGameEntries: [],
     enhancementCategories: [],
+    inGameSpecialBuff: [],
     loading: true
   });
 
@@ -147,6 +149,7 @@ const EntryDetailView: React.FC = () => {
           talismanEntries: dataManager.getTalismanEntries(),
           inGameEntries: dataManager.getInGameEntries(),
           enhancementCategories: dataManager.getEnhancementCategories(),
+          inGameSpecialBuff: dataManager.getInGameSpecialBuff(),
           loading: false
         });
       } catch (error) {
@@ -400,6 +403,57 @@ const EntryDetailView: React.FC = () => {
     },
   ];
 
+  // 特殊事件及地形效果表格列定义
+  const specialBuffColumns: TableColumnsType<EntryData> = [
+    {
+      title: 'ID',
+      dataIndex: 'entry_id',
+      key: 'entry_id',
+      width: '8%',
+      align: 'center',
+      onCell: () => ({
+        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
+      }),
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
+    },
+    {
+      title: '类型',
+      dataIndex: 'entry_type',
+      key: 'entry_type',
+      align: 'center',
+      width: '15%',
+      render: (text) => text ? (
+        <Tag color={getTypeColor(text)}>{text}</Tag>
+      ) : '-',
+    },
+    {
+      title: '效果名称',
+      dataIndex: 'entry_name',
+      key: 'entry_name',
+      width: '20%',
+      sorter: (a, b) => {
+        const nameA = a.entry_name || '';
+        const nameB = b.entry_name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+    },
+    {
+      title: '效果描述',
+      dataIndex: 'explanation',
+      key: 'explanation',
+      width: '55%',
+      render: (text) => text || '-',
+    },
+  ];
+
 
 
   // 创建强化类别表格列定义
@@ -522,6 +576,11 @@ const EntryDetailView: React.FC = () => {
         tableData = data.inGameEntries;
         columns = inGameColumns;
         tableData = filterData(tableData, searchKeyword, selectedInGameTypes);
+        break;
+      case '特殊事件及地形效果':
+        tableData = data.inGameSpecialBuff;
+        columns = specialBuffColumns;
+        tableData = filterData(tableData, searchKeyword);
         break;
       default:
         tableData = data.outsiderEntries;
@@ -752,6 +811,30 @@ const EntryDetailView: React.FC = () => {
       return null;
     }
 
+    if (tabKey === '特殊事件及地形效果') {
+      return (
+        <div className="search-container">
+          <div className="filter-search-content">
+            {/* 左侧：搜索、清除 */}
+            <div className="filter-controls">
+              <Search 
+                placeholder={`搜索 ${tabKey} 关键字`}
+                onSearch={(value) => {
+                  setSearchKeyword(value);
+                  setCurrentPage(1);
+                }}
+                className="custom-search-input"
+                allowClear
+              />
+              <Button onClick={clearAll} type="default" size="middle">
+                清除所有
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
     if (tabKey === '局外词条') {
       return (
         <div className="filter-search-row">
@@ -886,6 +969,16 @@ const EntryDetailView: React.FC = () => {
                 <div>
                   {renderSearchAndFilter('护符词条')}
                   {renderTableContent('护符词条')}
+                </div>
+              ),
+            },
+            {
+              key: '特殊事件及地形效果',
+              label: '特殊事件及地形效果',
+              children: (
+                <div>
+                  {renderSearchAndFilter('特殊事件及地形效果')}
+                  {renderTableContent('特殊事件及地形效果')}
                 </div>
               ),
             },
