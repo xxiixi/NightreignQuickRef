@@ -18,6 +18,8 @@
     "@ant-design/plots": "^2.6.3",
     "@types/lodash": "^4.17.20",
     "antd": "^5.26.7",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.2",
     "lodash": "^4.17.21",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

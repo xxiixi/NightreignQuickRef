@@ -5,6 +5,7 @@ import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
 import DataManager from '../utils/dataManager';
 import type { EnhancementCategory } from '../utils/dataManager';
+import RuneDamageChart from '../components/RuneDamageChart';
 
 // 扩展的强化类别接口，用于表格显示
 interface EnhancedEnhancementCategory extends EnhancementCategory {
@@ -136,6 +137,8 @@ const EntryDetailView: React.FC = () => {
     inGameSpecialBuff: [],
     loading: true
   });
+
+  
 
   // 从DataManager获取数据
   useEffect(() => {
@@ -686,6 +689,19 @@ const EntryDetailView: React.FC = () => {
                 下一页
               </Button>
             </div>
+          </div>
+        )}
+        
+        {/* 特殊事件及地形效果 tab 的折线图 */}
+        {tabKey === '特殊事件及地形效果' && !data.loading && (
+          <div style={{ 
+            marginTop: '30px',
+            padding: '20px',
+            backgroundColor: 'var(--theme-background)',
+            borderRadius: '8px',
+            border: '1px solid var(--theme-border)'
+          }}>
+            <RuneDamageChart />
           </div>
         )}
       </div>
