@@ -13,6 +13,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@ant-design/charts": "^2.6.2",
     "@ant-design/colors": "^7.2.1",
     "@ant-design/icons": "^6.0.0",
     "@ant-design/plots": "^2.6.3",

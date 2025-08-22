@@ -5,6 +5,8 @@ import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
 import DataManager from '../utils/dataManager';
 import type { EnhancementCategory } from '../utils/dataManager';
+import { Line } from '@ant-design/plots';
+import { getCurrentTheme } from '../utils/themeUtils';
 
 // 扩展的强化类别接口，用于表格显示
 interface EnhancedEnhancementCategory extends EnhancementCategory {
@@ -128,6 +130,9 @@ const EntryDetailView: React.FC = () => {
   const [activeEntryTab, setActiveEntryTab] = useState('局外词条');
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
+  const [isLinearMode, setIsLinearMode] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
+  const [chartKey, setChartKey] = useState(0);
   const [data, setData] = useState<DataState>({
     outsiderEntries: [],
     talismanEntries: [],
@@ -136,6 +141,156 @@ const EntryDetailView: React.FC = () => {
     inGameSpecialBuff: [],
     loading: true
   });
+
+  // 羊头诅咒事件数据
+  const curseData = [
+    { rune: '0', damageIncrease: 0 },
+    { rune: '1000', damageIncrease: 0.4 },
+    { rune: '2000', damageIncrease: 0.8 },
+    { rune: '5000', damageIncrease: 2 },
+    { rune: '10000', damageIncrease: 4 },
+    { rune: '20000', damageIncrease: 8 },
+    { rune: '30000', damageIncrease: 12 },
+    { rune: '50000', damageIncrease: 20 },
+    { rune: '60000', damageIncrease: 22 },
+    { rune: '80000', damageIncrease: 26 },
+    { rune: '100000', damageIncrease: 30 },
+    { rune: '150000', damageIncrease: 33.75 },
+    { rune: '200000', damageIncrease: 37.5 },
+    { rune: '300000', damageIncrease: 45 },
+    { rune: '500000', damageIncrease: 60 },
+    { rune: '700000', damageIncrease: 75 },
+    { rune: '900000', damageIncrease: 90 },
+    { rune: '1000000', damageIncrease: 91.2 },
+    { rune: '1100000', damageIncrease: 92.42 },
+    { rune: '1500000', damageIncrease: 97.26 },
+];
+
+    // 折线图配置
+  const lineConfig = {
+    data: isLinearMode ? curseData.map(item => ({ ...item, rune: parseInt(item.rune) })) : curseData,
+    xField: 'rune',
+    yField: 'damageIncrease',
+    theme: currentTheme,
+    height: 400,
+    autoFit: true,
+    point: {
+      size: 4,
+      shape: 'circle',
+      style: {
+        fill: 'white',
+        stroke: '#5B8FF9',
+        lineWidth: 2,
+      },
+    },
+    axis: {
+      x: {
+        label: {
+          autoRotate: true,
+          autoHide: true,
+          autoEllipsis: true,
+          style: {
+            fill: currentTheme === 'dark' ? '#ffffff' : '#000000',
+            fontSize: 12,
+          },
+          formatter: isLinearMode ? (value: string) => {
+            const num = parseInt(value);
+            if (num >= 1000000) {
+              return (num / 1000000).toFixed(1) + 'M';
+            } else if (num >= 1000) {
+              return (num / 1000).toFixed(0) + 'K';
+            }
+            return value;
+          } : undefined,
+        },
+        line: {
+          style: {
+            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+            lineWidth: 1,
+          },
+        },
+        tickLine: {
+          style: {
+            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+            lineWidth: 1,
+          },
+        },
+      },
+      y: {
+        label: {
+          style: {
+            fill: currentTheme === 'dark' ? '#ffffff' : '#000000',
+            fontSize: 12,
+          },
+          formatter: (value: string) => `${value}%`,
+        },
+        line: {
+          style: {
+            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+            lineWidth: 1,
+          },
+        },
+        tickLine: {
+          style: {
+            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
+            lineWidth: 1,
+          },
+        },
+      },
+    },
+    tooltip: {
+      title: (datum: { rune: string | number; damageIncrease: number }) => {
+        const runeValue = typeof datum.rune === 'number' ? datum.rune.toString() : datum.rune;
+        return `卢恩:${runeValue} | 增伤:${datum.damageIncrease.toFixed(2)}%`;
+      },
+    },
+    smooth: true,
+    color: '#5B8FF9',
+    lineStyle: {
+      lineWidth: 3,
+    },
+  };
+
+  // 监听主题变化
+  useEffect(() => {
+    const checkTheme = () => {
+      const newTheme = getCurrentTheme();
+      if (newTheme !== currentTheme) {
+        setCurrentTheme(newTheme);
+        setChartKey(prev => prev + 1);
+      }
+    };
+    
+    // 初始检查
+    checkTheme();
+    
+    // 监听 localStorage 变化
+    const handleStorageChange = () => {
+      // 延迟一点时间确保 localStorage 已更新
+      setTimeout(checkTheme, 50);
+    };
+    
+    // 监听系统主题变化
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleMediaChange = () => {
+      checkTheme();
+    };
+    
+    // 监听自定义主题变化事件
+    const handleThemeChange = () => {
+      setTimeout(checkTheme, 50);
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('themeChange', handleThemeChange);
+    mediaQuery.addEventListener('change', handleMediaChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('themeChange', handleThemeChange);
+      mediaQuery.removeEventListener('change', handleMediaChange);
+    };
+  }, [currentTheme]);
 
   // 从DataManager获取数据
   useEffect(() => {
@@ -685,6 +840,50 @@ const EntryDetailView: React.FC = () => {
               >
                 下一页
               </Button>
+            </div>
+          </div>
+        )}
+        
+        {/* 特殊事件及地形效果 tab 的折线图 */}
+        {tabKey === '特殊事件及地形效果' && !data.loading && (
+          <div style={{ 
+            marginTop: '30px',
+            padding: '20px',
+            backgroundColor: 'var(--theme-bg-primary)',
+            borderRadius: '8px',
+            border: '1px solid var(--theme-border)'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              marginBottom: '20px',
+            }}>
+              <h3 style={{ 
+                color: 'var(--theme-text-primary)',
+                fontSize: '16px',
+                fontWeight: 'bold',
+                margin: 0
+              }}>
+                恶魔的添翼:卢恩-增伤关系图
+              </h3>
+              <Button.Group size="small">
+                <Button 
+                  type={isLinearMode ? 'default' : 'primary'}
+                  onClick={() => setIsLinearMode(false)}
+                >
+                  非线性模式
+                </Button>
+                <Button 
+                  type={isLinearMode ? 'primary' : 'default'}
+                  onClick={() => setIsLinearMode(true)}
+                >
+                  线性模式
+                </Button>
+              </Button.Group>
+            </div>
+            <div style={{ height: '400px' }}>
+              <Line key={`line-chart-${chartKey}`} {...lineConfig} />
             </div>
           </div>
         )}
