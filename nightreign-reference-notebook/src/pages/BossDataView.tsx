@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Table, Card, Image, Tabs } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import type { BossData } from '../types';
-import bossData from '../data/zh-CN/boss_data.json';
+import type { BossData, WildBossData } from '../types';
+import bossData from '../data/zh-CN/night_king_data.json';
 import sinnerList from '../data/zh-CN/sinner_list.json';
+import wildBossData from '../data/zh-CN/wild_boss_data.json';
 import '../styles/bossDataView.css';
 
 // 导入boss图片
@@ -37,6 +38,7 @@ import deathBlightResistance from '../assets/Resistances/blight_status_effect_el
 
 const BossDataView: React.FC = () => {
   const [filteredData] = useState<BossData[]>(bossData);
+  const [filteredWildBossData] = useState<WildBossData[]>(wildBossData);
 
   // 根据抗性数值返回CSS类名
   const getResistanceClass = (value: number | string): string => {
@@ -64,11 +66,19 @@ const BossDataView: React.FC = () => {
     }
     
     if (value > 1) {
-      return 'absorption-weak'; // 弱吸收 - 绿色（容易受到伤害）
-    } else if (value < 1) {
-      return 'absorption-strong'; // 强吸收 - 红色（抗性较强）
+      return 'absorption-1'; // 程度1 - 绿色（容易受到伤害）
+    } 
+    else if (value < 1) {
+      // 对小于1的值进行进一步分类
+      if (value <= 0.3) {
+        return 'absorption-4';
+      } else if (value <= 0.7) {
+        return 'absorption-3';
+      } else {
+        return 'absorption-2'; 
+      }
     } else {
-      return ''; // 正常吸收 - 默认颜色
+      return ''; // 正常吸收 - 默认颜色 
     }
   };
 
@@ -97,7 +107,7 @@ const BossDataView: React.FC = () => {
 
   const resistanceFooter = () => (
     <div className="footer-text">
-      抗性：' - ' 表示对该Boss无效 (即boss不吃该属性异常)
+      抗性：'免疫' 表示对该Boss无效 (即boss不吃该属性异常)
     </div>
   );
 
@@ -195,12 +205,29 @@ const BossDataView: React.FC = () => {
             </span>
           ),
         },
-                    {
-              title: (
-                <div className="damage-type-container">
-                  <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
-                  <span>斩击</span>
-                </div>
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
+              <span>打击</span>
+            </div>
+          ),
+          dataIndex: 'strikeAbsorption',
+          key: 'strikeAbsorption',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
+              <span>斩击</span>
+            </div>
               ),
           dataIndex: 'slashAbsorption',
           key: 'slashAbsorption',
@@ -212,30 +239,13 @@ const BossDataView: React.FC = () => {
             </span>
           ),
         },
-                    {
-              title: (
-                <div className="damage-type-container">
-                  <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
-                  <span>打击</span>
-                </div>
-              ),
-          dataIndex: 'strikeAbsorption',
-          key: 'strikeAbsorption',
-          width: 60,
-          align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
-              {value}
-            </span>
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
+              <span>突刺</span>
+            </div>
           ),
-        },
-                    {
-              title: (
-                <div className="damage-type-container">
-                  <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
-                  <span>突刺</span>
-                </div>
-              ),
           dataIndex: 'pierceAbsorption',
           key: 'pierceAbsorption',
           width: 60,
@@ -612,6 +622,258 @@ const BossDataView: React.FC = () => {
     </div>
   );
 
+  // 野生Boss数据表格列定义
+  const wildBossColumns: ColumnsType<WildBossData> = [
+    {
+      title: 'Boss名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: 150,
+      align: 'center',
+      render: (text) => <strong>{text}</strong>,
+    },
+    {
+      title: '位置',
+      dataIndex: 'location',
+      key: 'location',
+      width: 120,
+      align: 'center',
+    },
+    {
+      title: '攻击类别',
+      children: [
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
+              <span>普通</span>
+            </div>
+          ),
+          dataIndex: 'normal',
+          key: 'normal',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
+              <span>打击</span>
+            </div>
+          ),
+          dataIndex: 'strike',
+          key: 'strike',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
+              <span>斩击</span>
+            </div>
+          ),
+          dataIndex: 'slash',
+          key: 'slash',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
+              <span>突刺</span>
+            </div>
+          ),
+          dataIndex: 'pierce',
+          key: 'pierce',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+      ],
+    },
+    {
+      title: '属性类别',
+      width: 240,
+      children: [
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
+              <span>魔力</span>
+            </div>
+          ),
+          dataIndex: 'magic',
+          key: 'magic',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
+              <span>火焰</span>
+            </div>
+          ),
+          dataIndex: 'fire',
+          key: 'fire',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
+              <span>雷电</span>
+            </div>
+          ),
+          dataIndex: 'lightning',
+          key: 'lightning',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
+              <span>神圣</span>
+            </div>
+          ),
+          dataIndex: 'holy',
+          key: 'holy',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+      ],
+    },
+    {
+      title: '基础韧性',
+      dataIndex: 'basePoise',
+      key: 'basePoise',
+      width: 80,
+      align: 'center',
+    },
+    {
+      title: '抗性',
+      children: [
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
+              <span>出血</span>
+            </div>
+          ),
+          dataIndex: 'bleed',
+          key: 'bleed',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
+              <span>中毒</span>
+            </div>
+          ),
+          dataIndex: 'poison',
+          key: 'poison',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
+              <span>腐败</span>
+            </div>
+          ),
+          dataIndex: 'scarletRot',
+          key: 'scarletRot',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
+              <span>冻伤</span>
+            </div>
+          ),
+          dataIndex: 'frost',
+          key: 'frost',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+      ],
+    },
+  ];
+
+  const wildBossFooter = () => (
+    <div className="footer-text">
+      野生Boss数据：包含各种敌人和Boss的吸收值和抗性数据
+    </div>
+  );
+
   return (
     <div className="boss-data-view-container">
       <Card className="boss-card">
@@ -662,6 +924,23 @@ const BossDataView: React.FC = () => {
                   size="small"
                   bordered
                   footer={sinnerFooter}
+                />
+              ),
+            },
+            {
+              key: 'wild-boss-data',
+              label: '🗡️ 野生Boss数据',
+              children: (
+                <Table
+                  columns={wildBossColumns}
+                  dataSource={filteredWildBossData}
+                  rowKey="name"
+                  scroll={{ x: 1000, y: 'calc(100vh - 250px)' }}
+                  pagination={false}
+                  size="small"
+                  bordered
+                  footer={wildBossFooter}
+                  sticky
                 />
               ),
             },

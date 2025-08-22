@@ -57,24 +57,33 @@
 
 /* 抗性数值颜色类 - 浅色模式 */
 .resistance-low {
-  color: #237804 !important; /* 深绿色 */
+  color: #237804 !important;
 }
 
 .resistance-medium {
-  color: #d48806 !important; /* 深橙色 */
+  color: #d48806 !important;
 }
 
 .resistance-high {
-  color: #cf1322 !important; /* 深红色 */
+  color: #cf1322 !important;
 }
 
 /* 吸收数值颜色类 - 浅色模式 */
-.absorption-weak {
-  color: #237804 !important; /* 深绿色 - 弱吸收，容易受到伤害 */
+
+.absorption-1 {
+  color: #237804 !important;
 }
 
-.absorption-strong {
-  color: #cf1322 !important; /* 深红色 - 强吸收，抗性较强 */
+.absorption-2 {
+  color: #d48806 !important;
+}
+
+.absorption-3 {
+  color: #cf1322 !important;
+}
+
+.absorption-4 {
+  color: #9f00c7 !important;
 }
 
 /* 深色模式下的颜色覆盖 */
@@ -90,10 +99,18 @@ body[tomato-theme="dark"] .resistance-high {
   color: #ff4d4f !important; /* 浅红色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-weak {
+body[tomato-theme="dark"] .absorption-1 {
   color: #52c41a !important; /* 浅绿色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-strong {
-  color: #ff4d4f !important; /* 浅红色 - 深色模式下更清晰 */
+body[tomato-theme="dark"] .absorption-2 {
+  color: #faad14 !important; /* 浅橙色 - 深色模式下更清晰 */
+}
+
+body[tomato-theme="dark"] .absorption-3 {
+  color: #ff292c !important; /* 浅红色 - 深色模式下更清晰 */
+}
+
+body[tomato-theme="dark"] .absorption- {
+  color: #cd29f6 !important; /* 亮红色 - 深色模式下更清晰 */
 }

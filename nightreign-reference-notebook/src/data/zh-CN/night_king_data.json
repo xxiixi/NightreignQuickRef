@@ -15,10 +15,10 @@
     "poisonResistance": 542,
     "scarletRotResistance": 252,
     "bleedResistance": 252,
-    "deathBlightResistance": "-",
+    "deathBlightResistance": "免疫",
     "frostResistance": 542,
     "sleepResistance": 154,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 120
   },
   {
@@ -37,10 +37,10 @@
     "poisonResistance": 154,
     "scarletRotResistance": 154,
     "bleedResistance": 542,
-    "deathBlightResistance": "-",
+    "deathBlightResistance": "免疫",
     "frostResistance": 154,
     "sleepResistance": 154,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 150
   },
   {
@@ -59,10 +59,10 @@
     "poisonResistance": 542,
     "scarletRotResistance": 154,
     "bleedResistance": 154,
-    "deathBlightResistance": "-",
+    "deathBlightResistance": "免疫",
     "frostResistance": 154,
     "sleepResistance": 542,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 100
   },
   {
@@ -81,10 +81,10 @@
     "poisonResistance": 252,
     "scarletRotResistance": 154,
     "bleedResistance": 154,
-    "deathBlightResistance": "-",
+    "deathBlightResistance": "免疫",
     "frostResistance": 154,
     "sleepResistance": 542,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 150
   },
   {
@@ -100,13 +100,13 @@
     "fireAbsorption": 1,
     "lightningAbsorption": 1,
     "holyAbsorption": 1,
-    "poisonResistance": "-",
-    "scarletRotResistance": "-",
-    "bleedResistance": "-",
-    "deathBlightResistance": "-",
-    "frostResistance": "-",
-    "sleepResistance": "-",
-    "madnessResistance": "-",
+    "poisonResistance": "免疫",
+    "scarletRotResistance": "免疫",
+    "bleedResistance": "免疫",
+    "deathBlightResistance": "免疫",
+    "frostResistance": "免疫",
+    "sleepResistance": "免疫",
+    "madnessResistance": "免疫",
     "basePoise": 100
   },
   {
@@ -122,13 +122,13 @@
     "fireAbsorption": 0.5,
     "lightningAbsorption": 1.4,
     "holyAbsorption": 0.85,
-    "poisonResistance": "-",
+    "poisonResistance": "免疫",
     "scarletRotResistance": 252,
-    "bleedResistance": "-",
-    "deathBlightResistance": "-",
+    "bleedResistance": "免疫",
+    "deathBlightResistance": "免疫",
     "frostResistance": 252,
-    "sleepResistance": "-",
-    "madnessResistance": "-",
+    "sleepResistance": "免疫",
+    "madnessResistance": "免疫",
     "basePoise": 150
   },
   {
@@ -147,9 +147,9 @@
     "poisonResistance": 154,
     "scarletRotResistance": 154,
     "bleedResistance": 252,
-    "deathBlightResistance": "-",
+    "deathBlightResistance": "免疫",
     "frostResistance": 252,
-    "sleepResistance": "-",
+    "sleepResistance": "免疫",
     "madnessResistance": 154,
     "basePoise": 120
   },
@@ -169,10 +169,10 @@
     "poisonResistance": 154,
     "scarletRotResistance": 154,
     "bleedResistance": 154,
-    "deathBlightResistance": "-",
+    "deathBlightResistance": "免疫",
     "frostResistance": 154,
     "sleepResistance": 154,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 155
   },
   {
@@ -191,10 +191,10 @@
     "poisonResistance": 252,
     "scarletRotResistance": 252,
     "bleedResistance": 252,
-    "deathBlightResistance": "-",
+    "deathBlightResistance": "免疫",
     "frostResistance": 542,
     "sleepResistance": 542,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 160
   },
   {
@@ -210,13 +210,13 @@
     "fireAbsorption": 1.2,
     "lightningAbsorption": 1,
     "holyAbsorption": 1.35,
-    "poisonResistance": "-",
+    "poisonResistance": "免疫",
     "scarletRotResistance": 252,
-    "bleedResistance": "-",
-    "deathBlightResistance": "-",
-    "frostResistance": "-",
+    "bleedResistance": "免疫",
+    "deathBlightResistance": "免疫",
+    "frostResistance": "免疫",
     "sleepResistance": 542,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 130
   },
   {
@@ -232,13 +232,13 @@
     "fireAbsorption": 1,
     "lightningAbsorption": 1.2,
     "holyAbsorption": 1.2,
-    "poisonResistance": "-",
+    "poisonResistance": "免疫",
     "scarletRotResistance": 252,
-    "bleedResistance": "-",
-    "deathBlightResistance": "-",
-    "frostResistance": "-",
+    "bleedResistance": "免疫",
+    "deathBlightResistance": "免疫",
+    "frostResistance": "免疫",
     "sleepResistance": 542,
-    "madnessResistance": "-",
+    "madnessResistance": "免疫",
     "basePoise": 130
   }
 ]

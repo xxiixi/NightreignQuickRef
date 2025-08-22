@@ -32,6 +32,25 @@ export interface BossData {
   nightreignHealthMultiplier: number | string;
 }
 
+// 野生Boss数据接口
+export interface WildBossData {
+  name: string;
+  normal: number;
+  strike: number;
+  slash: number;
+  pierce: number;
+  magic: number;
+  fire: number;
+  lightning: number;
+  holy: number;
+  basePoise: number | string;
+  bleed: number | string;
+  poison: number | string;
+  scarletRot: number | string;
+  frost: number | string;
+  location: string;
+}
+
 // 词条类型颜色映射
 export const typeColorMap: Record<string, string> = {
   // 局外词条
