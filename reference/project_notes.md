@@ -10,11 +10,9 @@
 [【艾尔登法环：黑夜君临】全角色回避翻滚动作，无敌帧分析对比！](https://www.bilibili.com/video/BV1LvuVzuEqo?buvid=XY5BE8950C8CC4AA8B07EBC9B4DE33F7B4011&from_spmid=main.my-history.0.0&is_story_h5=false&mid=faGN3hFyzP2Mp23Yr98MOg%3D%3D&plat_id=116&share_from=ugc&share_medium=android&share_plat=android&share_session_id=9978f5e2-1f48-4148-bcd3-b64d47773aaf&share_source=QQ&share_tag=s_i&spmid=united.player-video-detail.0.0&timestamp=1754465400&unique_k=CyJwQiY&up_id=292847)
 
 ### 隐士出招表参考
-
 [小黑盒链接](https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a)
 
 ### 每日缩圈时间参考
-
 [mobalytics.gg](https://mobalytics.gg/elden-ring-nightreign/guides/day-length)
 
 ### 角色升级所需卢恩参考
@@ -22,7 +20,6 @@
 [game8.co/games](https://game8.co/games/Elden-Ring-Nightreign/archives/522643)
 
 ### 血量恢复计算器参考
-
 [【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区](https://www.bilibili.com/video/BV1M18jzQE9X/?spm_id_from=333.1391.0.0&vd_source=37640654dbdd4ab80b471a16ac6da3c0)
 
 ### 角色各等级属性点数
@@ -33,6 +30,9 @@
 
 ### 永夜山羊罪人NPC预设一览
 [永夜山羊罪人NPC预设一览及仇恨机制](https://www.bilibili.com/opus/1100871642065666054)
+
+### boss抗性一览
+[boss抗性](https://tieba.baidu.com/p/9906444262?pid=152430482433&cid=#152430482433)
 
 ### 图片来源
 [nightreign wiki](https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki)
