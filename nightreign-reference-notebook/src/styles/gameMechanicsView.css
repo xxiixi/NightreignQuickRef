@@ -98,7 +98,6 @@
 .mechanic-card .card-title-section {
   padding-bottom: 16px;
   border-bottom: 2px solid var(--color-primary-100);
-  position: relative;
 }
 
 .mechanic-card .card-title-section::after {
@@ -350,5 +349,27 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 
 .game-mechanics-container .ant-alert-description {
   color: var(--color-text-2);
+}
+
+/* 数据来源图标样式 */
+.data-source-icon {
+  transition: all 0.2s ease;
+}
+
+.data-source-icon:hover {
+  color: var(--color-primary) !important;
+  transform: scale(1.1);
+}
+
+/* 数据来源链接样式 */
+.ant-popover .footer-link {
+  color: #1890ff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ant-popover .footer-link:hover {
+  color: #40a9ff;
+  text-decoration: underline;
 }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Timeline, Table, Alert } from 'antd';
 import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
+import DataSourceTooltip from '../components/DataSourceTooltip';
 import '../styles/gameMechanicsView.css';
 import DataManager, { type MagicMove } from '../utils/dataManager';
 
@@ -62,6 +63,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                     <ClockCircleOutlined />
                     游戏时间机制
+                    <DataSourceTooltip 
+                      links={[{
+                        text: "⏰ 每日缩圈时间",
+                        url: "https://mobalytics.gg/elden-ring-nightreign/guides/day-length"
+                      }]}
+                    />
                   </Title>
                 </div>
                 <div className="card-body">
@@ -135,6 +142,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                   <MoneyCollectOutlined />
                     升级所需卢恩
+                    <DataSourceTooltip 
+                      links={[{
+                        text: "💰 角色升级所需卢恩",
+                        url: "https://game8.co/games/Elden-Ring-Nightreign/archives/522643"
+                      }]}
+                    />
                   </Title>
                 </div>
                 <div className="card-body">
@@ -264,6 +277,12 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                     <HeartTwoTone twoToneColor="#eb2f96" />
                     回血量计算器
+                    <DataSourceTooltip 
+                      links={[{
+                        text: "【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区",
+                        url: "https://www.bilibili.com/video/BV1M18jzQE9X"
+                      }]}
+                    />
                   </Title>
                 </div>
                   <div className="card-body">
@@ -281,6 +300,18 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                     <ThunderboltTwoTone />
                     隐士出招表
+                    <DataSourceTooltip 
+                      links={[
+                        {
+                          text: "1. 混合魔法太复杂？没关系我来讲清楚！",
+                          url: "https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a"
+                        },
+                        {
+                          text: "2. 黑夜君临 v1.01数据汇总-技艺、绝招数据",
+                          url: "https://tieba.baidu.com/p/9906444262?pid=152430482433&cid=#152430482433"
+                        }
+                      ]}
+                    />
                   </Title>
                 </div>
                 <div className="card-body">
