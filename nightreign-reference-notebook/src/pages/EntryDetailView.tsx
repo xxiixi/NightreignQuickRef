@@ -4,7 +4,7 @@ import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
 import DataManager from '../utils/dataManager';
-import type { EnhancementCategory } from '../utils/dataManager';
+import type { EnhancementCategory, ItemEffect } from '../utils/dataManager';
 import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
@@ -29,6 +29,7 @@ interface DataState {
   inGameEntries: EntryData[];
   enhancementCategories: EnhancementCategory[];
   inGameSpecialBuff: EntryData[];
+  itemEffects: ItemEffect[];
   loading: boolean;
 }
 
@@ -59,6 +60,20 @@ const characterOptions = [
   { value: '复仇者', label: '复仇者' },
   { value: '隐士', label: '隐士' },
   { value: '无赖', label: '无赖' },
+];
+
+// 道具效果分类选项
+const itemEffectTypeOptions = [
+  { text: '圣杯瓶', value: '圣杯瓶' },
+  { text: '采集', value: '采集' },
+  { text: '道具', value: '道具' },
+  { text: '苔药', value: '苔药' },
+  { text: '露滴', value: '露滴' },
+  { text: '壶', value: '壶' },
+  { text: '飞刀', value: '飞刀' },
+  { text: '石', value: '石' },
+  { text: '香', value: '香' },
+  { text: '油脂', value: '油脂' },
 ];
 
 
@@ -126,6 +141,7 @@ const EntryDetailView: React.FC = () => {
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedInGameTypes, setSelectedInGameTypes] = useState<string[]>([]);
   const [selectedCharacter, setSelectedCharacter] = useState<string>('');
+  const [selectedItemEffectTypes, setSelectedItemEffectTypes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
   const [activeEntryTab, setActiveEntryTab] = useState('局外词条');
@@ -140,6 +156,7 @@ const EntryDetailView: React.FC = () => {
     inGameEntries: [],
     enhancementCategories: [],
     inGameSpecialBuff: [],
+    itemEffects: [],
     loading: true
   });
 
@@ -353,6 +370,7 @@ const EntryDetailView: React.FC = () => {
           inGameEntries: dataManager.getInGameEntries(),
           enhancementCategories: dataManager.getEnhancementCategories(),
           inGameSpecialBuff: dataManager.getInGameSpecialBuff(),
+          itemEffects: dataManager.getItemEffects(),
           loading: false
         });
       } catch (error) {
@@ -371,6 +389,7 @@ const EntryDetailView: React.FC = () => {
     setSelectedTypes([]);
     setSelectedInGameTypes([]);
     setSelectedCharacter('');
+    setSelectedItemEffectTypes([]);
     setFilteredInfo({});
     setSortedInfo({});
     setCurrentPage(1);
@@ -386,6 +405,12 @@ const EntryDetailView: React.FC = () => {
 
   // 强化类别表格变化处理函数
   const handleEnhancementTableChange: TableProps<EnhancementCategory>['onChange'] = (_pagination, filters, sorter) => {
+    setFilteredInfo(filters);
+    setSortedInfo(sorter as Sorts);
+  };
+
+  // 道具效果表格变化处理函数
+  const handleItemEffectTableChange: TableProps<ItemEffect>['onChange'] = (_pagination, filters, sorter) => {
     setFilteredInfo(filters);
     setSortedInfo(sorter as Sorts);
   };
@@ -657,6 +682,52 @@ const EntryDetailView: React.FC = () => {
     },
   ];
 
+  // 道具效果表格列定义
+  const itemEffectColumns: TableColumnsType<ItemEffect> = [
+    {
+      title: '名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: '15%',
+      align: 'center',
+      sorter: (a, b) => {
+        const nameA = a.name || '';
+        const nameB = b.name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
+    },
+    {
+      title: '分类',
+      dataIndex: 'type',
+      key: 'type',
+      width: '10%',
+      align: 'center',
+      render: (text) => text ? (
+        <Tag color={getTypeColor(text)}>{text}</Tag>
+      ) : '-',
+      filters: itemEffectTypeOptions,
+      filteredValue: filteredInfo.type || null,
+      onFilter: (value, record) => record.type === value,
+    },
+    {
+      title: '单格数量',
+      dataIndex: 'singleGridQty',
+      key: 'singleGridQty',
+      width: '8%',
+      align: 'center',
+      render: (text) => text || '-',
+    },
+    {
+      title: '效果',
+      dataIndex: 'effect',
+      key: 'effect',
+      width: '70%',
+      render: (text) => text || '-',
+    },
+  ];
+
 
 
   // 创建强化类别表格列定义
@@ -759,6 +830,10 @@ const EntryDetailView: React.FC = () => {
   const renderTableContent = (tabKey: string) => {
     if (tabKey === '强化类别词条适用范围') {
       return renderEnhancementTable();
+    }
+
+    if (tabKey === '道具效果') {
+      return renderItemEffectTable();
     }
 
     let tableData: EntryData[] = [];
@@ -1047,6 +1122,133 @@ const EntryDetailView: React.FC = () => {
     );
   };
 
+  // 渲染道具效果表格
+  const renderItemEffectTable = () => {
+    let tableData = data.itemEffects;
+    
+    // 为道具效果添加搜索过滤
+    if (searchKeyword.trim()) {
+      const searchLower = searchKeyword.toLowerCase();
+      tableData = tableData.filter(item => 
+        item.name?.toLowerCase().includes(searchLower) ||
+        item.effect?.toLowerCase().includes(searchLower) ||
+        item.type?.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // 为道具效果添加分类筛选
+    if (selectedItemEffectTypes.length > 0) {
+      tableData = tableData.filter(item => selectedItemEffectTypes.includes(item.type));
+    }
+
+    const totalPages = Math.ceil(tableData.length / pageSize);
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedData = tableData.slice(startIndex, endIndex);
+
+    // 道具效果表格 footer
+    const itemEffectFooter = () => (
+      <div className="footer-text">
+        表内所有攻击力、异常值全部为固定值，不随等级成长，不吃任何补正。
+      </div>
+    );
+
+    return (
+      <div>
+        <Table<ItemEffect>
+          columns={itemEffectColumns}
+          dataSource={paginatedData}
+          rowKey="name"
+          onChange={handleItemEffectTableChange}
+          pagination={false}
+          size="small"
+          bordered
+          loading={data.loading}
+          footer={itemEffectFooter}
+        />
+        
+        {/* 自定义分页导航 */}
+        {!data.loading && tableData.length > 0 && (
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            marginTop: '15px',
+            padding: '0 16px'
+          }}>
+            {/* 左侧：每页显示选择器 */}
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px'
+            }}>
+              <span style={{ 
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                每页显示
+              </span>
+              <Select
+                value={pageSize.toString()}
+                onChange={(value) => {
+                  setPageSize(Number(value));
+                  setCurrentPage(1);
+                }}
+                options={[
+                  { value: '15', label: '15 条' },
+                  { value: '20', label: '20 条' },
+                  { value: '30', label: '30 条' },
+                  { value: '50', label: '50 条' },
+                  { value: '80', label: '80 条' },
+                  { value: '100', label: '100 条' },
+                ]}
+                size="small"
+                style={{ width: '100px' }}
+              />
+              <span style={{ 
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                共 {tableData.length} 条记录
+              </span>
+            </div>
+            
+            {/* 右侧：分页按钮 */}
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '10px'
+            }}>
+              <Button 
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage <= 1}
+                size="middle"
+              >
+                上一页
+              </Button>
+              
+              <span style={{ 
+                margin: '0 15px',
+                color: 'var(--theme-text-secondary)',
+                fontSize: '14px'
+              }}>
+                第 {currentPage} 页，共 {totalPages} 页
+              </span>
+              
+              <Button 
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage >= totalPages}
+                size="middle"
+              >
+                下一页
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   // 渲染搜索和筛选器的函数
   const renderSearchAndFilter = (tabKey: string) => {
     if (data.loading) {
@@ -1059,6 +1261,45 @@ const EntryDetailView: React.FC = () => {
 
     if (tabKey === '强化类别词条适用范围' || tabKey === '特殊事件及地形效果') {
       return null;
+    }
+
+    if (tabKey === '道具效果') {
+      return (
+        <div className="filter-search-row">
+          <div className="filter-search-content">
+            {/* 左侧：搜索、多选、清除 */}
+            <div className="filter-controls">
+              <Search 
+                placeholder={`搜索 ${tabKey} 关键字`}
+                onSearch={(value) => {
+                  setSearchKeyword(value);
+                  setCurrentPage(1);
+                }}
+                className="custom-search-input"
+                allowClear
+              />
+              <Select
+                className="item-effect-type-select"
+                mode="multiple"
+                allowClear
+                tagRender={tagRender}
+                placeholder="按分类筛选"
+                value={selectedItemEffectTypes}
+                onChange={(values) => {
+                  setSelectedItemEffectTypes(values);
+                  setCurrentPage(1);
+                }}
+                options={itemEffectTypeOptions}
+                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                style={{ width: '200px' }}
+              />
+              <Button onClick={clearAll} type="default" size="middle">
+                清除所有
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
     }
 
     if (tabKey === '局外词条') {
@@ -1215,6 +1456,16 @@ const EntryDetailView: React.FC = () => {
                 <div>
                   {renderSearchAndFilter('特殊事件及地形效果')}
                   {renderTableContent('特殊事件及地形效果')}
+                </div>
+              ),
+            },
+            {
+              key: '道具效果',
+              label: '🌒 道具/采集效果',
+              children: (
+                <div>
+                  {renderSearchAndFilter('道具效果')}
+                  {renderTableContent('道具效果')}
                 </div>
               ),
             },

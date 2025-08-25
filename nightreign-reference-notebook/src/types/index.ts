@@ -82,4 +82,15 @@ export const typeColorMap: Record<string, string> = {
   '特殊地形：腐败森林': 'red',
   '特殊地形：山顶': 'cyan',
   '特殊地形：火山口': 'volcano',
+  // 道具效果分类
+  '圣杯瓶': 'red',
+  '采集': 'green',
+  '道具': 'cyan',
+  '苔药': 'orange',
+  '露滴': 'purple',
+  '壶': 'blue',
+  '飞刀': 'volcano',
+  '石': 'geekblue',
+  '香': 'magenta',
+  '油脂': 'gold',
 }; 

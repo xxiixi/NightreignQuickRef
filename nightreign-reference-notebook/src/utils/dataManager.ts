@@ -57,6 +57,14 @@ export interface InvincibleFrame {
   value: number;
 }
 
+// 道具效果数据接口
+export interface ItemEffect {
+  name: string;
+  effect: string;
+  singleGridQty: string;
+  type: string;
+}
+
 // 角色详细数据接口
 export interface CharacterDetailData {
   [characterName: string]: Array<{
@@ -131,7 +139,8 @@ class DataManager {
         invincibleFrames,
         enhancementCategories,
         inGameSpecialBuff,
-        characterData
+        characterData,
+        itemEffects
       ] = await Promise.all([
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
@@ -143,7 +152,8 @@ class DataManager {
         import('../data/zh-CN/invincible_frames.json'),
         import('../data/zh-CN/enhancement_categories.json'),
         import('../data/zh-CN/in-game_special_buff.json'),
-        import('../data/character-info/character_data.json')
+        import('../data/character-info/character_data.json'),
+        import('../data/zh-CN/item_effect.json')
       ]);
 
       // 加载角色详细数据
@@ -203,6 +213,7 @@ class DataManager {
       this.dataCache.set('inGameSpecialBuff', inGameSpecialBuff.default);
       this.dataCache.set('characterData', characterData.default);
       this.dataCache.set('characterDetailData', characterDetailData);
+      this.dataCache.set('itemEffects', itemEffects.default);
 
       this.isLoaded = true;
       console.log('所有数据预加载完成');
@@ -260,6 +271,10 @@ class DataManager {
 
   public getCharacterDetailData(): { [key: string]: any } {
     return this.dataCache.get('characterDetailData') || {};
+  }
+
+  public getItemEffects(): ItemEffect[] {
+    return this.dataCache.get('itemEffects') || [];
   }
 
   // 检查是否已加载
