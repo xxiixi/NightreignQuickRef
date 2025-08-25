@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Table, Input, Select, message, Tabs, Tag, Spin, Button} from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
@@ -7,7 +7,94 @@ import DataManager from '../utils/dataManager';
 import type { EnhancementCategory, ItemEffect } from '../utils/dataManager';
 import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
-import { throttle } from 'lodash';
+import { throttle, debounce } from 'lodash';
+import { SearchOutlined } from '@ant-design/icons';
+
+// 自定义搜索组件接口
+interface CustomSearchProps {
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
+  onSearch?: (value: string) => void;
+  className?: string;
+  allowClear?: boolean;
+  searchFields?: string[];
+}
+
+// 自定义搜索组件
+const CustomSearch: React.FC<CustomSearchProps> = ({
+  placeholder,
+  value,
+  onChange,
+  onSearch,
+  className = '',
+  allowClear = true,
+  searchFields = []
+}) => {
+  const [inputValue, setInputValue] = useState(value);
+
+  // 防抖处理搜索
+  const debouncedSearch = useMemo(
+    () => debounce((searchValue: string) => {
+      onChange(searchValue);
+      onSearch?.(searchValue);
+    }, 300),
+    [onChange, onSearch]
+  );
+
+  // 处理输入变化
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setInputValue(newValue);
+    debouncedSearch(newValue);
+  };
+
+  // 处理回车搜索
+  const handlePressEnter = () => {
+    onChange(inputValue);
+    onSearch?.(inputValue);
+  };
+
+  // 处理清除
+  const handleClear = () => {
+    setInputValue('');
+    onChange('');
+    onSearch?.('');
+  };
+
+  // 同步外部value变化
+  useEffect(() => {
+    setInputValue(value);
+  }, [value]);
+
+  return (
+    <div className={`custom-search-wrapper ${className}`}>
+      <Input
+        placeholder={placeholder}
+        prefix={<SearchOutlined style={{ color: 'var(--theme-text-secondary)' }} />}
+        value={inputValue}
+        onChange={handleInputChange}
+        onPressEnter={handlePressEnter}
+        allowClear={allowClear}
+        onClear={handleClear}
+        style={{ 
+          width: '250px',
+          transition: 'all 0.3s ease'
+        }}
+      />
+      {searchFields.length > 0 && (
+        <div className="search-hint" style={{
+          fontSize: '12px',
+          color: 'var(--theme-text-secondary)',
+          marginTop: '4px',
+          fontStyle: 'italic'
+        }}>
+          可搜索: {searchFields.join('、')}
+        </div>
+      )}
+    </div>
+  );
+};
 
 // 自定义分页组件接口
 interface CustomPaginationProps {
@@ -123,8 +210,6 @@ type OnChange = NonNullable<TableProps<EntryData>['onChange']>;
 type Filters = Parameters<OnChange>[1];
 type GetSingle<T> = T extends (infer U)[] ? U : never;
 type Sorts = GetSingle<Parameters<OnChange>[2]>;
-
-const { Search } = Input;
 
 // 数据接口
 interface DataState {
@@ -522,34 +607,75 @@ const EntryDetailView: React.FC = () => {
   // 搜索过滤函数
   const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[]) => {
     let filtered = data;
+    
+    // 类型筛选
     if (types && types.length > 0) {
       filtered = filtered.filter(item => types.includes(item.entry_type || ''));
     }
+    
+    // 局内词条类型筛选
     if (inGameTypes && inGameTypes.length > 0) {
       filtered = filtered.filter(item => inGameTypes.includes(item.entry_type || ''));
     }
+    
+    // 角色筛选
     if (character && character.trim()) {
       filtered = filtered.filter(item => 
         item.entry_name?.includes(character) || 
         item.explanation?.includes(character)
       );
     }
+    
+    // 关键词搜索
     if (!searchValue.trim()) return filtered;
     
-    const searchLower = searchValue.toLowerCase();
-    return filtered.filter(item => 
-      item.entry_name?.toLowerCase().includes(searchLower) ||
-      item.explanation?.toLowerCase().includes(searchLower) ||
-      item.entry_type?.toLowerCase().includes(searchLower) ||
-      item.superposability?.toLowerCase().includes(searchLower) ||
-      item.talisman?.toLowerCase().includes(searchLower) ||
-      item.entry_id?.toLowerCase().includes(searchLower)
-    );
+    const searchTerms = searchValue.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+    
+    return filtered.filter(item => {
+      // 搜索字段
+      const searchableFields = [
+        item.entry_name || '',
+        item.explanation || '',
+        item.entry_type || '',
+        item.superposability || '',
+        item.talisman || '',
+        item.entry_id || ''
+      ].map(field => field.toLowerCase());
+      
+      // 检查所有搜索词是否都在至少一个字段中出现
+      return searchTerms.every(term => 
+        searchableFields.some(field => field.includes(term))
+      );
+    });
   };
 
-
-
-
+  // 道具效果搜索过滤函数
+  const filterItemEffectData = (data: ItemEffect[], searchValue: string, types?: string[]) => {
+    let filtered = data;
+    
+    // 分类筛选
+    if (types && types.length > 0) {
+      filtered = filtered.filter(item => types.includes(item.type));
+    }
+    
+    // 关键词搜索
+    if (!searchValue.trim()) return filtered;
+    
+    const searchTerms = searchValue.toLowerCase().split(/\s+/).filter(term => term.length > 0);
+    
+    return filtered.filter(item => {
+      const searchableFields = [
+        item.name || '',
+        item.effect || '',
+        item.type || '',
+        item.singleGridQty?.toString() || ''
+      ].map(field => field.toLowerCase());
+      
+      return searchTerms.every(term => 
+        searchableFields.some(field => field.includes(term))
+      );
+    });
+  };
 
   // 将强化类别数据转换为支持rowSpan的格式
   const transformEnhancementData = (data: EnhancementCategory[]): EnhancedEnhancementCategory[] => {
@@ -763,19 +889,19 @@ const EntryDetailView: React.FC = () => {
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
+      sorter: (a, b) => {
+        const typeA = a.entry_type || '';
+        const typeB = b.entry_type || '';
+        return typeA.localeCompare(typeB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_type' ? sortedInfo.order : null,
     },
     {
       title: '效果名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
       width: '20%',
-      sorter: (a, b) => {
-        const nameA = a.entry_name || '';
-        const nameB = b.entry_name || '';
-        return nameA.localeCompare(nameB, 'zh-CN');
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
     },
     {
       title: '效果描述',
@@ -856,9 +982,6 @@ const EntryDetailView: React.FC = () => {
         key: 'category',
         width: '15%',
         align: 'center',
-        sorter: (a: EnhancedEnhancementCategory, b: EnhancedEnhancementCategory) => a.category.localeCompare(b.category, 'zh-CN'),
-        sortDirections: ['ascend', 'descend'] as const,
-        sortOrder: sortedInfo.columnKey === 'category' ? sortedInfo.order : null,
         onCell: (record: EnhancedEnhancementCategory, index?: number) => {
           const info = rowSpanInfo.get(record.category);
           if (info && index === info.firstIndex) {
@@ -1092,17 +1215,12 @@ const EntryDetailView: React.FC = () => {
     
     // 为道具效果添加搜索过滤
     if (searchKeyword.trim()) {
-      const searchLower = searchKeyword.toLowerCase();
-      tableData = tableData.filter(item => 
-        item.name?.toLowerCase().includes(searchLower) ||
-        item.effect?.toLowerCase().includes(searchLower) ||
-        item.type?.toLowerCase().includes(searchLower)
-      );
+      tableData = filterItemEffectData(tableData, searchKeyword, selectedItemEffectTypes);
     }
 
     // 为道具效果添加分类筛选
     if (selectedItemEffectTypes.length > 0) {
-      tableData = tableData.filter(item => selectedItemEffectTypes.includes(item.type));
+      tableData = filterItemEffectData(tableData, '', selectedItemEffectTypes); // 使用空字符串作为搜索关键词，只进行分类筛选
     }
 
     const startIndex = (currentPage - 1) * pageSize;
@@ -1165,12 +1283,15 @@ const EntryDetailView: React.FC = () => {
           <div className="filter-search-content">
             {/* 左侧：搜索、多选、清除 */}
             <div className="filter-controls">
-              <Search 
+              <CustomSearch
                 placeholder={`搜索 ${tabKey} 关键字`}
+                value={searchKeyword}
+                onChange={setSearchKeyword}
                 onSearch={(value) => {
                   setSearchKeyword(value);
                   setCurrentPage(1);
                 }}
+                                 searchFields={['名称', '效果', '分类', '单格数量']}
                 className="custom-search-input"
                 allowClear
               />
@@ -1204,12 +1325,15 @@ const EntryDetailView: React.FC = () => {
           <div className="filter-search-content">
             {/* 左侧：搜索、多选、单选、清除 */}
             <div className="filter-controls">
-              <Search 
+              <CustomSearch
                 placeholder={`搜索 ${tabKey} 关键字`}
+                value={searchKeyword}
+                onChange={setSearchKeyword}
                 onSearch={(value) => {
                   setSearchKeyword(value);
                   setCurrentPage(1);
                 }}
+                searchFields={['词条名称', '解释', '词条类型', '叠加性', 'ID']}
                 className="custom-search-input"
                 allowClear
               />
@@ -1255,12 +1379,15 @@ const EntryDetailView: React.FC = () => {
           <div className="filter-search-content">
             {/* 左侧：搜索、清除 */}
             <div className="filter-controls">
-              <Search 
+              <CustomSearch
                 placeholder={`搜索 ${tabKey} 关键字`}
+                value={searchKeyword}
+                onChange={setSearchKeyword}
                 onSearch={(value) => {
                   setSearchKeyword(value);
                   setCurrentPage(1);
                 }}
+                searchFields={['词条名称', '解释', '词条类型', 'ID']}
                 className="custom-search-input"
                 allowClear
               />

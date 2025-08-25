@@ -1173,3 +1173,84 @@ body[tomato-theme="dark"] .development-notice p {
     font-size: 2.5rem;
   }
 } 
+
+/* ===== 自定义搜索组件样式 ===== */
+.custom-search-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-search-wrapper .ant-input {
+  border-radius: 8px;
+  border: 1px solid var(--theme-border);
+  background-color: var(--theme-bg-secondary);
+  color: var(--theme-text-primary);
+  transition: all 0.3s ease;
+}
+
+.custom-search-wrapper .ant-input:hover {
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 2px rgba(95, 142, 247, 0.1);
+}
+
+.custom-search-wrapper .ant-input:focus,
+.custom-search-wrapper .ant-input-focused {
+  border-color: var(--theme-primary);
+  box-shadow: 0 0 0 2px rgba(95, 142, 247, 0.2);
+}
+
+.custom-search-wrapper .ant-input-prefix {
+  margin-right: 8px;
+}
+
+.search-hint {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--theme-bg-primary);
+  border: 1px solid var(--theme-border);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--theme-text-secondary);
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.custom-search-wrapper:hover .search-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 暗色模式适配 */
+[data-theme="dark"] .custom-search-wrapper .ant-input,
+body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
+  background-color: var(--theme-bg-secondary);
+  border-color: var(--theme-border);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="dark"] .custom-search-wrapper .ant-input:hover,
+body[tomato-theme="dark"] .custom-search-wrapper .ant-input:hover {
+  border-color: var(--theme-primary);
+}
+
+[data-theme="dark"] .search-hint,
+body[tomato-theme="dark"] .search-hint {
+  background-color: var(--theme-bg-primary);
+  border-color: var(--theme-border);
+  color: var(--theme-text-secondary);
+}
+
+/* 搜索框聚焦时的提示显示 */
+.custom-search-wrapper .ant-input:focus + .search-hint,
+.custom-search-wrapper .ant-input-focused + .search-hint {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+} 
