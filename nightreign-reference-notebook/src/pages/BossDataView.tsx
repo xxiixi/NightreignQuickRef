@@ -738,7 +738,7 @@ const BossDataView: React.FC = () => {
       title: '位置',
       dataIndex: 'location',
       key: 'location',
-      width: 140,
+      width: 150,
       align: 'center',
         render: (text) => (
         <span className="location-tag">

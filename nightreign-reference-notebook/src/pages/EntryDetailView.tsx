@@ -18,7 +18,6 @@ interface CustomSearchProps {
   onSearch?: (value: string) => void;
   className?: string;
   allowClear?: boolean;
-  searchFields?: string[];
 }
 
 // 自定义搜索组件
@@ -28,8 +27,7 @@ const CustomSearch: React.FC<CustomSearchProps> = ({
   onChange,
   onSearch,
   className = '',
-  allowClear = true,
-  searchFields = []
+  allowClear = true
 }) => {
   const [inputValue, setInputValue] = useState(value);
 
@@ -71,27 +69,14 @@ const CustomSearch: React.FC<CustomSearchProps> = ({
     <div className={`custom-search-wrapper ${className}`}>
       <Input
         placeholder={placeholder}
-        prefix={<SearchOutlined style={{ color: 'var(--theme-text-secondary)' }} />}
+        prefix={<SearchOutlined />}
         value={inputValue}
         onChange={handleInputChange}
         onPressEnter={handlePressEnter}
         allowClear={allowClear}
         onClear={handleClear}
-        style={{ 
-          width: '250px',
-          transition: 'all 0.3s ease'
-        }}
+        style={{ width: 200 }}
       />
-      {searchFields.length > 0 && (
-        <div className="search-hint" style={{
-          fontSize: '12px',
-          color: 'var(--theme-text-secondary)',
-          marginTop: '4px',
-          fontStyle: 'italic'
-        }}>
-          可搜索: {searchFields.join('、')}
-        </div>
-      )}
     </div>
   );
 };
@@ -937,9 +922,13 @@ const EntryDetailView: React.FC = () => {
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
-      filters: itemEffectTypeOptions,
-      filteredValue: filteredInfo.type || null,
-      onFilter: (value, record) => record.type === value,
+      sorter: (a, b) => {
+        const typeA = a.type || '';
+        const typeB = b.type || '';
+        return typeA.localeCompare(typeB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'type' ? sortedInfo.order : null,
     },
     {
       title: '单格数量',
@@ -1291,7 +1280,6 @@ const EntryDetailView: React.FC = () => {
                   setSearchKeyword(value);
                   setCurrentPage(1);
                 }}
-                                 searchFields={['名称', '效果', '分类', '单格数量']}
                 className="custom-search-input"
                 allowClear
               />
@@ -1308,7 +1296,7 @@ const EntryDetailView: React.FC = () => {
                 }}
                 options={itemEffectTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                style={{ width: '200px' }}
+                style={{ minWidth: '180px', maxWidth: '300px' }}
               />
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
@@ -1333,7 +1321,6 @@ const EntryDetailView: React.FC = () => {
                   setSearchKeyword(value);
                   setCurrentPage(1);
                 }}
-                searchFields={['词条名称', '解释', '词条类型', '叠加性', 'ID']}
                 className="custom-search-input"
                 allowClear
               />
@@ -1350,6 +1337,7 @@ const EntryDetailView: React.FC = () => {
                 }}
                 options={outsiderTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                style={{ minWidth: '180px', maxWidth: '300px' }}
               />
               <Select
                 className="character-select"
@@ -1387,7 +1375,6 @@ const EntryDetailView: React.FC = () => {
                   setSearchKeyword(value);
                   setCurrentPage(1);
                 }}
-                searchFields={['词条名称', '解释', '词条类型', 'ID']}
                 className="custom-search-input"
                 allowClear
               />
@@ -1405,6 +1392,7 @@ const EntryDetailView: React.FC = () => {
                   }}
                   options={inGameTypeOptions}
                   maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                  style={{ minWidth: '180px', maxWidth: '300px' }}
                 />
               )}
               <Button onClick={clearAll} type="default" size="middle">
@@ -1430,6 +1418,14 @@ const EntryDetailView: React.FC = () => {
           onChange={(key) => {
             setActiveEntryTab(key);
             setCurrentPage(1);
+            // 清空搜索相关状态
+            setSearchKeyword('');
+            setSelectedTypes([]);
+            setSelectedInGameTypes([]);
+            setSelectedCharacter('');
+            setSelectedItemEffectTypes([]);
+            setFilteredInfo({});
+            setSortedInfo({});
           }}
           items={[
             {
