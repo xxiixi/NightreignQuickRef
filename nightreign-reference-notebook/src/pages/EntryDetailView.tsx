@@ -9,6 +9,110 @@ import { Line } from '@ant-design/plots';
 import { getCurrentTheme } from '../utils/themeUtils';
 import { throttle } from 'lodash';
 
+// 自定义分页组件接口
+interface CustomPaginationProps {
+  currentPage: number;
+  pageSize: number;
+  totalItems: number;
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (pageSize: number) => void;
+  loading?: boolean;
+}
+
+// 自定义分页组件
+const CustomPagination: React.FC<CustomPaginationProps> = ({
+  currentPage,
+  pageSize,
+  totalItems,
+  onPageChange,
+  onPageSizeChange,
+  loading = false
+}) => {
+  const totalPages = Math.ceil(totalItems / pageSize);
+  
+  if (loading || totalItems === 0) {
+    return null;
+  }
+
+  return (
+    <div style={{ 
+      display: 'flex', 
+      justifyContent: 'space-between', 
+      alignItems: 'center', 
+      marginTop: '15px',
+      padding: '0 16px'
+    }}>
+      {/* 左侧：每页显示选择器 */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '8px'
+      }}>
+        <span style={{ 
+          color: 'var(--theme-text-secondary)',
+          fontSize: '14px'
+        }}>
+          每页显示
+        </span>
+        <Select
+          value={pageSize.toString()}
+          onChange={(value) => {
+            onPageSizeChange(Number(value));
+            onPageChange(1);
+          }}
+          options={[
+            { value: '15', label: '15 条' },
+            { value: '20', label: '20 条' },
+            { value: '30', label: '30 条' },
+            { value: '50', label: '50 条' },
+            { value: '80', label: '80 条' },
+            { value: '100', label: '100 条' },
+          ]}
+          size="small"
+          style={{ width: '100px' }}
+        />
+        <span style={{ 
+          color: 'var(--theme-text-secondary)',
+          fontSize: '14px'
+        }}>
+          共 {totalItems} 条记录
+        </span>
+      </div>
+      
+      {/* 右侧：分页按钮 */}
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        gap: '10px'
+      }}>
+        <Button 
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage <= 1}
+          size="middle"
+        >
+          上一页
+        </Button>
+        
+        <span style={{ 
+          margin: '0 15px',
+          color: 'var(--theme-text-secondary)',
+          fontSize: '14px'
+        }}>
+          第 {currentPage} 页，共 {totalPages} 页
+        </span>
+        
+        <Button 
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+          size="middle"
+        >
+          下一页
+        </Button>
+      </div>
+    </div>
+  );
+};
+
 // 扩展的强化类别接口，用于表格显示
 interface EnhancedEnhancementCategory extends EnhancementCategory {
   skillType?: string;
@@ -866,9 +970,6 @@ const EntryDetailView: React.FC = () => {
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter);
     }
 
-    // 计算总页数
-    const totalPages = Math.ceil(tableData.length / pageSize);
-    
     // 分页处理
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
@@ -890,81 +991,14 @@ const EntryDetailView: React.FC = () => {
         
         {/* 自定义分页导航 */}
         {!data.loading && tableData.length > 0 && (
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            marginTop: '15px',
-            padding: '0 16px'
-          }}>
-            {/* 左侧：每页显示选择器 */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '8px'
-            }}>
-              <span style={{ 
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                每页显示
-              </span>
-              <Select
-                value={pageSize.toString()}
-                onChange={(value) => {
-                  setPageSize(Number(value));
-                  setCurrentPage(1);
-                }}
-                options={[
-                  { value: '15', label: '15 条' },
-                  { value: '20', label: '20 条' },
-                  { value: '30', label: '30 条' },
-                  { value: '50', label: '50 条' },
-                  { value: '80', label: '80 条' },
-                  { value: '100', label: '100 条' },
-                ]}
-                size="small"
-                style={{ width: '100px' }}
-              />
-              <span style={{ 
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                共 {tableData.length} 条记录
-              </span>
-            </div>
-            
-            {/* 右侧：分页按钮 */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '10px'
-            }}>
-              <Button 
-                onClick={() => setCurrentPage(currentPage - 1)}
-                disabled={currentPage <= 1}
-                size="middle"
-              >
-                上一页
-              </Button>
-              
-              <span style={{ 
-                margin: '0 15px',
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                第 {currentPage} 页，共 {totalPages} 页
-              </span>
-              
-              <Button 
-                onClick={() => setCurrentPage(currentPage + 1)}
-                disabled={currentPage >= totalPages}
-                size="middle"
-              >
-                下一页
-              </Button>
-            </div>
-          </div>
+          <CustomPagination
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalItems={tableData.length}
+            onPageChange={setCurrentPage}
+            onPageSizeChange={setPageSize}
+            loading={data.loading}
+          />
         )}
         
         {/* 特殊事件及地形效果 tab 的折线图 */}
@@ -1020,12 +1054,9 @@ const EntryDetailView: React.FC = () => {
   // 渲染强化类别表格
   const renderEnhancementTable = () => {
     const transformedData = transformEnhancementData(data.enhancementCategories);
-    const totalPages = Math.ceil(transformedData.length / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedData = transformedData.slice(startIndex, endIndex);
-
-
 
     return (
       <div>
@@ -1042,81 +1073,14 @@ const EntryDetailView: React.FC = () => {
         
         {/* 自定义分页导航 */}
         {!data.loading && transformedData.length > 0 && (
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            marginTop: '15px',
-            padding: '0 16px'
-          }}>
-            {/* 左侧：每页显示选择器 */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '8px'
-            }}>
-              <span style={{ 
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                每页显示
-              </span>
-              <Select
-                value={pageSize.toString()}
-                onChange={(value) => {
-                  setPageSize(Number(value));
-                  setCurrentPage(1);
-                }}
-                options={[
-                  { value: '15', label: '15 条' },
-                  { value: '20', label: '20 条' },
-                  { value: '30', label: '30 条' },
-                  { value: '50', label: '50 条' },
-                  { value: '80', label: '80 条' },
-                  { value: '100', label: '100 条' },
-                ]}
-                size="small"
-                style={{ width: '100px' }}
-              />
-              <span style={{ 
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                共 {transformedData.length} 条记录
-              </span>
-            </div>
-            
-            {/* 右侧：分页按钮 */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '10px'
-            }}>
-              <Button 
-                onClick={() => setCurrentPage(currentPage - 1)}
-                disabled={currentPage <= 1}
-                size="middle"
-              >
-                上一页
-              </Button>
-              
-              <span style={{ 
-                margin: '0 15px',
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                第 {currentPage} 页，共 {totalPages} 页
-              </span>
-              
-              <Button 
-                onClick={() => setCurrentPage(currentPage + 1)}
-                disabled={currentPage >= totalPages}
-                size="middle"
-              >
-                下一页
-              </Button>
-            </div>
-          </div>
+          <CustomPagination
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalItems={transformedData.length}
+            onPageChange={setCurrentPage}
+            onPageSizeChange={setPageSize}
+            loading={data.loading}
+          />
         )}
       </div>
     );
@@ -1141,7 +1105,6 @@ const EntryDetailView: React.FC = () => {
       tableData = tableData.filter(item => selectedItemEffectTypes.includes(item.type));
     }
 
-    const totalPages = Math.ceil(tableData.length / pageSize);
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedData = tableData.slice(startIndex, endIndex);
@@ -1169,81 +1132,14 @@ const EntryDetailView: React.FC = () => {
         
         {/* 自定义分页导航 */}
         {!data.loading && tableData.length > 0 && (
-          <div style={{ 
-            display: 'flex', 
-            justifyContent: 'space-between', 
-            alignItems: 'center', 
-            marginTop: '15px',
-            padding: '0 16px'
-          }}>
-            {/* 左侧：每页显示选择器 */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '8px'
-            }}>
-              <span style={{ 
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                每页显示
-              </span>
-              <Select
-                value={pageSize.toString()}
-                onChange={(value) => {
-                  setPageSize(Number(value));
-                  setCurrentPage(1);
-                }}
-                options={[
-                  { value: '15', label: '15 条' },
-                  { value: '20', label: '20 条' },
-                  { value: '30', label: '30 条' },
-                  { value: '50', label: '50 条' },
-                  { value: '80', label: '80 条' },
-                  { value: '100', label: '100 条' },
-                ]}
-                size="small"
-                style={{ width: '100px' }}
-              />
-              <span style={{ 
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                共 {tableData.length} 条记录
-              </span>
-            </div>
-            
-            {/* 右侧：分页按钮 */}
-            <div style={{ 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '10px'
-            }}>
-              <Button 
-                onClick={() => setCurrentPage(currentPage - 1)}
-                disabled={currentPage <= 1}
-                size="middle"
-              >
-                上一页
-              </Button>
-              
-              <span style={{ 
-                margin: '0 15px',
-                color: 'var(--theme-text-secondary)',
-                fontSize: '14px'
-              }}>
-                第 {currentPage} 页，共 {totalPages} 页
-              </span>
-              
-              <Button 
-                onClick={() => setCurrentPage(currentPage + 1)}
-                disabled={currentPage >= totalPages}
-                size="middle"
-              >
-                下一页
-              </Button>
-            </div>
-          </div>
+          <CustomPagination
+            currentPage={currentPage}
+            pageSize={pageSize}
+            totalItems={tableData.length}
+            onPageChange={setCurrentPage}
+            onPageSizeChange={setPageSize}
+            loading={data.loading}
+          />
         )}
       </div>
     );
