@@ -1177,7 +1177,7 @@ body[tomato-theme="dark"] .development-notice p {
 .custom-search-wrapper .ant-input {
   border-radius: 8px;
   border: 1px solid var(--theme-border);
-  background-color: var(--theme-bg-secondary);
+  background-color: var(--theme-bg-primary);
   color: var(--theme-text-primary);
 }
 
@@ -1194,7 +1194,7 @@ body[tomato-theme="dark"] .development-notice p {
 /* 暗色模式适配 */
 [data-theme="dark"] .custom-search-wrapper .ant-input,
 body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
-  background-color: var(--theme-bg-secondary);
+  background-color: var(--theme-bg-primary);
   border-color: var(--theme-border);
   color: var(--theme-text-primary);
 } 
