@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
   onToggleTheme,
   onToggleLanguage
 }) => {
-  const { sitePv, pagePv, siteUv } = useVercount();
+  const { sitePv, siteUv } = useVercount();
 
   return (
     <>
