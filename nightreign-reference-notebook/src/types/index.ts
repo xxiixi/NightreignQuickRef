@@ -51,6 +51,25 @@ export interface WildBossData {
   location: string;
 }
 
+// 圆桌厅堂人物数据接口
+export interface CharacterData {
+  name: string;
+  normal: number;
+  strike: number;
+  slash: number;
+  pierce: number;
+  magic: number;
+  fire: number;
+  lightning: number;
+  holy: number;
+  basePoise: number | string;
+  bleed: number | string;
+  poison: number | string;
+  scarletRot: number | string;
+  frost: number | string;
+  location: string;
+}
+
 // 词条类型颜色映射
 export const typeColorMap: Record<string, string> = {
   // 局外词条

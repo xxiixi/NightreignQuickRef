@@ -138,6 +138,8 @@ body[tomato-theme="dark"] .resistance-high {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
+  justify-content: center;
+  align-items: center;
 }
 
 .location-tag .ant-tag {

@@ -961,7 +961,6 @@ body[tomato-theme="dark"] .loading-text {
     padding: var(--spacing-lg);
   }
   
-  /* 移动端不需要额外的底部内边距，因为使用了flexbox布局 */
   
   .main-title {
     font-size: var(--font-size-2xl) !important;

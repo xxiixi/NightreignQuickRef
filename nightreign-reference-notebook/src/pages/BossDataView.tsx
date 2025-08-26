@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { Table, Card, Image, Tabs, Select, Input, Button, Tag } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
-import type { BossData, WildBossData } from '../types';
+import type { BossData, WildBossData, CharacterData } from '../types';
 import bossData from '../data/zh-CN/night_king_data.json';
 import sinnerList from '../data/zh-CN/sinner_list.json';
 import wildBossData from '../data/zh-CN/wild_boss_data.json';
+import characterData from '../data/character-info/character_data.json';
 import '../styles/bossDataView.css';
 
 // 导入boss图片
@@ -41,6 +42,8 @@ const BossDataView: React.FC = () => {
   const [filteredData] = useState<BossData[]>(bossData);
   const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
+  const [characterSearchKeyword, setCharacterSearchKeyword] = useState('');
+  const [selectedCharacterLocations, setSelectedCharacterLocations] = useState<string[]>([]);
 
   // 位置颜色映射
   const locationColorMap: Record<string, string> = {
@@ -62,6 +65,11 @@ const BossDataView: React.FC = () => {
     '第一夜': 'green',
     '第二夜': 'green',
     '突发事件': 'yellow',
+    // 圆桌厅堂人物位置颜色
+    '训练场': 'green',
+    '可选角色': 'blue',
+    '执行者绝招变身': 'magenta',
+    '复仇者家人': 'cyan',
   };
 
   // 获取位置颜色
@@ -140,6 +148,50 @@ const BossDataView: React.FC = () => {
   const clearWildBossFilters = () => {
     setWildBossSearchKeyword('');
     setSelectedLocations([]);
+  };
+
+  // 获取所有唯一的圆桌厅堂人物位置选项
+  const getCharacterLocationOptions = () => {
+    const locations = new Set<string>();
+    characterData.forEach(character => {
+      if (character.location) {
+        locations.add(character.location.trim());
+      }
+    });
+    
+    return Array.from(locations).sort().map(location => ({
+      value: location,
+      label: location
+    }));
+  };
+
+  // 过滤圆桌厅堂人物数据
+  const getFilteredCharacterData = () => {
+    let filtered = characterData;
+    
+    // 按位置筛选
+    if (selectedCharacterLocations.length > 0) {
+      filtered = filtered.filter(character => {
+        if (!character.location) return false;
+        return selectedCharacterLocations.includes(character.location.trim());
+      });
+    }
+    
+    // 按搜索关键词筛选（仅搜索人物名称）
+    if (characterSearchKeyword.trim()) {
+      const searchLower = characterSearchKeyword.toLowerCase();
+      filtered = filtered.filter(character => 
+        character.name.toLowerCase().includes(searchLower)
+      );
+    }
+    
+    return filtered;
+  };
+
+  // 清除圆桌厅堂人物筛选
+  const clearCharacterFilters = () => {
+    setCharacterSearchKeyword('');
+    setSelectedCharacterLocations([]);
   };
 
   // 根据抗性数值返回CSS类名
@@ -491,7 +543,7 @@ const BossDataView: React.FC = () => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: '基础韧性',
+      title: '韧性',
       dataIndex: 'basePoise',
       key: 'basePoise',
       width: 70,
@@ -902,10 +954,10 @@ const BossDataView: React.FC = () => {
       ],
     },
     {
-      title: '基础韧性',
+      title: '韧性',
       dataIndex: 'basePoise',
       key: 'basePoise',
-      width: 80,
+      width: 60,
       align: 'center',
     },
     {
@@ -989,6 +1041,270 @@ const BossDataView: React.FC = () => {
     </div>
   );
 
+  // 圆桌厅堂人物数据表格列定义
+  const characterColumns: ColumnsType<CharacterData> = [
+    {
+      title: '人物名称',
+      dataIndex: 'name',
+      key: 'name',
+      width: 150,
+      align: 'center',
+      render: (text) => <strong>{text}</strong>,
+    },
+    {
+      title: '位置',
+      dataIndex: 'location',
+      key: 'location',
+      width: 120,
+      align: 'center',
+        render: (text) => (
+        <span className="location-tag">
+          {text ? (
+            <Tag
+              color={getLocationColor(text)}
+              style={{ marginInlineEnd: 2}}
+            >
+              {text}
+            </Tag>
+          ) : null}
+        </span>
+      ),
+    },
+    {
+      title: '攻击类别',
+      children: [
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
+              <span>普通</span>
+            </div>
+          ),
+          dataIndex: 'normal',
+          key: 'normal',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={strikeDamage} alt="打击" width={18} height={18} preview={false} />
+              <span>打击</span>
+            </div>
+          ),
+          dataIndex: 'strike',
+          key: 'strike',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
+              <span>斩击</span>
+            </div>
+          ),
+          dataIndex: 'slash',
+          key: 'slash',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={pierceDamage} alt="突刺" width={18} height={18} preview={false} />
+              <span>突刺</span>
+            </div>
+          ),
+          dataIndex: 'pierce',
+          key: 'pierce',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+      ],
+    },
+    {
+      title: '属性类别',
+      width: 240,
+      children: [
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
+              <span>魔力</span>
+            </div>
+          ),
+          dataIndex: 'magic',
+          key: 'magic',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
+              <span>火焰</span>
+            </div>
+          ),
+          dataIndex: 'fire',
+          key: 'fire',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
+              <span>雷电</span>
+            </div>
+          ),
+          dataIndex: 'lightning',
+          key: 'lightning',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
+              <span>神圣</span>
+            </div>
+          ),
+          dataIndex: 'holy',
+          key: 'holy',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getAbsorptionClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+      ],
+    },
+    {
+      title: '韧性',
+      dataIndex: 'basePoise',
+      key: 'basePoise',
+      width: 60,
+      align: 'center',
+    },
+    {
+      title: '抗性',
+      children: [
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={bleedResistance} alt="出血" width={18} height={18} preview={false} />
+              <span>出血</span>
+            </div>
+          ),
+          dataIndex: 'bleed',
+          key: 'bleed',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={poisonResistance} alt="中毒" width={18} height={18} preview={false} />
+              <span>中毒</span>
+            </div>
+          ),
+          dataIndex: 'poison',
+          key: 'poison',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={scarletRotResistance} alt="腐败" width={18} height={18} preview={false} />
+              <span>腐败</span>
+            </div>
+          ),
+          dataIndex: 'scarletRot',
+          key: 'scarletRot',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+        {
+          title: (
+            <div className="resistance-type-container">
+              <Image src={frostResistance} alt="冻伤" width={18} height={18} preview={false} />
+              <span>冻伤</span>
+            </div>
+          ),
+          dataIndex: 'frost',
+          key: 'frost',
+          width: 60,
+          align: 'center',
+          render: (value) => (
+            <span className={`resistance-value ${getResistanceClass(value)}`}>
+              {value}
+            </span>
+          ),
+        },
+      ],
+    },
+  ];
+
+  const characterFooter = () => (
+    <div className="footer-text">
+      圆桌厅堂人物数据：包含各种NPC和角色的吸收值和抗性数据
+    </div>
+  );
+
   return (
     <div className="boss-data-view-container">
       <Card className="boss-card">
@@ -1027,22 +1343,6 @@ const BossDataView: React.FC = () => {
               ),
             },
             {
-              key: 'sinner-data',
-              label: '🐐 永夜山羊召唤罪人详情',
-              children: (
-                <Table
-                  columns={sinnerColumns}
-                  dataSource={processSinnerData()}
-                  rowKey="key"
-                  scroll={{ x: 700 }}
-                  pagination={false}
-                  size="small"
-                  bordered
-                  footer={sinnerFooter}
-                />
-              ),
-            },
-            {
               key: 'wild-boss-data',
               label: '☠️ 野生Boss数据',
               children: (
@@ -1078,6 +1378,60 @@ const BossDataView: React.FC = () => {
                     scroll={{ x: 1000, y: 700 }}
                   />
                 </div>
+              ),
+            },
+            {
+              key: 'character-data',
+              label: '🏛️ 圆桌厅堂人物数据',
+              children: (
+                <div className="wild-boss-filter-container">
+                  <div className="filter-inputs">
+                    <Input
+                      placeholder="搜索人物名称"
+                      prefix={<SearchOutlined />}
+                      style={{ width: 200}}
+                      value={characterSearchKeyword}
+                      onChange={(e) => setCharacterSearchKeyword(e.target.value)}
+                    />
+                    <Select
+                      mode="multiple"
+                      placeholder="选择位置"
+                      options={getCharacterLocationOptions()}
+                      value={selectedCharacterLocations}
+                      onChange={setSelectedCharacterLocations}
+                      tagRender={locationTagRender}
+                      style={{ minWidth: 200, maxWidth: 400}}
+                    />
+                    <Button onClick={clearCharacterFilters}>清除筛选</Button>
+                  </div>
+                  <Table
+                    columns={characterColumns}
+                    dataSource={getFilteredCharacterData()}
+                    rowKey="name"
+                    pagination={false}
+                    size="small"
+                    bordered
+                    footer={characterFooter}
+                    sticky={{ offsetHeader: 0 }}
+                    scroll={{ x: 1000, y: 700 }}
+                  />
+                </div>
+              ),
+            },
+            {
+              key: 'sinner-data',
+              label: '🐐 永夜山羊召唤罪人详情',
+              children: (
+                <Table
+                  columns={sinnerColumns}
+                  dataSource={processSinnerData()}
+                  rowKey="key"
+                  scroll={{ x: 700 }}
+                  pagination={false}
+                  size="small"
+                  bordered
+                  footer={sinnerFooter}
+                />
               ),
             },
           ]}
