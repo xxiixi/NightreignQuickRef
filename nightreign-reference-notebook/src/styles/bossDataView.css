@@ -26,7 +26,7 @@
 /* 表格标题样式 */
 .table-title {
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* 卡片样式 - 使用百分比宽度，与传说武器详情页面保持一致 */
@@ -41,10 +41,7 @@
   padding: 0px 10px;
 }
 
-
-/* 容器样式 - 使用百分比宽度 */
 .boss-data-view-container {
-  /* padding: 24px; */
   padding-bottom: 40px;
   width: 100%;
 }
@@ -146,8 +143,8 @@ body[tomato-theme="dark"] .resistance-high {
   margin: 0;
   border-radius: 4px;
   font-size: 12px;
-  padding: 2px 6px;
-  line-height: 1.2;
+  padding: 1px 4px;
+  line-height: 1.5;
 }
 
 /* 深色模式下的筛选器样式 */

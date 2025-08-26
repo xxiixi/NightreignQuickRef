@@ -47,28 +47,28 @@ const BossDataView: React.FC = () => {
 
   // 位置颜色映射
   const locationColorMap: Record<string, string> = {
-    '要塞': 'default',
-    '监牢': 'orange',
-    '教堂': 'default',
-    '遗迹': 'default',
-    '营地': 'default',
-    '矿洞': 'default',
+    '要塞': 'cyan',
+    '监牢': 'volcano',
+    '教堂': 'orange',
+    '遗迹': 'magenta',
+    '营地': 'green',
+    '矿洞': 'magenta',
     '主城': 'gold',
     '主城地下': 'gold',
     '主城楼顶': 'gold',
     '野外蓝名': 'blue',
     '野外红名': 'red',
-    '火山口': 'volcano',
-    '山顶': 'cyan',
+    '火山口': 'purple',
+    '山顶': 'purple',
     '隐城': 'purple',
-    '腐败森林': 'magenta',
-    '第一夜': 'green',
-    '第二夜': 'green',
+    '腐败森林': 'purple',
+    '第一夜': 'geekblue',
+    '第二夜': 'cyan',
     '突发事件': 'yellow',
     // 圆桌厅堂人物位置颜色
     '训练场': 'green',
     '可选角色': 'blue',
-    '执行者绝招变身': 'magenta',
+    '执行者绝招': 'magenta',
     '复仇者家人': 'cyan',
   };
 
@@ -317,6 +317,7 @@ const BossDataView: React.FC = () => {
       key: 'name',
       width: 150,
       align: 'center',
+      fixed: 'left',
       render: (text) => <strong>{text}</strong>,
     },
     {
@@ -540,6 +541,7 @@ const BossDataView: React.FC = () => {
       width: 120,
       align: 'center',
       ellipsis: true,
+      fixed: 'left',
       render: (text) => <strong>{text}</strong>,
     },
     {
@@ -713,6 +715,7 @@ const BossDataView: React.FC = () => {
       key: 'characterName',
       width: 100,
       align: 'center',
+      fixed: 'left',
       render: (text) => <strong>{text}</strong>,
       onCell: (record) => {
         const currentIndex = processSinnerData().findIndex(item => 
@@ -782,15 +785,16 @@ const BossDataView: React.FC = () => {
       title: 'Boss名称',
       dataIndex: 'name',
       key: 'name',
-      width: 150,
+      width: 130,
       align: 'center',
+      fixed: 'left',
       render: (text) => <strong>{text}</strong>,
     },
     {
       title: '位置',
       dataIndex: 'location',
       key: 'location',
-      width: 150,
+      width: 90,
       align: 'center',
         render: (text) => (
         <span className="location-tag">
@@ -798,7 +802,7 @@ const BossDataView: React.FC = () => {
             <Tag
               key={loc}
               color={getLocationColor(loc)}
-              style={{ marginInlineEnd: 2}}
+              // style={{ marginInlineEnd: 1}}
             >
               {loc}
             </Tag>
@@ -954,13 +958,6 @@ const BossDataView: React.FC = () => {
       ],
     },
     {
-      title: '韧性',
-      dataIndex: 'basePoise',
-      key: 'basePoise',
-      width: 60,
-      align: 'center',
-    },
-    {
       title: '抗性',
       children: [
         {
@@ -1033,6 +1030,13 @@ const BossDataView: React.FC = () => {
         },
       ],
     },
+    {
+      title: '韧性',
+      dataIndex: 'basePoise',
+      key: 'basePoise',
+      width: 60,
+      align: 'center',
+    },
   ];
 
   const wildBossFooter = () => (
@@ -1047,15 +1051,16 @@ const BossDataView: React.FC = () => {
       title: '人物名称',
       dataIndex: 'name',
       key: 'name',
-      width: 150,
+      width: 120,
       align: 'center',
+      fixed: 'left',
       render: (text) => <strong>{text}</strong>,
     },
     {
       title: '位置',
       dataIndex: 'location',
       key: 'location',
-      width: 120,
+      width: 90,
       align: 'center',
         render: (text) => (
         <span className="location-tag">
@@ -1218,13 +1223,6 @@ const BossDataView: React.FC = () => {
       ],
     },
     {
-      title: '韧性',
-      dataIndex: 'basePoise',
-      key: 'basePoise',
-      width: 60,
-      align: 'center',
-    },
-    {
       title: '抗性',
       children: [
         {
@@ -1296,6 +1294,13 @@ const BossDataView: React.FC = () => {
           ),
         },
       ],
+    },
+    {
+      title: '韧性',
+      dataIndex: 'basePoise',
+      key: 'basePoise',
+      width: 60,
+      align: 'center',
     },
   ];
 

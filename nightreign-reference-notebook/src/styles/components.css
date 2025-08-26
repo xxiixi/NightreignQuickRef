@@ -781,7 +781,7 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
 }
 
 .table-row-odd {
-  background-color: var(--geekblue-1);
+  background-color: #f8f9fa;
 }
 
 [data-theme="dark"] .table-row-odd,
