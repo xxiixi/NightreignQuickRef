@@ -727,7 +727,7 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'entry_type',
       key: 'entry_type',
       align: 'center',
-      width: '15%',
+      width: '12%',
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
@@ -836,7 +836,25 @@ const EntryDetailView: React.FC = () => {
       dataIndex: 'explanation',
       key: 'explanation',
       width: '45%',
-      render: (text) => text || '-',
+      render: (text) => {
+        if (!text) return '-';
+        
+        return (
+          <div style={{
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            lineHeight: '1.6',
+            fontSize: '13px'
+          }}>
+            {text}
+          </div>
+        );
+      },
+      onCell: () => ({
+        style: {
+          padding: '12px 8px'
+        }
+      }),
     },
     {
       title: '词条类型',
@@ -852,7 +870,7 @@ const EntryDetailView: React.FC = () => {
       title: '叠加性',
       dataIndex: 'superposability',
       key: 'superposability',
-      width: '15%',
+      width: '12%',
       align: 'center',
       render: (text) => text ? (
         <Tag color={getSuperposabilityColor(text)}>{text}</Tag>
