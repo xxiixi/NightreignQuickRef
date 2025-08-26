@@ -305,8 +305,12 @@ const getSuperposabilityColor = (superposability: string | null | undefined): st
       return 'red';
     case '未知':
       return 'orange';
+    case '不同级别可叠加':
+      return 'purple';
+    case '同种不甘不可叠加':
+      return 'magenta';
     default:
-      return 'default';
+      return 'blue';
   }
 };
 
@@ -818,7 +822,7 @@ const EntryDetailView: React.FC = () => {
       title: '词条名称',
       dataIndex: 'entry_name',
       key: 'entry_name',
-      width: '25%',
+      width: '20%',
       sorter: (a, b) => {
         const nameA = a.entry_name || '';
         const nameB = b.entry_name || '';
@@ -831,7 +835,7 @@ const EntryDetailView: React.FC = () => {
       title: '解释',
       dataIndex: 'explanation',
       key: 'explanation',
-      width: '55%',
+      width: '45%',
       render: (text) => text || '-',
     },
     {
@@ -843,6 +847,25 @@ const EntryDetailView: React.FC = () => {
       render: (text) => text ? (
         <Tag color={getTypeColor(text)}>{text}</Tag>
       ) : '-',
+    },
+    {
+      title: '叠加性',
+      dataIndex: 'superposability',
+      key: 'superposability',
+      width: '15%',
+      align: 'center',
+      render: (text) => text ? (
+        <Tag color={getSuperposabilityColor(text)}>{text}</Tag>
+      ) : '-',
+      filters: [
+        { text: '可叠加', value: '可叠加' },
+        { text: '不可叠加', value: '不可叠加' },
+        { text: '未知', value: '未知' },
+        { text: '同级别可叠加', value: '同级别可叠加' },
+        { text: '同种不甘不可叠加', value: '同种不甘不可叠加' },
+      ],
+      filteredValue: filteredInfo.superposability || null,
+      onFilter: (value, record) => record.superposability === value,
     },
   ];
 
