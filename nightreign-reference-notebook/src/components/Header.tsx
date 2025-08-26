@@ -1,7 +1,7 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, TranslationOutlined, SmileOutlined, ReadOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, TranslationOutlined, SmileOutlined, ReadOutlined, RobotOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -22,9 +22,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
     <>
       <div className="top-bar">
         <div className="top-bar-content">
-          <div className="top-bar-right">
-            <Space size="middle">
-              <Tooltip title={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"} placement="bottom">
+            <div className="top-bar-right">
+             <Space size="middle">
+               <Tooltip title={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"} placement="bottom">
                 <Button
                   type="text"
                   icon={isDarkMode ? <MoonOutlined /> : <SunOutlined />}
@@ -42,9 +42,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                       <div style={{ fontSize: '12px' }}>
                         本站总访问量 <span style={{ color: '#1890ff' }}>{sitePv}</span> 次
                       </div>
-                      <div style={{ fontSize: '12px' }}>
+                      {/* <div style={{ fontSize: '12px' }}>
                         本页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
-                      </div>
+                      </div> */}
                       <div style={{ 
                         marginTop: '4px', 
                         borderTop: '1px solid rgba(198, 198, 198, 0.2)', 
@@ -136,6 +136,16 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         </div>
                         <div style={{ marginBottom: '4px' }}>
                           <a 
+                            href="https://www.bilibili.com/video/BV1wzvNzREYQ/?spm_id_from=333.1387.upload.video_card.click&vd_source=37640654dbdd4ab80b471a16ac6da3c0" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="footer-link"
+                          >
+                            🔰 局内减伤词条叠加性
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <a 
                             href="https://www.bilibili.com/opus/1100871642065666054" 
                             target="_blank" 
                             rel="noopener noreferrer"
@@ -187,6 +197,33 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   />
                 </Popover>
               </Tooltip>
+              <Tooltip title="Comments" placement="bottom" className="theme-toggle-btn">
+                 <Popover
+                   content={
+                     <div style={{ padding: '8px', maxWidth: '230px' }}>
+                       <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                         Comments 📝
+                       </div>
+                          <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                          <div style={{ marginBottom: '6px' }}>
+                          数据来源/原贴/原视频可以hover对应卡片问号后点击链接直接跳转（还没补全。。。）
+                          </div>
+                          <div style={{ marginBottom: '6px' }}>
+                          如果有数据错误有可能是我抄错数了，可以联系我修改（联系方式：<a href="mailto:scyxw5@gmail.com" className="footer-link">scyxw5@gmail.com</a>）
+                          </div>
+                        </div>
+                     </div>
+                   }
+                   placement="bottom"
+                   trigger="click"
+                 >
+                                       <Button
+                      type="text"
+                      icon={<RobotOutlined />}
+                      className="visits-counter-btn"
+                    />
+                 </Popover>
+               </Tooltip>
               <Tooltip title="切换语言功能尚未开发" placement="bottom">
                 <Button
                   type="text"
