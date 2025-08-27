@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Card, Image, Tabs, Select, Input, Button, Tag } from 'antd';
+import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData, WildBossData, CharacterData } from '../types';
@@ -44,6 +44,7 @@ const BossDataView: React.FC = () => {
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [characterSearchKeyword, setCharacterSearchKeyword] = useState('');
   const [selectedCharacterLocations, setSelectedCharacterLocations] = useState<string[]>([]);
+  const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
 
   // 位置颜色映射
   const locationColorMap: Record<string, string> = {
@@ -106,7 +107,7 @@ const BossDataView: React.FC = () => {
     const locations = new Set<string>();
     wildBossData.forEach(boss => {
       if (boss.location) {
-        // 处理多个位置用逗号分隔的情况
+        // 处理多个位置用、分隔的情况
         const locationList = boss.location.split('、');
         locationList.forEach(loc => {
           locations.add(loc.trim());
@@ -220,7 +221,7 @@ const BossDataView: React.FC = () => {
     }
     
     if (value > 1) {
-      return 'absorption-1'; // 程度1 - 绿色（容易受到伤害）
+      return 'absorption-1'; 
     } 
     else if (value < 1) {
       // 对小于1的值进行进一步分类
@@ -232,8 +233,32 @@ const BossDataView: React.FC = () => {
         return 'absorption-2'; 
       }
     } else {
-      return 'absorption-default'; // 正常吸收 - 默认颜色 
+      return ''; 
     }
+  };
+
+  // 计算韧性函数
+  const calculatePoise = (basePoise: number): number => {
+    const poiseMultipliers = {
+      1: 1,      // 单人
+      2: 1.82,   // 双人
+      3: 3.33    // 三人
+    };
+    return Math.round(basePoise * poiseMultipliers[playerCount as keyof typeof poiseMultipliers]);
+  };
+
+  // 计算抗性函数
+  const calculateResistance = (baseResistance: number | string): number | string => {
+    if (typeof baseResistance === 'string') {
+      return baseResistance; // 如果是"免疫"，直接返回
+    }
+    
+    const resistanceMultipliers = {
+      1: 1,      // 单人
+      2: 2.67,   // 双人
+      3: 4       // 三人
+    };
+    return Math.round(baseResistance * resistanceMultipliers[playerCount as keyof typeof resistanceMultipliers]);
   };
 
   // Boss名称到图片的映射
@@ -255,13 +280,16 @@ const BossDataView: React.FC = () => {
 
   const defaultFooter = () => (
     <div className="footer-text">
-      夜王血量计算：基础血量 × 3.54 × 玩家人数（永夜王需要再乘以对应血量加成）
+      <div>◦ 普通夜王血量 = 基础血量 × 玩家人数</div>
+      <div>◦ 永夜王血量为倍率加成：永夜王血量 = 基础血量 × 永夜王血量加成倍率 × 玩家人数</div>
+      <div>◦ 永夜王血量为独立数值：永夜王血量 = 永夜王血量 × 玩家人数</div>
     </div>
   );
 
   const resistanceFooter = () => (
     <div className="footer-text">
-      抗性：'免疫' 表示对该Boss无效 (即boss不吃该属性异常)
+      <div>◦ 韧性倍率：单人100%，双人182%，三人333%｜ 普通韧性 = 基础韧性 × 韧性倍率 ｜ 永夜王韧性 = 永夜王韧性 × 韧性倍率</div>
+      <div>◦ 抗性(异常耐受上限)倍率：单人100%，双人267%，三人400%｜ 抗性 = 基础抗性 × 抗性倍率</div>
     </div>
   );
 
@@ -321,7 +349,7 @@ const BossDataView: React.FC = () => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: '血量',
+      title: `Boss血量(${playerCount}人)`,
       children: [
         {
           title: '基础血量',
@@ -329,14 +357,43 @@ const BossDataView: React.FC = () => {
           key: 'baseHealth',
           width: 80,
           align: 'center',
-          render: (value) => value.toLocaleString(),
+          render: (value) => {
+            if (typeof value === 'number') {
+              return (
+                <span className="health-base">
+                  {Math.round(value * 3.54 * playerCount).toLocaleString()}
+                </span>
+              );
+            }
+            return (
+              <span className="health-base">
+                {value}
+              </span>
+            );
+          },
         },
         {
-          title: '永夜王加成',
+          title: '永夜王血量',
           dataIndex: 'nightreignHealthMultiplier',
           key: 'nightreignHealthMultiplier',
           width: 100,
           align: 'center',
+          render: (value, record) => {
+            if (typeof value === 'number' && typeof record.nightreignHealth === 'number') {
+              const nightreignBaseHealth = Math.round(record.nightreignHealth * 3.54 * playerCount);
+              const nightreignHealth = Math.round(nightreignBaseHealth * value);
+              return (
+                <span className="health-nightreign">
+                  {nightreignHealth.toLocaleString()}{value !== 1 ? `(×${value})` : ''}
+                </span>
+              );
+            }
+            return (
+              <span className="health-nightreign">
+                {value}
+              </span>
+            );
+          },
         },
       ],
     },
@@ -545,14 +602,45 @@ const BossDataView: React.FC = () => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: '韧性',
-      dataIndex: 'basePoise',
-      key: 'basePoise',
-      width: 70,
-      align: 'center',
+      title: `韧性(${playerCount}人)`,
+      children: [
+        {
+          title: '基础韧性',
+          dataIndex: 'basePoise',
+          key: 'basePoise',
+          width: 70,
+          align: 'center',
+          render: (value) => (
+            <span className="health-base">
+              {calculatePoise(value)}
+            </span>
+          ),
+        },
+        {
+          title: '永夜王韧性',
+          dataIndex: 'nightreignPoise',
+          key: 'nightreignPoise',
+          width: 80,
+          align: 'center',
+          render: (value) => {
+            if (typeof value === 'number') {
+              return (
+                <span className="health-nightreign">
+                  {calculatePoise(value)}
+                </span>
+              );
+            }
+            return (
+              <span className="health-nightreign">
+                {value}
+              </span>
+            );
+          },
+        },
+      ],
     },
     {
-      title: '抗性',
+      title: `抗性 (${playerCount}人)`,
       children: [
         {
           title: (
@@ -565,11 +653,15 @@ const BossDataView: React.FC = () => {
           key: 'poisonResistance',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => {
+            const calculatedValue = calculateResistance(value);
+            const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
+            return (
+              <span className={`resistance-value ${originalClass}`}>
+                {calculatedValue}
+              </span>
+            );
+          },
         },
         {
           title: (
@@ -582,11 +674,15 @@ const BossDataView: React.FC = () => {
           key: 'scarletRotResistance',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => {
+            const calculatedValue = calculateResistance(value);
+            const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
+            return (
+              <span className={`resistance-value ${originalClass}`}>
+                {calculatedValue}
+              </span>
+            );
+          },
         },
         {
           title: (
@@ -599,11 +695,15 @@ const BossDataView: React.FC = () => {
           key: 'bleedResistance',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => {
+            const calculatedValue = calculateResistance(value);
+            const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
+            return (
+              <span className={`resistance-value ${originalClass}`}>
+                {calculatedValue}
+              </span>
+            );
+          },
         },
         {
           title: (
@@ -616,11 +716,15 @@ const BossDataView: React.FC = () => {
           key: 'frostResistance',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => {
+            const calculatedValue = calculateResistance(value);
+            const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
+            return (
+              <span className={`resistance-value ${originalClass}`}>
+                {calculatedValue}
+              </span>
+            );
+          },
         },
         {
           title: (
@@ -633,11 +737,15 @@ const BossDataView: React.FC = () => {
           key: 'sleepResistance',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => {
+            const calculatedValue = calculateResistance(value);
+            const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
+            return (
+              <span className={`resistance-value ${originalClass}`}>
+                {calculatedValue}
+              </span>
+            );
+          },
         },
         {
           title: (
@@ -650,11 +758,15 @@ const BossDataView: React.FC = () => {
           key: 'madnessResistance',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => {
+            const calculatedValue = calculateResistance(value);
+            const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
+            return (
+              <span className={`resistance-value ${originalClass}`}>
+                {calculatedValue}
+              </span>
+            );
+          },
         },
         {
           title: (
@@ -667,11 +779,15 @@ const BossDataView: React.FC = () => {
           key: 'deathBlightResistance',
           width: 60,
           align: 'center',
-          render: (value) => (
-            <span className={`resistance-value ${getResistanceClass(value)}`}>
-              {value}
-            </span>
-          ),
+          render: (value) => {
+            const calculatedValue = calculateResistance(value);
+            const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
+            return (
+              <span className={`resistance-value ${originalClass}`}>
+                {calculatedValue}
+              </span>
+            );
+          },
         },
       ],
     },
@@ -1041,7 +1157,7 @@ const BossDataView: React.FC = () => {
 
   const wildBossFooter = () => (
     <div className="footer-text">
-      野生Boss数据：包含各种敌人和Boss的吸收值和抗性数据
+      野生Boss数据：包含各种敌人和Boss的吸收值和抗性（异常耐受上限）数据
     </div>
   );
 
@@ -1306,7 +1422,7 @@ const BossDataView: React.FC = () => {
 
   const characterFooter = () => (
     <div className="footer-text">
-      圆桌厅堂人物数据：包含各种NPC和角色的吸收值和抗性数据
+      圆桌厅堂人物数据：包含各种NPC和角色的吸收值和抗性（异常耐受上限）数据
     </div>
   );
 
@@ -1323,6 +1439,17 @@ const BossDataView: React.FC = () => {
               label: '🌙 夜王基础数据',
               children: (
                 <>
+                  <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <Radio.Group 
+                      value={playerCount} 
+                      onChange={(e) => setPlayerCount(e.target.value)}
+                      size="middle"
+                    >
+                      <Radio.Button value={1}>单人模式</Radio.Button>
+                      <Radio.Button value={2}>双人模式</Radio.Button>
+                      <Radio.Button value={3}>三人模式</Radio.Button>
+                    </Radio.Group>
+                  </div>
                   <Table
                     columns={leftColumns}
                     dataSource={filteredData}

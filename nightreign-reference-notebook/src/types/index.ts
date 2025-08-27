@@ -12,7 +12,8 @@ export interface EntryData {
 export interface BossData {
   id: number;
   name: string;
-  baseHealth: number;
+  baseHealth: number | string;
+  nightreignHealth: number | string;
   normalAbsorption: number;
   slashAbsorption: number;
   strikeAbsorption: number;
@@ -29,6 +30,7 @@ export interface BossData {
   sleepResistance: number | string;
   madnessResistance: number | string;
   basePoise: number;
+  nightreignPoise: number | string;
   nightreignHealthMultiplier: number | string;
 }
 

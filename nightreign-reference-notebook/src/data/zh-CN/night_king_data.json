@@ -3,7 +3,8 @@
     "id": 1,
     "name": "\"黑夜野兽\"格拉狄乌斯",
     "baseHealth": 3200,
-    "nightreignHealthMultiplier": 1.4,
+    "nightreignHealth": 3200,
+    "nightreignHealthMultiplier": 1.55,
     "normalAbsorption": 1,
     "slashAbsorption": 1,
     "strikeAbsorption": 1,
@@ -19,14 +20,16 @@
     "frostResistance": 542,
     "sleepResistance": 154,
     "madnessResistance": "免疫",
-    "basePoise": 120
+    "basePoise": 120,
+    "nightreignPoise": 120
   },
   {
     "id": 2,
     "name": "\"黑夜之爵\"艾德雷",
     "baseHealth": 3712,
-    "normalAbsorption": 1,
+    "nightreignHealth": 3712,
     "nightreignHealthMultiplier": 1.35,
+    "normalAbsorption": 1,
     "slashAbsorption": 1,
     "strikeAbsorption": 1,
     "pierceAbsorption": 1,
@@ -41,12 +44,14 @@
     "frostResistance": 154,
     "sleepResistance": 154,
     "madnessResistance": "免疫",
-    "basePoise": 150
+    "basePoise": 150,
+    "nightreignPoise": 150
   },
   {
     "id": 3,
     "name": "\"黑夜之智\"格诺斯塔",
     "baseHealth": 3680,
+    "nightreignHealth": 1840,
     "nightreignHealthMultiplier": 1,
     "normalAbsorption": 1.15,
     "slashAbsorption": 1.25,
@@ -63,12 +68,14 @@
     "frostResistance": 154,
     "sleepResistance": 542,
     "madnessResistance": "免疫",
-    "basePoise": 100
+    "basePoise": 100,
+    "nightreignPoise": 100
   },
   {
     "id": 4,
     "name": "\"坚盾\"弗堤士",
     "baseHealth": 3456,
+    "nightreignHealth": 2016,
     "nightreignHealthMultiplier": 1,
     "normalAbsorption": 0.9,
     "slashAbsorption": 0.8,
@@ -85,12 +92,14 @@
     "frostResistance": 154,
     "sleepResistance": 542,
     "madnessResistance": "免疫",
-    "basePoise": 150
+    "basePoise": 150,
+    "nightreignPoise": 150
   },
   {
     "id": 5,
     "name": "\"超越之光\"亚尼姆斯",
-    "baseHealth": 4560,
+    "baseHealth": "未知",
+    "nightreignHealth": 1798,
     "nightreignHealthMultiplier": 1,
     "normalAbsorption": 1,
     "slashAbsorption": 1,
@@ -107,13 +116,15 @@
     "frostResistance": "免疫",
     "sleepResistance": "免疫",
     "madnessResistance": "免疫",
-    "basePoise": 100
+    "basePoise": 100,
+    "nightreignPoise": 100
   },
   {
     "id": 6,
     "name": "\"深海黑夜\"玛丽斯",
     "baseHealth": 3584,
-    "nightreignHealthMultiplier": "二阶段:8320",
+    "nightreignHealth": 8320,
+    "nightreignHealthMultiplier": 1,
     "normalAbsorption": 1,
     "slashAbsorption": 1.15,
     "strikeAbsorption": 0.8,
@@ -129,12 +140,14 @@
     "frostResistance": 252,
     "sleepResistance": "免疫",
     "madnessResistance": "免疫",
-    "basePoise": 150
+    "basePoise": 150,
+    "nightreignPoise": 600
   },
   {
     "id": 7,
     "name": "\"黑夜之魔\"利普拉",
     "baseHealth": 3686,
+    "nightreignHealth": 3686,
     "nightreignHealthMultiplier": 1.4,
     "normalAbsorption": 1,
     "slashAbsorption": 1.1,
@@ -151,12 +164,14 @@
     "frostResistance": 252,
     "sleepResistance": "免疫",
     "madnessResistance": 154,
-    "basePoise": 120
+    "basePoise": 120,
+    "nightreignPoise": 120
   },
   {
     "id": 8,
     "name": "\"黑夜光骑士\"弗格尔",
     "baseHealth": 3360,
+    "nightreignHealth": 3360,
     "nightreignHealthMultiplier": 1.2,
     "normalAbsorption": 1,
     "slashAbsorption": 1,
@@ -173,12 +188,14 @@
     "frostResistance": 154,
     "sleepResistance": 154,
     "madnessResistance": "免疫",
-    "basePoise": 155
+    "basePoise": 155,
+    "nightreignPoise": 155
   },
   {
     "id": 9,
     "name": "\"黑夜雾霾\"卡莉果",
     "baseHealth": 3392,
+    "nightreignHealth": 3392,
     "nightreignHealthMultiplier": 1.4,
     "normalAbsorption": 1,
     "slashAbsorption": 0.85,
@@ -195,12 +212,14 @@
     "frostResistance": 542,
     "sleepResistance": 542,
     "madnessResistance": "免疫",
-    "basePoise": 160
+    "basePoise": 160,
+    "nightreignPoise": 160
   },
   {
     "id": 10,
     "name": "黑夜轮廓",
     "baseHealth": 1408,
+    "nightreignHealth": "未知",
     "nightreignHealthMultiplier": "未知",
     "normalAbsorption": 1,
     "slashAbsorption": 1.15,
@@ -217,12 +236,14 @@
     "frostResistance": "免疫",
     "sleepResistance": 542,
     "madnessResistance": "免疫",
-    "basePoise": 130
+    "basePoise": 130,
+    "nightreignPoise": "未知"
   },
   {
     "id": 11,
     "name": "\"黑夜王\"布德奇冥",
     "baseHealth": 2880,
+    "nightreignHealth": "未知",
     "nightreignHealthMultiplier": "未知",
     "normalAbsorption": 1,
     "slashAbsorption": 0.9,
@@ -239,6 +260,7 @@
     "frostResistance": "免疫",
     "sleepResistance": 542,
     "madnessResistance": "免疫",
-    "basePoise": 130
+    "basePoise": 130,
+    "nightreignPoise": "未知"
   }
 ]

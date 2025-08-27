@@ -182,8 +182,23 @@ body[tomato-theme="dark"] .absorption-4 {
   color: #cd29f6 !important; /* 亮紫色 - 深色模式下更清晰 */
 }
 
-body[tomato-theme="dark"] .absorption-default {
-  color: rgb(92, 156, 2) !important; 
+/* body[tomato-theme="dark"] .absorption-default {
+  color: rgb(67, 67, 67) !important; 
+} */
+
+/* 血量/韧性数值颜色样式 */
+.health-base {
+  /* color: #0009b9 !important;  */
+  font-weight: 500;
+}
+
+.health-nightreign {
+  color: #7100c2 !important; /* 紫色 - 永夜王血量/韧性 */
+  font-weight: 500;
+}
+
+body[tomato-theme="dark"] .health-nightreign {
+  color: #b240ff !important; /* 浅紫色 - 深色模式下更清晰 */
 }
 
 /* 表头固定样式 */
