@@ -561,6 +561,11 @@ const EntryDetailView: React.FC = () => {
     loadData();
   }, []);
 
+  // 监听筛选状态变化，用于调试
+  useEffect(() => {
+    console.log('FilteredInfo changed:', filteredInfo);
+  }, [filteredInfo]);
+
   // 清除所有筛选和排序
   const clearAll = () => {
     setSearchKeyword('');
@@ -577,6 +582,7 @@ const EntryDetailView: React.FC = () => {
 
   // 表格变化处理函数
   const handleTableChange: OnChange = (_pagination, filters, sorter) => {
+    console.log('Table change - filters:', filters, 'sorter:', sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter as Sorts);
   };
@@ -594,7 +600,7 @@ const EntryDetailView: React.FC = () => {
   };
 
   // 搜索过滤函数
-  const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[]) => {
+  const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[], superposabilityFilters?: string[]) => {
     let filtered = data;
     
     // 类型筛选
@@ -613,6 +619,21 @@ const EntryDetailView: React.FC = () => {
         item.entry_name?.includes(character) || 
         item.explanation?.includes(character)
       );
+    }
+    
+    // 叠加性筛选
+    if (superposabilityFilters && superposabilityFilters.length > 0) {
+      console.log('Applying superposability filter:', superposabilityFilters);
+      const beforeCount = filtered.length;
+      filtered = filtered.filter(item => {
+        const itemSuperposability = item.superposability || '';
+        const isIncluded = superposabilityFilters.includes(itemSuperposability);
+        if (!isIncluded) {
+          console.log(`Filtered out item "${item.entry_name}" with superposability "${itemSuperposability}"`);
+        }
+        return isIncluded;
+      });
+      console.log(`Superposability filter: ${beforeCount} -> ${filtered.length} items`);
     }
     
     // 关键词搜索
@@ -747,7 +768,6 @@ const EntryDetailView: React.FC = () => {
         { text: '未知', value: '未知' },
       ],
       filteredValue: filteredInfo.superposability || null,
-      onFilter: (value, record) => record.superposability === value,
     },
   ];
 
@@ -879,11 +899,10 @@ const EntryDetailView: React.FC = () => {
         { text: '可叠加', value: '可叠加' },
         { text: '不可叠加', value: '不可叠加' },
         { text: '未知', value: '未知' },
-        { text: '同级别可叠加', value: '同级别可叠加' },
+        { text: '不同级别可叠加', value: '不同级别可叠加' },
         { text: '同种不甘不可叠加', value: '同种不甘不可叠加' },
       ],
       filteredValue: filteredInfo.superposability || null,
-      onFilter: (value, record) => record.superposability === value,
     },
   ];
 
@@ -1100,7 +1119,7 @@ const EntryDetailView: React.FC = () => {
       case '局外词条':
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter);
+        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
         break;
       case '护符词条':
         tableData = data.talismanEntries;
@@ -1110,7 +1129,7 @@ const EntryDetailView: React.FC = () => {
       case '局内词条':
         tableData = data.inGameEntries;
         columns = inGameColumns;
-        tableData = filterData(tableData, searchKeyword, selectedInGameTypes);
+        tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
         break;
       case '特殊事件及地形效果':
         tableData = data.inGameSpecialBuff;
@@ -1120,7 +1139,7 @@ const EntryDetailView: React.FC = () => {
       default:
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
-        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter);
+        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
     }
 
     // 分页处理
