@@ -72,10 +72,9 @@
   box-shadow: var(--shadow-md);
   transition: all var(--transition-normal);
   overflow: hidden;
-  height: 100%; /* 改为100%以确保在grid中拉伸到相同高度 */
+  height: 100%;
   min-height: 200px;
   position: relative;
-  border: 1px solid var(--theme-border);
   display: flex;
   flex-direction: column;
 }
@@ -94,7 +93,7 @@
   height: 100%;
 }
 
-/* 标题区域 - 与内容融合 */
+
 .mechanic-card .card-title-section {
   padding-bottom: 16px;
   border-bottom: 2px solid var(--color-primary-100);
@@ -167,43 +166,6 @@ body[tomato-theme="dark"] .weapon-level-note {
 .mechanic-timeline .ant-timeline-item-content {
   color: var(--color-text-1);
   font-size: var(--font-size-sm);
-}
-
-/* 机制内容样式 */
-.mechanic-content {
-  color: var(--color-text-1);
-  line-height: var(--line-height-relaxed);
-}
-
-.mechanic-content h4 {
-  color: var(--color-title-secondary);
-  font-weight: var(--font-weight-semibold);
-  margin-bottom: 12px;
-  font-size: var(--font-size-md);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.mechanic-content h4::before {
-  content: '•';
-  color: var(--color-primary-500);
-  font-weight: bold;
-}
-
-.mechanic-content p {
-  margin-bottom: 8px;
-  font-size: var(--font-size-sm);
-  padding-left: 16px;
-  position: relative;
-}
-
-.mechanic-content p::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--color-text-3);
-  font-size: 12px;
 }
 
 /* 开发中占位符样式 */

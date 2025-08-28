@@ -259,11 +259,14 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                         <div className="tip-item">
                         2. 如果当前卢恩足够升级，左上角显示等级的数字左边会出现一个白色箭头(局内)。
                         </div>
+                        <div className="tip-item">
+                        3. 单人模式获得1.5倍卢恩 | 双人模式获得1.3倍卢恩 | 三人模式获得1倍卢恩
+                        </div>
                       </div>
                     }
                     type="info"
                     showIcon={false}
-                    style={{ marginTop: '15px' }}
+                    style={{ marginTop: '15px'}}
                   />
                 </div>
               </div>

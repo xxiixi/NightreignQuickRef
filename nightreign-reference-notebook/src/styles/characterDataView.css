@@ -193,14 +193,10 @@ body[tomato-theme="dark"] .card-item .card-body {
 }
 
 .dodge-frames-tips .tip-item {
-  margin-bottom: 6px;
+  /* margin-bottom: 6px; */
   font-size: 13px;
   line-height: 1.5;
   color: var(--color-text-2);
-}
-
-.dodge-frames-tips .tip-item:last-child {
-  margin-bottom: 0;
 }
 
 /* Alert 组件样式优化 */
