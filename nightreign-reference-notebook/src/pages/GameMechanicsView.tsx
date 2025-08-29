@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Timeline, Table, Alert } from 'antd';
-import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone } from '@ant-design/icons';
+import { Typography, Timeline, Table, Alert, Steps, Segmented } from 'antd';
+import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import '../styles/gameMechanicsView.css';
@@ -12,9 +12,141 @@ interface GameMechanicsViewProps {
   functionName: string;
 }
 
+// 缩圈效果组件
+const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ currentStep, day }) => {
+  // 根据时间点计算圈的大小
+  const getCircleSize = (step: number, dayNum: number) => {
+    if (dayNum === 1) {
+      // Day 1 的圈大小逻辑
+      switch (step) {
+        case 0: return 100; // 游戏开始 - 最大圈
+        case 1: return 60;  // 第一次缩圈开始
+        case 2: return 60;  // 第一次缩圈结束
+        case 3: return 20;  // 第二次缩圈开始
+        case 4: return 20;  // 第二次缩圈结束
+        case 5: return 20;  // Boss战 - 最小圈
+        default: return 100;
+      }
+    } else {
+      // Day 2 的圈大小逻辑
+      switch (step) {
+        case 0: return 100; // 游戏开始
+        case 1: return 60;  // 第一次缩圈开始
+        case 2: return 60;  // 第一次缩圈结束
+        case 3: return 20;  // 第二次缩圈开始
+        case 4: return 20;  // 第二次缩圈结束
+        case 5: return 20;   // Boss战
+        default: return 100;
+      }
+    }
+  };
+
+  const currentSize = getCircleSize(currentStep, day);
+  
+  // 判断是否在缩圈开始阶段（需要脉冲动画）
+  const isShrinkingStart = (step: number, dayNum: number) => {
+    if (dayNum === 1) {
+      return step === 1 || step === 3; // Day 1: 第一次缩圈开始(1) 或 第二次缩圈开始(3)
+    } else {
+      return step === 1 || step === 3; // Day 2: 第一次缩圈开始(1) 或 第二次缩圈开始(3)
+    }
+  };
+  
+  // 判断是第几次缩圈
+  const getShrinkPhase = (step: number) => {
+    if (step === 1) return 'first';  // 第一次缩圈
+    if (step === 3) return 'second'; // 第二次缩圈
+    return 'none';
+  };
+  
+  // 判断是否是第一次缩圈阶段（60%圈）
+  const isFirstShrinkPhase = (step: number) => {
+    return step === 1 || step === 2; // 第一次缩圈开始和结束都是60%
+  };
+  
+  // 判断是否是第一次缩圈结束阶段（需要深蓝色）
+  const isFirstShrinkEnd = (step: number) => {
+    return step === 2; // 第一次缩圈结束
+  };
+  
+  // 判断是否第一次缩圈已结束（外圈需要变灰）
+  const isFirstShrinkCompleted = (step: number) => {
+    return step >= 2; // 第一次缩圈结束后（step 2及以后）
+  };
+  
+  // 判断是否是第二次缩圈开始（外圈变深蓝，内圈变浅蓝）
+  const isSecondShrinkStart = (step: number) => {
+    return step === 3; // 第二次缩圈开始
+  };
+  
+  // 获取上一个圈的大小（用于脉冲范围）
+  const getPreviousSize = (step: number, dayNum: number) => {
+    if (dayNum === 1) {
+      switch (step) {
+        case 1: return 100; // 第一次缩圈开始前是100%
+        case 3: return 60;  // 第二次缩圈开始前是60%
+        default: return currentSize;
+      }
+    } else {
+      switch (step) {
+        case 1: return 100; // 第一次缩圈开始前是100%
+        case 3: return 60;  // 第二次缩圈开始前是60%
+        default: return currentSize;
+      }
+    }
+  };
+
+  const shouldPulse = isShrinkingStart(currentStep, day);
+  const previousSize = getPreviousSize(currentStep, day);
+  const shrinkPhase = getShrinkPhase(currentStep);
+  const isFirstShrink = isFirstShrinkPhase(currentStep);
+  const isFirstShrinkEndPhase = isFirstShrinkEnd(currentStep);
+  const isFirstShrinkCompletedPhase = isFirstShrinkCompleted(currentStep);
+  const isSecondShrinkStartPhase = isSecondShrinkStart(currentStep);
+
+  return (
+    <div className="circle-shrink-container">
+      <div className="circle-shrink-wrapper">
+        {/* 外圈 - 固定大小 */}
+        <div className={`circle-outer ${isFirstShrinkCompletedPhase ? 'circle-outer-faded' : ''} ${isSecondShrinkStartPhase ? 'circle-outer-second-shrink' : ''}`} />
+        
+        {/* 内圈 - 根据时间点动态变化 */}
+        <div 
+          className={`circle-inner ${shouldPulse ? 'circle-pulse' : ''} ${shrinkPhase !== 'none' ? `shrink-${shrinkPhase}` : ''} ${isFirstShrink ? 'first-shrink-no-bg' : ''} ${isFirstShrinkEndPhase ? 'first-shrink-end-dark' : ''} ${isSecondShrinkStartPhase ? 'second-shrink-start-dark' : ''}`}
+          style={{
+            width: `${currentSize}%`,
+            height: `${currentSize}%`,
+            transition: 'all 0.8s ease-in-out'
+          }}
+        />
+        
+        {/* 脉冲效果圈 - 只在缩圈开始时显示 */}
+        {shouldPulse && (
+          <div 
+            className="circle-pulse-ring"
+            style={{
+              width: `${previousSize}%`,
+              height: `${previousSize}%`,
+            }}
+          />
+        )}
+        
+        {/* 中心点 */}
+        <div className="circle-center" />
+        
+      </div>
+      
+    </div>
+  );
+};
+
 const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) => {
   // 隐士出招表数据
   const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
+  // 时间轴状态 - 为每个Day创建独立状态
+  const [day1TimelineStep, setDay1TimelineStep] = useState(0);
+  const [day2TimelineStep, setDay2TimelineStep] = useState(0);
+  const [currentDay, setCurrentDay] = useState(0); // 0: Day 1, 1: Day 2
 
   useEffect(() => {
     const loadData = async () => {
@@ -63,12 +195,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                     <ClockCircleOutlined />
                     游戏时间机制
-                    <DataSourceTooltip 
-                      links={[{
-                        text: "⏰ 每日缩圈时间",
-                        url: "https://mobalytics.gg/elden-ring-nightreign/guides/day-length"
-                      }]}
-                    />
                   </Title>
                 </div>
                 <div className="card-body">
@@ -142,12 +268,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                   <MoneyCollectOutlined />
                     升级所需卢恩
-                    <DataSourceTooltip 
-                      links={[{
-                        text: "💰 角色升级所需卢恩",
-                        url: "https://game8.co/games/Elden-Ring-Nightreign/archives/522643"
-                      }]}
-                    />
                   </Title>
                 </div>
                 <div className="card-body">
@@ -272,6 +392,165 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
               </div>
             </div>
           </div>
+
+          {/* 可点击时间轴 */}
+          <div className="mechanics-grid one-columns">
+            <div className="mechanic-card">
+              <div className="card-content">
+                <div className="card-title-section">
+                  <Title level={5} className="mechanic-card-title">
+                    <CloudOutlined />
+                    游戏时间轴 - 详细版
+                  </Title>
+                </div>
+                <div className="card-body">
+                  <div className="timeline-layout-container">
+
+                    {/* <div className="timeline-segmented-wrapper"> */}
+                      <Segmented
+                        vertical
+                        value={currentDay}
+                        onChange={(value) => setCurrentDay(value as number)}
+                        options={[
+                          { label: 'Day 1', value: 0 },
+                          { label: 'Day 2', value: 1 },
+                        ]}
+                        // className="timeline-segmented"
+                      />
+                    {/* </div> */}
+
+                    <div className="timeline-content-wrapper">
+                    {/* --- Day 1 --- */}
+                    {currentDay === 0 && (
+                    <div className="timeline-content active">
+                      <div className="timeline-content-area">
+                        <div className="timeline-header">
+                          <div>
+                            <Text strong className="timeline-title-day1">
+                              Day 1 - {day1TimelineStep === 0 ? '游戏开始' : 
+                              day1TimelineStep === 1 ? '第一次缩圈开始' :
+                              day1TimelineStep === 2 ? '第一次缩圈结束' :
+                              day1TimelineStep === 3 ? '第二次缩圈开始' :
+                              day1TimelineStep === 4 ? '第二次缩圈结束' :
+                              day1TimelineStep === 5 ? 'Boss战' : '未知时间点'}
+                            </Text>
+                            <br />
+                            <Text type="secondary" className="timeline-time">
+                              {day1TimelineStep === 0 ? '0:00' : 
+                              day1TimelineStep === 1 ? '4:30' :
+                              day1TimelineStep === 2 ? '7:30' :
+                              day1TimelineStep === 3 ? '11:00' :
+                              day1TimelineStep === 4 ? '14:30' :
+                              day1TimelineStep === 5 ? 'Boss战时间' : ''}
+                            </Text>
+                          </div>
+                          <div className="timeline-boss-card">
+                            <div className="timeline-boss-card-day1">
+                              <Text strong className="timeline-boss-title-day1">封印监牢Boss</Text>
+                              <br />
+                              <Text className="timeline-boss-stats">
+                                {day1TimelineStep <= 4 ? '55% 血量' : 'Boss战'}
+                              </Text>
+                              <br />
+                              <Text className="timeline-boss-stats">
+                                {day1TimelineStep <= 4 ? '减伤 47%' : 'Boss战'}
+                              </Text>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* 缩圈效果可视化 */}
+                        <div className="circle-shrink-section">
+                          <CircleShrinkEffect currentStep={day1TimelineStep} day={1} />
+                        </div>
+                        
+                        <Text type="secondary">点击下方时间轴查看不同时间点的Boss数据</Text>
+                      </div>
+
+                      <Steps
+                        current={day1TimelineStep}
+                        onChange={setDay1TimelineStep}
+                        items={[
+                          { title: '0:00', description: 'Day 1 开始' },
+                          { title: '4:30', description: '第一次缩圈开始' },
+                          { title: '7:30', description: '第一次缩圈结束' },
+                          { title: '11:00', description: '第二次缩圈开始' },
+                          { title: '14:30', description: '第二次缩圈结束' },
+                          { title: '', description: '' },
+                        ]}
+                      />
+                    </div>
+                    )}
+
+                    {/* Day 2 内容 */}
+                    {currentDay === 1 && (
+                    <div className="timeline-content active">
+                      <div className="timeline-content-area">
+                        <div className="timeline-header">
+                          <div>
+                            <Text strong className="timeline-title-day2">
+                              Day 2 - {day2TimelineStep === 0 ? '游戏开始' : 
+                              day2TimelineStep === 1 ? '第一次缩圈开始' :
+                              day2TimelineStep === 2 ? '第一次缩圈结束' :
+                              day2TimelineStep === 3 ? '第二次缩圈开始' :
+                              day2TimelineStep === 4 ? '第二次缩圈结束' :
+                              day2TimelineStep === 5 ? 'Boss战' : '未知时间点'}
+                            </Text>
+                            <br />
+                            <Text type="secondary" className="timeline-time">
+                              {day2TimelineStep === 0 ? '0:00' : 
+                              day2TimelineStep === 1 ? '4:30' :
+                              day2TimelineStep === 2 ? '7:30' :
+                              day2TimelineStep === 3 ? '11:00' :
+                              day2TimelineStep === 4 ? '14:30' :
+                              day2TimelineStep === 5 ? 'Boss战时间' : ''}
+                            </Text>
+                          </div>
+                          <div className="timeline-boss-card">
+                            <div className="timeline-boss-card-day2">
+                              <Text strong className="timeline-boss-title-day2">封印监牢Boss</Text>
+                              <br />
+                              <Text className="timeline-boss-stats">
+                                {day2TimelineStep <= 1 ? '75% 血量' : 
+                                 day2TimelineStep <= 3 ? '100% 血量' : 'Boss战'}
+                              </Text>
+                              <br />
+                              <Text className="timeline-boss-stats">
+                                {day2TimelineStep <= 1 ? '减伤 20%' : 
+                                 day2TimelineStep <= 3 ? '减伤 0%' : 'Boss战'}
+                              </Text>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* 缩圈效果可视化 */}
+                        <div className="circle-shrink-section">
+                          <CircleShrinkEffect currentStep={day2TimelineStep} day={2} />
+                        </div>
+                        
+                        <Text type="secondary">点击下方时间轴查看不同时间点的Boss数据</Text>
+                      </div>
+
+                      <Steps
+                        current={day2TimelineStep}
+                        onChange={setDay2TimelineStep}
+                        items={[
+                          { title: '0:00  ', description: 'DAY 2 开始' },
+                          { title: '4:30', description: '第一次缩圈开始' },
+                          { title: '7:30', description: '第一次缩圈结束' },
+                          { title: '11:00', description: '第二次缩圈开始' },
+                          { title: '14:30', description: '第二次缩圈结束' },
+                          { title: '', description: '' },
+                        ]}
+                      />
+                    </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
           <div className="mechanics-grid">
             <div className="mechanic-card">

@@ -93,6 +93,193 @@
   height: 100%;
 }
 
+/* Carousel 样式增强 */
+.mechanic-card .ant-carousel {
+  position: relative;
+}
+
+.mechanic-card .ant-carousel .slick-prev,
+.mechanic-card .ant-carousel .slick-next {
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.3s;
+}
+
+.mechanic-card .ant-carousel .slick-prev:hover,
+.mechanic-card .ant-carousel .slick-next:hover {
+  background: #fff;
+  color: #1890ff;
+  border-color: #1890ff;
+}
+
+.mechanic-card .ant-carousel .slick-prev {
+  left: -16px;
+}
+
+.mechanic-card .ant-carousel .slick-next {
+  right: -16px;
+}
+
+/* 时间轴容器过渡效果 */
+.timeline-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-content {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-content.active {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.timeline-content.inactive {
+  pointer-events: none !important;
+}
+
+/* Segmented 控制器样式增强 */
+.mechanic-card .ant-segmented {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d9d9d9;
+}
+
+.mechanic-card .ant-segmented-item {
+  transition: all 0.3s ease;
+}
+
+.mechanic-card .ant-segmented-item-selected {
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  color: white;
+  box-shadow: 0 2px 4px rgba(24, 144, 255, 0.3);
+}
+
+/* 垂直分段控制器特殊样式 */
+.mechanic-card .ant-segmented[data-vertical="true"] {
+  min-height: 120px;
+}
+
+.mechanic-card .ant-segmented[data-vertical="true"] .ant-segmented-item {
+  padding: 12px 16px;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* 时间轴布局样式 */
+.timeline-layout-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* .timeline-segmented-wrapper {
+  flex-shrink: 0;
+} */
+
+/* .timeline-segmented {
+  background: #f5f5f5;
+  padding: 8px 4px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+} */
+
+.timeline-content-wrapper {
+  flex: 1;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 16px;
+  /* background-color: #fff; */
+  min-height: 300px;
+  max-height: 600px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.timeline-content {
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  transition: all 0.3s ease-in-out;
+  min-height: 100%;
+}
+
+.timeline-content.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.timeline-content-area {
+  min-height: 150px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  /* background-color: #fafafa; */
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.timeline-title-day1 {
+  font-size: 16px;
+  color: #faad14;
+}
+
+.timeline-title-day2 {
+  font-size: 16px;
+  color: #52c41a;
+}
+
+.timeline-time {
+  font-size: 14px;
+}
+
+.timeline-boss-card {
+  text-align: right;
+}
+
+.timeline-boss-card-day1 {
+  padding: 8px 12px;
+  background-color: #e6f7ff;
+  border-radius: 6px;
+  border: 1px solid #91d5ff;
+}
+
+.timeline-boss-card-day2 {
+  padding: 8px 12px;
+  background-color: #f6ffed;
+  border-radius: 6px;
+  border: 1px solid #b7eb8f;
+}
+
+.timeline-boss-title-day1 {
+  color: #1890ff;
+}
+
+.timeline-boss-title-day2 {
+  color: #52c41a;
+}
+
+.timeline-boss-stats {
+  font-size: 12px;
+  color: #666;
+}
+
 
 .mechanic-card .card-title-section {
   padding-bottom: 16px;
@@ -333,5 +520,248 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 .ant-popover .footer-link:hover {
   color: #40a9ff;
   text-decoration: underline;
+}
+
+/* ========================================
+   缩圈效果图 CSS 逻辑说明
+   ========================================
+   
+   缩圈效果图由以下层级组成（从外到内）：
+   1. 外圈 (circle-outer) - 固定大小的参考边界
+   2. 上一个圈 (circle-pulse-ring) - 显示缩圈前的大小
+   3. 当前圈 (circle-inner) - 显示缩圈后的大小
+   4. 脉冲边框 (::before) - 缩圈开始时的动画效果
+   5. 中心点 (circle-center) - 最中心的点
+   
+   动画触发条件：
+   - 第一次缩圈开始 (step 1) - 使用 innerPulse + borderPulse
+   - 第二次缩圈开始 (step 3) - 使用 innerPulseSecond + borderPulseSecond
+   ======================================== */
+
+/* 缩圈效果容器 */
+.circle-shrink-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+}
+
+.circle-shrink-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.circle-shrink-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 外圈 - 固定大小的参考边界，不参与动画 */
+.circle-outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #1890ff;
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* 第一次缩圈结束后的外圈 - 浅蓝色 */
+.circle-outer.circle-outer-faded {
+  border: 2px solid rgba(24, 144, 255, 0.4);
+}
+
+/* 第二次缩圈开始时的外圈 - 深蓝色 */
+.circle-outer.circle-outer-second-shrink {
+  border: 2px solid #1890ff;
+}
+
+/* 当前圈 - 根据时间点动态变化大小，无背景色 */
+.circle-inner {
+  position: absolute;
+  border: 3px solid rgba(24, 144, 255, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 0 20px rgba(24, 144, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 第一次缩圈阶段（60%圈） - 保持透明背景 */
+.circle-inner.first-shrink-no-bg {
+  background: transparent;
+}
+
+/* 第一次缩圈结束阶段 - 深蓝色背景 */
+.circle-inner.first-shrink-end-dark {
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.3) 0%, rgba(24, 144, 255, 0.1) 70%);
+  border: 2px solid #1890ff;
+}
+
+/* 第二次缩圈开始阶段 - 内圈变为浅蓝色 */
+.circle-inner.second-shrink-start-dark {
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.1) 0%, transparent 70%);
+  border: 3px solid rgba(24, 144, 255, 0.3);
+}
+
+/* 第一次缩圈脉冲效果 - 当前圈保持固定大小，只有阴影脉冲 */
+.circle-inner.circle-pulse {
+  animation: innerPulse 2s ease-in-out infinite;
+  transform: scale(1); /* 确保当前圈保持固定大小，不缩放 */
+}
+
+/* 脉冲边框 - 围绕当前圈进行缩放动画 */
+.circle-inner.circle-pulse::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border: 1px solid rgba(24, 144, 255, 0.3);
+  border-radius: 50%;
+  animation: borderPulse 4s ease-in-out infinite;
+}
+
+/* 第二次缩圈脉冲效果 - 使用不同的动画，scale值更大 */
+.circle-inner.shrink-second.circle-pulse {
+  animation: innerPulseSecond 4s ease-in-out infinite;
+}
+
+.circle-inner.shrink-second.circle-pulse::before {
+  animation: borderPulseSecond 4s ease-in-out infinite;
+}
+
+/* 上一个圈 - 显示缩圈前的大小，静态显示，无动画 */
+.circle-pulse-ring {
+  position: absolute;
+  border: 2px solid rgba(24, 144, 255, 0.2);
+  border-radius: 50%;
+  background: transparent;
+  z-index: 1;
+}
+
+/* 第一次缩圈动画定义 */
+/* @keyframes innerPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8); 
+  }
+} */
+
+@keyframes borderPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);  /* 起始大小 */
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.7);  /* 脉冲时1.7倍缩放 */
+  }
+}
+
+/* 第二次缩圈动画定义 - scale值更大，效果更强烈 */
+/* @keyframes innerPulseSecond {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8); 
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8); 
+  }
+} */
+
+@keyframes borderPulseSecond {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);  /* 起始大小 */
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(3.4);  /* 脉冲时3.4倍缩放，更强烈 */
+  }
+}
+
+.circle-center {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #1890ff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(24, 144, 255, 0.8);
+  z-index: 2;
+}
+
+.circle-time-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.circle-status {
+  text-align: center;
+  padding: 8px 16px;
+  background: rgba(24, 144, 255, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(24, 144, 255, 0.2);
+}
+
+
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .circle-shrink-wrapper {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .circle-shrink-section {
+    padding: 15px;
+    margin: 15px 0;
+  }
+}
+
+/* 自定义滚动条样式 */
+.timeline-content-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+
+.timeline-content-wrapper::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.timeline-content-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(24, 144, 255, 0.3);
+  border-radius: 4px;
+  transition: background 0.4s ease;
+}
+
+.timeline-content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(24, 144, 255, 0.5);
+}
+
+/* Firefox 滚动条样式 */
+.timeline-content-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(24, 144, 255, 0.3) rgba(0, 0, 0, 0.05);
 }
 
