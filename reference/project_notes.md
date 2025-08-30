@@ -37,6 +37,8 @@
 ### 图片来源
 [nightreign wiki](https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki)
 
+###  boss
+
 ---
 ### 词条整理（根据局内分类手动整理）
 1. 能力值：提升血量上限、提升专注值上限、提升精力上限、生命力、集中力、耐力、力气、灵巧、智力、信仰、感应、强韧度、每次解开魔法师塔的机关能提升专注值上限
