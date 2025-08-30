@@ -581,9 +581,9 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   border: 2px solid rgba(24, 144, 255, 0.4);
 }
 
-/* 第二次缩圈开始时的外圈 - 深蓝色 */
+/* 第二次缩圈开始时的外圈 - 浅蓝色 */
 .circle-outer.circle-outer-second-shrink {
-  border: 2px solid #1890ff;
+  border: 2px solid rgba(24, 144, 255, 0.4);
 }
 
 /* 当前圈 - 根据时间点动态变化大小，无背景色 */
@@ -609,10 +609,16 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   border: 2px solid #1890ff;
 }
 
-/* 第二次缩圈开始阶段 - 内圈变为浅蓝色 */
+/* 第二次缩圈开始阶段 - 内圈保持浅蓝色 */
 .circle-inner.second-shrink-start-dark {
   background: radial-gradient(circle, rgba(24, 144, 255, 0.1) 0%, transparent 70%);
   border: 3px solid rgba(24, 144, 255, 0.3);
+}
+
+/* 第二次缩圈结束阶段 - 内圈变为深蓝色 */
+.circle-inner.second-shrink-end-dark {
+  background: radial-gradient(circle, rgba(24, 144, 255, 0.3) 0%, rgba(24, 144, 255, 0.1) 70%);
+  border: 2px solid #1890ff;
 }
 
 /* 第一次缩圈脉冲效果 - 当前圈保持固定大小，只有阴影脉冲 */
@@ -650,6 +656,11 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   border-radius: 50%;
   background: transparent;
   z-index: 1;
+}
+
+/* 第二次缩圈开始时的脉冲圈 - 深蓝色 */
+.circle-pulse-ring.second-shrink-pulse {
+  border: 2px solid #1890ff;
 }
 
 /* 第一次缩圈动画定义 */

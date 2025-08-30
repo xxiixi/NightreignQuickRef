@@ -79,6 +79,11 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
     return step === 3; // 第二次缩圈开始
   };
   
+  // 判断是否是第二次缩圈结束（内圈变深蓝）
+  const isSecondShrinkEnd = (step: number) => {
+    return step === 4; // 第二次缩圈结束
+  };
+  
   // 获取上一个圈的大小（用于脉冲范围）
   const getPreviousSize = (step: number, dayNum: number) => {
     if (dayNum === 1) {
@@ -103,6 +108,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
   const isFirstShrinkEndPhase = isFirstShrinkEnd(currentStep);
   const isFirstShrinkCompletedPhase = isFirstShrinkCompleted(currentStep);
   const isSecondShrinkStartPhase = isSecondShrinkStart(currentStep);
+  const isSecondShrinkEndPhase = isSecondShrinkEnd(currentStep);
 
   return (
     <div className="circle-shrink-container">
@@ -112,7 +118,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
         
         {/* 内圈 - 根据时间点动态变化 */}
         <div 
-          className={`circle-inner ${shouldPulse ? 'circle-pulse' : ''} ${shrinkPhase !== 'none' ? `shrink-${shrinkPhase}` : ''} ${isFirstShrink ? 'first-shrink-no-bg' : ''} ${isFirstShrinkEndPhase ? 'first-shrink-end-dark' : ''} ${isSecondShrinkStartPhase ? 'second-shrink-start-dark' : ''}`}
+          className={`circle-inner ${shouldPulse ? 'circle-pulse' : ''} ${shrinkPhase !== 'none' ? `shrink-${shrinkPhase}` : ''} ${isFirstShrink ? 'first-shrink-no-bg' : ''} ${isFirstShrinkEndPhase ? 'first-shrink-end-dark' : ''} ${isSecondShrinkStartPhase ? 'second-shrink-start-dark' : ''} ${isSecondShrinkEndPhase ? 'second-shrink-end-dark' : ''}`}
           style={{
             width: `${currentSize}%`,
             height: `${currentSize}%`,
@@ -123,7 +129,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
         {/* 脉冲效果圈 - 只在缩圈开始时显示 */}
         {shouldPulse && (
           <div 
-            className="circle-pulse-ring"
+            className={`circle-pulse-ring ${isSecondShrinkStartPhase ? 'second-shrink-pulse' : ''}`}
             style={{
               width: `${previousSize}%`,
               height: `${previousSize}%`,
@@ -248,7 +254,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                           dot: <FireTwoTone twoToneColor="red"/>,
                           children: '战斗!',
                         },
-                        {
+                      {
                           dot: <HeartTwoTone twoToneColor="#eb2f96" />,
                           children: 'Day 2 开始 / 最终Boss战',
                           color: 'green',
