@@ -351,7 +351,7 @@ body[tomato-theme="dark"] .mechanic-card:hover {
 
 [data-theme="dark"] .mechanic-card .card-title-section,
 body[tomato-theme="dark"] .mechanic-card .card-title-section {
-  border-bottom-color: var(--color-primary-800);
+  border-bottom-color: var(--color-primary-600);
 }
 
 /* 升级所需卢恩表格样式 */
@@ -727,6 +727,13 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   border-radius: 20px;
 }
 
+/* 深色模式下的进度条容器样式 */
+[data-theme="dark"] .boss-progress-container,
+body[tomato-theme="dark"] .boss-progress-container {
+  background-color: var(--theme-bg-tertiary);
+  border: 1px solid var(--theme-border);
+}
+
 .boss-progress-item {
   margin-bottom: 8px;
   /* width: 100%; */
@@ -739,7 +746,6 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 /* 进度条标签样式 */
 .progress-label {
   font-size: 12px;
-  color: rgba(0, 0, 0, 0.65);
   /* margin-bottom: 4px; */
   font-weight: 500;
   /* white-space: nowrap; */
@@ -781,6 +787,12 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 
 .damage-stat:last-child {
   margin-bottom: 0;
+}
+
+/* 深色模式下的伤害统计样式 */
+[data-theme="dark"] .damage-stat,
+body[tomato-theme="dark"] .damage-stat {
+  color: var(--theme-text-primary);
 }
 
 /* 时间轴列样式 */
@@ -827,6 +839,12 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   min-height: 0;
 }
 
+/* 深色模式下的时间轴列内容样式 */
+[data-theme="dark"] .timeline-column-content,
+body[tomato-theme="dark"] .timeline-column-content {
+  color: var(--theme-text-primary);
+}
+
 /* 时间轴控制样式 */
 .timeline-controls {
   text-align: center;
@@ -853,4 +871,16 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 .boss-section-title .anticon {
   color: #1890ff;
   font-size: 14px;
+}
+
+/* 深色模式下的Boss标题样式 */
+[data-theme="dark"] .boss-section-title,
+body[tomato-theme="dark"] .boss-section-title {
+  color: #40a9ff;
+  border-bottom-color: rgba(64, 169, 255, 0.3);
+}
+
+[data-theme="dark"] .boss-section-title .anticon,
+body[tomato-theme="dark"] .boss-section-title .anticon {
+  color: #40a9ff;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Timeline, Table, Alert, Steps, Progress, Statistic } from 'antd';
-import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined } from '@ant-design/icons';
+import { CheckCircleTwoTone, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectTwoTone, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined, PlayCircleTwoTone } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import '../styles/gameMechanicsView.css';
@@ -213,7 +213,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
-                    <ClockCircleOutlined />
+                    <ClockCircleTwoTone twoToneColor="blue" />
                     游戏时间机制
                   </Title>
                 </div>
@@ -286,7 +286,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
-                    <MoneyCollectOutlined />
+                    <MoneyCollectTwoTone twoToneColor="#faad14" />
                     升级所需卢恩
                   </Title>
                 </div>
@@ -419,8 +419,8 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
-                    <CloudOutlined />
-                    游戏时间轴 - 详细版
+                    <PlayCircleTwoTone twoToneColor="#722ed1" />
+                    游戏时间机制: 监牢/夜雨
                   </Title>
                 </div>
                 <div className="card-body">
@@ -524,7 +524,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                   <div className="boss-progress-container">
                                     <div className="boss-section-title">
                                       <CloudOutlined />
-                                      雨中冒险伤害
+                                      夜雨伤害
                                     </div>
                                     <div className="damage-stat">
                                       <Statistic
