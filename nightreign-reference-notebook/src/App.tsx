@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ConfigProvider, theme } from 'antd';
 import { geekblue } from '@ant-design/colors';
-import zhCN from 'antd/locale/zh_CN';
-import enUS from 'antd/locale/en_US';
+// import zhCN from 'antd/locale/zh_CN';
+// import enUS from 'antd/locale/en_US';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Navigation from './components/Navigation';
@@ -20,7 +20,7 @@ import { getDefaultPage } from './config/navigationConfig';
 function App() {
   const [activeTab, setActiveTab] = useState(getDefaultPage());
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [isEnglish, setIsEnglish] = useState(false);
+  // const [isEnglish, setIsEnglish] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   
   // 子Tab和Step状态管理
@@ -45,9 +45,9 @@ function App() {
   };
 
   // 语言切换
-  const handleToggleLanguage = () => {
-    setIsEnglish(!isEnglish);
-  };
+  // const handleToggleLanguage = () => {
+  //   setIsEnglish(!isEnglish);
+  // };
 
   // 子Tab切换处理
   const handleSubTabChange = (tabKey: string) => {
@@ -117,7 +117,7 @@ function App() {
   return (
     <ConfigProvider 
       theme={themeConfig}
-      locale={isEnglish ? enUS : zhCN}
+      // locale={isEnglish ? enUS : zhCN}
     >
       {!isDataLoaded ? (
         <LoadingSpinner message="正在加载数据，请稍候..." />
@@ -132,7 +132,7 @@ function App() {
           <Header
             isDarkMode={isDarkMode}
             onToggleTheme={handleToggleTheme}
-            onToggleLanguage={handleToggleLanguage}
+            // onToggleLanguage={handleToggleLanguage}
           />
 
           <Navigation

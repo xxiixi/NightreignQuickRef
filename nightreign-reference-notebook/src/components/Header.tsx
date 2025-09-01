@@ -1,20 +1,20 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, TranslationOutlined, SmileOutlined, ReadOutlined, RobotOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, SmileOutlined, ReadOutlined, RobotOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
 interface HeaderProps {
   isDarkMode: boolean;
   onToggleTheme: () => void;
-  onToggleLanguage: () => void;
+  // onToggleLanguage: () => void;
 }
 
 const Header: React.FC<HeaderProps> = React.memo(({
   isDarkMode,
   onToggleTheme,
-  onToggleLanguage
+  // onToggleLanguage
 }) => {
   const { sitePv, siteUv } = useVercount();
 
