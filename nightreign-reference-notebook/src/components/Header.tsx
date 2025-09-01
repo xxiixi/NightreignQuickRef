@@ -32,40 +32,6 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   className="theme-toggle-btn"
                 />
               </Tooltip>
-              <Tooltip title="查看访问量" placement="bottom" className="theme-toggle-btn">
-                <Popover
-                  content={
-                    <div style={{ padding: '5px' }}>
-                      <div style={{ fontSize: '12px' }}>
-                        本站总访客数 <span style={{ color: '#1890ff' }}>{siteUv}</span> 人
-                      </div>
-                      <div style={{ fontSize: '12px' }}>
-                        本站总访问量 <span style={{ color: '#1890ff' }}>{sitePv}</span> 次
-                      </div>
-                      {/* <div style={{ fontSize: '12px' }}>
-                        本页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
-                      </div> */}
-                      <div style={{ 
-                        marginTop: '4px', 
-                        borderTop: '1px solid rgba(198, 198, 198, 0.2)', 
-                        paddingTop: '4px', 
-                        fontSize: '12px', 
-                        color: '#999' 
-                      }}>
-                        统计服务: Vercount
-                      </div>
-                    </div>
-                  }
-                  placement="bottom"
-                  trigger="click"
-                >
-                  <Button
-                    type="text"
-                    icon={<SmileOutlined />}
-                    className="visits-counter-btn"
-                  />
-                </Popover>
-              </Tooltip>
               <Tooltip title="查看数据来源" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
@@ -197,41 +163,78 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   />
                 </Popover>
               </Tooltip>
-              <Tooltip title="Comments" placement="bottom" className="theme-toggle-btn">
+              <Tooltip title="查看访问量" placement="bottom" className="theme-toggle-btn">
+                <Popover
+                  content={
+                    <div style={{ padding: '5px' }}>
+                      <div style={{ fontSize: '12px' }}>
+                        本站总访客数 <span style={{ color: '#1890ff' }}>{siteUv}</span> 人
+                      </div>
+                      <div style={{ fontSize: '12px' }}>
+                        本站总访问量 <span style={{ color: '#1890ff' }}>{sitePv}</span> 次
+                      </div>
+                      {/* <div style={{ fontSize: '12px' }}>
+                        本页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
+                      </div> */}
+                      <div style={{ 
+                        marginTop: '4px', 
+                        borderTop: '1px solid rgba(198, 198, 198, 0.2)', 
+                        paddingTop: '4px', 
+                        fontSize: '10px', 
+                        color: '#999' 
+                      }}>
+                        统计服务: Vercount
+                      </div>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
+                >
+                  <Button
+                    type="text"
+                    icon={<SmileOutlined />}
+                    className="visits-counter-btn"
+                  />
+                </Popover>
+              </Tooltip>
+              <Tooltip title="网站声明" placement="bottom" className="theme-toggle-btn">
                  <Popover
                    content={
-                     <div style={{ padding: '8px', maxWidth: '230px' }}>
+                     <div style={{ padding: '8px', maxWidth: '250px',width: '250px' }}>
                        <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
-                         Comments 📝
+                         网站声明 📝
                        </div>
-                          <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                                               <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
                           <div style={{ marginBottom: '6px' }}>
-                          数据来源/原贴/原视频可以hover对应卡片问号后点击链接直接跳转（还没补全。。。）
+                            ⚠️ 本网站为个人制作，非官方授权网站
                           </div>
                           <div style={{ marginBottom: '6px' }}>
-                          如果有数据错误有可能是我抄错数了，可以联系我修改（联系方式：<a href="mailto:scyxw5@gmail.com" className="footer-link">scyxw5@gmail.com</a>）
+                          ⚠️ 数据由个人收集整理，可能存在错误或遗漏; 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接
                           </div>
+                           <div style={{ marginBottom: '6px' }}>
+                           ⚠️ 使用本网站数据造成的任何损失，网站制作者不承担责任; 未经授权禁止复制、修改或商业使用本网站源码;
+                          </div>                          
                         </div>
                      </div>
                    }
                    placement="bottom"
                    trigger="click"
                  >
-                                       <Button
+                  <Button
                       type="text"
                       icon={<RobotOutlined />}
                       className="visits-counter-btn"
                     />
                  </Popover>
                </Tooltip>
-              <Tooltip title="切换语言功能尚未开发" placement="bottom">
+              {/* <Tooltip title="切换语言功能尚未开发" placement="bottom">
                 <Button
                   type="text"
                   icon={<TranslationOutlined />}
                   onClick={onToggleLanguage}
                   className="language-toggle-btn"
                 />
-              </Tooltip>
+              </Tooltip> */}
           </Space>
         </div>
       </div>
@@ -239,11 +242,11 @@ const Header: React.FC<HeaderProps> = React.memo(({
 
       <div className="header">
         <Title level={1} className="main-title">
-          《艾尔登法环:黑夜君临》速查手册
+          黑夜君临速查手册
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
           <Text type="secondary" className="subtitle-text">
-            黑夜君临数据、机制速查工具，可快速检索条目信息，后续会添加更多内容
+            个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
           </Text>
         </Space>
       </div>
