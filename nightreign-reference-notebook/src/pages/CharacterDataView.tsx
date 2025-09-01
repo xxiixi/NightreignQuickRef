@@ -700,7 +700,7 @@ const CharacterDataView: React.FC = () => {
 
   return (
     <div className="character-data-container">
-      <div className="content-wrapper card-item">
+      <div className="content-wrapper card-item" id="character-attributes">
         <div className="card-header">
           <Title level={5} className="character-card-title">
             基础属性
@@ -872,7 +872,7 @@ const CharacterDataView: React.FC = () => {
       </div>
 
       {/* 角色详细数据 */}
-      <div className="content-wrapper card-item">
+      <div className="content-wrapper card-item" id="character-detail-data">
          <div className="card-header">
            <Title level={5} className="character-card-title">
              角色详细数据
@@ -1079,7 +1079,9 @@ const CharacterDataView: React.FC = () => {
 
 
       {/* 闪避无敌帧对比 */}
-      <DodgeFramesComparison />
+      <div id="dodge-frames">
+        <DodgeFramesComparison />
+      </div>
 
 
       

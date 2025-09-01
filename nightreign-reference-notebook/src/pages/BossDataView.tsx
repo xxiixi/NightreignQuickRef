@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
@@ -38,13 +38,18 @@ import sleepResistance from '../assets/Resistances/sleep-status-effect-elden-rin
 import madnessResistance from '../assets/Resistances/madness-status-effect-elden-ring-nightreign-wiki-guide-100px.png';
 import deathBlightResistance from '../assets/Resistances/blight_status_effect_elden_ring_wiki_guide_100px.png';
 
-const BossDataView: React.FC = () => {
+interface BossDataViewProps {
+  activeSubTab?: string;
+}
+
+const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const [filteredData] = useState<BossData[]>(bossData);
   const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [characterSearchKeyword, setCharacterSearchKeyword] = useState('');
   const [selectedCharacterLocations, setSelectedCharacterLocations] = useState<string[]>([]);
   const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
+  const [activeBossTab, setActiveBossTab] = useState<string>(activeSubTab || 'boss-data');
 
   // 位置颜色映射
   const locationColorMap: Record<string, string> = {
@@ -1426,19 +1431,27 @@ const BossDataView: React.FC = () => {
     </div>
   );
 
+  // 监听外部Tab切换
+  useEffect(() => {
+    if (activeSubTab && activeSubTab !== activeBossTab) {
+      setActiveBossTab(activeSubTab);
+    }
+  }, [activeSubTab, activeBossTab]);
+
   return (
     <div className="boss-data-view-container">
       <Card className="boss-card">
         <Tabs
           style={{ marginTop: '5px' }}
           type="card"
-          defaultActiveKey="boss-data"
+          activeKey={activeBossTab}
+          onChange={setActiveBossTab}
           items={[
             {
               key: 'boss-data',
               label: '🌙 夜王基础数据',
               children: (
-                <>
+                <div id="night-king-basic">
                   <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <Radio.Group 
                       value={playerCount} 
@@ -1471,14 +1484,14 @@ const BossDataView: React.FC = () => {
                     bordered
                     footer={resistanceFooter}
                   />
-                </>
+                </div>
               ),
             },
             {
               key: 'wild-boss-data',
               label: '☠️ 野生Boss数据',
               children: (
-                <div className="wild-boss-filter-container">
+                <div className="wild-boss-filter-container" id="wild-boss-data">
                   <div className="filter-inputs">
                     <Input
                       placeholder="搜索Boss名称"
@@ -1516,7 +1529,7 @@ const BossDataView: React.FC = () => {
               key: 'character-data',
               label: '🏛️ 圆桌厅堂人物数据',
               children: (
-                <div className="wild-boss-filter-container">
+                <div className="wild-boss-filter-container" id="roundtable-characters">
                   <div className="filter-inputs">
                     <Input
                       placeholder="搜索人物名称"
@@ -1554,16 +1567,18 @@ const BossDataView: React.FC = () => {
               key: 'sinner-data',
               label: '🐐 永夜山羊召唤罪人详情',
               children: (
-                <Table
-                  columns={sinnerColumns}
-                  dataSource={processSinnerData()}
-                  rowKey="key"
-                  scroll={{ x: 700 }}
-                  pagination={false}
-                  size="small"
-                  bordered
-                  footer={sinnerFooter}
-                />
+                <div id="sinner-details">
+                  <Table
+                    columns={sinnerColumns}
+                    dataSource={processSinnerData()}
+                    rowKey="key"
+                    scroll={{ x: 700 }}
+                    pagination={false}
+                    size="small"
+                    bordered
+                    footer={sinnerFooter}
+                  />
+                </div>
               ),
             },
           ]}

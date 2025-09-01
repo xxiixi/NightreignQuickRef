@@ -22,6 +22,10 @@ function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isEnglish, setIsEnglish] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  
+  // 子Tab和Step状态管理
+  const [activeSubTab, setActiveSubTab] = useState<string>('');
+  const [activeStep, setActiveStep] = useState<number>(0);
 
   // 主题切换函数
   const handleToggleTheme = () => {
@@ -45,6 +49,16 @@ function App() {
     setIsEnglish(!isEnglish);
   };
 
+  // 子Tab切换处理
+  const handleSubTabChange = (tabKey: string) => {
+    setActiveSubTab(tabKey);
+  };
+
+  // Step切换处理
+  const handleStepChange = (stepIndex: number) => {
+    setActiveStep(stepIndex);
+  };
+
   // 预加载所有数据
   useEffect(() => {
     const dataManager = DataManager.getInstance();
@@ -66,21 +80,27 @@ function App() {
     return cleanup;
   }, []);
 
+  // 主Tab切换时重置子Tab和Step状态
+  useEffect(() => {
+    setActiveSubTab('');
+    setActiveStep(0);
+  }, [activeTab]);
+
   // 渲染内容
   const renderContent = () => {
     switch (activeTab) {
       case '词条详细数据':
-        return <EntryDetailView />;
+        return <EntryDetailView activeSubTab={activeSubTab} />;
       case '传说武器详情':
-        return <LegendaryWeaponView />;
+        return <LegendaryWeaponView activeStep={activeStep} />;
       case '角色数据':
         return <CharacterDataView />;
       case '游戏机制':
         return <GameMechanicsView functionName="游戏机制" />;
       case '夜王Boss数据':
-        return <BossDataView />;
+        return <BossDataView activeSubTab={activeSubTab} />;
       default:
-        return <EntryDetailView />;
+        return <EntryDetailView activeSubTab={activeSubTab} />;
     }
   };
 
@@ -103,7 +123,11 @@ function App() {
         <LoadingSpinner message="正在加载数据，请稍候..." />
       ) : (
         <div className="app-container">
-          <FunctionMenu onTabChange={setActiveTab} />
+          <FunctionMenu 
+            onTabChange={setActiveTab} 
+            onSubTabChange={handleSubTabChange}
+            onStepChange={handleStepChange}
+          />
           
           <Header
             isDarkMode={isDarkMode}

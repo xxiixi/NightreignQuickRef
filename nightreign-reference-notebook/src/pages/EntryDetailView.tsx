@@ -314,7 +314,11 @@ const getSuperposabilityColor = (superposability: string | null | undefined): st
   }
 };
 
-const EntryDetailView: React.FC = () => {
+interface EntryDetailViewProps {
+  activeSubTab?: string;
+}
+
+const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedInGameTypes, setSelectedInGameTypes] = useState<string[]>([]);
@@ -322,7 +326,7 @@ const EntryDetailView: React.FC = () => {
   const [selectedItemEffectTypes, setSelectedItemEffectTypes] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(20);
-  const [activeEntryTab, setActiveEntryTab] = useState('局外词条');
+  const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
   const [isLinearMode, setIsLinearMode] = useState(false);
@@ -534,6 +538,13 @@ const EntryDetailView: React.FC = () => {
       return () => clearTimeout(timer);
     }
   }, [activeEntryTab]);
+
+  // 监听外部Tab切换
+  useEffect(() => {
+    if (activeSubTab && activeSubTab !== activeEntryTab) {
+      setActiveEntryTab(activeSubTab);
+    }
+  }, [activeSubTab, activeEntryTab]);
 
   // 从DataManager获取数据
   useEffect(() => {
@@ -1492,7 +1503,7 @@ const EntryDetailView: React.FC = () => {
               key: '局外词条',
               label: '🌕 局外词条',
               children: (
-                <div>
+                <div id="outsider-entries">
                   {renderSearchAndFilter('局外词条')}
                   {renderTableContent('局外词条')}
                 </div>
@@ -1502,7 +1513,7 @@ const EntryDetailView: React.FC = () => {
               key: '局内词条',
               label: '🌖 局内词条',
               children: (
-                <div>
+                <div id="in-game-entries">
                   {renderSearchAndFilter('局内词条')}
                   {renderTableContent('局内词条')}
                 </div>
@@ -1512,7 +1523,7 @@ const EntryDetailView: React.FC = () => {
               key: '护符词条',
               label: '🌗 护符词条',
               children: (
-                <div>
+                <div id="talisman-entries">
                   {renderSearchAndFilter('护符词条')}
                   {renderTableContent('护符词条')}
                 </div>
@@ -1522,7 +1533,7 @@ const EntryDetailView: React.FC = () => {
               key: '强化类别词条适用范围',
               label: '🌘 强化类别词条适用范围',
               children: (
-                <div>
+                <div id="enhancement-categories">
                   {renderSearchAndFilter('强化类别词条适用范围')}
                   {renderTableContent('强化类别词条适用范围')}
                 </div>
@@ -1532,7 +1543,7 @@ const EntryDetailView: React.FC = () => {
               key: '特殊事件及地形效果',
               label: '🌑 特殊事件及地形效果',
               children: (
-                <div>
+                <div id="special-events">
                   {renderSearchAndFilter('特殊事件及地形效果')}
                   {renderTableContent('特殊事件及地形效果')}
                 </div>
@@ -1542,7 +1553,7 @@ const EntryDetailView: React.FC = () => {
               key: '道具效果',
               label: '🌒 道具/采集效果',
               children: (
-                <div>
+                <div id="item-effects">
                   {renderSearchAndFilter('道具效果')}
                   {renderTableContent('道具效果')}
                 </div>

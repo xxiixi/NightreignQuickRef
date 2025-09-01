@@ -209,7 +209,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
 
           {/* 游戏时间机制 - 自定义宽度比例 2:1 */}
           <div className="mechanics-grid custom-columns" style={{ '--mechanics-grid-columns': '1.2fr 2fr' } as React.CSSProperties}>
-            <div className="mechanic-card">
+            <div className="mechanic-card" id="game-time-mechanism">
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
@@ -282,7 +282,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
             </div>
 
             {/* 右侧小卡片 - 升级所需卢恩 */}
-            <div className="mechanic-card">
+            <div className="mechanic-card" id="runes-required">
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
@@ -415,7 +415,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
 
           {/* 可点击时间轴 */}
           <div className="mechanics-grid one-columns">
-            <div className="mechanic-card">
+            <div className="mechanic-card" id="prison-rain-mechanism">
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
@@ -561,7 +561,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
           </div>
 
           <div className="mechanics-grid">
-            <div className="mechanic-card">
+            <div className="mechanic-card" id="recovery-calculator">
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
@@ -584,7 +584,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
 
           {/* 隐士出招表 */}
           <div className="mechanics-grid">
-            <div className="mechanic-card">
+            <div className="mechanic-card" id="hermit-magic-list">
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">

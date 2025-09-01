@@ -151,8 +151,12 @@ const ColorLegend = () => {
   );
 };
 
-const LegendaryWeaponView: React.FC = () => {
-  const [currentStep, setCurrentStep] = React.useState(0);
+interface LegendaryWeaponViewProps {
+  activeStep?: number;
+}
+
+const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep }) => {
+  const [currentStep, setCurrentStep] = React.useState(activeStep || 0);
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [dataState, setDataState] = useState<DataState>({
     weaponCharacterData: [],
@@ -183,6 +187,13 @@ const LegendaryWeaponView: React.FC = () => {
 
     loadData();
   }, []);
+
+  // 监听外部Step切换
+  useEffect(() => {
+    if (typeof activeStep === 'number' && activeStep !== currentStep) {
+      setCurrentStep(activeStep);
+    }
+  }, [activeStep, currentStep]);
 
   const { weaponCharacterData, weaponEffectData, loading } = dataState;
 
@@ -354,8 +365,8 @@ const LegendaryWeaponView: React.FC = () => {
         <div className="legendary-weapon-container" style={{ padding: '16px' }}>
           {customSteps}
           <div className="legendary-weapon-content">
-            {currentStep === 0 && firstTable}
-            {currentStep === 1 && secondTable}
+            {currentStep === 0 && <div id="weapon-strength-panel">{firstTable}</div>}
+            {currentStep === 1 && <div id="weapon-blessing-effects">{secondTable}</div>}
           </div>
         </div>
       </div>
