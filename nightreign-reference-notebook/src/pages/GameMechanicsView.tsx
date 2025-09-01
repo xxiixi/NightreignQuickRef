@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Typography, Timeline, Table, Alert, Steps, Progress } from 'antd';
-import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined } from '@ant-design/icons';
+import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import '../styles/gameMechanicsView.css';
@@ -149,10 +149,24 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
 const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) => {
   // 隐士出招表数据
   const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
-  // 时间轴状态 - 为每个Day创建独立状态
+  // 时间轴状态
   const [day1TimelineStep, setDay1TimelineStep] = useState(0);
-  const [day2TimelineStep, setDay2TimelineStep] = useState(0);
-  const [currentDay, setCurrentDay] = useState(0); // 0: Day 1, 1: Day 2
+
+  // 获取当前时间点的时间和描述
+  const getCurrentTimeInfo = (step: number) => {
+    const timelineItems = [
+      { time: '0:00', description: 'Day 1/ Day 2 开始' },
+      { time: '4:30', description: '第一次缩圈开始' },
+      { time: '7:30', description: '第一次缩圈结束' },
+      { time: '11:00', description: '第二次缩圈开始' },
+      { time: '14:30', description: '第二次缩圈结束' },
+    ];
+
+    if (step >= 0 && step < timelineItems.length) {
+      return timelineItems[step];
+    }
+    return { time: '0:00', description: 'Day 1/ Day 2 开始' };
+  };
 
   useEffect(() => {
     const loadData = async () => {
@@ -411,197 +425,124 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                 </div>
                 <div className="card-body">
                   <div className="timeline-layout-container">
-                    {/* Day切换时间轴 - 纵向布局 */}
-                    <div className="timeline-day-switcher">
-                      <div className="custom-steps-container">
-                        <Steps
-                          size="small"
-                          current={currentDay}
-                          onChange={(value) => setCurrentDay(value as number)}
-                          items={[
-                            { title: 'Day 1' },
-                            { title: 'Day 2' }
-                          ]}
-                        />
-                      </div>
-                    </div>
                     <div className="timeline-content-wrapper">
+                      {/* 时间轴内容 */}
+                      <div className="timeline-content">
+                        {/* 时间轴 + 两栏布局 */}
+                        <div className="timeline-with-steps">
+                          {/* 左侧时间轴 */}
+                          <div className="timeline-steps-container">
+                            <Steps
+                              size="small"
+                              direction="vertical"
+                              current={day1TimelineStep}
+                              onChange={setDay1TimelineStep}
+                              items={[
+                                { title: '0:00', description: 'Day 1/ Day 2 开始' },
+                                { title: '4:30', description: '第一次缩圈开始' },
+                                { title: '7:30', description: '第一次缩圈结束' },
+                                { title: '11:00', description: '第二次缩圈开始' },
+                                { title: '14:30', description: '第二次缩圈结束' },
+                              ]}
+                            />
+                          </div>
 
-                      {/* --- Day 1 --- */}
-                      {currentDay === 0 && (
-                        <div className="timeline-content">
-                          {/* 时间轴 + 两栏布局 */}
-                          <div className="timeline-with-steps">
-                            {/* 左侧时间轴 */}
-                            <div className="timeline-steps-container">
-                              <Steps
-                                size="small"
-                                direction="vertical"
-                                current={day1TimelineStep}
-                                onChange={setDay1TimelineStep}
-                                items={[
-                                  { title: '0:00', description: 'Day 1 开始' },
-                                  { title: '4:30', description: '第一次缩圈开始' },
-                                  { title: '7:30', description: '第一次缩圈结束' },
-                                  { title: '11:00', description: '第二次缩圈开始' },
-                                  { title: '14:30', description: '第二次缩圈结束' },
-                                ]}
-                              />
-                            </div>
-
-                            {/* 右侧内容区域 */}
-                            {/* 两栏布局 */}
-                            <div className="timeline-two-columns">
-                              {/* 第一栏：缩圈效果图 */}
-                              <div className="timeline-column">
-                                <div className="timeline-column-header">
-                                  <Text strong>缩圈效果图</Text>
-                                </div>
-                                <div className="timeline-column-content">
-                                  <CircleShrinkEffect currentStep={day1TimelineStep} day={1} />
+                          {/* 右侧内容区域 */}
+                          {/* 两栏布局 */}
+                          <div className="timeline-two-columns">
+                            {/* 第一栏：缩圈效果图 */}
+                            <div className="timeline-column">
+                              <div className="timeline-column-content">
+                                <CircleShrinkEffect currentStep={day1TimelineStep} day={1} />
+                                <div style={{
+                                  textAlign: 'center',
+                                  marginTop: '12px',
+                                  fontSize: '12px',
+                                  color: '#666',
+                                  fontWeight: 'normal'
+                                }}>
+                                  {getCurrentTimeInfo(day1TimelineStep).time} - {getCurrentTimeInfo(day1TimelineStep + 1).time} <br />
+                                  {getCurrentTimeInfo(day1TimelineStep).description}
                                 </div>
                               </div>
+                            </div>
 
-                              {/* 第二栏：封印监牢Boss + 雨中冒险伤害 */}
-                              <div className="timeline-column">
-                                <div className="timeline-column-header">
-                                  <Text strong>封印监牢Boss & 雨中冒险伤害（Day 1）</Text>
-                                </div>
-                                <div className="timeline-column-content">
-                                  <div className="boss-info">
-                                    <div className="boss-progress-container">
-                                      <div className="boss-progress-item">
-                                        <div className="progress-label">血量：</div>
-                                        <Progress
-                                          percent={day1TimelineStep <= 4 ? 55 : 100}
-                                          size="small"
-                                          strokeColor="#cf1322"
-                                          format={(percent) => `${percent}%`}
-                                        />
-                                      </div>
-                                      <div className="boss-progress-item">
-                                        <div className="progress-label">减伤：</div>
-                                        <Progress
-                                          percent={day1TimelineStep <= 4 ? 47 : 0}
-                                          size="small"
-                                          strokeColor="#3f8600"
-                                          format={(percent) => `${percent}%`}
-                                        />
-                                      </div>
+                            {/* 第二栏：封印监牢Boss + 雨中冒险伤害 */}
+                            <div className="timeline-column">
+                              <div className="timeline-column-content">
+                                <div className="boss-info">
+                                  <div className="boss-progress-container">
+                                    <div className="boss-section-title">
+                                      <LockOutlined />
+                                      Day 1: 封印监牢Boss血量/减伤率
+                                    </div>
+                                    <div className="boss-progress-item">
+                                      <div className="progress-label">Boss血量：</div>
+                                      <Progress
+                                        percent={day1TimelineStep <= 4 ? 55 : 100}
+                                        strokeColor="#cf1322"
+                                        format={(percent) => `${percent}%`}
+                                      />
+                                    </div>
+                                    <div className="boss-progress-item">
+                                      <div className="progress-label">减伤率：</div>
+                                      <Progress
+                                        percent={day1TimelineStep <= 4 ? 47 : 0}
+                                        strokeColor="#3f8600"
+                                        format={(percent) => `${percent}%`}
+                                      />
                                     </div>
                                   </div>
 
-                                  <div className="damage-info" style={{ marginTop: '20px' }}>
-                                    <div className="damage-stat">
-                                      <Text type="secondary">雨中冒险伤害:</Text>
-                                      <Text strong style={{ color: '#52c41a' }}>
-                                        {day1TimelineStep === 0 ? '夜雨尚未出现' :
-                                          day1TimelineStep === 1 ? '2% + 15/s' :
-                                            day1TimelineStep === 2 ? '2% + 15/s' :
-                                              day1TimelineStep === 3 ? '2% + 30/s' :
-                                                day1TimelineStep === 4 ? '2% + 30/s' : '2% + 30/s'}
-                                      </Text>
+                                  <div className="boss-progress-container">
+                                    <div className="boss-section-title">
+                                      <LockOutlined />
+                                      Day 2: 封印监牢Boss血量/减伤率
                                     </div>
-                                    <div className="damage-stat" style={{ marginTop: '8px' }}>
-                                      <Text type="secondary" style={{ fontSize: '12px', color: '#666' }}>
-                                        超时秒杀机制：110秒后，伤害变为10%+30/0.5s，120秒后直接秒杀
-                                      </Text>
+                                    <div className="boss-progress-item">
+                                      <div className="progress-label">Boss血量：</div>
+                                      <Progress
+                                        percent={day1TimelineStep <= 1 ? 75 :
+                                          day1TimelineStep <= 3 ? 100 : 0}
+                                        strokeColor="#cf1322"
+                                        format={(percent) => `${percent}%`}
+                                      />
                                     </div>
+                                    <div className="boss-progress-item">
+                                      <div className="progress-label">减伤率：</div>
+                                      <Progress
+                                        percent={day1TimelineStep <= 1 ? 20 :
+                                          day1TimelineStep <= 3 ? 0 : 0}
+                                        strokeColor="#3f8600"
+                                        format={(percent) => `${percent}%`}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="damage-info">
+                                  <div className="damage-stat">
+                                    <Text type="secondary">雨中冒险伤害:</Text>
+                                    <Text strong style={{ color: '#52c41a' }}>
+                                      {day1TimelineStep === 0 ? '夜雨尚未出现' :
+                                        day1TimelineStep === 1 ? '2% + 15/s' :
+                                          day1TimelineStep === 2 ? '2% + 15/s' :
+                                            day1TimelineStep === 3 ? '2% + 30/s' :
+                                              day1TimelineStep === 4 ? '2% + 30/s' : '2% + 30/s'}
+                                    </Text>
+                                  </div>
+                                  <div className="damage-stat" style={{ marginTop: '8px' }}>
+                                    <Text type="secondary" style={{ fontSize: '12px', color: '#666' }}>
+                                      超时秒杀机制：110秒后，伤害变为10%+30/0.5s，120秒后直接秒杀
+                                    </Text>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      )}
+                      </div>
 
-                      {/* Day 2 内容 */}
-                      {currentDay === 1 && (
-                        <div className="timeline-content active">
-                          {/* 时间轴 + 两栏布局 */}
-                          <div className="timeline-with-steps">
-                            {/* 左侧时间轴 */}
-                            <div className="timeline-steps-container">
-                              <Steps
-                                direction="vertical"
-                                size="small"
-                                current={day2TimelineStep}
-                                onChange={setDay2TimelineStep}
-                                items={[
-                                  { title: '0:00', description: 'Day 2 开始' },
-                                  { title: '4:30', description: '第一次缩圈开始' },
-                                  { title: '7:30', description: '第一次缩圈结束' },
-                                  { title: '11:00', description: '第二次缩圈开始' },
-                                  { title: '14:30', description: '第二次缩圈结束' },
-                                ]}
-                              />
-                            </div>
-
-                            {/* 右侧内容区域 */}
-                            {/* 两栏布局 */}
-                            <div className="timeline-two-columns">
-                              {/* 第一栏：缩圈效果图 */}
-                              <div className="timeline-column">
-                                <div className="timeline-column-header">
-                                  <Text strong>缩圈效果图</Text>
-                                </div>
-                                <div className="timeline-column-content">
-                                  <CircleShrinkEffect currentStep={day2TimelineStep} day={2} />
-                                </div>
-                              </div>
-
-                              <div className="timeline-column">
-                                <div className="timeline-column-header">
-                                  <Text strong>封印监牢Boss&雨中冒险伤害（Day 2）</Text>
-                                </div>
-                                <div className="timeline-column-content">
-                                  <div className="boss-info">
-                                    <div className="boss-progress-container">
-                                      <div className="boss-progress-item">
-                                        <div className="progress-label">血量：</div>
-                                        <Progress
-                                          percent={day2TimelineStep <= 1 ? 75 :
-                                            day2TimelineStep <= 3 ? 100 : 0}
-                                          size="small"
-                                          strokeColor="#cf1322"
-                                          format={(percent) => `${percent}%`}
-                                        />
-                                      </div>
-                                      <div className="boss-progress-item">
-                                        <div className="progress-label">减伤：</div>
-                                        <Progress
-                                          percent={day2TimelineStep <= 1 ? 20 :
-                                            day2TimelineStep <= 3 ? 0 : 0}
-                                          size="small"
-                                          strokeColor="#3f8600"
-                                          format={(percent) => `${percent}%`}
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="damage-info" style={{ marginTop: '20px' }}>
-                                    <div className="damage-stat">
-                                      <Text type="secondary">雨中冒险伤害:</Text>
-                                      <Text strong style={{ color: '#52c41a' }}>
-                                        {day2TimelineStep === 0 ? '夜雨尚未出现' :
-                                          day2TimelineStep === 1 ? '2% + 15/s' :
-                                            day2TimelineStep === 2 ? '2% + 15/s' :
-                                              day2TimelineStep === 3 ? '2% + 30/s' :
-                                                day2TimelineStep === 4 ? '2% + 30/s' : '2% + 30/s'}
-                                      </Text>
-                                    </div>
-                                    <div className="damage-stat" style={{ marginTop: '8px' }}>
-                                      <Text type="secondary" style={{ fontSize: '12px', color: '#666' }}>
-                                        超时秒杀机制：110秒后，伤害变为10%+30/0.5s，120秒后直接秒杀
-                                      </Text>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>

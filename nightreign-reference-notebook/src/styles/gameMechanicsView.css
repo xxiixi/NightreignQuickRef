@@ -183,9 +183,8 @@
 
 .timeline-content-wrapper {
   /* border: 1px solid #d9d9d9; */
-  border-radius: 8px;
   overflow-y: auto;
-  margin-top: 15px;
+  /* margin-top: 15px; */
 }
 
 .timeline-content {
@@ -727,7 +726,9 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 
 .timeline-steps-container {
   min-width: 200px;
-  /* border: 1px solid #d9d9d9; */
+  padding-left: 20px;
+  padding-top: 10px;
+  border: 1px solid #d9d9d9;
 }
 
 /* 两栏布局样式 */
@@ -744,29 +745,25 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   width: 100%;
   flex: 1;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.boss-stat {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  padding: 4px 0;
-}
-
-.boss-stat:last-child {
-  margin-bottom: 0;
+  flex-direction: row;
+  gap: 10px;
 }
 
 /* 进度条样式 */
 .boss-progress-container {
-  margin-top: 12px;
+  /* margin-top: 12px; */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 15px;
+  /* border: 1px solid #d9d9d9; */
+  background-color: #fafafa;
+  border-radius: 20px;
 }
 
 .boss-progress-item {
   margin-bottom: 8px;
+  /* width: 100%; */
 }
 
 .boss-progress-item:last-child {
@@ -777,8 +774,9 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 .progress-label {
   font-size: 12px;
   color: rgba(0, 0, 0, 0.65);
-  margin-bottom: 4px;
+  /* margin-bottom: 4px; */
   font-weight: 500;
+  /* white-space: nowrap; */
 }
 
 [data-theme="dark"] .progress-label {
@@ -801,7 +799,10 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
+  padding: 20px;
+  border: 1px solid #d9d9d9;
+  margin-top: 15px;
 }
 
 .damage-stat {
@@ -822,9 +823,9 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   flex-direction: column;
   height: 100%;
   border: 1px solid #d9d9d9;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   padding: 16px;
-  background: #fafafa;
+  /* background: #fafafa; */
 }
 
 /* 缩圈效果图列样式 - 宽度自适应内容 */
@@ -867,4 +868,23 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   background: rgba(24, 144, 255, 0.05);
   border-radius: 8px;
   /* border: 1px solid rgba(24, 144, 255, 0.1); */
+}
+
+/* Boss标题样式 */
+.boss-section-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1890ff;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #87ceeb;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.boss-section-title .anticon {
+  color: #1890ff;
+  font-size: 14px;
 }
