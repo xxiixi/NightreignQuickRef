@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Timeline, Table, Alert, Steps, Progress } from 'antd';
+import { Typography, Timeline, Table, Alert, Steps, Progress, Statistic } from 'antd';
 import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
@@ -503,7 +503,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       <div className="progress-label">Boss血量：</div>
                                       <Progress
                                         percent={day1TimelineStep <= 1 ? 75 :
-                                          day1TimelineStep <= 3 ? 100 : 0}
+                                          day1TimelineStep <= 4 ? 100 : 0}
                                         strokeColor="#cf1322"
                                         format={(percent) => `${percent}%`}
                                       />
@@ -521,20 +521,30 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                 </div>
 
                                 <div className="damage-info">
-                                  <div className="damage-stat">
-                                    <Text type="secondary">雨中冒险伤害:</Text>
-                                    <Text strong style={{ color: '#52c41a' }}>
-                                      {day1TimelineStep === 0 ? '夜雨尚未出现' :
-                                        day1TimelineStep === 1 ? '2% + 15/s' :
-                                          day1TimelineStep === 2 ? '2% + 15/s' :
-                                            day1TimelineStep === 3 ? '2% + 30/s' :
-                                              day1TimelineStep === 4 ? '2% + 30/s' : '2% + 30/s'}
-                                    </Text>
-                                  </div>
-                                  <div className="damage-stat" style={{ marginTop: '8px' }}>
-                                    <Text type="secondary" style={{ fontSize: '12px', color: '#666' }}>
-                                      超时秒杀机制：110秒后，伤害变为10%+30/0.5s，120秒后直接秒杀
-                                    </Text>
+                                  <div className="boss-progress-container">
+                                    <div className="boss-section-title">
+                                      <CloudOutlined />
+                                      雨中冒险伤害
+                                    </div>
+                                    <div className="damage-stat">
+                                      <Statistic
+                                        title="每秒受到的伤害"
+                                        value={day1TimelineStep === 0 ? '夜雨尚未出现' :
+                                          day1TimelineStep === 1 ? '当前角色血量 × 2% + 15' :
+                                            day1TimelineStep === 2 ? '当前角色血量 × 2% + 15' :
+                                              day1TimelineStep === 3 ? '当前角色血量 × 2% + 30' :
+                                                day1TimelineStep === 4 ? '当前角色血量 × 2% + 30' : '当前角色血量 × 2% + 30'}
+                                        valueStyle={{
+                                          color: day1TimelineStep === 0 ? '#666' : '#1890ff',
+                                          fontSize: '20px',
+                                        }}
+                                      />
+                                    </div>
+                                    <div className="damage-stat" style={{ marginTop: '8px' }}>
+                                      <Text type="secondary" style={{ fontSize: '14px', color: '#666' }}>
+                                        超时秒杀机制：110秒后，伤害变为10%+30/0.5s，120秒后直接秒杀
+                                      </Text>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

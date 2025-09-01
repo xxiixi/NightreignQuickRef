@@ -93,40 +93,6 @@
   height: 100%;
 }
 
-/* Carousel 样式增强 */
-.mechanic-card .ant-carousel {
-  position: relative;
-}
-
-.mechanic-card .ant-carousel .slick-prev,
-.mechanic-card .ant-carousel .slick-next {
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid #d9d9d9;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #666;
-  transition: all 0.3s;
-}
-
-.mechanic-card .ant-carousel .slick-prev:hover,
-.mechanic-card .ant-carousel .slick-next:hover {
-  background: #fff;
-  color: #1890ff;
-  border-color: #1890ff;
-}
-
-.mechanic-card .ant-carousel .slick-prev {
-  left: -16px;
-}
-
-.mechanic-card .ant-carousel .slick-next {
-  right: -16px;
-}
 
 /* 时间轴容器过渡效果 */
 .timeline-container {
@@ -151,7 +117,7 @@
 /* Segmented 控制器样式增强 */
 .mechanic-card .ant-segmented {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #d9d9d9;
+  /* border: 1px solid #d9d9d9; */
 }
 
 .mechanic-card .ant-segmented-item {
@@ -532,8 +498,8 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 
 .circle-shrink-wrapper {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -728,14 +694,14 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   min-width: 200px;
   padding-left: 20px;
   padding-top: 10px;
-  border: 1px solid #d9d9d9;
+  /* border: 1px solid #d9d9d9; */
 }
 
 /* 两栏布局样式 */
 .timeline-two-columns {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 10px;
+  gap: 20px;
   align-items: stretch;
   min-height: 200px;
   height: 100%;
@@ -800,9 +766,9 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   display: flex;
   flex-direction: column;
   /* justify-content: flex-start; */
-  padding: 20px;
-  border: 1px solid #d9d9d9;
-  margin-top: 15px;
+  /* padding: 20px; */
+  /* border: 1px solid #d9d9d9; */
+  margin-top: 10px;
 }
 
 .damage-stat {
@@ -822,9 +788,9 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid #d9d9d9;
+  /* border: 1px solid #d9d9d9; */
   /* border-radius: 8px; */
-  padding: 16px;
+  padding: 0 16px;
   /* background: #fafafa; */
 }
 
