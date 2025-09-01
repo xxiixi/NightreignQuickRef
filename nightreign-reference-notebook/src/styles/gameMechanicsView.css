@@ -178,38 +178,21 @@
 /* 时间轴布局样式 */
 .timeline-layout-container {
   display: flex;
-  gap: 20px;
-  align-items: flex-start;
+  flex-direction: column;
 }
 
-/* .timeline-segmented-wrapper {
-  flex-shrink: 0;
-} */
-
-/* .timeline-segmented {
-  background: #f5f5f5;
-  padding: 8px 4px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-} */
-
 .timeline-content-wrapper {
-  flex: 1;
-  border: 1px solid #d9d9d9;
+  /* border: 1px solid #d9d9d9; */
   border-radius: 8px;
-  padding: 16px;
-  /* background-color: #fff; */
-  min-height: 300px;
-  max-height: 600px;
-  position: relative;
   overflow-y: auto;
-  overflow-x: hidden;
+  margin-top: 15px;
 }
 
 .timeline-content {
   position: relative;
   width: 100%;
-  padding: 16px;
+  /* padding: 16px; */
+  /* margin-top: 10px; */
   transition: all 0.3s ease-in-out;
   min-height: 100%;
 }
@@ -217,15 +200,6 @@
 .timeline-content.active {
   opacity: 1;
   pointer-events: auto;
-}
-
-.timeline-content-area {
-  min-height: 150px;
-  padding: 20px;
-  margin-bottom: 24px;
-  border: 1px solid #f0f0f0;
-  border-radius: 8px;
-  /* background-color: #fafafa; */
 }
 
 .timeline-header {
@@ -663,45 +637,27 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   border: 2px solid #1890ff;
 }
 
-/* 第一次缩圈动画定义 */
-/* @keyframes innerPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8); 
-  }
-} */
 
 @keyframes borderPulse {
   0%, 100% {
     opacity: 0.5;
-    transform: scale(1);  /* 起始大小 */
+    transform: scale(1);
   }
   50% {
     opacity: 0.9;
-    transform: scale(1.7);  /* 脉冲时1.7倍缩放 */
+    transform: scale(1.75);
   }
 }
 
-/* 第二次缩圈动画定义 - scale值更大，效果更强烈 */
-/* @keyframes innerPulseSecond {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8); 
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(24, 144, 255, 0.8); 
-  }
-} */
 
 @keyframes borderPulseSecond {
   0%, 100% {
     opacity: 0.6;
-    transform: scale(1);  /* 起始大小 */
+    transform: scale(1);
   }
   50% {
     opacity: 0.9;
-    transform: scale(3.4);  /* 脉冲时3.4倍缩放，更强烈 */
+    transform: scale(3.6);
   }
 }
 
@@ -750,29 +706,165 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   }
 }
 
-/* 自定义滚动条样式 */
-.timeline-content-wrapper::-webkit-scrollbar {
-  width: 8px;
+/* Day切换按钮样式 */
+.timeline-day-switcher {
+  text-align: center;
+  max-width: 500px;
+  min-width: 200px;
+  width: 30%;
+  margin: 0 auto 0 auto;
 }
 
-.timeline-content-wrapper::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
+/* 时间轴 + 两栏布局样式 */
+.timeline-with-steps {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 
-.timeline-content-wrapper::-webkit-scrollbar-thumb {
-  background: rgba(24, 144, 255, 0.3);
-  border-radius: 4px;
-  transition: background 0.4s ease;
+.timeline-steps-container {
+  min-width: 200px;
+  /* border: 1px solid #d9d9d9; */
 }
 
-.timeline-content-wrapper::-webkit-scrollbar-thumb:hover {
-  background: rgba(24, 144, 255, 0.5);
+/* 两栏布局样式 */
+.timeline-two-columns {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: stretch;
+  min-height: 200px;
+  height: 100%;
+}
+/* Boss信息样式 */
+.boss-info {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-/* Firefox 滚动条样式 */
-.timeline-content-wrapper {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(24, 144, 255, 0.3) rgba(0, 0, 0, 0.05);
+.boss-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 4px 0;
 }
 
+.boss-stat:last-child {
+  margin-bottom: 0;
+}
+
+/* 进度条样式 */
+.boss-progress-container {
+  margin-top: 12px;
+}
+
+.boss-progress-item {
+  margin-bottom: 8px;
+}
+
+.boss-progress-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 进度条标签样式 */
+.progress-label {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .progress-label {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* 进度条数字样式 */
+.boss-progress-item .ant-progress-text {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .boss-progress-item .ant-progress-text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 伤害信息样式 */
+.damage-info {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.damage-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 6px; */
+  padding: 2px 0;
+}
+
+.damage-stat:last-child {
+  margin-bottom: 0;
+}
+
+/* 时间轴列样式 */
+.timeline-column {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 16px;
+  background: #fafafa;
+}
+
+/* 缩圈效果图列样式 - 宽度自适应内容 */
+.timeline-column:first-child {
+  width: fit-content;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+[data-theme="dark"] .timeline-column {
+  background: #1f1f1f;
+  border-color: #434343;
+}
+
+.timeline-column-header {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d9d9d9;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .timeline-column-header {
+  border-bottom-color: #434343;
+}
+
+.timeline-column-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* 时间轴控制样式 */
+.timeline-controls {
+  text-align: center;
+  padding: 16px;
+  background: rgba(24, 144, 255, 0.05);
+  border-radius: 8px;
+  /* border: 1px solid rgba(24, 144, 255, 0.1); */
+}

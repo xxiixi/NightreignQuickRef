@@ -687,54 +687,6 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   color: #fff !important;
 }
 
-.ant-steps .ant-steps-item-wait .ant-steps-item-icon {
-  background-color: var(--theme-bg-tertiary) !important;
-  border-color: var(--theme-border) !important;
-}
-
-.ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon {
-  color: var(--theme-text-tertiary) !important;
-}
-
-.ant-steps .ant-steps-item-finish .ant-steps-item-tail::after,
-.ant-steps .ant-steps-item-process .ant-steps-item-tail::after {
-  background-color: var(--color-primary-300) !important;
-}
-
-.ant-steps .ant-steps-item-wait .ant-steps-item-tail::after {
-  background-color: var(--theme-bg-tertiary) !important;
-}
-
-.ant-steps .ant-steps-item-title {
-  color: var(--theme-text-secondary) !important;
-}
-
-.ant-steps .ant-steps-item-process .ant-steps-item-title,
-.ant-steps .ant-steps-item-finish .ant-steps-item-title {
-  color: var(--color-primary-400) !important;
-}
-
-/* 暗色模式下的Steps样式 */
-[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon,
-[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon {
-  background-color: var(--theme-bg-tertiary) !important;
-  border-color: var(--theme-border) !important;
-}
-
-[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon,
-[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-icon .ant-steps-icon {
-  color: var(--theme-text-tertiary) !important;
-}
-
-[data-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-tail::after,
-[tomato-theme='dark'] .ant-steps .ant-steps-item-wait .ant-steps-item-tail::after {
-  background-color: var(--theme-bg-tertiary) !important;
-}
-
-[data-theme='dark'] .ant-steps .ant-steps-item-title,
-[tomato-theme='dark'] .ant-steps .ant-steps-item-title {
-  color: var(--theme-text-primary) !important;
-}
 
 /* ===== 传说武器视图组件 ===== */
 .legendary-weapon-container {

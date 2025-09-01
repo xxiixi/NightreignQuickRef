@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Typography, Timeline, Table, Alert, Steps, Segmented } from 'antd';
+import { Typography, Timeline, Table, Alert, Steps, Progress } from 'antd';
 import { CheckCircleTwoTone, ClockCircleOutlined, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, MoneyCollectOutlined, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
@@ -42,7 +42,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
   };
 
   const currentSize = getCircleSize(currentStep, day);
-  
+
   // 判断是否在缩圈开始阶段（需要脉冲动画）
   const isShrinkingStart = (step: number, dayNum: number) => {
     if (dayNum === 1) {
@@ -51,39 +51,39 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
       return step === 1 || step === 3; // Day 2: 第一次缩圈开始(1) 或 第二次缩圈开始(3)
     }
   };
-  
+
   // 判断是第几次缩圈
   const getShrinkPhase = (step: number) => {
     if (step === 1) return 'first';  // 第一次缩圈
     if (step === 3) return 'second'; // 第二次缩圈
     return 'none';
   };
-  
+
   // 判断是否是第一次缩圈阶段（60%圈）
   const isFirstShrinkPhase = (step: number) => {
     return step === 1 || step === 2; // 第一次缩圈开始和结束都是60%
   };
-  
+
   // 判断是否是第一次缩圈结束阶段（需要深蓝色）
   const isFirstShrinkEnd = (step: number) => {
     return step === 2; // 第一次缩圈结束
   };
-  
+
   // 判断是否第一次缩圈已结束（外圈需要变灰）
   const isFirstShrinkCompleted = (step: number) => {
     return step >= 2; // 第一次缩圈结束后（step 2及以后）
   };
-  
+
   // 判断是否是第二次缩圈开始（外圈变深蓝，内圈变浅蓝）
   const isSecondShrinkStart = (step: number) => {
     return step === 3; // 第二次缩圈开始
   };
-  
+
   // 判断是否是第二次缩圈结束（内圈变深蓝）
   const isSecondShrinkEnd = (step: number) => {
     return step === 4; // 第二次缩圈结束
   };
-  
+
   // 获取上一个圈的大小（用于脉冲范围）
   const getPreviousSize = (step: number, dayNum: number) => {
     if (dayNum === 1) {
@@ -115,9 +115,9 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
       <div className="circle-shrink-wrapper">
         {/* 外圈 - 固定大小 */}
         <div className={`circle-outer ${isFirstShrinkCompletedPhase ? 'circle-outer-faded' : ''} ${isSecondShrinkStartPhase ? 'circle-outer-second-shrink' : ''}`} />
-        
+
         {/* 内圈 - 根据时间点动态变化 */}
-        <div 
+        <div
           className={`circle-inner ${shouldPulse ? 'circle-pulse' : ''} ${shrinkPhase !== 'none' ? `shrink-${shrinkPhase}` : ''} ${isFirstShrink ? 'first-shrink-no-bg' : ''} ${isFirstShrinkEndPhase ? 'first-shrink-end-dark' : ''} ${isSecondShrinkStartPhase ? 'second-shrink-start-dark' : ''} ${isSecondShrinkEndPhase ? 'second-shrink-end-dark' : ''}`}
           style={{
             width: `${currentSize}%`,
@@ -125,10 +125,10 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
             transition: 'all 0.8s ease-in-out'
           }}
         />
-        
+
         {/* 脉冲效果圈 - 只在缩圈开始时显示 */}
         {shouldPulse && (
-          <div 
+          <div
             className={`circle-pulse-ring ${isSecondShrinkStartPhase ? 'second-shrink-pulse' : ''}`}
             style={{
               width: `${previousSize}%`,
@@ -136,12 +136,12 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
             }}
           />
         )}
-        
+
         {/* 中心点 */}
         <div className="circle-center" />
-        
+
       </div>
-      
+
     </div>
   );
 };
@@ -192,7 +192,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
     return (
       <div className="game-mechanics-container" style={{ '--mechanics-container-width': '1400px' } as React.CSSProperties}>
         <div className="mechanics-layout">
-          
+
           {/* 游戏时间机制 - 自定义宽度比例 2:1 */}
           <div className="mechanics-grid custom-columns" style={{ '--mechanics-grid-columns': '1.2fr 2fr' } as React.CSSProperties}>
             <div className="mechanic-card">
@@ -209,7 +209,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                       mode="left"
                       items={[
                         {
-                          dot: <PauseCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,  
+                          dot: <PauseCircleTwoTone twoToneColor="#52c41a" style={{ fontSize: '16px' }} />,
                           children: 'Day 1 / Day 2 开始',
                           color: 'green',
                           label: '0:00',
@@ -251,10 +251,10 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                           label: '14:00',
                         },
                         {
-                          dot: <FireTwoTone twoToneColor="red"/>,
+                          dot: <FireTwoTone twoToneColor="red" />,
                           children: '战斗!',
                         },
-                      {
+                        {
                           dot: <HeartTwoTone twoToneColor="#eb2f96" />,
                           children: 'Day 2 开始 / 最终Boss战',
                           color: 'green',
@@ -272,7 +272,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
               <div className="card-content">
                 <div className="card-title-section">
                   <Title level={5} className="mechanic-card-title">
-                  <MoneyCollectOutlined />
+                    <MoneyCollectOutlined />
                     升级所需卢恩
                   </Title>
                 </div>
@@ -349,7 +349,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                             key: 'runes',
                             width: '33%',
                             render: (text) => (
-                              <span style={{ 
+                              <span style={{
                                 color: '#1890ff'
                               }}>
                                 {text}
@@ -371,7 +371,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                       />
                     </div>
                   </div>
-                  
+
                   {/* 升级所需卢恩注释信息 */}
                   <Alert
                     // 加一个title：小提示
@@ -383,16 +383,16 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                           10 级可使用<strong style={{ color: '#faad14' }}>金色武器</strong>。
                         </div>
                         <div className="tip-item">
-                        2. 如果当前卢恩足够升级，左上角显示等级的数字左边会出现一个白色箭头(局内)。
+                          2. 如果当前卢恩足够升级，左上角显示等级的数字左边会出现一个白色箭头(局内)。
                         </div>
                         <div className="tip-item">
-                        3. 单人模式获得1.5倍卢恩 | 双人模式获得1.3倍卢恩 | 三人模式获得1倍卢恩
+                          3. 单人模式获得1.5倍卢恩 | 双人模式获得1.3倍卢恩 | 三人模式获得1倍卢恩
                         </div>
                       </div>
                     }
                     type="info"
                     showIcon={false}
-                    style={{ marginTop: '15px'}}
+                    style={{ marginTop: '15px' }}
                   />
                 </div>
               </div>
@@ -411,152 +411,203 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                 </div>
                 <div className="card-body">
                   <div className="timeline-layout-container">
-
-                    {/* <div className="timeline-segmented-wrapper"> */}
-                      <Segmented
-                        vertical
-                        value={currentDay}
-                        onChange={(value) => setCurrentDay(value as number)}
-                        options={[
-                          { label: 'Day 1', value: 0 },
-                          { label: 'Day 2', value: 1 },
-                        ]}
-                        // className="timeline-segmented"
-                      />
-                    {/* </div> */}
-
+                    {/* Day切换时间轴 - 纵向布局 */}
+                    <div className="timeline-day-switcher">
+                      <div className="custom-steps-container">
+                        <Steps
+                          size="small"
+                          current={currentDay}
+                          onChange={(value) => setCurrentDay(value as number)}
+                          items={[
+                            { title: 'Day 1' },
+                            { title: 'Day 2' }
+                          ]}
+                        />
+                      </div>
+                    </div>
                     <div className="timeline-content-wrapper">
-                    {/* --- Day 1 --- */}
-                    {currentDay === 0 && (
-                    <div className="timeline-content active">
-                      <div className="timeline-content-area">
-                        <div className="timeline-header">
-                          <div>
-                            <Text strong className="timeline-title-day1">
-                              Day 1 - {day1TimelineStep === 0 ? '游戏开始' : 
-                              day1TimelineStep === 1 ? '第一次缩圈开始' :
-                              day1TimelineStep === 2 ? '第一次缩圈结束' :
-                              day1TimelineStep === 3 ? '第二次缩圈开始' :
-                              day1TimelineStep === 4 ? '第二次缩圈结束' :
-                              day1TimelineStep === 5 ? 'Boss战' : '未知时间点'}
-                            </Text>
-                            <br />
-                            <Text type="secondary" className="timeline-time">
-                              {day1TimelineStep === 0 ? '0:00' : 
-                              day1TimelineStep === 1 ? '4:30' :
-                              day1TimelineStep === 2 ? '7:30' :
-                              day1TimelineStep === 3 ? '11:00' :
-                              day1TimelineStep === 4 ? '14:30' :
-                              day1TimelineStep === 5 ? 'Boss战时间' : ''}
-                            </Text>
-                          </div>
-                          <div className="timeline-boss-card">
-                            <div className="timeline-boss-card-day1">
-                              <Text strong className="timeline-boss-title-day1">封印监牢Boss</Text>
-                              <br />
-                              <Text className="timeline-boss-stats">
-                                {day1TimelineStep <= 4 ? '55% 血量' : 'Boss战'}
-                              </Text>
-                              <br />
-                              <Text className="timeline-boss-stats">
-                                {day1TimelineStep <= 4 ? '减伤 47%' : 'Boss战'}
-                              </Text>
+
+                      {/* --- Day 1 --- */}
+                      {currentDay === 0 && (
+                        <div className="timeline-content">
+                          {/* 时间轴 + 两栏布局 */}
+                          <div className="timeline-with-steps">
+                            {/* 左侧时间轴 */}
+                            <div className="timeline-steps-container">
+                              <Steps
+                                size="small"
+                                direction="vertical"
+                                current={day1TimelineStep}
+                                onChange={setDay1TimelineStep}
+                                items={[
+                                  { title: '0:00', description: 'Day 1 开始' },
+                                  { title: '4:30', description: '第一次缩圈开始' },
+                                  { title: '7:30', description: '第一次缩圈结束' },
+                                  { title: '11:00', description: '第二次缩圈开始' },
+                                  { title: '14:30', description: '第二次缩圈结束' },
+                                ]}
+                              />
+                            </div>
+
+                            {/* 右侧内容区域 */}
+                            {/* 两栏布局 */}
+                            <div className="timeline-two-columns">
+                              {/* 第一栏：缩圈效果图 */}
+                              <div className="timeline-column">
+                                <div className="timeline-column-header">
+                                  <Text strong>缩圈效果图</Text>
+                                </div>
+                                <div className="timeline-column-content">
+                                  <CircleShrinkEffect currentStep={day1TimelineStep} day={1} />
+                                </div>
+                              </div>
+
+                              {/* 第二栏：封印监牢Boss + 雨中冒险伤害 */}
+                              <div className="timeline-column">
+                                <div className="timeline-column-header">
+                                  <Text strong>封印监牢Boss & 雨中冒险伤害（Day 1）</Text>
+                                </div>
+                                <div className="timeline-column-content">
+                                  <div className="boss-info">
+                                    <div className="boss-progress-container">
+                                      <div className="boss-progress-item">
+                                        <div className="progress-label">血量：</div>
+                                        <Progress
+                                          percent={day1TimelineStep <= 4 ? 55 : 100}
+                                          size="small"
+                                          strokeColor="#cf1322"
+                                          format={(percent) => `${percent}%`}
+                                        />
+                                      </div>
+                                      <div className="boss-progress-item">
+                                        <div className="progress-label">减伤：</div>
+                                        <Progress
+                                          percent={day1TimelineStep <= 4 ? 47 : 0}
+                                          size="small"
+                                          strokeColor="#3f8600"
+                                          format={(percent) => `${percent}%`}
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div className="damage-info" style={{ marginTop: '20px' }}>
+                                    <div className="damage-stat">
+                                      <Text type="secondary">雨中冒险伤害:</Text>
+                                      <Text strong style={{ color: '#52c41a' }}>
+                                        {day1TimelineStep === 0 ? '夜雨尚未出现' :
+                                          day1TimelineStep === 1 ? '2% + 15/s' :
+                                            day1TimelineStep === 2 ? '2% + 15/s' :
+                                              day1TimelineStep === 3 ? '2% + 30/s' :
+                                                day1TimelineStep === 4 ? '2% + 30/s' : '2% + 30/s'}
+                                      </Text>
+                                    </div>
+                                    <div className="damage-stat" style={{ marginTop: '8px' }}>
+                                      <Text type="secondary" style={{ fontSize: '12px', color: '#666' }}>
+                                        超时秒杀机制：110秒后，伤害变为10%+30/0.5s，120秒后直接秒杀
+                                      </Text>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        
-                        {/* 缩圈效果可视化 */}
-                        <div className="circle-shrink-section">
-                          <CircleShrinkEffect currentStep={day1TimelineStep} day={1} />
-                        </div>
-                        
-                        <Text type="secondary">点击下方时间轴查看不同时间点的Boss数据</Text>
-                      </div>
+                      )}
 
-                      <Steps
-                        current={day1TimelineStep}
-                        onChange={setDay1TimelineStep}
-                        items={[
-                          { title: '0:00', description: 'Day 1 开始' },
-                          { title: '4:30', description: '第一次缩圈开始' },
-                          { title: '7:30', description: '第一次缩圈结束' },
-                          { title: '11:00', description: '第二次缩圈开始' },
-                          { title: '14:30', description: '第二次缩圈结束' },
-                          { title: '', description: '' },
-                        ]}
-                      />
-                    </div>
-                    )}
+                      {/* Day 2 内容 */}
+                      {currentDay === 1 && (
+                        <div className="timeline-content active">
+                          {/* 时间轴 + 两栏布局 */}
+                          <div className="timeline-with-steps">
+                            {/* 左侧时间轴 */}
+                            <div className="timeline-steps-container">
+                              <Steps
+                                direction="vertical"
+                                size="small"
+                                current={day2TimelineStep}
+                                onChange={setDay2TimelineStep}
+                                items={[
+                                  { title: '0:00', description: 'Day 2 开始' },
+                                  { title: '4:30', description: '第一次缩圈开始' },
+                                  { title: '7:30', description: '第一次缩圈结束' },
+                                  { title: '11:00', description: '第二次缩圈开始' },
+                                  { title: '14:30', description: '第二次缩圈结束' },
+                                ]}
+                              />
+                            </div>
 
-                    {/* Day 2 内容 */}
-                    {currentDay === 1 && (
-                    <div className="timeline-content active">
-                      <div className="timeline-content-area">
-                        <div className="timeline-header">
-                          <div>
-                            <Text strong className="timeline-title-day2">
-                              Day 2 - {day2TimelineStep === 0 ? '游戏开始' : 
-                              day2TimelineStep === 1 ? '第一次缩圈开始' :
-                              day2TimelineStep === 2 ? '第一次缩圈结束' :
-                              day2TimelineStep === 3 ? '第二次缩圈开始' :
-                              day2TimelineStep === 4 ? '第二次缩圈结束' :
-                              day2TimelineStep === 5 ? 'Boss战' : '未知时间点'}
-                            </Text>
-                            <br />
-                            <Text type="secondary" className="timeline-time">
-                              {day2TimelineStep === 0 ? '0:00' : 
-                              day2TimelineStep === 1 ? '4:30' :
-                              day2TimelineStep === 2 ? '7:30' :
-                              day2TimelineStep === 3 ? '11:00' :
-                              day2TimelineStep === 4 ? '14:30' :
-                              day2TimelineStep === 5 ? 'Boss战时间' : ''}
-                            </Text>
-                          </div>
-                          <div className="timeline-boss-card">
-                            <div className="timeline-boss-card-day2">
-                              <Text strong className="timeline-boss-title-day2">封印监牢Boss</Text>
-                              <br />
-                              <Text className="timeline-boss-stats">
-                                {day2TimelineStep <= 1 ? '75% 血量' : 
-                                 day2TimelineStep <= 3 ? '100% 血量' : 'Boss战'}
-                              </Text>
-                              <br />
-                              <Text className="timeline-boss-stats">
-                                {day2TimelineStep <= 1 ? '减伤 20%' : 
-                                 day2TimelineStep <= 3 ? '减伤 0%' : 'Boss战'}
-                              </Text>
+                            {/* 右侧内容区域 */}
+                            {/* 两栏布局 */}
+                            <div className="timeline-two-columns">
+                              {/* 第一栏：缩圈效果图 */}
+                              <div className="timeline-column">
+                                <div className="timeline-column-header">
+                                  <Text strong>缩圈效果图</Text>
+                                </div>
+                                <div className="timeline-column-content">
+                                  <CircleShrinkEffect currentStep={day2TimelineStep} day={2} />
+                                </div>
+                              </div>
+
+                              <div className="timeline-column">
+                                <div className="timeline-column-header">
+                                  <Text strong>封印监牢Boss&雨中冒险伤害（Day 2）</Text>
+                                </div>
+                                <div className="timeline-column-content">
+                                  <div className="boss-info">
+                                    <div className="boss-progress-container">
+                                      <div className="boss-progress-item">
+                                        <div className="progress-label">血量：</div>
+                                        <Progress
+                                          percent={day2TimelineStep <= 1 ? 75 :
+                                            day2TimelineStep <= 3 ? 100 : 0}
+                                          size="small"
+                                          strokeColor="#cf1322"
+                                          format={(percent) => `${percent}%`}
+                                        />
+                                      </div>
+                                      <div className="boss-progress-item">
+                                        <div className="progress-label">减伤：</div>
+                                        <Progress
+                                          percent={day2TimelineStep <= 1 ? 20 :
+                                            day2TimelineStep <= 3 ? 0 : 0}
+                                          size="small"
+                                          strokeColor="#3f8600"
+                                          format={(percent) => `${percent}%`}
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="damage-info" style={{ marginTop: '20px' }}>
+                                    <div className="damage-stat">
+                                      <Text type="secondary">雨中冒险伤害:</Text>
+                                      <Text strong style={{ color: '#52c41a' }}>
+                                        {day2TimelineStep === 0 ? '夜雨尚未出现' :
+                                          day2TimelineStep === 1 ? '2% + 15/s' :
+                                            day2TimelineStep === 2 ? '2% + 15/s' :
+                                              day2TimelineStep === 3 ? '2% + 30/s' :
+                                                day2TimelineStep === 4 ? '2% + 30/s' : '2% + 30/s'}
+                                      </Text>
+                                    </div>
+                                    <div className="damage-stat" style={{ marginTop: '8px' }}>
+                                      <Text type="secondary" style={{ fontSize: '12px', color: '#666' }}>
+                                        超时秒杀机制：110秒后，伤害变为10%+30/0.5s，120秒后直接秒杀
+                                      </Text>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        
-                        {/* 缩圈效果可视化 */}
-                        <div className="circle-shrink-section">
-                          <CircleShrinkEffect currentStep={day2TimelineStep} day={2} />
-                        </div>
-                        
-                        <Text type="secondary">点击下方时间轴查看不同时间点的Boss数据</Text>
-                      </div>
-
-                      <Steps
-                        current={day2TimelineStep}
-                        onChange={setDay2TimelineStep}
-                        items={[
-                          { title: '0:00  ', description: 'DAY 2 开始' },
-                          { title: '4:30', description: '第一次缩圈开始' },
-                          { title: '7:30', description: '第一次缩圈结束' },
-                          { title: '11:00', description: '第二次缩圈开始' },
-                          { title: '14:30', description: '第二次缩圈结束' },
-                          { title: '', description: '' },
-                        ]}
-                      />
+                      )}
                     </div>
-                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
           <div className="mechanics-grid">
             <div className="mechanic-card">
@@ -565,7 +616,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                     <HeartTwoTone twoToneColor="#eb2f96" />
                     回血量计算器
-                    <DataSourceTooltip 
+                    <DataSourceTooltip
                       links={[{
                         text: "【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区",
                         url: "https://www.bilibili.com/video/BV1M18jzQE9X"
@@ -573,9 +624,9 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                     />
                   </Title>
                 </div>
-                  <div className="card-body">
+                <div className="card-body">
                   <RecoveryCalculator />
-                 </div>
+                </div>
               </div>
             </div>
           </div>
@@ -588,7 +639,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   <Title level={5} className="mechanic-card-title">
                     <ThunderboltTwoTone />
                     隐士出招表
-                    <DataSourceTooltip 
+                    <DataSourceTooltip
                       links={[
                         {
                           text: "1. 混合魔法太复杂？没关系我来讲清楚！",
