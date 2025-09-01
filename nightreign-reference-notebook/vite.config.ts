@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [
     react()
   ],
-  // 根据环境变量决定base路径
-  base: process.env.VITE_DEPLOY_TARGET === 'github' ? '/NightreignQuickRef/' : '/',
+  // GitHub Pages部署路径
+  base: '/NightreignQuickRef/',
   define: {
     // 在构建时注入部署时间
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
