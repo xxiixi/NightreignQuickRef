@@ -71,12 +71,12 @@ const getBackgroundColor = (value: number, rowValues: number[]): string => {
   const max = Math.max(...rowValues);
   const min = Math.min(...rowValues);
   const range = max - min;
-  
+
   if (range === 0) return 'var(--color-primary-300)';
-  
+
   const normalizedValue = (value - min) / range;
   const isDarkMode = document.body.getAttribute('tomato-theme') === 'dark';
-  
+
   // 浅色模式（带透明度）
   if (!isDarkMode) {
     if (normalizedValue < 0.25) return 'rgba(237, 242, 255, 0.3)';
@@ -84,7 +84,7 @@ const getBackgroundColor = (value: number, rowValues: number[]): string => {
     if (normalizedValue < 0.8) return 'rgba(191, 207, 255, 0.7)';
     return 'rgba(147, 167, 255, 0.9)';
   }
-  
+
   // 深色模式
   if (normalizedValue < 0.25) return 'rgba(47, 84, 235, 0.1)';
   if (normalizedValue < 0.5) return 'rgba(47, 84, 235, 0.2)';
@@ -100,17 +100,17 @@ const ColorLegend = () => {
     { range: '较高', threshold: 0.8, valueRange: '50% ~ 80%' },
     { range: '高', threshold: 1.0, valueRange: '80% ~ 100%' }
   ];
-  
+
   return (
-    <div className="color-legend-container" style={{ 
-      marginBottom: '12px', 
+    <div className="color-legend-container" style={{
+      marginBottom: '12px',
       padding: '12px 16px',
       backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
       borderRadius: '6px'
     }}>
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
         gap: '16px',
         marginBottom: '8px',
         flexWrap: 'wrap'
@@ -119,13 +119,13 @@ const ColorLegend = () => {
         <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
           {legendItems.map((item, index) => (
             <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <div 
-                style={{ 
-                  width: '16px', 
-                  height: '16px', 
+              <div
+                style={{
+                  width: '16px',
+                  height: '16px',
                   borderRadius: '3px',
                   backgroundColor: getBackgroundColor(
-                    item.threshold, 
+                    item.threshold,
                     [0, 1] // 用0和1模拟范围以便获取对应颜色
                   )
                 }}
@@ -138,8 +138,8 @@ const ColorLegend = () => {
           ))}
         </div>
       </div>
-    
-      <div style={{ 
+
+      <div style={{
         paddingTop: '8px',
         borderTop: `1px solid ${isDarkMode ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)'}`,
         fontSize: '12px',
@@ -169,7 +169,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
       try {
         const dataManager = DataManager.getInstance();
         await dataManager.waitForData();
-        
+
         setDataState({
           weaponCharacterData: transformData(dataManager.getWeaponCharacter() as WeaponCharacter[]),
           weaponEffectData: transformEffectData(dataManager.getWeaponEffect() as WeaponEffect[]),
@@ -190,10 +190,10 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
 
   // 监听外部Step切换
   useEffect(() => {
-    if (typeof activeStep === 'number' && activeStep !== currentStep) {
+    if (typeof activeStep === 'number') {
       setCurrentStep(activeStep);
     }
-  }, [activeStep, currentStep]);
+  }, [activeStep]);
 
   const { weaponCharacterData, weaponEffectData, loading } = dataState;
 
@@ -221,9 +221,9 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
       render: (value: number, record: TransformedWeaponCharacter) => {
         const rowValues = characterNames.map(name => record[name] as number);
         return (
-          <div 
+          <div
             className="heatmap-cell legendary-weapon-heatmap-cell"
-            style={{ 
+            style={{
               backgroundColor: getBackgroundColor(value, rowValues),
               width: '90%',
               height: '80%',
@@ -328,7 +328,7 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
         pagination={false}
         size="small"
         bordered
-        rowClassName={(_record, index) => 
+        rowClassName={(_record, index) =>
           index !== undefined && index % 2 === 0 ? 'table-row-even' : 'table-row-odd'
         }
       />
@@ -342,7 +342,9 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
         size="small"
         current={currentStep}
         onChange={(current) => {
-          setCurrentStep(current);
+          if (typeof current === 'number') {
+            setCurrentStep(current);
+          }
         }}
         items={[
           { title: '全角色传说武器面板' },
@@ -361,17 +363,16 @@ const LegendaryWeaponView: React.FC<LegendaryWeaponViewProps> = ({ activeStep })
   }
 
   return (
-      <div className="steps-container">
-        <div className="legendary-weapon-container" style={{ padding: '16px' }}>
-          {customSteps}
-          <div className="legendary-weapon-content">
-            {currentStep === 0 && <div id="weapon-strength-panel">{firstTable}</div>}
-            {currentStep === 1 && <div id="weapon-blessing-effects">{secondTable}</div>}
-          </div>
+    <div className="steps-container">
+      <div className="legendary-weapon-container" style={{ padding: '16px' }}>
+        {customSteps}
+        <div className="legendary-weapon-content">
+          {currentStep === 0 && <div id="weapon-strength-panel">{firstTable}</div>}
+          {currentStep === 1 && <div id="weapon-blessing-effects">{secondTable}</div>}
         </div>
       </div>
+    </div>
   );
 };
 
 export default LegendaryWeaponView;
-    

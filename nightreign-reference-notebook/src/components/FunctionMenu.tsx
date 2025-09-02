@@ -61,8 +61,8 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       key: '传说武器详情',
       label: '⚔️ 传说武器详情',
       children: [
-        { key: '传说武器强度面板', label: '💪 不同角色使用传说武器的强度面板', anchorId: 'weapon-strength-panel', stepIndex: 0 },
-        { key: '武器庇佑效果', label: '🛡️ 各武器的庇佑效果', anchorId: 'weapon-blessing-effects', stepIndex: 1 }
+        { key: '传说武器强度面板', label: '🛡️ 不同角色使用传说武器的强度面板', anchorId: 'weapon-strength-panel', stepIndex: 0 },
+        { key: '武器庇佑效果', label: '🗡️ 传说武器的庇佑效果', anchorId: 'weapon-blessing-effects', stepIndex: 1 }
       ]
     },
   ];
@@ -87,34 +87,34 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       setMenuVisible(false);
     } else {
       // 检查是否是子菜单项
-      const subMenuItem = menuItems.flatMap(item => 
+      const subMenuItem = menuItems.flatMap(item =>
         item.children.map(subItem => ({ ...subItem, parentKey: item.key }))
       ).find(subItem => subItem.key === key);
-      
+
       if (subMenuItem) {
         // 先切换到父菜单页面
         onTabChange(subMenuItem.parentKey);
         setMenuVisible(false);
-        
+
         // 延迟执行锚点跳转，确保页面已经渲染
         setTimeout(() => {
           // 处理Tab页面的切换
           if ('tabKey' in subMenuItem && subMenuItem.tabKey && onSubTabChange) {
             onSubTabChange(subMenuItem.tabKey);
           }
-          
+
           // 处理Step页面的切换
           if ('stepIndex' in subMenuItem && typeof subMenuItem.stepIndex === 'number' && onStepChange) {
             onStepChange(subMenuItem.stepIndex);
           }
-          
+
           // 执行锚点跳转
           if (subMenuItem.anchorId) {
             const element = document.getElementById(subMenuItem.anchorId);
             if (element) {
-              element.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start' 
+              element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
               });
             }
           }
@@ -132,9 +132,9 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
   return (
     <div className="fixed-logo">
       <Tooltip title="功能导航" placement="right">
-        <img 
-          src={logoImage} 
-          alt="Nightreign Logo" 
+        <img
+          src={logoImage}
+          alt="Nightreign Logo"
           onClick={() => setMenuVisible(!menuVisible)}
           style={{
             cursor: 'pointer',
@@ -146,10 +146,10 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
           }}
         />
       </Tooltip>
-      
+
       {/* 功能导航菜单 */}
       {menuVisible && (
-        <div 
+        <div
           className="function-menu-overlay"
           style={{
             position: 'fixed',
@@ -181,7 +181,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
           />
         </div>
       )}
-      
+
       {/* 点击外部关闭菜单 */}
       {menuVisible && (
         <div
