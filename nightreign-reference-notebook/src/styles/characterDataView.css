@@ -210,29 +210,13 @@ body[tomato-theme="dark"] .card-item .card-body {
   color: var(--color-text-2);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .character-data-container {
-    padding: 10px 0;
+/* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
+  .content-wrapper.card-item {
+    width: 95%;
+    min-width: auto;
   }
   
-  .character-attribute-value {
-    font-size: 14px;
-  }
-  
-  .character-card-description {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .character-attributes-table .ant-table-cell {
-    padding: 8px 4px;
-  }
-  
-  .character-attribute-value {
-    font-size: 12px;
-  }
 } 
 
 /* ===== 表格与雷达图宽度比例控制 ===== */
@@ -275,27 +259,15 @@ body[tomato-theme="dark"] .character-attributes-table .ant-table-tbody > tr.ant-
   background-color: #000000 !important;
 }
 
-/* 响应式调整 */
-@media (max-width: 1200px) {
-  /* 中等屏幕：自动调整为50-50 */
+/* 移动端响应式调整 - 简化版 */
+@media (max-width: 999px) {
   .character-attributes-table-container {
-    flex: 0.5 !important;
-  }
-  
-  .radar-chart-container {
-    flex: 0.5 !important;
-  }
-}
-
-@media (max-width: 768px) {
-  /* 小屏幕：垂直堆叠 */
-  .character-attributes-table-container,
-  .radar-chart-container {
     flex: 1 !important;
     min-width: 100% !important;
   }
   
+  /* 移动端隐藏雷达图，避免显示问题 */
   .radar-chart-container {
-    min-height: 350px;
+    display: none !important;
   }
 } 

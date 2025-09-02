@@ -83,6 +83,14 @@ body[tomato-theme="dark"] .steps-container {
   margin-bottom: var(--spacing-2xl);
 }
 
+@media (max-width: 999px) {
+  .content-wrapper {
+    min-width: auto;
+    width: 95%;
+    padding: 10px 20px 20px 20px;
+  }
+}
+
 /* ===== 顶部导航栏 ===== */
 .top-bar {
   width: 100%;
@@ -314,6 +322,15 @@ body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover 
   margin-bottom: var(--spacing-2xl);
 }
 
+/* 移动端步骤容器适配 */
+@media (max-width: 999px) {
+  .steps-container {
+    min-width: auto;
+    width: 95%;
+    padding: 8px;
+  }
+}
+
 .main-tabs {
   width: 100%;
 }
@@ -492,6 +509,20 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   margin-top: var(--spacing-md);
 }
 
+/* 移动端按钮容器适配 */
+@media (max-width: 999px) {
+  .custom-buttons-container {
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+  
+  .custom-tab-button {
+    width: 120px;
+    height: 40px;
+  }
+}
+
 /* ===== 搜索组件 ===== */
 .search-container {
   margin-bottom: var(--spacing-md);
@@ -519,12 +550,40 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   flex-shrink: 0;
 }
 
+/* 移动端搜索输入框适配 */
+@media (max-width: 999px) {
+  .custom-search-input {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .outsider-type-select,
+  .in-game-type-select {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .character-select {
+    min-width: auto;
+    width: 100%;
+  }
+}
+
 .filter-search-row {
   display: flex;
   gap: var(--spacing-md);
   margin-bottom: var(--spacing-md);
   align-items: center;
   flex-wrap: wrap;
+}
+
+/* 移动端搜索筛选行适配 */
+@media (max-width: 999px) {
+  .filter-search-row {
+    gap: var(--spacing-sm);
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 .filter-search-content {
@@ -536,6 +595,15 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   flex-wrap: wrap;
 }
 
+/* 移动端搜索内容适配 */
+@media (max-width: 999px) {
+  .filter-search-content {
+    gap: var(--spacing-sm);
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 .filter-controls {
   display: flex;
   align-items: center;
@@ -545,12 +613,29 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   min-width: 0;
 }
 
+/* 移动端筛选控件适配 */
+@media (max-width: 999px) {
+  .filter-controls {
+    gap: 8px;
+    justify-content: center;
+  }
+}
+
 .pagination-controls {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
   flex-wrap: wrap;
+}
+
+/* 移动端分页控件适配 */
+@media (max-width: 999px) {
+  .pagination-controls {
+    gap: 8px;
+    justify-content: center;
+    margin-top: var(--spacing-sm);
+  }
 }
 
 .pagination-label {
@@ -664,6 +749,15 @@ body[tomato-theme="dark"] .ant-table-tbody > tr:hover > td {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   max-width: 550px;
   margin: 0 auto 0 auto;
+}
+
+/* 移动端步骤条容器优化 */
+@media (max-width: 999px) {
+  .custom-steps-container {
+    max-width: none;
+    width: 100%;
+    margin: 0 var(--spacing-sm) var(--spacing-md) var(--spacing-sm);
+  }
 }
 
 [data-theme='dark'] .custom-steps-container,
@@ -841,6 +935,23 @@ body[tomato-theme="dark"] .custom-card .ant-card-body {
   background: var(--content-bg);
 }
 
+/* 移动端卡片优化 - 移除大小限制 */
+@media (max-width: 999px) {
+  .custom-card {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+  
+  .custom-card .ant-card-body {
+    padding: var(--spacing-sm);
+  }
+  
+  .custom-card .ant-card-head {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
 /* 固定在左上角的logo按钮 */
 .fixed-logo {
   position: fixed;
@@ -895,119 +1006,21 @@ body[tomato-theme="dark"] .loading-text {
   pointer-events: none;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
+/* 已合并到999px的媒体查询中 */
+
+/* 移动端表格横向滚动优化 */
+@media (max-width: 999px) {
+  .ant-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   
-  .loading-text {
-    font-size: var(--font-size-sm);
+  .ant-table {
+    min-width: 800px; /* 确保表格内容完整显示 */
   }
 }
 
-/* ===== 响应式设计 ===== */
-@media (max-width: 768px) {
-  .content-wrapper,
-  .steps-container,
-  .header,
-  .top-bar-content {
-    max-width: 95%;
-    padding: var(--spacing-lg);
-  }
-  
-  
-  .main-title {
-    font-size: var(--font-size-2xl) !important;
-  }
-  
-  .top-bar {
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-  
-  .theme-toggle-btn,
-  .language-toggle-btn {
-    font-size: var(--font-size-sm);
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-
-  .filter-search-row {
-    gap: 8px;
-  }
-
-  .filter-search-content {
-    gap: 8px;
-  }
-
-  .filter-controls {
-    gap: 8px;
-  }
-
-  .pagination-controls {
-    gap: 8px;
-  }
-
-  .custom-search-input {
-    width: 200px;
-  }
-
-  .outsider-type-select {
-    min-width: 280px;
-  }
-
-  .character-select {
-    min-width: 100px;
-  }
-}
-
-@media (max-width: 480px) {
-  .content-wrapper,
-  .steps-container,
-  .header,
-  .top-bar-content {
-    max-width: 98%;
-    padding: var(--spacing-md);
-  }
-  
-  /* 小屏幕不需要额外的底部内边距，因为使用了flexbox布局 */
-  
-  .main-title {
-    font-size: var(--font-size-xl) !important;
-  }
-  
-  .top-bar {
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-
-  .filter-search-row {
-    gap: 6px;
-  }
-
-  .filter-search-content {
-    gap: 6px;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .filter-controls {
-    gap: 6px;
-    justify-content: center;
-  }
-
-  .pagination-controls {
-    gap: 6px;
-    justify-content: center;
-  }
-
-  .custom-search-input {
-    width: 180px;
-  }
-
-  .outsider-type-select {
-    min-width: 250px;
-  }
-
-  .character-select {
-    min-width: 90px;
-  }
-}
+/* 已合并到999px的媒体查询中 */
 
 /* ===== Boss数据页面样式 ===== */
 .boss-data-view {
@@ -1028,6 +1041,15 @@ body[tomato-theme="dark"] .loading-text {
   max-width: 500px;
   width: 100%;
   border-radius: 20px;
+}
+
+/* 移动端开发通知优化 */
+@media (max-width: 999px) {
+  .development-notice {
+    max-width: none;
+    width: 100%;
+    margin: 0 var(--spacing-sm);
+  }
 }
 
 .development-notice h2 {
@@ -1079,50 +1101,9 @@ body[tomato-theme="dark"] .development-notice p {
   color: var(--color-text-secondary-dark);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .boss-data-view {
-    padding: var(--spacing-lg);
-  }
-  
-  .development-notice {
-    padding: var(--spacing-xl);
-  }
-  
-  .development-notice h2 {
-    font-size: var(--font-size-xl);
-  }
-  
-  .development-notice p {
-    font-size: var(--font-size-md);
-  }
-  
-  .construction-icon {
-    font-size: 3rem;
-  }
-}
+/* 已合并到999px的媒体查询中 */
 
-@media (max-width: 480px) {
-  .boss-data-view {
-    padding: var(--spacing-md);
-  }
-  
-  .development-notice {
-    padding: var(--spacing-lg);
-  }
-  
-  .development-notice h2 {
-    font-size: var(--font-size-lg);
-  }
-  
-  .development-notice p {
-    font-size: var(--font-size-sm);
-  }
-  
-  .construction-icon {
-    font-size: 2.5rem;
-  }
-} 
+/* 已合并到999px的媒体查询中 */ 
 
 /* ===== 自定义搜索组件样式 ===== */
 .custom-search-wrapper .ant-input {
@@ -1148,4 +1129,57 @@ body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
   background-color: var(--theme-bg-primary);
   border-color: var(--theme-border);
   color: var(--theme-text-primary);
-} 
+}
+
+/* ===== 移动端触摸优化 ===== */
+@media (max-width: 999px) {
+  /* 确保触摸目标足够大 */
+  .ant-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .ant-menu-item {
+    min-height: 44px;
+  }
+  
+  .ant-tabs-tab {
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+  
+  /* 移动端标签页优化 */
+  .ant-tabs-nav {
+    margin-bottom: 16px;
+  }
+  
+  .ant-tabs-tab-btn {
+    white-space: nowrap;
+  }
+  
+  /* 移动端步骤条优化 */
+  .ant-steps-item {
+    min-height: 44px;
+  }
+  
+  .ant-steps-item-title {
+    font-size: 14px;
+  }
+  
+  /* 移动端通用容器优化 */
+  .ant-card,
+  .ant-table-wrapper,
+  .ant-tabs-content-holder {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  
+  /* 移动端间距优化 */
+  .ant-card-body {
+    padding: var(--spacing-sm) !important;
+  }
+  
+  .ant-card-head {
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+  }
+}

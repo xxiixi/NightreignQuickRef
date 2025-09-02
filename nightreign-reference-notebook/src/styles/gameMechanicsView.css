@@ -45,23 +45,15 @@
   align-items: stretch; /* 确保所有子元素高度相等 */
 }
 
-/* 响应式布局 */
-@media (max-width: 1024px) {
-  .mechanics-grid.two-columns,
-  .mechanics-grid.three-columns,
-  .mechanics-grid.custom-columns {
-    grid-template-columns: 1fr;
-    align-items: stretch; /* 确保单列时也保持高度一致 */
-  }
-}
+/* 已合并到999px的媒体查询中 */
 
-@media (max-width: 768px) {
+/* 已合并到999px的媒体查询中 */
+
+/* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
   .mechanics-layout {
-    padding: 0 16px;
-  }
-  
-  .mechanics-grid {
-    gap: 16px;
+    width: 95%;
+    min-width: auto;
   }
 }
 
@@ -378,17 +370,12 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   margin-bottom: 8px;
 }
 
-/* 响应式布局 */
-@media (max-width: 768px) {
+/* 已合并到999px的媒体查询中 */
+
+/* 移动端卢恩表格 - 简化版 */
+@media (max-width: 999px) {
   .rune-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .rune-total {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
+    overflow-x: auto;
   }
 }
 
@@ -421,11 +408,16 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   text-align: center;
 }
 
-/* 响应式布局 - 小屏幕时变为单列 */
-@media (max-width: 768px) {
+/* 已合并到999px的媒体查询中 */
+
+/* 移动端卢恩表格2栏布局 - 简化版 */
+@media (max-width: 999px) {
   .runes-table-container {
     grid-template-columns: 1fr;
-    gap: 12px;
+  }
+  
+  .runes-column {
+    overflow-x: auto;
   }
 }
 
@@ -657,16 +649,11 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
 
 
 
-/* 响应式调整 */
-@media (max-width: 768px) {
+/* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
   .circle-shrink-wrapper {
     width: 150px;
     height: 150px;
-  }
-  
-  .circle-shrink-section {
-    padding: 15px;
-    margin: 15px 0;
   }
 }
 

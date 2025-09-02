@@ -22,17 +22,10 @@
   100% { transform: rotate(360deg)}
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
+/* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
   .loader {
     width: 80px;
     height: 80px;
-  }
-}
-
-@media (max-width: 480px) {
-  .loader {
-    width: 60px;
-    height: 60px;
   }
 } 
