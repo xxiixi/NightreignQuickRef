@@ -870,3 +870,65 @@ body[tomato-theme="dark"] .boss-section-title {
 body[tomato-theme="dark"] .boss-section-title .anticon {
   color: #40a9ff;
 }
+
+
+/* 移动端适配强化：时间机制与卢恩布局自动换行 */
+@media (max-width: 999px) {
+  /* 主网格在小屏下单列 */
+  .mechanics-grid.two-columns,
+  .mechanics-grid.three-columns,
+  .mechanics-grid.custom-columns {
+    grid-template-columns: 1fr;
+  }
+
+  /* 时间机制：两栏改为单栏 */
+  .timeline-with-steps,
+  .timeline-two-columns {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .timeline-steps-container {
+    min-width: 0;
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  .timeline-column:first-child {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .timeline-day-switcher {
+    width: 100%;
+    max-width: none;
+  }
+
+  .mechanic-timeline .ant-timeline {
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+
+  /* 升级所需卢恩：网格自动换行 */
+  .rune-grid {
+    overflow-x: visible;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .runes-column {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .runes-column .ant-table {
+    table-layout: fixed;
+    min-width: 520px;
+  }
+
+  .runes-column .ant-table-thead > tr > th,
+  .runes-column .ant-table-tbody > tr > td {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
