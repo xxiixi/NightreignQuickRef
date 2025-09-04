@@ -325,100 +325,80 @@ const CharacterDataView: React.FC = () => {
         const fpRows: Array<{ character: string; [key: string]: string | number }> = [];
         const stRows: Array<{ character: string; [key: string]: string | number }> = [];
 
-        // 处理每个角色的详细数据
+        // 统一获取属性列（排除 HP/FP/ST/等级）
+        const firstCharacterWithData = Object.values(characterDetailData).find((arr: any) => Array.isArray(arr) && arr.length > 0) as any[] | undefined;
+        const attributeKeys = firstCharacterWithData
+          ? Object.keys(firstCharacterWithData[0]).filter(key => !['HP', 'FP', 'ST', '等级'].includes(key))
+          : [];
+
+        // 构建等级视图：每个等级一个 Tab，行=角色，列=各属性
+        for (let lv = 1; lv <= 15; lv++) {
+          const levelColumns: ColumnsType<any> = [
+            {
+              title: `角色（${lv}级）`,
+              dataIndex: 'character',
+              key: 'character',
+              width: 100,
+              fixed: 'left',
+              align: 'center' as const,
+              render: (text: string) => (
+                <span style={{ 
+                  fontWeight: 'bold', 
+                  color: 'var(--color-text-1)',
+                  fontSize: '13px'
+                }}>
+                  {text}
+                </span>
+              )
+            },
+            ...attributeKeys.map(attrKey => ({
+              title: attrKey === '增加点数'
+                ? <span>{`Lv${lv - 1} → Lv${lv}` } 增加点数</span>
+                : ['生命力','集中力','耐力','力气','敏捷','智力','信仰','感应'].includes(attrKey)
+                  ? <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{attrKey}</span>
+                  : attrKey,
+              dataIndex: attrKey,
+              key: attrKey,
+              width: attrKey === '增加点数' ? 140 : 60,
+              align: 'center' as const,
+              render: (value: any) => (
+                <span style={{ 
+                  fontWeight: '500', 
+                  color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
+                  fontSize: '13px'
+                }}>
+                  {value || '-'}
+                </span>
+              )
+            }))
+          ];
+
+          const rowsAtLevel: any[] = [];
+          Object.entries(characterDetailData).forEach(([characterName, characterLevels]) => {
+            if (Array.isArray(characterLevels) && characterLevels.length > 0) {
+              const levelData = (characterLevels as any[]).find((item: any) => item.等级 === lv);
+              const row: any = { character: characterName };
+              attributeKeys.forEach(attrKey => {
+                row[attrKey] = levelData ? levelData[attrKey] : '';
+              });
+              rowsAtLevel.push(row);
+            }
+          });
+
+          tabs.push({
+            name: `🔸 Lv${lv}`,
+            columns: levelColumns,
+            data: rowsAtLevel
+          });
+        }
+
+        // 提取 HP/FP/ST 数据：按等级聚合到 Lv1..Lv15
         Object.entries(characterDetailData).forEach(([characterName, characterData]) => {
-          if (characterData && characterData.length > 0) {
-            // 获取列名（排除HP、FP、ST和等级）
-            const columnKeys = Object.keys(characterData[0]).filter(key => 
-              !['HP', 'FP', 'ST', '等级'].includes(key)
-            );
-
-            // 调换行列：将属性作为行，等级作为列
-            const transposedData = columnKeys.map((attrKey) => {
-              const row: any = { attribute: attrKey };
-              // 为每个等级创建列
-              for (let lv = 1; lv <= 15; lv++) {
-                const levelData = characterData.find((item: any) => item.等级 === lv);
-                row[`Lv${lv}`] = levelData ? levelData[attrKey] : '';
-              }
-              return row;
-            });
-
-            // 创建新的列定义
-            const transposedColumns: ColumnsType<any> = [
-              {
-                title: '等级',
-                dataIndex: 'attribute',
-                key: 'attribute',
-                width: 100,
-                fixed: 'left',
-                align: 'center' as const,
-                render: (text: string) => (
-                  <span style={{ 
-                    fontWeight: 'bold', 
-                    color: 'var(--color-text-1)',
-                    fontSize: '13px'
-                  }}>
-                    {text}
-                  </span>
-                ),
-                onCell: (record) => {
-                  const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
-                  const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                                   document.body.getAttribute('tomato-theme') === 'dark';
-                  return {
-                    style: {
-                      backgroundColor: isSpecialAttr 
-                        ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
-                        : 'var(--content-bg)',
-                    }
-                  };
-                }
-              },
-              ...Array.from({ length: 15 }, (_, i) => ({
-                title: <span style={{ fontWeight: 'bold', color: 'var(--color-primary-500)' }}>{`Lv${i + 1}`}</span>,
-                dataIndex: `Lv${i + 1}`,
-                key: `Lv${i + 1}`,
-                width: 60,
-                align: 'center' as const,
-                render: (value: any, record: any) => {
-                  const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
-                  return (
-                    <span style={{ 
-                      fontWeight: isSpecialAttr ? 'bold' : 'normal',
-                      color: value ? 'var(--color-text-1)' : 'var(--color-text-3)',
-                      fontSize: '13px'
-                    }}>
-                      {value || '-'}
-                    </span>
-                  );
-                },
-                onCell: (record: { attribute: string }) => {
-                  const isSpecialAttr = ['总点数', '增加点数'].includes(record.attribute);
-                  const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || 
-                                   document.body.getAttribute('tomato-theme') === 'dark';
-                  return {
-                    style: {
-                      backgroundColor: isSpecialAttr 
-                        ? (isDarkMode ? 'var(--color-neutral-900)' : 'var(--geekblue-1)')
-                        : 'transparent',
-                    }
-                  };
-                }
-              }))
-            ];
-
-            tabs.push({ 
-              name: characterName, 
-              columns: transposedColumns, 
-              data: transposedData 
-            });
-
-            // 提取 HP/FP/ST 数据：按等级聚合到 Lv1..Lv15
+          if (characterData && (characterData as any[]).length > 0) {
             const buildRow = (statKey: string) => {
               const row: any = { character: characterName };
               for (let lv = 1; lv <= 15; lv++) {
-                const levelData = characterData.find((item: any) => item.等级 === lv);
+                const levelData = (characterData as any[]).find((item: any) => item.等级 === lv);
                 row[`Lv${lv}`] = levelData ? levelData[statKey] : '';
               }
               return row;
@@ -447,30 +427,16 @@ const CharacterDataView: React.FC = () => {
     loadData();
   }, []);
 
-
-
-  // 直接使用加载的角色数据
   const characterData: CharacterData = data.characterStatesData[0] || {};
-
-  // 获取所有属性名称
   const getAttributeNames = () => {
     const firstCharacter = Object.values(characterData)[0];
     return firstCharacter ? Object.keys(firstCharacter) : [];
   };
-
-  // 获取所有角色名称
   const characterNames = Object.keys(characterData);
-
-  // 选中的角色状态 - 默认选中追踪者和女爵
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '女爵']);
-  
-  // 当前主题状态
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
-  
-  // 强制重新渲染的key
   const [chartKey, setChartKey] = useState(0);
 
-  // 监听主题变化
   useEffect(() => {
     const checkTheme = () => {
       const newTheme = getCurrentTheme();
@@ -480,22 +446,17 @@ const CharacterDataView: React.FC = () => {
       }
     };
     
-    // 初始检查
     checkTheme();
     
-    // 监听 localStorage 变化
     const handleStorageChange = () => {
-      // 延迟一点时间确保 localStorage 已更新
       setTimeout(checkTheme, 50);
     };
     
-    // 监听系统主题变化
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleMediaChange = () => {
       checkTheme();
     };
-    
-    // 监听自定义主题变化事件
+
     const handleThemeChange = () => {
       setTimeout(checkTheme, 50);
     };
@@ -513,20 +474,15 @@ const CharacterDataView: React.FC = () => {
 
   // 处理窗口大小变化和拖拽导致的图表刷新问题
   useEffect(() => {
-    // 节流后的图表刷新函数
     const throttledChartRefresh = throttle(() => {
-      // 强制重新渲染图表
       setChartKey(prev => prev + 1);
     }, 300); // 300ms节流延迟
 
-    // 监听窗口大小变化
     const handleResize = () => {
       throttledChartRefresh();
     };
 
-    // 监听拖拽相关事件
     const handleDragEnd = () => {
-      // 拖拽结束后延迟刷新，确保容器尺寸已稳定
       setTimeout(throttledChartRefresh, 100);
     };
 
@@ -537,9 +493,8 @@ const CharacterDataView: React.FC = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('dragend', handleDragEnd);
     };
-  }, []); // 空依赖数组，只在组件挂载时设置监听器
+  }, []);
 
-  // 动态调整雷达图高度以匹配表格高度
   useEffect(() => {
     const adjustRadarHeight = () => {
       const tableContainer = document.querySelector('.character-attributes-table')?.closest('div');
@@ -547,22 +502,16 @@ const CharacterDataView: React.FC = () => {
       
       if (tableContainer && radarContainer) {
         const tableHeight = tableContainer.getBoundingClientRect().height;
-        // 设置雷达图容器高度与表格一致，但最小保持350px
         const targetHeight = Math.max(tableHeight, 350);
         radarContainer.style.height = `${targetHeight}px`;
       }
     };
 
-    // 节流后的高度调整函数
     const throttledAdjustHeight = throttle(adjustRadarHeight, 200);
-
-    // 初始调整
     adjustRadarHeight();
-    
-    // 监听表格数据变化（通过selectedRowKeys变化触发）
+
     const timer = setTimeout(throttledAdjustHeight, 100);
     
-    // 监听窗口大小变化
     window.addEventListener('resize', throttledAdjustHeight);
     
     return () => {
@@ -879,8 +828,38 @@ const CharacterDataView: React.FC = () => {
            </Title>
          </div>
          <div className="card-body">
+         <Title level={5} style={{ margin: '12px 0 8px', color: 'var(--color-text-1)' }}>
+                同等级角色属性对比
+               </Title>
+                {/* 角色详细数据标签页 */}
+               <Tabs
+                 type="card"
+                 items={jsonTabs.map((tab: any) => ({
+                   key: tab.name,
+                   label: tab.name,
+                   children: (
+                     <Table
+                       dataSource={tab.data}
+                       columns={tab.columns}
+                       pagination={false}
+                       size="small"
+                       bordered
+                       scroll={{ x: 'max-content' }}
+                       style={{ 
+                         wordBreak: 'break-word',
+                         whiteSpace: 'pre-wrap'
+                        }}
+                        footer={bottomTablesFooter}
+                     />
+                   ),
+                 }))}
+               />
+               <Divider />
            {jsonTabs.length > 0 && (
               <>
+                <Title level={5} style={{ marginBottom: 8, color: 'var(--color-text-1)' }}>
+                  血量、专注、耐力具体数值
+                </Title>
                 {/* HP/FP/ST 数据表格（通过 Tabs 切换） */}
                <Tabs
                  type="card"
@@ -1046,31 +1025,6 @@ const CharacterDataView: React.FC = () => {
                    }
                  ]}
                  style={{ marginBottom: 30 }}
-               />
-               <Divider />
-               
-                {/* 角色详细数据标签页 */}
-               <Tabs
-                 type="card"
-                 items={jsonTabs.map((tab: any) => ({
-                   key: tab.name,
-                   label: tab.name,
-                   children: (
-                     <Table
-                       dataSource={tab.data}
-                       columns={tab.columns}
-                       pagination={false}
-                       size="small"
-                       bordered
-                       scroll={{ x: 'max-content' }}
-                       style={{ 
-                         wordBreak: 'break-word',
-                         whiteSpace: 'pre-wrap'
-                        }}
-                        footer={bottomTablesFooter}
-                     />
-                   ),
-                 }))}
                />
              </>
            )}
