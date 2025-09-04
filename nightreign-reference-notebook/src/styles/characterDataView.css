@@ -84,7 +84,7 @@ body[tomato-theme="dark"] .card-item .card-body {
 .character-attributes-table {
   background: var(--content-bg);
   border-radius: 8px;
-  overflow: hidden;
+  overflow: x;
   transition: all var(--transition-normal);
 }
 
@@ -237,12 +237,8 @@ body[tomato-theme="dark"] .card-item .card-body {
 
 .character-attributes-table-container .ant-table {
   flex: 1;
-  /* height: 350px; 移除固定高度，让footer可见 */
 }
 
-.character-attributes-table-container .ant-table-wrapper {
-  /* height: 350px; 移除固定高度，让footer可见 */
-}
 
 .radar-chart-container {
   flex: 0.4 !important;
@@ -261,13 +257,21 @@ body[tomato-theme="dark"] .character-attributes-table .ant-table-tbody > tr.ant-
 
 /* 移动端响应式调整 - 简化版 */
 @media (max-width: 999px) {
+  .attributes-and-radar {
+    flex-direction: column !important;
+  }
+
   .character-attributes-table-container {
     flex: 1 !important;
     min-width: 100% !important;
   }
-  
-  /* 移动端隐藏雷达图，避免显示问题 */
+
+  /* 移动端雷达图，表格下方 */
   .radar-chart-container {
-    display: none !important;
+    display: block !important;
+    flex: unset !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 12px;
   }
 } 
