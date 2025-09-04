@@ -1431,6 +1431,70 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     </div>
   );
 
+  // 利普拉的交易选项
+  interface LipulaTrade {
+    key: string;
+    desire: string;
+    effect: string;
+    stats?: LipulaStats;
+  }
+
+  interface LipulaStats {
+    level: number; // 等级
+    hp: number; // 血
+    fp: number; // 蓝
+    stamina: number; // 绿
+    str: number; // 力
+    dex: number; // 敏
+    intl: number; // 智
+    fth: number; // 信
+    arc: number; // 感
+  }
+
+  const lipulaTradesData: LipulaTrade[] = [
+    { key: '1', desire: '我想要力气变的更大', effect: '改变角色属性加点为：', stats: { level: 15, hp: 47, fp: 6, stamina: 23, str: 73, dex: 9, intl: 3, fth: 3, arc: 3 } },
+    { key: '2', desire: '我想要灵巧变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 43, fp: 10, stamina: 23, str: 9, dex: 72, intl: 3, fth: 3, arc: 3 } },
+    { key: '3', desire: '我想要智力变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 55, fth: 24, arc: 3 } },
+    { key: '4', desire: '我想要信仰变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 24, fth: 55, arc: 3 } },
+    { key: '5', desire: '我想要感应变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 41, fp: 26, stamina: 26, str: 39, dex: 39, intl: 30, fth: 30, arc: 35 } },
+    { key: '6', desire: '我想要能抵抗异常状态', effect: '提升全异常抗性，减少10%精力上限' },
+    { key: '7', desire: '我想要死亡远离我', effect: '第一次收到致命攻击时免死并回满血，但是血量上限永久减少20%' },
+    { key: '8', desire: '我想要厉害的武器', effect: '在维克的战矛、颠火圣印记、指纹石盾、黑刀、米凯拉骑士剑、黄金树弓中抽取一把武器' },
+    { key: '9', desire: '我想要大幅度地升级', effect: '升三级，但是此后每次喝药将会降低一级' },
+    { key: '10', desire: '我想要圣杯瓶', effect: '圣杯瓶使用次数增加一次，但是减少血量上限' },
+    { key: '11', desire: '我想要体验大器晚成', effect: '立即减少血量、专注值、精力上限30%，如果在boss战开始后两分钟不倒地，血量、专注值、精力恢复正常并增加上限20%' },
+    { key: '12', desire: '我想要全力战斗', effect: '利普拉开始战斗后立即进入金身强化状态，场上的玩家和boss都获得持续一分钟的buff' },
+    { key: '13', desire: '我想要恶魔的力量', effect: '活得一个会随机攻击敌人的恶魔眼球，但是眼球每次攻击敌人会为角色累计发狂值' },
+  ];
+
+  const lipulaColumns: ColumnsType<LipulaTrade> = [
+    {
+      title: '利普拉的交易',
+      dataIndex: 'desire',
+      key: 'desire',
+      width: 220,
+      align: 'center',
+      render: (text) => <strong>{text}</strong>,
+      fixed: 'left',
+    },
+    {
+      title: '效果',
+      dataIndex: 'effect',
+      key: 'effect',
+      align: 'left',
+      render: (text, record) => (
+        <div>
+          <div>{text}</div>
+          {record.stats && (
+            <div style={{ marginTop: 4 }}>
+             角色15级时加点示例：血量 {record.stats.hp}｜专注  {record.stats.fp}｜耐力 {record.stats.stamina}｜力气 {record.stats.str}｜敏捷 {record.stats.dex}｜智力 {record.stats.intl}｜信仰 {record.stats.fth}｜感应 {record.stats.arc}
+            </div>
+          )}
+        </div>
+      ),
+    },
+  ];
+
   // 监听外部Tab切换
   useEffect(() => {
     if (activeSubTab && activeSubTab !== activeBossTab) {
@@ -1577,6 +1641,22 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                     size="small"
                     bordered
                     footer={sinnerFooter}
+                  />
+                </div>
+              ),
+            },
+            {
+              key: 'lipula-trades',
+              label: '⚖️利普拉的交易选项',
+              children: (
+                <div id="lipula-trades">
+                  <Table
+                    columns={lipulaColumns}
+                    dataSource={lipulaTradesData}
+                    rowKey="key"
+                    pagination={false}
+                    size="small"
+                    bordered
                   />
                 </div>
               ),
