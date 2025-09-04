@@ -41,12 +41,18 @@
   padding: 0px 10px;
 }
 
-/* 移动端基础适配 - 解决卡片溢出问题 */
 @media (max-width: 999px) {
   .boss-card {
     min-width: auto;
-    width: 95%;
-    margin: 0 10px;
+    width: 95% !important;
+    margin: 0 auto;
+    padding: 10px 20px 20px 20px;
+    box-sizing: border-box;
+  }
+  
+  /* 提升特异性，覆盖全局 .ant-card { width: 100% !important; } */
+  .boss-card.ant-card {
+    width: 95% !important;
   }
 }
 

@@ -45,15 +45,17 @@
   align-items: stretch; /* 确保所有子元素高度相等 */
 }
 
-/* 已合并到999px的媒体查询中 */
 
-/* 已合并到999px的媒体查询中 */
-
-/* 移动端基础适配 - 简化版 */
 @media (max-width: 999px) {
   .mechanics-layout {
     width: 95%;
     min-width: auto;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .mechanic-card {
+    width: 100%;
   }
 }
 

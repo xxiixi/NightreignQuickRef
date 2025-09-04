@@ -638,6 +638,27 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   }
 }
 
+/* 自定义分页行：移动端换行显示 */
+.custom-pagination-row {
+  width: 100%;
+}
+
+@media (max-width: 999px) {
+  .custom-pagination-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: var(--spacing-sm);
+  }
+
+  .custom-pagination-row .page-size-controls {
+    justify-content: center;
+  }
+
+  .custom-pagination-row .page-nav-controls {
+    justify-content: center;
+  }
+}
+
 .pagination-label {
   color: var(--theme-text-secondary);
   font-size: 14px;
