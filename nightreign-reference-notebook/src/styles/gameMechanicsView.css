@@ -344,7 +344,7 @@ body[tomato-theme="dark"] .mechanic-card:hover {
 
 [data-theme="dark"] .mechanic-card .card-title-section,
 body[tomato-theme="dark"] .mechanic-card .card-title-section {
-  border-bottom-color: var(--color-primary-600);
+  border-bottom-color: var(--color-primary-700);
 }
 
 /* 升级所需卢恩表格样式 */
