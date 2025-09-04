@@ -41,6 +41,21 @@
   padding: 0px 10px;
 }
 
+@media (max-width: 999px) {
+  .boss-card {
+    min-width: auto;
+    width: 95% !important;
+    margin: 0 auto;
+    padding: 10px 20px 20px 20px;
+    box-sizing: border-box;
+  }
+  
+  /* 提升特异性，覆盖全局 .ant-card { width: 100% !important; } */
+  .boss-card.ant-card {
+    width: 95% !important;
+  }
+}
+
 .boss-data-view-container {
   padding-bottom: 40px;
   width: 100%;
@@ -105,6 +120,38 @@ body[tomato-theme="dark"] .resistance-high {
   margin-bottom: 16px;
 }
 
+/* 夜王boss数据表格样式优化 */
+.boss-card .ant-table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.boss-card .ant-table-thead > tr > th {
+  background: var(--table-header-bg, #fafafa);
+  font-weight: 500;
+  border-bottom: 2px solid var(--color-text-2, #637fbb);
+}
+
+.boss-card .ant-table-tbody > tr:hover > td {
+  background-color: var(--table-hover-bg, #f0f5ff);
+}
+
+/* 野生Boss表格样式优化 */
+.wild-boss-filter-container .ant-table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.wild-boss-filter-container .ant-table-thead > tr > th {
+  background: var(--table-header-bg, #fafafa);
+  font-weight: 500;
+  border-bottom: 2px solid var(--color-text-2, #637fbb);
+}
+
+.wild-boss-filter-container .ant-table-tbody > tr:hover > td {
+  background-color: var(--table-hover-bg, #f0f5ff);
+}
+
 .filter-inputs {
   display: flex;
   align-items: center;
@@ -153,8 +200,8 @@ body[tomato-theme="dark"] .filter-inputs {
   border-color: var(--theme-border);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
+/* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
   .filter-inputs {
     flex-direction: column;
     align-items: stretch;
@@ -163,6 +210,64 @@ body[tomato-theme="dark"] .filter-inputs {
   .filter-inputs .ant-input,
   .filter-inputs .ant-select {
     width: 100% !important;
+  }
+  
+  /* 夜王boss数据表格移动端优化 */
+  .boss-card .ant-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .boss-card .ant-table {
+    min-width: 800px; /* 确保表格内容完整显示 */
+  }
+  
+  /* 野生Boss表格移动端优化 */
+  .wild-boss-filter-container .ant-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .wild-boss-filter-container .ant-table {
+    min-width: 1000px; /* 确保表格内容完整显示 */
+  }
+  
+  /* 圆桌厅堂人物表格移动端优化 */
+  .wild-boss-filter-container#roundtable-characters .ant-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .wild-boss-filter-container#roundtable-characters .ant-table {
+    min-width: 800px; /* 确保表格内容完整显示 */
+  }
+
+  
+  /* 移动端触摸优化 */
+  .boss-card .ant-table,
+  .wild-boss-filter-container .ant-table {
+    touch-action: pan-x;
+  }
+  
+  /* 移动端表格内容优化 */
+  .boss-card .ant-table-cell,
+  .wild-boss-filter-container .ant-table-cell {
+    padding: 8px 6px !important;
+    font-size: 13px;
+  }
+  
+  .boss-card .boss-image,
+  .wild-boss-filter-container .boss-image {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  
+  /* 移动端表格标题优化 */
+  .boss-card .ant-table-thead > tr > th,
+  .wild-boss-filter-container .ant-table-thead > tr > th {
+    padding: 10px 6px !important;
+    font-size: 12px;
+    white-space: nowrap;
   }
 }
 

@@ -107,7 +107,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   }
 
   return (
-    <div style={{ 
+    <div className="custom-pagination-row" style={{ 
       display: 'flex', 
       justifyContent: 'space-between', 
       alignItems: 'center', 
@@ -115,7 +115,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
       padding: '0 16px'
     }}>
       {/* 左侧：每页显示选择器 */}
-      <div style={{ 
+      <div className="page-size-controls" style={{ 
         display: 'flex', 
         alignItems: 'center', 
         gap: '8px'
@@ -152,7 +152,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
       </div>
       
       {/* 右侧：分页按钮 */}
-      <div style={{ 
+      <div className="page-nav-controls" style={{ 
         display: 'flex', 
         alignItems: 'center', 
         gap: '10px'

@@ -84,7 +84,7 @@ body[tomato-theme="dark"] .card-item .card-body {
 .character-attributes-table {
   background: var(--content-bg);
   border-radius: 8px;
-  overflow: hidden;
+  overflow: x;
   transition: all var(--transition-normal);
 }
 
@@ -210,29 +210,13 @@ body[tomato-theme="dark"] .card-item .card-body {
   color: var(--color-text-2);
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .character-data-container {
-    padding: 10px 0;
+/* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
+  .content-wrapper.card-item {
+    width: 95%;
+    min-width: auto;
   }
   
-  .character-attribute-value {
-    font-size: 14px;
-  }
-  
-  .character-card-description {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 480px) {
-  .character-attributes-table .ant-table-cell {
-    padding: 8px 4px;
-  }
-  
-  .character-attribute-value {
-    font-size: 12px;
-  }
 } 
 
 /* ===== 表格与雷达图宽度比例控制 ===== */
@@ -253,12 +237,8 @@ body[tomato-theme="dark"] .card-item .card-body {
 
 .character-attributes-table-container .ant-table {
   flex: 1;
-  /* height: 350px; 移除固定高度，让footer可见 */
 }
 
-.character-attributes-table-container .ant-table-wrapper {
-  /* height: 350px; 移除固定高度，让footer可见 */
-}
 
 .radar-chart-container {
   flex: 0.4 !important;
@@ -275,27 +255,23 @@ body[tomato-theme="dark"] .character-attributes-table .ant-table-tbody > tr.ant-
   background-color: #000000 !important;
 }
 
-/* 响应式调整 */
-@media (max-width: 1200px) {
-  /* 中等屏幕：自动调整为50-50 */
-  .character-attributes-table-container {
-    flex: 0.5 !important;
+/* 移动端响应式调整 - 简化版 */
+@media (max-width: 999px) {
+  .attributes-and-radar {
+    flex-direction: column !important;
   }
-  
-  .radar-chart-container {
-    flex: 0.5 !important;
-  }
-}
 
-@media (max-width: 768px) {
-  /* 小屏幕：垂直堆叠 */
-  .character-attributes-table-container,
-  .radar-chart-container {
+  .character-attributes-table-container {
     flex: 1 !important;
     min-width: 100% !important;
   }
-  
+
+  /* 移动端雷达图，表格下方 */
   .radar-chart-container {
-    min-height: 350px;
+    display: block !important;
+    flex: unset !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-top: 12px;
   }
 } 

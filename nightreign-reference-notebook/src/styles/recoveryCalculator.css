@@ -267,8 +267,8 @@
   margin: 0 8px;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
+/* 移动端基础适配 - 简化版 */
+@media (max-width: 999px) {
   .recovery-calculator {
     flex-direction: column;
     gap: 16px;
@@ -280,31 +280,6 @@
   
   .recovery-calculator .character-select {
     width: 100%;
-  }
-  
-  .recovery-calculator .character-selection {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .recovery-calculator .character-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-  
-  .recovery-calculator .character-row .ant-typography {
-    margin-bottom: 4px;
-  }
-  
-  .recovery-calculator .character-row .character-select {
-    min-width: 100%;
-    max-width: none;
-  }
-  
-  .recovery-calculator .results-content {
-    flex-direction: column;
-    gap: 12px;
   }
   
   .recovery-calculator .divider {

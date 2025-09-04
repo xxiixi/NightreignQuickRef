@@ -707,7 +707,7 @@ const CharacterDataView: React.FC = () => {
           </Title>
         </div>
         <div className="card-body">
-          <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+          <div className="attributes-and-radar" style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
             {/* 角色属性表格 */}
             <div className="character-attributes-table-container">
               <Table
