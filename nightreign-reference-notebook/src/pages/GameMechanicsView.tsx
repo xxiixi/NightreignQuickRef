@@ -12,30 +12,28 @@ interface GameMechanicsViewProps {
   functionName: string;
 }
 
-// 缩圈效果组件
 const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ currentStep, day }) => {
-  // 根据时间点计算圈的大小
   const getCircleSize = (step: number, dayNum: number) => {
     if (dayNum === 1) {
-      // Day 1 的圈大小逻辑
+      // Day 1
       switch (step) {
-        case 0: return 100; // 游戏开始 - 最大圈
-        case 1: return 60;  // 第一次缩圈开始
-        case 2: return 60;  // 第一次缩圈结束
-        case 3: return 20;  // 第二次缩圈开始
-        case 4: return 20;  // 第二次缩圈结束
-        case 5: return 20;  // Boss战 - 最小圈
+        case 0: return 100;
+        case 1: return 60;
+        case 2: return 60;
+        case 3: return 20;
+        case 4: return 20;
+        case 5: return 20;
         default: return 100;
       }
     } else {
-      // Day 2 的圈大小逻辑
+      // Day 2
       switch (step) {
-        case 0: return 100; // 游戏开始
-        case 1: return 60;  // 第一次缩圈开始
-        case 2: return 60;  // 第一次缩圈结束
-        case 3: return 20;  // 第二次缩圈开始
-        case 4: return 20;  // 第二次缩圈结束
-        case 5: return 20;   // Boss战
+        case 0: return 100;
+        case 1: return 60;
+        case 2: return 60;
+        case 3: return 20;
+        case 4: return 20;
+        case 5: return 20;
         default: return 100;
       }
     }
@@ -46,56 +44,50 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
   // 判断是否在缩圈开始阶段（需要脉冲动画）
   const isShrinkingStart = (step: number, dayNum: number) => {
     if (dayNum === 1) {
-      return step === 1 || step === 3; // Day 1: 第一次缩圈开始(1) 或 第二次缩圈开始(3)
+      return step === 1 || step === 3;
     } else {
-      return step === 1 || step === 3; // Day 2: 第一次缩圈开始(1) 或 第二次缩圈开始(3)
+      return step === 1 || step === 3;
     }
   };
 
   // 判断是第几次缩圈
   const getShrinkPhase = (step: number) => {
-    if (step === 1) return 'first';  // 第一次缩圈
-    if (step === 3) return 'second'; // 第二次缩圈
+    if (step === 1) return 'first';
+    if (step === 3) return 'second';
     return 'none';
   };
 
-  // 判断是否是第一次缩圈阶段（60%圈）
   const isFirstShrinkPhase = (step: number) => {
-    return step === 1 || step === 2; // 第一次缩圈开始和结束都是60%
+    return step === 1 || step === 2;
   };
 
-  // 判断是否是第一次缩圈结束阶段（需要深蓝色）
   const isFirstShrinkEnd = (step: number) => {
-    return step === 2; // 第一次缩圈结束
+    return step === 2;
   };
 
-  // 判断是否第一次缩圈已结束（外圈需要变灰）
   const isFirstShrinkCompleted = (step: number) => {
-    return step >= 2; // 第一次缩圈结束后（step 2及以后）
+    return step >= 2;
   };
 
-  // 判断是否是第二次缩圈开始（外圈变深蓝，内圈变浅蓝）
   const isSecondShrinkStart = (step: number) => {
-    return step === 3; // 第二次缩圈开始
+    return step === 3;
   };
 
-  // 判断是否是第二次缩圈结束（内圈变深蓝）
   const isSecondShrinkEnd = (step: number) => {
-    return step === 4; // 第二次缩圈结束
+    return step === 4;
   };
 
-  // 获取上一个圈的大小（用于脉冲范围）
   const getPreviousSize = (step: number, dayNum: number) => {
     if (dayNum === 1) {
       switch (step) {
-        case 1: return 100; // 第一次缩圈开始前是100%
-        case 3: return 60;  // 第二次缩圈开始前是60%
+        case 1: return 100;
+        case 3: return 60;
         default: return currentSize;
       }
     } else {
       switch (step) {
-        case 1: return 100; // 第一次缩圈开始前是100%
-        case 3: return 60;  // 第二次缩圈开始前是60%
+        case 1: return 100;
+        case 3: return 60;
         default: return currentSize;
       }
     }
@@ -147,12 +139,8 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
 };
 
 const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) => {
-  // 隐士出招表数据
   const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
-  // 时间轴状态
   const [day1TimelineStep, setDay1TimelineStep] = useState(0);
-
-  // 获取当前时间点的时间和描述
   const getCurrentTimeInfo = (step: number) => {
     const timelineItems = [
       { time: '0:00', description: 'Day 1/ Day 2 开始' },
@@ -175,7 +163,6 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
         await dataManager.waitForData();
         setMagicMoves(dataManager.getMagicMoveList());
       } catch (error) {
-        // no-op; GameMechanicsView 其他区域仍可渲染
         console.error('Failed to load magic moves:', error);
       }
     };
@@ -485,7 +472,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       />
                                     </div>
                                     <div className="boss-progress-item">
-                                      <div className="progress-label">减伤率：</div>
+                                      <div className="progress-label">角色减伤率：</div>
                                       <Progress
                                         percent={day1TimelineStep <= 4 ? 47 : 0}
                                         strokeColor="#3f8600"
@@ -509,7 +496,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       />
                                     </div>
                                     <div className="boss-progress-item">
-                                      <div className="progress-label">减伤率：</div>
+                                      <div className="progress-label">角色减伤率：</div>
                                       <Progress
                                         percent={day1TimelineStep <= 1 ? 20 :
                                           day1TimelineStep <= 3 ? 0 : 0}
@@ -627,7 +614,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
     );
   }
 
-  // 其他功能保持原有的简单显示
+  // 其他功能
   return (
     <div className="mechanics-development-placeholder">
       <Title level={3} className="mechanics-development-title">{functionName}</Title>
