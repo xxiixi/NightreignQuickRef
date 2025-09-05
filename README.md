@@ -4,6 +4,8 @@ Quick reference for Elden Ring: Nightreign entries, categorized to match in-game
 
 All data reference files are located in the [raw_data/](./reference/raw_data/) directory.
 
+---
+
 ## Tech Stack
 
 - **React 19.1.0**
@@ -46,3 +48,5 @@ Build output will be generated in the `dist` directory
 ```bash
 npm run preview
 ```
+
+
