@@ -54,7 +54,8 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '夜王基础数据', label: '🌙 夜王基础数据', anchorId: 'night-king-basic', tabKey: 'boss-data' },
         { key: '野生Boss数据', label: '☠️ 野生Boss数据', anchorId: 'wild-boss-data', tabKey: 'wild-boss-data' },
         { key: '圆桌厅堂人物数据', label: '🏛️ 圆桌厅堂人物数据', anchorId: 'roundtable-characters', tabKey: 'character-data' },
-        { key: '永夜山羊召唤罪人详情', label: '🐐 永夜山羊召唤罪人详情', anchorId: 'sinner-details', tabKey: 'sinner-data' }
+        { key: '永夜山羊召唤罪人详情', label: '🐐 永夜山羊召唤罪人详情', anchorId: 'sinner-details', tabKey: 'sinner-data' },
+        { key: '利普拉的交易选项', label: '⚖️ 利普拉的交易(Boss战)', anchorId: 'lipula-trades', tabKey: 'lipula-trades' }
       ]
     },
     {

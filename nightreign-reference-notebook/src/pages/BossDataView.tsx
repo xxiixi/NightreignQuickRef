@@ -91,9 +91,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       event.preventDefault();
       event.stopPropagation();
     };
-    
+
     const color = getLocationColor(value);
-    
+
     return (
       <Tag
         color={color}
@@ -119,7 +119,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
         });
       }
     });
-    
+
     return Array.from(locations).sort().map(location => ({
       value: location,
       label: location
@@ -129,7 +129,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   // 过滤野生Boss数据
   const getFilteredWildBossData = () => {
     let filtered = wildBossData;
-    
+
     // 按位置筛选
     if (selectedLocations.length > 0) {
       filtered = filtered.filter(boss => {
@@ -138,15 +138,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
         return selectedLocations.some(selectedLoc => bossLocations.includes(selectedLoc));
       });
     }
-    
+
     // 按搜索关键词筛选（仅搜索Boss名称）
     if (wildBossSearchKeyword.trim()) {
       const searchLower = wildBossSearchKeyword.toLowerCase();
-      filtered = filtered.filter(boss => 
+      filtered = filtered.filter(boss =>
         boss.name.toLowerCase().includes(searchLower)
       );
     }
-    
+
     return filtered;
   };
 
@@ -164,7 +164,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
         locations.add(character.location.trim());
       }
     });
-    
+
     return Array.from(locations).sort().map(location => ({
       value: location,
       label: location
@@ -174,7 +174,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   // 过滤圆桌厅堂人物数据
   const getFilteredCharacterData = () => {
     let filtered = characterData;
-    
+
     // 按位置筛选
     if (selectedCharacterLocations.length > 0) {
       filtered = filtered.filter(character => {
@@ -182,15 +182,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
         return selectedCharacterLocations.includes(character.location.trim());
       });
     }
-    
+
     // 按搜索关键词筛选（仅搜索人物名称）
     if (characterSearchKeyword.trim()) {
       const searchLower = characterSearchKeyword.toLowerCase();
-      filtered = filtered.filter(character => 
+      filtered = filtered.filter(character =>
         character.name.toLowerCase().includes(searchLower)
       );
     }
-    
+
     return filtered;
   };
 
@@ -205,9 +205,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     if (value === '-' || value === null || value === undefined) {
       return '';
     }
-    
+
     const numValue = typeof value === 'string' ? parseInt(value) : value;
-    
+
     if (numValue <= 154) {
       return 'resistance-low'; // 低抗性 - 绿色
     } else if (numValue <= 252) {
@@ -215,7 +215,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     } else if (numValue <= 542) {
       return 'resistance-high'; // 高抗性 - 红色
     } else {
-      return ''; 
+      return '';
     }
   };
 
@@ -224,10 +224,10 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     if (value === null || value === undefined) {
       return '';
     }
-    
+
     if (value > 1) {
-      return 'absorption-1'; 
-    } 
+      return 'absorption-1';
+    }
     else if (value < 1) {
       // 对小于1的值进行进一步分类
       if (value <= 0.3) {
@@ -235,10 +235,10 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       } else if (value <= 0.7) {
         return 'absorption-3';
       } else {
-        return 'absorption-2'; 
+        return 'absorption-2';
       }
     } else {
-      return ''; 
+      return '';
     }
   };
 
@@ -257,7 +257,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     if (typeof baseResistance === 'string') {
       return baseResistance; // 如果是"免疫"，直接返回
     }
-    
+
     const resistanceMultipliers = {
       1: 1,      // 单人
       2: 2.67,   // 双人
@@ -322,9 +322,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
         // 找到相同图片的下一个boss的索引
         const currentIndex = filteredData.findIndex(item => item.name === record.name);
         const currentImage = bossImageMap[record.name];
-        
+
         if (!currentImage) return {};
-        
+
         // 计算相同图片的行数
         let rowSpan = 1;
         for (let i = currentIndex + 1; i < filteredData.length; i++) {
@@ -334,12 +334,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             break;
           }
         }
-        
+
         // 如果是相同图片组的第一行，设置rowSpan
         if (currentIndex === 0 || bossImageMap[filteredData[currentIndex - 1].name] !== currentImage) {
           return { rowSpan };
         }
-        
+
         // 否则隐藏单元格
         return { rowSpan: 0 };
       },
@@ -405,13 +405,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     {
       title: '攻击类别',
       children: [
-                {
+        {
           title: (
-                <div className="damage-type-container">
-                  <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
-                  <span>普通</span>
-                </div>
-              ),
+            <div className="damage-type-container">
+              <Image src={standardDamage} alt="普通" width={18} height={18} preview={false} />
+              <span>普通</span>
+            </div>
+          ),
           dataIndex: 'normalAbsorption',
           key: 'normalAbsorption',
           width: 60,
@@ -445,7 +445,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               <Image src={slashDamage} alt="斩击" width={18} height={18} preview={false} />
               <span>斩击</span>
             </div>
-              ),
+          ),
           dataIndex: 'slashAbsorption',
           key: 'slashAbsorption',
           width: 60,
@@ -478,13 +478,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     {
       title: '属性类别',
       children: [
-                    {
-              title: (
-                <div className="damage-type-container">
-                  <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
-                  <span>魔力</span>
-                </div>
-              ),
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={magicDamage} alt="魔力" width={18} height={18} preview={false} />
+              <span>魔力</span>
+            </div>
+          ),
           dataIndex: 'magicAbsorption',
           key: 'magicAbsorption',
           width: 60,
@@ -495,13 +495,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             </span>
           ),
         },
-                    {
-              title: (
-                <div className="damage-type-container">
-                  <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
-                  <span>火焰</span>
-                </div>
-              ),
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={fireDamage} alt="火焰" width={18} height={18} preview={false} />
+              <span>火焰</span>
+            </div>
+          ),
           dataIndex: 'fireAbsorption',
           key: 'fireAbsorption',
           width: 60,
@@ -512,13 +512,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             </span>
           ),
         },
-                    {
-              title: (
-                <div className="damage-type-container">
-                  <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
-                  <span>雷电</span>
-                </div>
-              ),
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={lightningDamage} alt="雷电" width={18} height={18} preview={false} />
+              <span>雷电</span>
+            </div>
+          ),
           dataIndex: 'lightningAbsorption',
           key: 'lightningAbsorption',
           width: 60,
@@ -529,13 +529,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             </span>
           ),
         },
-                    {
-              title: (
-                <div className="damage-type-container">
-                  <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
-                  <span>神圣</span>
-                </div>
-              ),
+        {
+          title: (
+            <div className="damage-type-container">
+              <Image src={holyDamage} alt="神圣" width={18} height={18} preview={false} />
+              <span>神圣</span>
+            </div>
+          ),
           dataIndex: 'holyAbsorption',
           key: 'holyAbsorption',
           width: 60,
@@ -574,9 +574,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
         // 找到相同图片的下一个boss的索引
         const currentIndex = filteredData.findIndex(item => item.name === record.name);
         const currentImage = bossImageMap[record.name];
-        
+
         if (!currentImage) return {};
-        
+
         // 计算相同图片的行数
         let rowSpan = 1;
         for (let i = currentIndex + 1; i < filteredData.length; i++) {
@@ -586,12 +586,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             break;
           }
         }
-        
+
         // 如果是相同图片组的第一行，设置rowSpan
         if (currentIndex === 0 || bossImageMap[filteredData[currentIndex - 1].name] !== currentImage) {
           return { rowSpan };
         }
-        
+
         // 否则隐藏单元格
         return { rowSpan: 0 };
       },
@@ -811,7 +811,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   // 处理罪人数据，转换为表格格式
   const processSinnerData = (): SinnerData[] => {
     const sinnerTableData: SinnerData[] = [];
-    
+
     Object.entries(sinnerList).forEach(([characterName, builds]) => {
       builds.forEach((build: { 左手: string | string[]; 右手: string | string[]; 消耗品: string }, index: number) => {
         sinnerTableData.push({
@@ -824,7 +824,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
         });
       });
     });
-    
+
     return sinnerTableData;
   };
 
@@ -839,10 +839,10 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       fixed: 'left',
       render: (text) => <strong>{text}</strong>,
       onCell: (record) => {
-        const currentIndex = processSinnerData().findIndex(item => 
+        const currentIndex = processSinnerData().findIndex(item =>
           item.characterName === record.characterName && item.buildIndex === record.buildIndex
         );
-        
+
         // 计算相同角色的行数
         let rowSpan = 1;
         const allData = processSinnerData();
@@ -853,12 +853,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             break;
           }
         }
-        
+
         // 如果是相同角色的第一行，设置rowSpan
         if (currentIndex === 0 || allData[currentIndex - 1]?.characterName !== record.characterName) {
           return { rowSpan };
         }
-        
+
         // 否则隐藏单元格
         return { rowSpan: 0 };
       },
@@ -917,13 +917,13 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       key: 'location',
       width: 90,
       align: 'center',
-        render: (text) => (
+      render: (text) => (
         <span className="location-tag">
           {text ? text.split('、').map((loc: string) => (
             <Tag
               key={loc}
               color={getLocationColor(loc)}
-              // style={{ marginInlineEnd: 1}}
+            // style={{ marginInlineEnd: 1}}
             >
               {loc}
             </Tag>
@@ -1183,12 +1183,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       key: 'location',
       width: 90,
       align: 'center',
-        render: (text) => (
+      render: (text) => (
         <span className="location-tag">
           {text ? (
             <Tag
               color={getLocationColor(text)}
-              style={{ marginInlineEnd: 2}}
+              style={{ marginInlineEnd: 2 }}
             >
               {text}
             </Tag>
@@ -1452,11 +1452,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   }
 
   const lipulaTradesData: LipulaTrade[] = [
-    { key: '1', desire: '我想要力气变的更大', effect: '改变角色属性加点为：', stats: { level: 15, hp: 47, fp: 6, stamina: 23, str: 73, dex: 9, intl: 3, fth: 3, arc: 3 } },
-    { key: '2', desire: '我想要灵巧变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 43, fp: 10, stamina: 23, str: 9, dex: 72, intl: 3, fth: 3, arc: 3 } },
-    { key: '3', desire: '我想要智力变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 55, fth: 24, arc: 3 } },
-    { key: '4', desire: '我想要信仰变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 24, fth: 55, arc: 3 } },
-    { key: '5', desire: '我想要感应变的更高', effect: '改变角色属性加点为：', stats: { level: 15, hp: 41, fp: 26, stamina: 26, str: 39, dex: 39, intl: 30, fth: 30, arc: 35 } },
+    { key: '1', desire: '我想要力气变的更大', effect: '改变角色属性加点', stats: { level: 15, hp: 47, fp: 6, stamina: 23, str: 73, dex: 9, intl: 3, fth: 3, arc: 3 } },
+    { key: '2', desire: '我想要灵巧变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 43, fp: 10, stamina: 23, str: 9, dex: 72, intl: 3, fth: 3, arc: 3 } },
+    { key: '3', desire: '我想要智力变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 55, fth: 24, arc: 3 } },
+    { key: '4', desire: '我想要信仰变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 33, fp: 28, stamina: 17, str: 9, dex: 9, intl: 24, fth: 55, arc: 3 } },
+    { key: '5', desire: '我想要感应变的更高', effect: '改变角色属性加点', stats: { level: 15, hp: 41, fp: 26, stamina: 26, str: 39, dex: 39, intl: 30, fth: 30, arc: 35 } },
     { key: '6', desire: '我想要能抵抗异常状态', effect: '提升全异常抗性，减少10%精力上限' },
     { key: '7', desire: '我想要死亡远离我', effect: '第一次收到致命攻击时免死并回满血，但是血量上限永久减少20%' },
     { key: '8', desire: '我想要厉害的武器', effect: '在维克的战矛、颠火圣印记、指纹石盾、黑刀、米凯拉骑士剑、黄金树弓中抽取一把武器' },
@@ -1487,7 +1487,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           <div>{text}</div>
           {record.stats && (
             <div style={{ marginTop: 4 }}>
-             角色15级时加点示例：血量 {record.stats.hp}｜专注  {record.stats.fp}｜耐力 {record.stats.stamina}｜力气 {record.stats.str}｜敏捷 {record.stats.dex}｜智力 {record.stats.intl}｜信仰 {record.stats.fth}｜感应 {record.stats.arc}
+              角色15级时加点示例：血量 {record.stats.hp}｜专注  {record.stats.fp}｜耐力 {record.stats.stamina}｜力气 {record.stats.str}｜敏捷 {record.stats.dex}｜智力 {record.stats.intl}｜信仰 {record.stats.fth}｜感应 {record.stats.arc}
             </div>
           )}
         </div>
@@ -1517,8 +1517,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               children: (
                 <div id="night-king-basic">
                   <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                    <Radio.Group 
-                      value={playerCount} 
+                    <Radio.Group
+                      value={playerCount}
                       onChange={(e) => setPlayerCount(e.target.value)}
                       size="middle"
                     >
@@ -1560,7 +1560,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                     <Input
                       placeholder="搜索Boss名称"
                       prefix={<SearchOutlined />}
-                      style={{ width: 200}}
+                      style={{ width: 200 }}
                       value={wildBossSearchKeyword}
                       onChange={(e) => setWildBossSearchKeyword(e.target.value)}
                     />
@@ -1571,7 +1571,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       value={selectedLocations}
                       onChange={setSelectedLocations}
                       tagRender={locationTagRender}
-                      style={{ minWidth: 200, maxWidth: 400}}
+                      style={{ minWidth: 200, maxWidth: 400 }}
                     />
                     <Button onClick={clearWildBossFilters}>清除筛选</Button>
                   </div>
@@ -1598,7 +1598,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                     <Input
                       placeholder="搜索人物名称"
                       prefix={<SearchOutlined />}
-                      style={{ width: 200}}
+                      style={{ width: 200 }}
                       value={characterSearchKeyword}
                       onChange={(e) => setCharacterSearchKeyword(e.target.value)}
                     />
@@ -1609,7 +1609,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       value={selectedCharacterLocations}
                       onChange={setSelectedCharacterLocations}
                       tagRender={locationTagRender}
-                      style={{ minWidth: 200, maxWidth: 400}}
+                      style={{ minWidth: 200, maxWidth: 400 }}
                     />
                     <Button onClick={clearCharacterFilters}>清除筛选</Button>
                   </div>
@@ -1647,7 +1647,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             },
             {
               key: 'lipula-trades',
-              label: '⚖️利普拉的交易选项',
+              label: '⚖️ 利普拉的交易(Boss战)',
               children: (
                 <div id="lipula-trades">
                   <Table
