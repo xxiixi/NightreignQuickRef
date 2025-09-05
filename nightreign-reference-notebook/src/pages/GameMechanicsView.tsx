@@ -12,45 +12,26 @@ interface GameMechanicsViewProps {
   functionName: string;
 }
 
-const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ currentStep, day }) => {
-  const getCircleSize = (step: number, dayNum: number) => {
-    if (dayNum === 1) {
-      // Day 1
-      switch (step) {
-        case 0: return 100;
-        case 1: return 60;
-        case 2: return 60;
-        case 3: return 20;
-        case 4: return 20;
-        case 5: return 20;
-        default: return 100;
-      }
-    } else {
-      // Day 2
-      switch (step) {
-        case 0: return 100;
-        case 1: return 60;
-        case 2: return 60;
-        case 3: return 20;
-        case 4: return 20;
-        case 5: return 20;
-        default: return 100;
-      }
+const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) => {
+  // 根据时间点计算圈的大小
+  const getCircleSize = (step: number) => {
+    switch (step) {
+      case 0: return 100;
+      case 1: return 60;
+      case 2: return 60;  // 第一次缩圈结束
+      case 3: return 20;  // 第二次缩圈开始
+      case 4: return 20;  // 第二次缩圈结束
+      case 5: return 20;
+      default: return 100;
     }
   };
 
-  const currentSize = getCircleSize(currentStep, day);
+  const currentSize = getCircleSize(currentStep);
 
-  // 判断是否在缩圈开始阶段（需要脉冲动画）
-  const isShrinkingStart = (step: number, dayNum: number) => {
-    if (dayNum === 1) {
-      return step === 1 || step === 3;
-    } else {
-      return step === 1 || step === 3;
-    }
+  const isShrinkingStart = (step: number) => {
+    return step === 1 || step === 3;
   };
 
-  // 判断是第几次缩圈
   const getShrinkPhase = (step: number) => {
     if (step === 1) return 'first';
     if (step === 3) return 'second';
@@ -66,7 +47,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
   };
 
   const isFirstShrinkCompleted = (step: number) => {
-    return step >= 2;
+    return step >= 2; 
   };
 
   const isSecondShrinkStart = (step: number) => {
@@ -77,24 +58,16 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
     return step === 4;
   };
 
-  const getPreviousSize = (step: number, dayNum: number) => {
-    if (dayNum === 1) {
-      switch (step) {
-        case 1: return 100;
-        case 3: return 60;
-        default: return currentSize;
-      }
-    } else {
-      switch (step) {
-        case 1: return 100;
-        case 3: return 60;
-        default: return currentSize;
-      }
+  const getPreviousSize = (step: number) => {
+    switch (step) {
+      case 1: return 100;
+      case 3: return 60;
+      default: return currentSize;
     }
   };
 
-  const shouldPulse = isShrinkingStart(currentStep, day);
-  const previousSize = getPreviousSize(currentStep, day);
+  const shouldPulse = isShrinkingStart(currentStep);
+  const previousSize = getPreviousSize(currentStep);
   const shrinkPhase = getShrinkPhase(currentStep);
   const isFirstShrink = isFirstShrinkPhase(currentStep);
   const isFirstShrinkEndPhase = isFirstShrinkEnd(currentStep);
@@ -139,8 +112,12 @@ const CircleShrinkEffect: React.FC<{ currentStep: number; day: number }> = ({ cu
 };
 
 const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) => {
+  // 隐士出招表数据
   const [magicMoves, setMagicMoves] = useState<MagicMove[]>([]);
+  // 时间轴状态
   const [day1TimelineStep, setDay1TimelineStep] = useState(0);
+
+  // 获取当前时间点的时间和描述
   const getCurrentTimeInfo = (step: number) => {
     const timelineItems = [
       { time: '0:00', description: 'Day 1/ Day 2 开始' },
@@ -163,6 +140,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
         await dataManager.waitForData();
         setMagicMoves(dataManager.getMagicMoveList());
       } catch (error) {
+        // no-op; GameMechanicsView 其他区域仍可渲染
         console.error('Failed to load magic moves:', error);
       }
     };
@@ -440,7 +418,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                             {/* 第一栏：缩圈效果图 */}
                             <div className="timeline-column">
                               <div className="timeline-column-content">
-                                <CircleShrinkEffect currentStep={day1TimelineStep} day={1} />
+                                <CircleShrinkEffect currentStep={day1TimelineStep} />
                                 <div style={{
                                   textAlign: 'center',
                                   marginTop: '12px',
@@ -472,7 +450,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       />
                                     </div>
                                     <div className="boss-progress-item">
-                                      <div className="progress-label">角色减伤率：</div>
+                                      <div className="progress-label">减伤率：</div>
                                       <Progress
                                         percent={day1TimelineStep <= 4 ? 47 : 0}
                                         strokeColor="#3f8600"
@@ -496,7 +474,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       />
                                     </div>
                                     <div className="boss-progress-item">
-                                      <div className="progress-label">角色减伤率：</div>
+                                      <div className="progress-label">减伤率：</div>
                                       <Progress
                                         percent={day1TimelineStep <= 1 ? 20 :
                                           day1TimelineStep <= 3 ? 0 : 0}
@@ -614,7 +592,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
     );
   }
 
-  // 其他功能
+  // 其他功能保持原有的简单显示
   return (
     <div className="mechanics-development-placeholder">
       <Title level={3} className="mechanics-development-title">{functionName}</Title>

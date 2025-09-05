@@ -1464,7 +1464,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     { key: '10', desire: '我想要圣杯瓶', effect: '圣杯瓶使用次数增加一次，但是减少血量上限' },
     { key: '11', desire: '我想要体验大器晚成', effect: '立即减少血量、专注值、精力上限30%，如果在boss战开始后两分钟不倒地，血量、专注值、精力恢复正常并增加上限20%' },
     { key: '12', desire: '我想要全力战斗', effect: '利普拉开始战斗后立即进入金身强化状态，场上的玩家和boss都获得持续一分钟的buff' },
-    { key: '13', desire: '我想要恶魔的力量', effect: '活得一个会随机攻击敌人的恶魔眼球，但是眼球每次攻击敌人会为角色累计发狂值' },
+    { key: '13', desire: '我想要恶魔的力量', effect: '获得一个会随机攻击敌人的恶魔眼球，但是眼球每次攻击敌人会为角色累计发狂值' },
   ];
 
   const lipulaColumns: ColumnsType<LipulaTrade> = [
