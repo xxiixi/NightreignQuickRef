@@ -3,11 +3,11 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: (process.env.VERCEL === '1' || process.env.VERCEL === 'true') ? '/' : '/NightreignQuickRef/',
   plugins: [
     react()
   ],
   // GitHub Pages部署路径
-  base: '/NightreignQuickRef/',
   define: {
     // 在构建时注入部署时间
     __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
