@@ -36,14 +36,14 @@ const Footer: React.FC = React.memo(() => {
             rel="noopener noreferrer"
             className="footer-link"
           > */}
-            Cecilia
+          Cecilia
           {/* </a> */}
           {' '}｜{' '}
           <GithubOutlined style={{ marginRight: '4px' }} />
           Report an issue on{' '}
-          <a 
-            href="https://github.com/xxiixi/NightreignQuickRef" 
-            target="_blank" 
+          <a
+            href="https://github.com/xxiixi/NightreignQuickRef/issues"
+            target="_blank"
             rel="noopener noreferrer"
             className="footer-link"
           >

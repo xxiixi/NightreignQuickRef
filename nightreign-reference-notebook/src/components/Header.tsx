@@ -1,7 +1,7 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, SmileOutlined, ReadOutlined, RobotOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, SmileOutlined, ReadOutlined, RobotOutlined, StarOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -22,9 +22,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
     <>
       <div className="top-bar">
         <div className="top-bar-content">
-            <div className="top-bar-right">
-             <Space size="middle">
-               <Tooltip title={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"} placement="bottom">
+          <div className="top-bar-right">
+            <Space size="middle">
+              <Tooltip title={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"} placement="bottom">
                 <Button
                   type="text"
                   icon={isDarkMode ? <MoonOutlined /> : <SunOutlined />}
@@ -41,9 +41,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                       </div>
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://www.bilibili.com/video/BV1GfMSzvE3V" 
-                            target="_blank" 
+                          <a
+                            href="https://www.bilibili.com/video/BV1GfMSzvE3V"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -51,9 +51,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://www.bilibili.com/video/BV1LvuVzuEqo" 
-                            target="_blank" 
+                          <a
+                            href="https://www.bilibili.com/video/BV1LvuVzuEqo"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -61,9 +61,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a" 
-                            target="_blank" 
+                          <a
+                            href="https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -71,9 +71,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://mobalytics.gg/elden-ring-nightreign/guides/day-length" 
-                            target="_blank" 
+                          <a
+                            href="https://mobalytics.gg/elden-ring-nightreign/guides/day-length"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -81,9 +81,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://game8.co/games/Elden-Ring-Nightreign/archives/522643" 
-                            target="_blank" 
+                          <a
+                            href="https://game8.co/games/Elden-Ring-Nightreign/archives/522643"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -91,9 +91,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://www.bilibili.com/video/BV1M18jzQE9X" 
-                            target="_blank" 
+                          <a
+                            href="https://www.bilibili.com/video/BV1M18jzQE9X"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -101,9 +101,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://www.bilibili.com/video/BV1wzvNzREYQ/?spm_id_from=333.1387.upload.video_card.click&vd_source=37640654dbdd4ab80b471a16ac6da3c0" 
-                            target="_blank" 
+                          <a
+                            href="https://www.bilibili.com/video/BV1wzvNzREYQ/?spm_id_from=333.1387.upload.video_card.click&vd_source=37640654dbdd4ab80b471a16ac6da3c0"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -111,9 +111,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://www.bilibili.com/opus/1100871642065666054" 
-                            target="_blank" 
+                          <a
+                            href="https://www.bilibili.com/opus/1100871642065666054"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -121,9 +121,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://www.bilibili.com/video/BV1p5ThzfEy7" 
-                            target="_blank" 
+                          <a
+                            href="https://www.bilibili.com/video/BV1p5ThzfEy7"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -131,9 +131,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://www.bilibili.com/video/BV1TnNLzXESx" 
-                            target="_blank" 
+                          <a
+                            href="https://www.bilibili.com/video/BV1TnNLzXESx"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -141,9 +141,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a 
-                            href="https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki" 
-                            target="_blank" 
+                          <a
+                            href="https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="footer-link"
                           >
@@ -176,12 +176,12 @@ const Header: React.FC<HeaderProps> = React.memo(({
                       {/* <div style={{ fontSize: '12px' }}>
                         本页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
                       </div> */}
-                      <div style={{ 
-                        marginTop: '4px', 
-                        borderTop: '1px solid rgba(198, 198, 198, 0.2)', 
-                        paddingTop: '4px', 
-                        fontSize: '10px', 
-                        color: '#999' 
+                      <div style={{
+                        marginTop: '4px',
+                        borderTop: '1px solid rgba(198, 198, 198, 0.2)',
+                        paddingTop: '4px',
+                        fontSize: '10px',
+                        color: '#999'
                       }}>
                         统计服务: Vercount
                       </div>
@@ -198,35 +198,64 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 </Popover>
               </Tooltip>
               <Tooltip title="网站声明" placement="bottom" className="theme-toggle-btn">
-                 <Popover
-                   content={
-                     <div style={{ padding: '8px', maxWidth: '250px',width: '250px' }}>
-                       <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
-                         网站声明 📝
-                       </div>
-                                               <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
-                          <div style={{ marginBottom: '6px' }}>
-                            ⚠️ 本网站为个人制作，非官方授权网站
-                          </div>
-                          <div style={{ marginBottom: '6px' }}>
-                          ⚠️ 数据由个人收集整理，可能存在错误或遗漏; 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接
-                          </div>
-                           <div style={{ marginBottom: '6px' }}>
-                           ⚠️ 使用本网站数据造成的任何损失，网站制作者不承担责任; 未经授权禁止复制、修改或商业使用本网站源码;
-                          </div>                          
+                <Popover
+                  content={
+                    <div style={{ padding: '8px', maxWidth: '250px', width: '250px' }}>
+                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                        网站声明 📝
+                      </div>
+                      <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                        <div style={{ marginBottom: '6px' }}>
+                          ⚠️ 本网站为个人制作，非官方授权网站
                         </div>
-                     </div>
-                   }
-                   placement="bottom"
-                   trigger="click"
-                 >
+                        <div style={{ marginBottom: '6px' }}>
+                          ⚠️ 数据由个人收集整理，可能存在错误或遗漏; 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接
+                        </div>
+                        <div style={{ marginBottom: '6px' }}>
+                          ⚠️ 使用本网站数据造成的任何损失，网站制作者不承担责任; 未经授权禁止复制、修改或商业使用本网站源码;
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
+                >
                   <Button
-                      type="text"
-                      icon={<RobotOutlined />}
-                      className="visits-counter-btn"
-                    />
-                 </Popover>
-               </Tooltip>
+                    type="text"
+                    icon={<RobotOutlined />}
+                    className="visits-counter-btn"
+                  />
+                </Popover>
+              </Tooltip>
+              <Tooltip title="查看原项目" placement="bottom" className="theme-toggle-btn">
+                <Popover
+                  content={
+                    <div style={{ padding: '8px', maxWidth: '200px', width: '180px' }}>
+                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                        🙏 求个Star ⭐️ 感谢支持 🙏
+                      </div>
+                      <div>
+                        <a
+                          href="https://github.com/xxiixi/NightreignQuickRef"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="footer-link"
+                        >
+                          点击跳转GitHub仓库
+                        </a>
+                      </div>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
+                >
+                  <Button
+                    type="text"
+                    icon={<StarOutlined />}
+                    className="visits-counter-btn"
+                  />
+                </Popover>
+              </Tooltip>
               {/* <Tooltip title="切换语言功能尚未开发" placement="bottom">
                 <Button
                   type="text"
@@ -235,10 +264,10 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   className="language-toggle-btn"
                 />
               </Tooltip> */}
-          </Space>
+            </Space>
+          </div>
         </div>
       </div>
-    </div>
 
       <div className="header">
         <Title level={1} className="main-title">
