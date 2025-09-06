@@ -1,7 +1,7 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, SmileOutlined, ReadOutlined, RobotOutlined, StarOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -177,9 +177,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         本页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
                       </div> */}
                       <div style={{
-                        marginTop: '4px',
+                        marginTop: '8px',
                         borderTop: '1px solid rgba(198, 198, 198, 0.2)',
-                        paddingTop: '4px',
+                        paddingTop: '8px',
                         fontSize: '10px',
                         color: '#999'
                       }}>
@@ -192,7 +192,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 >
                   <Button
                     type="text"
-                    icon={<SmileOutlined />}
+                    icon={<FireOutlined />}
                     className="visits-counter-btn"
                   />
                 </Popover>
@@ -209,10 +209,10 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           ⚠️ 本网站为个人制作，非官方授权网站
                         </div>
                         <div style={{ marginBottom: '6px' }}>
-                          ⚠️ 数据由个人收集整理，可能存在错误或遗漏; 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接
+                          ‼️ 数据由个人收集整理，可能存在错误或遗漏; 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接
                         </div>
                         <div style={{ marginBottom: '6px' }}>
-                          ⚠️ 使用本网站数据造成的任何损失，网站制作者不承担责任; 未经授权禁止复制、修改或商业使用本网站源码;
+                          ⛔️ 使用本网站数据造成的任何损失，网站制作者不承担责任; 
                         </div>
                       </div>
                     </div>
