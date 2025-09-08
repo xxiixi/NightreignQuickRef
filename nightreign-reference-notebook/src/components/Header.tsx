@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
   onToggleTheme,
   // onToggleLanguage
 }) => {
-  const { sitePv, siteUv } = useVercount();
+  const { sitePv, siteUv, pagePv } = useVercount();
 
   return (
     <>
@@ -32,6 +32,56 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   className="theme-toggle-btn"
                 />
               </Tooltip>
+
+              <Tooltip title={"点击跳转【地图种子筛选器】"} placement="bottom">
+                <Button
+                  type="text"
+                  icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-map" viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d="M15.817.113A.5.5 0 0 1 16 .5v14a.5.5 0 0 1-.402.49l-5 1a.5.5 0 0 1-.196 0L5.5 15.01l-4.902.98A.5.5 0 0 1 0 15.5v-14a.5.5 0 0 1 .402-.49l5-1a.5.5 0 0 1 .196 0L10.5.99l4.902-.98a.5.5 0 0 1 .415.103M10 1.91l-4-.8v12.98l4 .8zm1 12.98 4-.8V1.11l-4 .8zm-6-.8V1.11l-4 .8v12.98z" />
+                  </svg>}
+                  onClick={() => window.open('https://xxiixi.github.io/NightreignMapFilter/', '_blank')}
+                  className="theme-toggle-btn"
+                />
+              </Tooltip>
+
+              <Tooltip title="查看访问量" placement="bottom" className="theme-toggle-btn">
+                <Popover
+                  content={
+                    <div style={{ padding: '5px' }}>
+                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                        访问量统计 🔥
+                      </div>
+                      <div style={{ fontSize: '12px' }}>
+                        本站总访客数 <span style={{ color: '#1890ff' }}>{siteUv}</span> 人
+                      </div>
+                      <div style={{ fontSize: '12px' }}>
+                        本站总访问量 <span style={{ color: '#1890ff' }}>{sitePv}</span> 次
+                      </div>
+                      <div style={{ fontSize: '12px' }}>
+                        数据查询页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
+                      </div>
+                      <div style={{
+                        marginTop: '8px',
+                        borderTop: '1px solid rgba(198, 198, 198, 0.2)',
+                        paddingTop: '8px',
+                        fontSize: '10px',
+                        color: '#999'
+                      }}>
+                        统计服务: Vercount
+                      </div>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
+                >
+                  <Button
+                    type="text"
+                    icon={<FireOutlined />}
+                    className="visits-counter-btn"
+                  />
+                </Popover>
+              </Tooltip>
+
               <Tooltip title="查看数据来源" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
@@ -163,40 +213,6 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   />
                 </Popover>
               </Tooltip>
-              <Tooltip title="查看访问量" placement="bottom" className="theme-toggle-btn">
-                <Popover
-                  content={
-                    <div style={{ padding: '5px' }}>
-                      <div style={{ fontSize: '12px' }}>
-                        本站总访客数 <span style={{ color: '#1890ff' }}>{siteUv}</span> 人
-                      </div>
-                      <div style={{ fontSize: '12px' }}>
-                        本站总访问量 <span style={{ color: '#1890ff' }}>{sitePv}</span> 次
-                      </div>
-                      {/* <div style={{ fontSize: '12px' }}>
-                        本页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
-                      </div> */}
-                      <div style={{
-                        marginTop: '8px',
-                        borderTop: '1px solid rgba(198, 198, 198, 0.2)',
-                        paddingTop: '8px',
-                        fontSize: '10px',
-                        color: '#999'
-                      }}>
-                        统计服务: Vercount
-                      </div>
-                    </div>
-                  }
-                  placement="bottom"
-                  trigger="click"
-                >
-                  <Button
-                    type="text"
-                    icon={<FireOutlined />}
-                    className="visits-counter-btn"
-                  />
-                </Popover>
-              </Tooltip>
               <Tooltip title="网站声明" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
@@ -212,7 +228,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           ‼️ 数据由个人收集整理，可能存在错误或遗漏; 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接
                         </div>
                         <div style={{ marginBottom: '6px' }}>
-                          ⛔️ 使用本网站数据造成的任何损失，网站制作者不承担责任; 
+                          ⛔️ 使用本网站数据造成的任何损失，网站制作者不承担责任;
                         </div>
                       </div>
                     </div>
@@ -232,7 +248,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   content={
                     <div style={{ padding: '8px', maxWidth: '200px', width: '180px' }}>
                       <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
-                        🙏 求个Star ⭐️ 感谢支持 🙏
+                        本项目GitHub仓库
                       </div>
                       <div>
                         <a
@@ -241,8 +257,17 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           rel="noopener noreferrer"
                           className="footer-link"
                         >
-                          点击跳转GitHub仓库
+                          点击跳转
                         </a>
+                      </div>
+                      <div style={{
+                        marginTop: '8px',
+                        borderTop: '1px solid rgba(198, 198, 198, 0.2)',
+                        paddingTop: '8px',
+                        fontSize: '10px',
+                        color: '#999'
+                      }}>
+                        🙏 求个Star ⭐️ 感谢支持 🙏
                       </div>
                     </div>
                   }
