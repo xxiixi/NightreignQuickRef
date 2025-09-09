@@ -218,17 +218,17 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   content={
                     <div style={{ padding: '8px', maxWidth: '250px', width: '250px' }}>
                       <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
-                        网站声明 📝
+                        网站声明 📜
                       </div>
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '6px' }}>
-                          ⚠️ 本网站为个人制作，非官方授权网站
+                          📕 本网站为个人制作，非官方授权网站;
                         </div>
                         <div style={{ marginBottom: '6px' }}>
-                          ‼️ 数据由个人收集整理，可能存在错误或遗漏; 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接
+                          📘 数据由个人收集整理，可能存在错误或遗漏，请以数据来源的原数据为准;
                         </div>
                         <div style={{ marginBottom: '6px' }}>
-                          ⛔️ 使用本网站数据造成的任何损失，网站制作者不承担责任;
+                          📗 点击左侧 <ReadOutlined /> 按钮可查看具体数据来源链接;
                         </div>
                       </div>
                     </div>

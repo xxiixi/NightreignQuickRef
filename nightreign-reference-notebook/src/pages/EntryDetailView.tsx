@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Input, Select, message, Tabs, Tag, Spin, Button} from 'antd';
+import { Table, Input, Select, message, Tabs, Tag, Spin, Button } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
@@ -101,26 +101,26 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   loading = false
 }) => {
   const totalPages = Math.ceil(totalItems / pageSize);
-  
+
   if (loading || totalItems === 0) {
     return null;
   }
 
   return (
-    <div className="custom-pagination-row" style={{ 
-      display: 'flex', 
-      justifyContent: 'space-between', 
-      alignItems: 'center', 
+    <div className="custom-pagination-row" style={{
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       marginTop: '15px',
       padding: '0 16px'
     }}>
       {/* 左侧：每页显示选择器 */}
-      <div className="page-size-controls" style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
+      <div className="page-size-controls" style={{
+        display: 'flex',
+        alignItems: 'center',
         gap: '8px'
       }}>
-        <span style={{ 
+        <span style={{
           color: 'var(--theme-text-secondary)',
           fontSize: '14px'
         }}>
@@ -143,37 +143,37 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
           size="small"
           style={{ width: '100px' }}
         />
-        <span style={{ 
+        <span style={{
           color: 'var(--theme-text-secondary)',
           fontSize: '14px'
         }}>
           共 {totalItems} 条记录
         </span>
       </div>
-      
+
       {/* 右侧：分页按钮 */}
-      <div className="page-nav-controls" style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
+      <div className="page-nav-controls" style={{
+        display: 'flex',
+        alignItems: 'center',
         gap: '10px'
       }}>
-        <Button 
+        <Button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
           size="middle"
         >
           上一页
         </Button>
-        
-        <span style={{ 
+
+        <span style={{
           margin: '0 15px',
           color: 'var(--theme-text-secondary)',
           fontSize: '14px'
         }}>
           第 {currentPage} 页，共 {totalPages} 页
         </span>
-        
-        <Button 
+
+        <Button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
           size="middle"
@@ -274,9 +274,9 @@ const tagRender = (props: { label: React.ReactNode; value: string; closable?: bo
     event.preventDefault();
     event.stopPropagation();
   };
-  
+
   const color = typeColorMap[value] || 'default';
-  
+
   return (
     <Tag
       color={color}
@@ -297,7 +297,7 @@ const getTypeColor = (type: string | null | undefined): string => {
 
 const getSuperposabilityColor = (superposability: string | null | undefined): string => {
   if (!superposability) return 'default';
-  
+
   switch (superposability) {
     case '可叠加':
       return 'green';
@@ -364,9 +364,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     { rune: '1000000', damageIncrease: 91.2 },
     { rune: '1100000', damageIncrease: 92.42 },
     { rune: '1500000', damageIncrease: 97.26 },
-];
+  ];
 
-    // 折线图配置
+  // 折线图配置
   const lineConfig = {
     data: isLinearMode ? curseData.map(item => ({ ...item, rune: parseInt(item.rune) })) : curseData,
     xField: 'rune',
@@ -460,31 +460,31 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         setChartKey(prev => prev + 1);
       }
     };
-    
+
     // 初始检查
     checkTheme();
-    
+
     // 监听 localStorage 变化
     const handleStorageChange = () => {
       // 延迟一点时间确保 localStorage 已更新
       setTimeout(checkTheme, 50);
     };
-    
+
     // 监听系统主题变化
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     const handleMediaChange = () => {
       checkTheme();
     };
-    
+
     // 监听自定义主题变化事件
     const handleThemeChange = () => {
       setTimeout(checkTheme, 50);
     };
-    
+
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('themeChange', handleThemeChange);
     mediaQuery.addEventListener('change', handleMediaChange);
-    
+
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('themeChange', handleThemeChange);
@@ -523,7 +523,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     const timer = setTimeout(() => {
       window.dispatchEvent(new Event('resize'));
     }, 100);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -534,7 +534,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         setChartKey(prev => prev + 1);
         window.dispatchEvent(new Event('resize'));
       }, 200);
-      
+
       return () => clearTimeout(timer);
     }
   }, [activeEntryTab]);
@@ -587,7 +587,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     setFilteredInfo({});
     setSortedInfo({});
     setCurrentPage(1);
-    setPageSize(20); 
+    setPageSize(20);
     message.success('已清除所有筛选和排序');
   };
 
@@ -613,25 +613,25 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   // 搜索过滤函数
   const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[], superposabilityFilters?: string[]) => {
     let filtered = data;
-    
+
     // 类型筛选
     if (types && types.length > 0) {
       filtered = filtered.filter(item => types.includes(item.entry_type || ''));
     }
-    
+
     // 局内词条类型筛选
     if (inGameTypes && inGameTypes.length > 0) {
       filtered = filtered.filter(item => inGameTypes.includes(item.entry_type || ''));
     }
-    
+
     // 角色筛选
     if (character && character.trim()) {
-      filtered = filtered.filter(item => 
-        item.entry_name?.includes(character) || 
+      filtered = filtered.filter(item =>
+        item.entry_name?.includes(character) ||
         item.explanation?.includes(character)
       );
     }
-    
+
     // 叠加性筛选
     if (superposabilityFilters && superposabilityFilters.length > 0) {
       console.log('Applying superposability filter:', superposabilityFilters);
@@ -646,12 +646,12 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       });
       console.log(`Superposability filter: ${beforeCount} -> ${filtered.length} items`);
     }
-    
+
     // 关键词搜索
     if (!searchValue.trim()) return filtered;
-    
+
     const searchTerms = searchValue.toLowerCase().split(/\s+/).filter(term => term.length > 0);
-    
+
     return filtered.filter(item => {
       // 搜索字段
       const searchableFields = [
@@ -662,9 +662,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         item.talisman || '',
         item.entry_id || ''
       ].map(field => field.toLowerCase());
-      
+
       // 检查所有搜索词是否都在至少一个字段中出现
-      return searchTerms.every(term => 
+      return searchTerms.every(term =>
         searchableFields.some(field => field.includes(term))
       );
     });
@@ -673,17 +673,17 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   // 道具效果搜索过滤函数
   const filterItemEffectData = (data: ItemEffect[], searchValue: string, types?: string[]) => {
     let filtered = data;
-    
+
     // 分类筛选
     if (types && types.length > 0) {
       filtered = filtered.filter(item => types.includes(item.type));
     }
-    
+
     // 关键词搜索
     if (!searchValue.trim()) return filtered;
-    
+
     const searchTerms = searchValue.toLowerCase().split(/\s+/).filter(term => term.length > 0);
-    
+
     return filtered.filter(item => {
       const searchableFields = [
         item.name || '',
@@ -691,8 +691,8 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         item.type || '',
         item.singleGridQty?.toString() || ''
       ].map(field => field.toLowerCase());
-      
-      return searchTerms.every(term => 
+
+      return searchTerms.every(term =>
         searchableFields.some(field => field.includes(term))
       );
     });
@@ -701,7 +701,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   // 将强化类别数据转换为支持rowSpan的格式
   const transformEnhancementData = (data: EnhancementCategory[]): EnhancedEnhancementCategory[] => {
     const transformedData: EnhancedEnhancementCategory[] = [];
-    
+
     data.forEach(item => {
       Object.entries(item.applicable_scope).forEach(([skillType, skills]) => {
         transformedData.push({
@@ -711,7 +711,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         });
       });
     });
-    
+
     return transformedData;
   };
 
@@ -724,7 +724,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -791,7 +791,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -839,7 +839,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -869,7 +869,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '45%',
       render: (text) => {
         if (!text) return '-';
-        
+
         return (
           <div style={{
             whiteSpace: 'pre-wrap',
@@ -926,7 +926,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       width: '8%',
       align: 'center',
       onCell: () => ({
-        style: {fontSize: '11px', color: 'var(--theme-text-secondary)' }
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
       }),
       sorter: (a, b) => {
         const idA = a.entry_id || '';
@@ -1024,7 +1024,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const createEnhancementColumns = (paginatedData: EnhancedEnhancementCategory[]): TableColumnsType<EnhancedEnhancementCategory> => {
     // 计算rowSpan信息
     const rowSpanInfo = new Map<string, { firstIndex: number; count: number }>();
-    
+
     paginatedData.forEach((item, index) => {
       if (!rowSpanInfo.has(item.category)) {
         const categoryRows = paginatedData.filter(row => row.category === item.category);
@@ -1058,7 +1058,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         align: 'center',
         render: (_: unknown, record: EnhancedEnhancementCategory) => {
           if (!record.skillType) return '';
-          
+
           const getSkillTypeColor = (skillType: string): string => {
             switch (skillType) {
               case '祷告':
@@ -1073,11 +1073,13 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 return 'blue';
               case '道具':
                 return 'orange';
+              case '绝招':
+                return 'magenta';
               default:
                 return 'default';
             }
           };
-          
+
           return (
             <Tag color={getSkillTypeColor(record.skillType)}>
               {record.skillType}
@@ -1125,7 +1127,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
     let tableData: EntryData[] = [];
     let columns: TableColumnsType<EntryData>;
-    
+
     switch (tabKey) {
       case '局外词条':
         tableData = data.outsiderEntries;
@@ -1157,7 +1159,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     const startIndex = (currentPage - 1) * pageSize;
     const endIndex = startIndex + pageSize;
     const paginatedData = tableData.slice(startIndex, endIndex);
-    
+
     // 表格样式
     return (
       <div>
@@ -1171,7 +1173,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           bordered
           loading={data.loading}
         />
-        
+
         {/* 自定义分页导航 */}
         {!data.loading && tableData.length > 0 && (
           <CustomPagination
@@ -1183,23 +1185,23 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
             loading={data.loading}
           />
         )}
-        
+
         {/* 特殊事件及地形效果 tab 的折线图 */}
         {tabKey === '特殊事件及地形效果' && !data.loading && (
-          <div style={{ 
+          <div style={{
             marginTop: '30px',
             padding: '20px',
             backgroundColor: 'var(--theme-bg-primary)',
             borderRadius: '8px',
             border: '1px solid var(--theme-border)'
           }}>
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'space-between', 
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
               alignItems: 'center',
               marginBottom: '20px',
             }}>
-              <h3 style={{ 
+              <h3 style={{
                 color: 'var(--theme-text-primary)',
                 fontSize: '16px',
                 fontWeight: 'bold',
@@ -1208,13 +1210,13 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 🪬 恶魔的添翼:卢恩-增伤关系图
               </h3>
               <Button.Group size="small">
-                <Button 
+                <Button
                   type={isLinearMode ? 'default' : 'primary'}
                   onClick={() => setIsLinearMode(false)}
                 >
                   非线性模式
                 </Button>
-                <Button 
+                <Button
                   type={isLinearMode ? 'primary' : 'default'}
                   onClick={() => setIsLinearMode(true)}
                 >
@@ -1222,7 +1224,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 </Button>
               </Button.Group>
             </div>
-            <div 
+            <div
               id="line-chart-container"
               style={{ height: '400px' }}
             >
@@ -1253,7 +1255,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           bordered
           loading={data.loading}
         />
-        
+
         {/* 自定义分页导航 */}
         {!data.loading && transformedData.length > 0 && (
           <CustomPagination
@@ -1272,7 +1274,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   // 渲染道具效果表格
   const renderItemEffectTable = () => {
     let tableData = data.itemEffects;
-    
+
     // 为道具效果添加搜索过滤
     if (searchKeyword.trim()) {
       tableData = filterItemEffectData(tableData, searchKeyword, selectedItemEffectTypes);
@@ -1307,7 +1309,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           loading={data.loading}
           footer={itemEffectFooter}
         />
-        
+
         {/* 自定义分页导航 */}
         {!data.loading && tableData.length > 0 && (
           <CustomPagination
@@ -1427,7 +1429,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 清除所有
               </Button>
             </div>
-            
+
 
           </div>
         </div>
@@ -1470,7 +1472,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 清除所有
               </Button>
             </div>
-            
+
 
           </div>
         </div>
@@ -1480,88 +1482,88 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
   return (
     <div className="content-wrapper">
-        <Tabs
-          type="card"
-          style={{ 
-            marginTop: '20px',
-          }}
-          activeKey={activeEntryTab}
-          onChange={(key) => {
-            setActiveEntryTab(key);
-            setCurrentPage(1);
-            // 清空搜索相关状态
-            setSearchKeyword('');
-            setSelectedTypes([]);
-            setSelectedInGameTypes([]);
-            setSelectedCharacter('');
-            setSelectedItemEffectTypes([]);
-            setFilteredInfo({});
-            setSortedInfo({});
-          }}
-          items={[
-            {
-              key: '局外词条',
-              label: '🌕 局外词条',
-              children: (
-                <div id="outsider-entries">
-                  {renderSearchAndFilter('局外词条')}
-                  {renderTableContent('局外词条')}
-                </div>
-              ),
-            },
-            {
-              key: '局内词条',
-              label: '🌖 局内词条',
-              children: (
-                <div id="in-game-entries">
-                  {renderSearchAndFilter('局内词条')}
-                  {renderTableContent('局内词条')}
-                </div>
-              ),
-            },
-            {
-              key: '护符词条',
-              label: '🌗 护符词条',
-              children: (
-                <div id="talisman-entries">
-                  {renderSearchAndFilter('护符词条')}
-                  {renderTableContent('护符词条')}
-                </div>
-              ),
-            },
-            {
-              key: '强化类别词条适用范围',
-              label: '🌘 强化类别词条适用范围',
-              children: (
-                <div id="enhancement-categories">
-                  {renderSearchAndFilter('强化类别词条适用范围')}
-                  {renderTableContent('强化类别词条适用范围')}
-                </div>
-              ),
-            },
-            {
-              key: '特殊事件及地形效果',
-              label: '🌑 特殊事件及地形效果',
-              children: (
-                <div id="special-events">
-                  {renderSearchAndFilter('特殊事件及地形效果')}
-                  {renderTableContent('特殊事件及地形效果')}
-                </div>
-              ),
-            },
-            {
-              key: '道具效果',
-              label: '🌒 道具/采集效果',
-              children: (
-                <div id="item-effects">
-                  {renderSearchAndFilter('道具效果')}
-                  {renderTableContent('道具效果')}
-                </div>
-              ),
-            },
-          ]}
-          className="custom-tabs"
-        />
+      <Tabs
+        type="card"
+        style={{
+          marginTop: '20px',
+        }}
+        activeKey={activeEntryTab}
+        onChange={(key) => {
+          setActiveEntryTab(key);
+          setCurrentPage(1);
+          // 清空搜索相关状态
+          setSearchKeyword('');
+          setSelectedTypes([]);
+          setSelectedInGameTypes([]);
+          setSelectedCharacter('');
+          setSelectedItemEffectTypes([]);
+          setFilteredInfo({});
+          setSortedInfo({});
+        }}
+        items={[
+          {
+            key: '局外词条',
+            label: '🌕 局外词条',
+            children: (
+              <div id="outsider-entries">
+                {renderSearchAndFilter('局外词条')}
+                {renderTableContent('局外词条')}
+              </div>
+            ),
+          },
+          {
+            key: '局内词条',
+            label: '🌖 局内词条',
+            children: (
+              <div id="in-game-entries">
+                {renderSearchAndFilter('局内词条')}
+                {renderTableContent('局内词条')}
+              </div>
+            ),
+          },
+          {
+            key: '护符词条',
+            label: '🌗 护符词条',
+            children: (
+              <div id="talisman-entries">
+                {renderSearchAndFilter('护符词条')}
+                {renderTableContent('护符词条')}
+              </div>
+            ),
+          },
+          {
+            key: '强化类别词条适用范围',
+            label: '🌘 强化类别词条适用范围',
+            children: (
+              <div id="enhancement-categories">
+                {renderSearchAndFilter('强化类别词条适用范围')}
+                {renderTableContent('强化类别词条适用范围')}
+              </div>
+            ),
+          },
+          {
+            key: '特殊事件及地形效果',
+            label: '🌑 特殊事件及地形效果',
+            children: (
+              <div id="special-events">
+                {renderSearchAndFilter('特殊事件及地形效果')}
+                {renderTableContent('特殊事件及地形效果')}
+              </div>
+            ),
+          },
+          {
+            key: '道具效果',
+            label: '🌒 道具/采集效果',
+            children: (
+              <div id="item-effects">
+                {renderSearchAndFilter('道具效果')}
+                {renderTableContent('道具效果')}
+              </div>
+            ),
+          },
+        ]}
+        className="custom-tabs"
+      />
     </div>
   );
 };
