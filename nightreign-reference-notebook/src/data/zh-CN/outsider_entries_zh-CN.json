@@ -626,7 +626,7 @@
         "entry_id":"7032700",
         "entry_name":"【女爵】在绝招发动期间，打倒敌人时能提升攻击力",
         "entry_type":"仅限特定角色",
-        "explanation":"在12.5秒内，如果击杀敌人，会触发30秒增益状态，\n造成的伤害+15%",
+        "explanation":"在隐身的12.5秒内，击杀敌人会叠加层数，每层增伤15%，持续30s；每层独立计时，上限30层（如层数为3时增伤计算：1.15*1.15*1.15 ≈ 1.52，增伤52%）",
         "superposability":"不可叠加"
     },
     {
@@ -711,14 +711,14 @@
         "entry_name":"通过肢体动作“盘腿坐”，能累积发狂量表",
         "entry_type":"行动",
         "explanation":"每2秒+10点发狂值，\n触发发狂异常时，扣除最大生命值10%+100，\n固定扣除30点专注值，造成2.4秒特殊发狂硬直",
-        "superposability":"不可叠加"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7035500",
         "entry_name":"引发异常状态发狂后，能持续恢复专注值",
         "entry_type":"恢复",
         "explanation":"引发发狂异常后，25秒内，每0.5秒回复1点专注值",
-        "superposability":"不可叠加"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7035700",
@@ -732,7 +732,7 @@
         "entry_name":"附加属性攻击力时，能提升属性攻击力",
         "entry_type":"攻击力",
         "explanation":"魔力\/火\/雷\/圣属性伤害+10%",
-        "superposability":"不可叠加"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7035900",
