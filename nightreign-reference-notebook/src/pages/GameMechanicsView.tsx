@@ -47,7 +47,7 @@ const CircleShrinkEffect: React.FC<{ currentStep: number }> = ({ currentStep }) 
   };
 
   const isFirstShrinkCompleted = (step: number) => {
-    return step >= 2; 
+    return step >= 2;
   };
 
   const isSecondShrinkStart = (step: number) => {
@@ -439,7 +439,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                   <div className="boss-progress-container">
                                     <div className="boss-section-title">
                                       <LockOutlined />
-                                      Day 1: 封印监牢Boss血量/减伤率
+                                      Day 1: 封印监牢Boss血量/角色减伤率
                                     </div>
                                     <div className="boss-progress-item">
                                       <div className="progress-label">Boss血量：</div>
@@ -450,7 +450,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       />
                                     </div>
                                     <div className="boss-progress-item">
-                                      <div className="progress-label">减伤率：</div>
+                                      <div className="progress-label">角色减伤率：</div>
                                       <Progress
                                         percent={day1TimelineStep <= 4 ? 47 : 0}
                                         strokeColor="#3f8600"
@@ -462,7 +462,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                   <div className="boss-progress-container">
                                     <div className="boss-section-title">
                                       <LockOutlined />
-                                      Day 2: 封印监牢Boss血量/减伤率
+                                      Day 2: 封印监牢Boss血量/角色减伤率
                                     </div>
                                     <div className="boss-progress-item">
                                       <div className="progress-label">Boss血量：</div>
@@ -474,7 +474,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                       />
                                     </div>
                                     <div className="boss-progress-item">
-                                      <div className="progress-label">减伤率：</div>
+                                      <div className="progress-label">角色减伤率：</div>
                                       <Progress
                                         percent={day1TimelineStep <= 1 ? 20 :
                                           day1TimelineStep <= 3 ? 0 : 0}
