@@ -299,9 +299,12 @@ const Header: React.FC<HeaderProps> = React.memo(({
           黑夜君临速查手册
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
-          <Text type="secondary" className="subtitle-text">
-            个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
-          </Text>
+        <Text type="secondary" className="subtitle-text version-info">
+          黑夜君临版本: v1.02（数据更新至2025.9.9）
+        </Text>
+        <Text type="secondary" className="subtitle-text">
+          个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
+        </Text>
         </Space>
       </div>
     </>

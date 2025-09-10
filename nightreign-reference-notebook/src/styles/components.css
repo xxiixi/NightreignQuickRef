@@ -286,6 +286,11 @@ body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover 
   font-weight: var(--font-weight-medium);
 }
 
+.version-info {
+  color: var(--geekblue-6) !important;
+  font-size: calc(var(--font-size-sm) - 1px) !important;
+}
+
 .author-link {
   color: var(--color-primary-500) !important;
   text-decoration: none;
