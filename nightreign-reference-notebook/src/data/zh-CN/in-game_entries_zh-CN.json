@@ -466,7 +466,7 @@
         "entry_name":"强化闪避能力",
         "entry_type":"强化",
         "explanation":"增加闪避动作无敌帧",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"8410100",
