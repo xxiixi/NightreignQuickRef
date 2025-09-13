@@ -204,6 +204,7 @@ interface DataState {
   enhancementCategories: EnhancementCategory[];
   inGameSpecialBuff: EntryData[];
   itemEffects: ItemEffect[];
+  deepNightEntries: EntryData[];
   loading: boolean;
 }
 
@@ -223,6 +224,24 @@ const outsiderTypeOptions = [
   { value: '出击时的武器（附加）', label: '出击时的武器（附加）' },
   { value: '出击时的道具', label: '出击时的道具' },
   { value: '场地环境', label: '场地环境' },
+];
+
+// 深夜模式词条类型选项
+const deepNightTypeOptions = [
+  { value: '攻击力', label: '攻击力' },
+  { value: '减伤率', label: '减伤率' },
+  { value: '对异常状态的抵抗力', label: '对异常状态的抵抗力' },
+  { value: '恢复', label: '恢复' },
+  { value: '技艺/绝招', label: '技艺/绝招' },
+  { value: '能力值', label: '能力值' },
+  { value: '行动', label: '行动' },
+  { value: '仅限特定角色', label: '仅限特定角色' },
+  { value: '出击时的道具(结晶露滴)', label: '出击时的道具(结晶露滴)' },
+  { value: '出击时的道具', label: '出击时的道具' },
+  { value: '仅限特定武器', label: '仅限特定武器' },
+  { value: '减益(减伤率)', label: '减益(减伤率)' },
+  { value: '减益(能力值)', label: '减益(能力值)' },
+  { value: '减益(行动)', label: '减益(行动)' },
 ];
 
 const characterOptions = [
@@ -339,6 +358,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     enhancementCategories: [],
     inGameSpecialBuff: [],
     itemEffects: [],
+    deepNightEntries: [],
     loading: true
   });
 
@@ -560,6 +580,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           enhancementCategories: dataManager.getEnhancementCategories(),
           inGameSpecialBuff: dataManager.getInGameSpecialBuff(),
           itemEffects: dataManager.getItemEffects(),
+          deepNightEntries: dataManager.getDeepNightEntries(),
           loading: false
         });
       } catch (error) {
@@ -917,6 +938,73 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     },
   ];
 
+  // 深夜模式词条表格列定义（复用局外词条的列定义）
+  const deepNightColumns: TableColumnsType<EntryData> = [
+    {
+      title: 'ID',
+      dataIndex: 'entry_id',
+      key: 'entry_id',
+      width: '8%',
+      align: 'center',
+      onCell: () => ({
+        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
+      }),
+      sorter: (a, b) => {
+        const idA = a.entry_id || '';
+        const idB = b.entry_id || '';
+        return idA.localeCompare(idB);
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
+    },
+    {
+      title: '词条名称',
+      dataIndex: 'entry_name',
+      key: 'entry_name',
+      width: '35%',
+      sorter: (a, b) => {
+        const nameA = a.entry_name || '';
+        const nameB = b.entry_name || '';
+        return nameA.localeCompare(nameB, 'zh-CN');
+      },
+      sortDirections: ['ascend', 'descend'],
+      sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+    },
+    {
+      title: '解释',
+      dataIndex: 'explanation',
+      key: 'explanation',
+      width: '35%',
+      render: (text) => text || '-',
+    },
+    {
+      title: '词条类型',
+      dataIndex: 'entry_type',
+      key: 'entry_type',
+      align: 'center',
+      width: '12%',
+      render: (text) => text ? (
+        <Tag color={getTypeColor(text)}>{text}</Tag>
+      ) : '-',
+    },
+    {
+      title: '叠加性',
+      dataIndex: 'superposability',
+      key: 'superposability',
+      width: '12%',
+      align: 'center',
+      render: (text) => text ? (
+        <Tag color={getSuperposabilityColor(text)}>{text}</Tag>
+      ) : '-',
+      filters: [
+        { text: '可叠加', value: '可叠加' },
+        { text: '不可叠加', value: '不可叠加' },
+        { text: '未知', value: '未知' },
+      ],
+      filteredValue: filteredInfo.superposability || null,
+    },
+  ];
+
   // 特殊事件及地形效果表格列定义
   const specialBuffColumns: TableColumnsType<EntryData> = [
     {
@@ -1132,6 +1220,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       case '局外词条':
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
+        tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        break;
+      case '深夜模式词条':
+        tableData = data.deepNightEntries;
+        columns = deepNightColumns;
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
         break;
       case '护符词条':
@@ -1434,6 +1527,58 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           </div>
         </div>
       );
+    } else if (tabKey === '深夜模式词条') {
+      return (
+        <div className="filter-search-row">
+          <div className="filter-search-content">
+            {/* 左侧：搜索、多选、单选、清除 */}
+            <div className="filter-controls">
+              <CustomSearch
+                placeholder={`搜索 ${tabKey} 关键字`}
+                value={searchKeyword}
+                onChange={setSearchKeyword}
+                onSearch={(value) => {
+                  setSearchKeyword(value);
+                  setCurrentPage(1);
+                }}
+                className="custom-search-input"
+                allowClear
+              />
+              <Select
+                className="deep-night-type-select"
+                mode="multiple"
+                allowClear
+                tagRender={tagRender}
+                placeholder="按词条类型筛选"
+                value={selectedTypes}
+                onChange={(values) => {
+                  setSelectedTypes(values);
+                  setCurrentPage(1);
+                }}
+                options={deepNightTypeOptions}
+                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                style={{ minWidth: '180px', maxWidth: '300px' }}
+              />
+              <Select
+                className="character-select"
+                allowClear
+                placeholder="按角色筛选"
+                value={selectedCharacter || undefined}
+                onChange={(value) => {
+                  setSelectedCharacter(value);
+                  setCurrentPage(1);
+                }}
+                options={characterOptions}
+                notFoundContent="暂无角色"
+                showSearch={false}
+              />
+              <Button onClick={clearAll} type="default" size="middle">
+                清除所有
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
     } else {
       return (
         <div className="search-container">
@@ -1558,6 +1703,16 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               <div id="item-effects">
                 {renderSearchAndFilter('道具效果')}
                 {renderTableContent('道具效果')}
+              </div>
+            ),
+          },
+          {
+            key: '深夜模式词条',
+            label: '🌌 深夜模式-局内词条',
+            children: (
+              <div id="deep-night-entries">
+                {renderSearchAndFilter('深夜模式词条')}
+                {renderTableContent('深夜模式词条')}
               </div>
             ),
           },

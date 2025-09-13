@@ -140,7 +140,8 @@ class DataManager {
         enhancementCategories,
         inGameSpecialBuff,
         characterData,
-        itemEffects
+        itemEffects,
+        deepNightEntries
       ] = await Promise.all([
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
@@ -153,7 +154,8 @@ class DataManager {
         import('../data/zh-CN/enhancement_categories.json'),
         import('../data/zh-CN/in-game_special_buff.json'),
         import('../data/character-info/character_data.json'),
-        import('../data/zh-CN/item_effect.json')
+        import('../data/zh-CN/item_effect.json'),
+        import('../data/zh-CN/deep_night_entries.json')
       ]);
 
       // 加载角色详细数据
@@ -214,6 +216,7 @@ class DataManager {
       this.dataCache.set('characterData', characterData.default);
       this.dataCache.set('characterDetailData', characterDetailData);
       this.dataCache.set('itemEffects', itemEffects.default);
+      this.dataCache.set('deepNightEntries', deepNightEntries.default);
 
       this.isLoaded = true;
       console.log('所有数据预加载完成');
@@ -275,6 +278,10 @@ class DataManager {
 
   public getItemEffects(): ItemEffect[] {
     return this.dataCache.get('itemEffects') || [];
+  }
+
+  public getDeepNightEntries(): EntryData[] {
+    return this.dataCache.get('deepNightEntries') || [];
   }
 
   // 检查是否已加载

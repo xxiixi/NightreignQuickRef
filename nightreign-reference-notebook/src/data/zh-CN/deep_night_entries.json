@@ -256,21 +256,21 @@
     "entry_name": "涂抹油脂类道具时能额外提升物理攻击力＋１",
     "explanation": "提升17%，持续30秒",
     "entry_type": "攻击力",
-    "superposability": "可叠加"
+    "superposability": "未知"
   },
   {
     "entry_id": "6030901",
     "entry_name": "涂抹油脂类道具时能额外提升物理攻击力＋２",
     "explanation": "提升20%，持续30秒",
     "entry_type": "攻击力",
-    "superposability": "可叠加"
+    "superposability": "未知"
   },
   {
     "entry_id": "6035100",
     "entry_name": "使出致命一击时能提升精力的恢复速度＋１",
     "explanation": "提升17/s，持续15秒",
     "entry_type": "恢复",
-    "superposability": "不可叠加"
+    "superposability": "未知"
   },
   {
     "entry_id": "6040100",
@@ -682,6 +682,7 @@
     "entry_id": "6621900",
     "entry_name": "出击时会持有“连刺破露滴”",
     "explanation": "1个",
+    "entry_type": "出击时的道具(结晶露滴)",
     "superposability": "可叠加"
   },
   {
@@ -863,6 +864,7 @@
     "entry_id": "6630700",
     "entry_name": "通过潜在能力能比较容易找到双头剑",
     "explanation": "",
+    "entry_type": "仅限特定武器",
     "superposability": "未知"
   },
   {
@@ -904,6 +906,7 @@
     "entry_id": "6631300",
     "entry_name": "通过潜在能力能比较容易找到大槌",
     "explanation": "",
+    "entry_type": "仅限特定武器",
     "superposability": "未知"
   },
   {
@@ -959,12 +962,14 @@
     "entry_id": "6632100",
     "entry_name": "通过潜在能力能比较容易找到软鞭",
     "explanation": "",
+    "entry_type": "仅限特定武器",
     "superposability": "未知"
   },
   {
     "entry_id": "6632200",
     "entry_name": "通过潜在能力能比较容易找到特大武器",
     "explanation": "",
+    "entry_type": "仅限特定武器",
     "superposability": "未知"
   },
   {
