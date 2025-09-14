@@ -1,7 +1,7 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined, BaiduOutlined, BilibiliOutlined, LinkOutlined, ArrowRightOutlined, GithubOutlined} from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 <Popover
                   content={
                     <div style={{ padding: '5px' }}>
-                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' ,borderBottom: '1px solid rgba(198, 198, 198, 0.2)',paddingBottom: '4px'}}>
                         访问量统计 🔥
                       </div>
                       <div style={{ fontSize: '12px' }}>
@@ -85,119 +85,169 @@ const Header: React.FC<HeaderProps> = React.memo(({
               <Tooltip title="查看数据来源" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
-                    <div style={{ padding: '8px', maxWidth: '300px' }}>
-                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                    <div style={{ padding: '8px', maxWidth: '250px'}}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold',borderBottom: '1px solid rgba(198, 198, 198, 0.2)',paddingBottom: '8px' }}>
                         数据来源链接 🔗
                       </div>
+                      {/* Baidu  */}
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '4px' }}>
+                          <BaiduOutlined style={{ marginRight: '4px' }} />
+                          黑夜君临 v1.01数据汇总 
+                            <a
+                              href="https://tieba.baidu.com/p/9906444262?pid=152430482433&cid=#152430482433"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                        <BaiduOutlined style={{ marginRight: '4px' }} />
+                        黑夜君临 新词条数据一览
+                          <a
+                            href="https://tieba.baidu.com/p/9935090782?pid=152476350171&cid=#152476350171"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                        <BaiduOutlined style={{ marginRight: '4px' }} />
+                        全传说武器庇佑效果
+                          <a
+                            href="https://tieba.baidu.com/p/9889921465?pid=152403477340&cid=#152403477340"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                        <BaiduOutlined style={{ marginRight: '4px' }} />
+                        黑夜君临1.02.2部分详细更新内容（包含深夜模式改动）
+                          <a
+                            href="https://tieba.baidu.com/p/10026641416?pid=152611338073&cid=#152611338073"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+
+                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}/>
+
+                         {/* Bilibili  */}
+                        <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          【艾尔登法环：黑夜君临】全词条汇总！遗物+护符+武器固有效果+武器随机buff
                           <a
                             href="https://www.bilibili.com/video/BV1GfMSzvE3V"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            📋 全词条汇总
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          【艾尔登法环：黑夜君临】全角色回避翻滚动作，无敌帧分析对比！
                           <a
                             href="https://www.bilibili.com/video/BV1LvuVzuEqo"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            🎯 翻滚/闪避无敌帧分析
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                          <a
-                            href="https://api.xiaoheihe.cn/v3/bbs/app/api/web/share?link_id=758970790a0a"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="footer-link"
-                          >
-                            🧙‍♂️ 隐士出招表
-                          </a>
-                        </div>
-                        <div style={{ marginBottom: '4px' }}>
-                          <a
-                            href="https://mobalytics.gg/elden-ring-nightreign/guides/day-length"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="footer-link"
-                          >
-                            ⏰ 每日缩圈时间
-                          </a>
-                        </div>
-                        <div style={{ marginBottom: '4px' }}>
-                          <a
-                            href="https://game8.co/games/Elden-Ring-Nightreign/archives/522643"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="footer-link"
-                          >
-                            💰 角色升级所需卢恩
-                          </a>
-                        </div>
-                        <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          【黑夜君临】圣杯瓶恢复、缓回、群回机制解析及常见误区
                           <a
                             href="https://www.bilibili.com/video/BV1M18jzQE9X"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            🏺 血量恢复计算器
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          黑夜君临 永夜山羊罪人NPC预设一览+部分buff/debuff数值
                           <a
                             href="https://www.bilibili.com/video/BV1wzvNzREYQ/?spm_id_from=333.1387.upload.video_card.click&vd_source=37640654dbdd4ab80b471a16ac6da3c0"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            🔰 局内减伤词条叠加性
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          【黑夜君临】局内减伤词条叠加测试
                           <a
                             href="https://www.bilibili.com/opus/1100871642065666054"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            🐐 永夜山羊罪人NPC预设一览
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          黑夜君临：渡夜者各等级属性点数一览
                           <a
                             href="https://www.bilibili.com/video/BV1p5ThzfEy7"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            📊 角色各等级属性点数
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          黑夜君临：复活机制解析
                           <a
                             href="https://www.bilibili.com/video/BV1TnNLzXESx"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            💀 复活机制解析
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}/>
+                        <div style={{ marginBottom: '4px' }}>
+                          <LinkOutlined style={{ marginRight: '4px' }} />
+                          每日缩圈时间
+                          <a
+                            href="https://mobalytics.gg/elden-ring-nightreign/guides/day-length"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
+                          <LinkOutlined style={{ marginRight: '4px' }} />
+                          角色升级所需卢恩
+                          <a
+                            href="https://game8.co/games/Elden-Ring-Nightreign/archives/522643"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <LinkOutlined style={{ marginRight: '4px' }} />
+                          官方 Wiki
                           <a
                             href="https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="footer-link"
                           >
-                            📚 官方 Wiki
+                            <ArrowRightOutlined />
                           </a>
                         </div>
                       </div>
@@ -217,7 +267,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 <Popover
                   content={
                     <div style={{ padding: '8px', maxWidth: '250px', width: '250px' }}>
-                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold', borderBottom: '1px solid rgba(198, 198, 198, 0.2)', paddingBottom: '8px' }}>
                         网站声明 📜
                       </div>
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
@@ -247,15 +297,16 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 <Popover
                   content={
                     <div style={{ padding: '8px', maxWidth: '200px', width: '180px' }}>
-                      <div style={{ fontSize: '12px', marginBottom: '8px', fontWeight: 'bold' }}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold'}}>
                         本项目GitHub仓库
                       </div>
-                      <div>
+                      <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                        <GithubOutlined style={{ marginRight: '4px' }} />NightreignQuickRef
                         <a
                           href="https://github.com/xxiixi/NightreignQuickRef"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="footer-link"
+                          className="header-link"
                         >
                           点击跳转
                         </a>

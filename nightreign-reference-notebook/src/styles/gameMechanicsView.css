@@ -442,14 +442,15 @@ body[tomato-theme="dark"] .mechanic-card .card-title-section {
   transform: scale(1.1);
 }
 
-/* 数据来源链接样式 */
-.ant-popover .footer-link {
+/* 数据来源链接样式 - 统一设置Popover中的所有链接 */
+.ant-popover a {
   color: #1890ff;
   text-decoration: none;
   transition: color 0.2s ease;
+  margin-left: 4px;
 }
 
-.ant-popover .footer-link:hover {
+.ant-popover a:hover {
   color: #40a9ff;
   text-decoration: underline;
 }
