@@ -300,7 +300,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
         <Text type="secondary" className="subtitle-text version-info">
-          黑夜君临版本: v1.02.02 | 更新时间：2025.9.13 | 更新内容：深夜模式局内词条
+          黑夜君临版本: v1.02.02 | 更新时间：2025.9.13 | 更新内容：深夜模式局外词条
         </Text>
         <Text type="secondary" className="subtitle-text">
           个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容

@@ -1708,7 +1708,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           },
           {
             key: '深夜模式词条',
-            label: '🌌 深夜模式-局内词条',
+            label: '🌌 深夜模式-局外词条',
             children: (
               <div id="deep-night-entries">
                 {renderSearchAndFilter('深夜模式词条')}
