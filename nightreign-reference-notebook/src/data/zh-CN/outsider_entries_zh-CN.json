@@ -605,7 +605,7 @@
         "entry_id":"7031900",
         "entry_name":"使出致命一击时，能获得卢恩",
         "entry_type":null,
-        "explanation":"+300卢恩",
+        "explanation":"+600卢恩",
         "superposability":"不可叠加"
     },
     {
@@ -668,7 +668,7 @@
         "entry_id":"7034100",
         "entry_name":"【隐士】发动绝招时，能提升血量上限",
         "entry_type":"仅限特定角色",
-        "explanation":"30秒内，提升生命值上限30%",
+        "explanation":"30秒内，提升生命值上限50%",
         "superposability":"不可叠加"
     },
     {
@@ -1564,7 +1564,7 @@
         "entry_id":"7240000",
         "entry_name":"受到损伤并被弹飞时，能提升强韧度与减伤率",
         "entry_type":"减伤率",
-        "explanation":"玩家被击飞时，30秒内，受到的伤害 -20%，受到的韧性伤害 -20%",
+        "explanation":"玩家被击飞时，20秒内，受到的伤害 -20%，受到的韧性伤害 -20%",
         "superposability":"未知"
     },
     {
@@ -1613,7 +1613,7 @@
         "entry_id":"7280000",
         "entry_name":"【铁之眼】延长弱点显露的时间",
         "entry_type":"仅限特定角色",
-        "explanation":null,
+        "explanation":"标记存在时间从17变为22秒",
         "superposability":"不可叠加"
     },
     {
@@ -1809,350 +1809,350 @@
         "entry_id":"7340000",
         "entry_name":"以短剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340100",
         "entry_name":"以直剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340200",
         "entry_name":"以大剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340300",
         "entry_name":"以特大剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340400",
         "entry_name":"以曲剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340500",
         "entry_name":"以大曲剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340600",
         "entry_name":"以刀攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340700",
         "entry_name":"以双头剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340800",
         "entry_name":"以刺剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7340900",
         "entry_name":"以重刺剑攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341000",
         "entry_name":"以斧攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341100",
         "entry_name":"以大斧攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341200",
         "entry_name":"以槌攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341300",
         "entry_name":"以大槌攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341400",
         "entry_name":"以连枷攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341500",
         "entry_name":"以矛攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341600",
         "entry_name":"以长矛攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341700",
         "entry_name":"以大矛攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341800",
         "entry_name":"以戟攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7341900",
         "entry_name":"以镰刀攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7342000",
         "entry_name":"以拳头攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7342100",
         "entry_name":"以钩爪攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7342200",
         "entry_name":"以软鞭攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7342300",
         "entry_name":"以特大武器攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7342400",
         "entry_name":"以弓攻击时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复10点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350000",
         "entry_name":"以短剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350100",
         "entry_name":"以直剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350200",
         "entry_name":"以大剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350300",
         "entry_name":"以特大剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350400",
         "entry_name":"以曲剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350500",
         "entry_name":"以大曲剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350600",
         "entry_name":"以刀攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350700",
         "entry_name":"以双头剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350800",
         "entry_name":"以刺剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7350900",
         "entry_name":"以重刺剑攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351000",
         "entry_name":"以斧攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351100",
         "entry_name":"以大斧攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351200",
         "entry_name":"以槌攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351300",
         "entry_name":"以大槌攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351400",
         "entry_name":"以连枷攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351500",
         "entry_name":"以矛攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351600",
         "entry_name":"以长矛攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351700",
         "entry_name":"以大矛攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351800",
         "entry_name":"以戟攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7351900",
         "entry_name":"以镰刀攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7352000",
         "entry_name":"以拳头攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7352100",
         "entry_name":"以钩爪攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7352200",
         "entry_name":"以软鞭攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7352300",
         "entry_name":"以特大武器攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7352400",
         "entry_name":"以弓攻击时，恢复专注值",
         "entry_type":"恢复",
-        "explanation":"固定回复1点专注值",
+        "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
     }
 ]

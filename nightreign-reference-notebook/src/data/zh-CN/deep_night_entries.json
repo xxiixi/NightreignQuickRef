@@ -408,7 +408,7 @@
   {
     "entry_id": "6500100",
     "entry_name": "【守护者】发动技艺时能提升周围我方人物的减伤率",
-    "explanation": "提升18%全减伤率，持续15秒",
+    "explanation": "提升18%全减伤率，持续30秒",
     "entry_type": "仅限特定角色",
     "superposability": "不可叠加"
   },
