@@ -1,7 +1,7 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined, BaiduOutlined, BilibiliOutlined, LinkOutlined, ArrowRightOutlined, GithubOutlined} from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined, BaiduOutlined, BilibiliOutlined, LinkOutlined, ArrowRightOutlined, GithubOutlined, HistoryOutlined} from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -332,6 +332,70 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   />
                 </Popover>
               </Tooltip>
+              <Tooltip title="查看更新记录和计划" placement="bottom" className="theme-toggle-btn">
+                <Popover
+                  content={
+                    <div style={{ padding: '8px', maxWidth: '280px' }}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold', borderBottom: '1px solid rgba(198, 198, 198, 0.2)', paddingBottom: '8px' }}>
+                        更新记录 & 计划 📋
+                      </div>
+                      <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                        {/* 最新更新 */}
+                        <div style={{ marginBottom: '8px' }}>
+                          <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>
+                            🆕 最新更新 (v1.02.02)
+                          </div>
+                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 添加了深夜模式局外词条
+                          </div>
+                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 更新了数据来源
+                          </div>
+                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 更新了1.02.2部分普通局外遗物数据
+                            <span style={{ marginLeft: '12px', fontSize: '10px' }}>
+                            <br/>
+                              - 隐士开大HP上限提升<br/>
+                              - 铁眼标记持续时间增加<br/>
+                              - 特定武器攻击回血、回蓝提升<br/>
+                              - 击飞减伤Buff时间减少
+                            </span>
+                          </div>
+                        </div>
+
+                        <div style={{ marginBottom: '8px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}>
+                          <div style={{ fontWeight: 'bold', color: '#52c41a', marginBottom: '4px' }}>
+                            🔧 TODO
+                          </div>
+                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 夜雨伤害数据待更新(无数据来源)
+                          </div>
+                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 深夜模式局内词条待更新(无数据来源)
+                          </div>
+                        </div>
+
+                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}>
+                          <div style={{ fontWeight: 'bold', color: '#fa8c16', marginBottom: '4px' }}>
+                            🐛 已知问题
+                          </div>
+                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 部分数据可能存在版本差异，发现后会尽快修正
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
+                >
+                  <Button
+                    type="text"
+                    icon={<HistoryOutlined />}
+                    className="visits-counter-btn"
+                  />
+                </Popover>
+              </Tooltip>
               {/* <Tooltip title="切换语言功能尚未开发" placement="bottom">
                 <Button
                   type="text"
@@ -351,7 +415,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
         <Text type="secondary" className="subtitle-text version-info">
-          黑夜君临版本: v1.02.02 | 更新时间：2025.9.13 | 更新内容：深夜模式局外词条
+          黑夜君临版本: v1.02.02 (2025.9.10更新)
         </Text>
         <Text type="secondary" className="subtitle-text">
           个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容

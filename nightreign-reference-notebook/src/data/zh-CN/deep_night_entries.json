@@ -221,21 +221,21 @@
     "entry_name": "受到损伤的当下能通过攻击恢复部分血量＋１",
     "explanation": "虚血，回血量提升25%",
     "entry_type": "恢复",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6005601",
     "entry_name": "受到损伤的当下能通过攻击恢复部分血量＋２",
     "explanation": "虚血，回血量提升35%",
     "entry_type": "恢复",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6030200",
     "entry_name": "食用苔药等等道具时能恢复血量＋１",
     "explanation": "回复33点血",
     "entry_type": "恢复",
-    "superposability": "不可叠加"
+    "superposability": "未知"
   },
   {
     "entry_id": "6030600",
@@ -347,56 +347,56 @@
     "entry_name": "提升打倒敌人时绝招量表的累积量＋１",
     "explanation": "充能6.5%",
     "entry_type": "技艺/绝招",
-    "superposability": "不可叠加"
+    "superposability": "未知"
   },
   {
     "entry_id": "6160000",
     "entry_name": "突刺反击成功时能恢复血量＋１",
     "explanation": "恢复3.3%",
     "entry_type": "恢复",
-    "superposability": "不可叠加"
+    "superposability": "未知"
   },
   {
     "entry_id": "6260000",
     "entry_name": "对陷入中毒的敌人能强化攻击＋１",
     "explanation": "提升16%",
     "entry_type": "行动",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6260001",
     "entry_name": "对陷入中毒的敌人能强化攻击＋２",
     "explanation": "提升20%",
     "entry_type": "行动",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6260300",
     "entry_name": "对陷入猩红腐败的敌人能强化攻击＋１",
     "explanation": "提升16%",
     "entry_type": "行动",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6260301",
     "entry_name": "对陷入猩红腐败的敌人能强化攻击＋２",
     "explanation": "提升20%",
     "entry_type": "行动",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6260400",
     "entry_name": "对陷入冻伤的敌人能强化攻击＋１",
     "explanation": "提升16%",
     "entry_type": "行动",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6260401",
     "entry_name": "对陷入冻伤的敌人能强化攻击＋２",
     "explanation": "提升20%",
     "entry_type": "行动",
-    "superposability": "不可叠加"
+    "superposability": "可叠加"
   },
   {
     "entry_id": "6500000",
