@@ -1047,112 +1047,112 @@
     "entry_name": "【追踪者】提升集中力但降低生命力",
     "explanation": "最高12级时-7血，+8蓝",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6640100",
     "entry_name": "【追踪者】提升智力、信仰但降低力气、灵巧",
     "explanation": "最高12级时-10力，-8敏，+15智，+15信",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6641000",
     "entry_name": "【守护者】提升力气、灵巧但降低生命力",
     "explanation": "最高12级时-10血，+7力，+17敏",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6641100",
     "entry_name": "【守护者】提升集中力、信仰但降低生命力",
     "explanation": "最高12级时-6血，+22蓝，+38信（目前有bug，实际+38的是感应）",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6642000",
     "entry_name": "【铁之眼】提升感应但降低灵巧",
     "explanation": "最高12级时-8敏，+17感",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6642100",
     "entry_name": "【铁之眼】提升生命力、力气但降低灵巧",
     "explanation": "最高12级时-15敏，+4血，+16力",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6643000",
     "entry_name": "【女爵】提升生命力、力气但降低集中力",
     "explanation": "最高12级时-12蓝，+3血，+24力",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6643100",
     "entry_name": "【女爵】提升集中力、信仰但降低智力",
     "explanation": "最高12级时-12智，+3蓝，+16信（目前有bug，实际-12的是感应）",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6644000",
     "entry_name": "【无赖】提升集中力、智力但降低生命力、耐力",
     "explanation": "最高12级时-12血，-5绿，+9蓝，+35智",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6644100",
     "entry_name": "【无赖】提升感应但降低生命力",
     "explanation": "最高12级时-4血，+17感",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6645000",
     "entry_name": "【复仇者】提升生命力、耐力但降低集中力",
     "explanation": "最高12级时-12蓝，+5血，+4绿",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6645100",
     "entry_name": "【复仇者】提升力气但降低信仰",
     "explanation": "最高12级时-36信，+31力",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6646000",
     "entry_name": "【隐士】提升生命力、耐力、灵巧但降低智力、信仰",
     "explanation": "最高12级时-8智，-8信，+3血，+5绿，+16敏",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6646100",
     "entry_name": "【隐士】提升智力、信仰但降低集中力",
     "explanation": "最高12级时-12蓝，+11智，+11信",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6647000",
     "entry_name": "【执行者】提升生命力、耐力但降低感应",
     "explanation": "最高12级时-12感，+4血，+4绿",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6647100",
     "entry_name": "【执行者】提升灵巧、感应但降低生命力",
     "explanation": "最高12级时-3血，+8敏，+14感",
     "entry_type": "仅限特定角色",
-    "superposability": "可叠加"
+    "superposability": "不可叠加"
   },
   {
     "entry_id": "6820000",
