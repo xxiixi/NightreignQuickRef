@@ -489,7 +489,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                                   <div className="boss-progress-container">
                                     <div className="boss-section-title">
                                       <CloudOutlined />
-                                      夜雨伤害
+                                      夜雨伤害（当前数据为9.10更新前版本，更新后夜雨伤害增加，具体数据待更新）
                                     </div>
                                     <div className="damage-stat">
                                       <Statistic
