@@ -1,6 +1,13 @@
 [
   {
     "entry_id": "6001400",
+    "entry_name": "提升物理攻击力＋3",
+    "explanation": "缺少数据",
+    "entry_type": "攻击力",
+    "superposability": "可叠加"
+  },
+  {
+    "entry_id": "6001401",
     "entry_name": "提升物理攻击力＋４",
     "explanation": "提升物理攻击力8.5%",
     "entry_type": "攻击力",
@@ -359,42 +366,42 @@
   {
     "entry_id": "6260000",
     "entry_name": "对陷入中毒的敌人能强化攻击＋１",
-    "explanation": "提升 16%",
+    "explanation": "提升 16%, 不同级别可叠加",
     "entry_type": "行动",
     "superposability": "可叠加"
   },
   {
     "entry_id": "6260001",
     "entry_name": "对陷入中毒的敌人能强化攻击＋２",
-    "explanation": "提升 20%",
+    "explanation": "提升 20%, 不同级别可叠加",
     "entry_type": "行动",
     "superposability": "可叠加"
   },
   {
     "entry_id": "6260300",
     "entry_name": "对陷入猩红腐败的敌人能强化攻击＋１",
-    "explanation": "提升 16%",
+    "explanation": "提升 16%, 不同级别可叠加",
     "entry_type": "行动",
     "superposability": "可叠加"
   },
   {
     "entry_id": "6260301",
     "entry_name": "对陷入猩红腐败的敌人能强化攻击＋２",
-    "explanation": "提升 20%",
+    "explanation": "提升 20%, 不同级别可叠加",
     "entry_type": "行动",
     "superposability": "可叠加"
   },
   {
     "entry_id": "6260400",
     "entry_name": "对陷入冻伤的敌人能强化攻击＋１",
-    "explanation": "提升 16%",
+    "explanation": "提升 16%, 不同级别可叠加",
     "entry_type": "行动",
     "superposability": "可叠加"
   },
   {
     "entry_id": "6260401",
     "entry_name": "对陷入冻伤的敌人能强化攻击＋２",
-    "explanation": "提升 20%",
+    "explanation": "提升 20%, 不同级别可叠加",
     "entry_type": "行动",
     "superposability": "可叠加"
   },
