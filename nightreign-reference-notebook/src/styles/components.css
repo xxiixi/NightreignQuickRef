@@ -258,7 +258,7 @@ body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover 
 .header {
   text-align: center;
   margin-bottom: var(--spacing-xl);
-  padding: var(--spacing-lg);
+  padding: var(--spacing-sm);
   background: transparent;
   border-radius: var(--radius-lg);
   margin: 0 auto var(--spacing-md) auto;

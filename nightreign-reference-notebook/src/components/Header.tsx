@@ -1,7 +1,7 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined, BaiduOutlined, BilibiliOutlined, LinkOutlined, ArrowRightOutlined, GithubOutlined, HistoryOutlined} from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined, BaiduOutlined, BilibiliOutlined, LinkOutlined, ArrowRightOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 <Popover
                   content={
                     <div style={{ padding: '5px' }}>
-                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' ,borderBottom: '1px solid rgba(198, 198, 198, 0.2)',paddingBottom: '4px'}}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold', borderBottom: '1px solid rgba(198, 198, 198, 0.2)', paddingBottom: '4px' }}>
                         访问量统计 🔥
                       </div>
                       <div style={{ fontSize: '12px' }}>
@@ -85,26 +85,26 @@ const Header: React.FC<HeaderProps> = React.memo(({
               <Tooltip title="查看数据来源" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
-                    <div style={{ padding: '8px', maxWidth: '250px'}}>
-                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold',borderBottom: '1px solid rgba(198, 198, 198, 0.2)',paddingBottom: '8px' }}>
+                    <div style={{ padding: '8px', maxWidth: '250px' }}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold', borderBottom: '1px solid rgba(198, 198, 198, 0.2)', paddingBottom: '8px' }}>
                         数据来源链接 🔗
                       </div>
                       {/* Baidu  */}
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
                         <div style={{ marginBottom: '4px' }}>
                           <BaiduOutlined style={{ marginRight: '4px' }} />
-                          黑夜君临 v1.01数据汇总 
-                            <a
-                              href="https://tieba.baidu.com/p/9906444262?pid=152430482433&cid=#152430482433"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
+                          黑夜君临 v1.01数据汇总
+                          <a
+                            href="https://tieba.baidu.com/p/9906444262?pid=152430482433&cid=#152430482433"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <ArrowRightOutlined />
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                        <BaiduOutlined style={{ marginRight: '4px' }} />
-                        黑夜君临 新词条数据一览
+                          <BaiduOutlined style={{ marginRight: '4px' }} />
+                          黑夜君临 新词条数据一览
                           <a
                             href="https://tieba.baidu.com/p/9935090782?pid=152476350171&cid=#152476350171"
                             target="_blank"
@@ -114,8 +114,8 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                        <BaiduOutlined style={{ marginRight: '4px' }} />
-                        全传说武器庇佑效果
+                          <BaiduOutlined style={{ marginRight: '4px' }} />
+                          全传说武器庇佑效果
                           <a
                             href="https://tieba.baidu.com/p/9889921465?pid=152403477340&cid=#152403477340"
                             target="_blank"
@@ -125,8 +125,8 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
                         <div style={{ marginBottom: '4px' }}>
-                        <BaiduOutlined style={{ marginRight: '4px' }} />
-                        黑夜君临1.02.2部分详细更新内容（包含深夜模式改动）
+                          <BaiduOutlined style={{ marginRight: '4px' }} />
+                          黑夜君临1.02.2部分详细更新内容（包含深夜模式改动）
                           <a
                             href="https://tieba.baidu.com/p/10026641416?pid=152611338073&cid=#152611338073"
                             target="_blank"
@@ -136,9 +136,9 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </a>
                         </div>
 
-                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}/>
+                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }} />
 
-                         {/* Bilibili  */}
+                        {/* Bilibili  */}
                         <div style={{ marginBottom: '4px' }}>
                           <BilibiliOutlined style={{ marginRight: '4px' }} />
                           【艾尔登法环：黑夜君临】全词条汇总！遗物+护符+武器固有效果+武器随机buff
@@ -216,7 +216,18 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             <ArrowRightOutlined />
                           </a>
                         </div>
-                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}/>
+                        <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          【艾尔登法环：黑夜君临】深夜模式，全词条！（遗物+武器+负面词条机制）
+                          <a
+                            href="https://www.bilibili.com/video/BV1JLpxzmEdv"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }} />
                         <div style={{ marginBottom: '4px' }}>
                           <LinkOutlined style={{ marginRight: '4px' }} />
                           每日缩圈时间
@@ -297,7 +308,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 <Popover
                   content={
                     <div style={{ padding: '8px', maxWidth: '200px', width: '180px' }}>
-                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold'}}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' }}>
                         本项目GitHub仓库
                       </div>
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
@@ -354,10 +365,10 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
                             • 更新了1.02.2部分普通局外遗物数据
                             <span style={{ marginLeft: '12px', fontSize: '10px' }}>
-                            <br/>
-                              - 隐士开大HP上限提升<br/>
-                              - 铁眼标记持续时间增加<br/>
-                              - 特定武器攻击回血、回蓝提升<br/>
+                              <br />
+                              - 隐士开大HP上限提升<br />
+                              - 铁眼标记持续时间增加<br />
+                              - 特定武器攻击回血、回蓝提升<br />
                               - 击飞减伤Buff时间减少
                             </span>
                           </div>
@@ -414,12 +425,12 @@ const Header: React.FC<HeaderProps> = React.memo(({
           黑夜君临速查手册
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
-        <Text type="secondary" className="subtitle-text version-info">
-          黑夜君临版本: v1.02.02 (2025.9.10更新)
-        </Text>
-        <Text type="secondary" className="subtitle-text">
-          个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
-        </Text>
+          <Text type="secondary" className="subtitle-text version-info">
+            黑夜君临版本: v1.02.02 (2025.9.10更新)
+          </Text>
+          <Text type="secondary" className="subtitle-text">
+            个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
+          </Text>
         </Space>
       </div>
     </>
