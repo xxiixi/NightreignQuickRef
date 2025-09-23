@@ -5,9 +5,7 @@ import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
 import DataManager from '../utils/dataManager';
 import type { EnhancementCategory, ItemEffect } from '../utils/dataManager';
-import { Line } from '@ant-design/plots';
-import { getCurrentTheme } from '../utils/themeUtils';
-import { throttle, debounce } from 'lodash';
+import { debounce } from 'lodash';
 import { SearchOutlined } from '@ant-design/icons';
 
 // 自定义搜索组件接口
@@ -202,7 +200,6 @@ interface DataState {
   talismanEntries: EntryData[];
   inGameEntries: EntryData[];
   enhancementCategories: EnhancementCategory[];
-  inGameSpecialBuff: EntryData[];
   itemEffects: ItemEffect[];
   deepNightEntries: EntryData[];
   loading: boolean;
@@ -226,7 +223,7 @@ const outsiderTypeOptions = [
   { value: '场地环境', label: '场地环境' },
 ];
 
-// 深夜模式词条类型选项
+// 深夜模式局外词条类型选项
 const deepNightTypeOptions = [
   { value: '攻击力', label: '攻击力' },
   { value: '减伤率', label: '减伤率' },
@@ -348,216 +345,17 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
-  const [isLinearMode, setIsLinearMode] = useState(false);
-  const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
-  const [chartKey, setChartKey] = useState(0);
   const [data, setData] = useState<DataState>({
     outsiderEntries: [],
     talismanEntries: [],
     inGameEntries: [],
     enhancementCategories: [],
-    inGameSpecialBuff: [],
     itemEffects: [],
     deepNightEntries: [],
     loading: true
   });
 
-  // 羊头诅咒事件数据
-  const curseData = [
-    { rune: '0', damageIncrease: 0 },
-    { rune: '1000', damageIncrease: 0.4 },
-    { rune: '2000', damageIncrease: 0.8 },
-    { rune: '5000', damageIncrease: 2 },
-    { rune: '10000', damageIncrease: 4 },
-    { rune: '20000', damageIncrease: 8 },
-    { rune: '30000', damageIncrease: 12 },
-    { rune: '50000', damageIncrease: 20 },
-    { rune: '60000', damageIncrease: 22 },
-    { rune: '80000', damageIncrease: 26 },
-    { rune: '100000', damageIncrease: 30 },
-    { rune: '150000', damageIncrease: 33.75 },
-    { rune: '200000', damageIncrease: 37.5 },
-    { rune: '300000', damageIncrease: 45 },
-    { rune: '500000', damageIncrease: 60 },
-    { rune: '700000', damageIncrease: 75 },
-    { rune: '900000', damageIncrease: 90 },
-    { rune: '1000000', damageIncrease: 91.2 },
-    { rune: '1100000', damageIncrease: 92.42 },
-    { rune: '1500000', damageIncrease: 97.26 },
-  ];
 
-  // 折线图配置
-  const lineConfig = {
-    data: isLinearMode ? curseData.map(item => ({ ...item, rune: parseInt(item.rune) })) : curseData,
-    xField: 'rune',
-    yField: 'damageIncrease',
-    theme: currentTheme,
-    height: 400,
-    autoFit: true,
-    point: {
-      size: 4,
-      shape: 'circle',
-      style: {
-        fill: 'white',
-        stroke: '#5B8FF9',
-        lineWidth: 2,
-      },
-    },
-    axis: {
-      x: {
-        label: {
-          autoRotate: true,
-          autoHide: true,
-          autoEllipsis: true,
-          style: {
-            fill: currentTheme === 'dark' ? '#ffffff' : '#000000',
-            fontSize: 12,
-          },
-          formatter: isLinearMode ? (value: string) => {
-            const num = parseInt(value);
-            if (num >= 1000000) {
-              return (num / 1000000).toFixed(1) + 'M';
-            } else if (num >= 1000) {
-              return (num / 1000).toFixed(0) + 'K';
-            }
-            return value;
-          } : undefined,
-        },
-        line: {
-          style: {
-            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
-            lineWidth: 1,
-          },
-        },
-        tickLine: {
-          style: {
-            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
-            lineWidth: 1,
-          },
-        },
-      },
-      y: {
-        label: {
-          style: {
-            fill: currentTheme === 'dark' ? '#ffffff' : '#000000',
-            fontSize: 12,
-          },
-          formatter: (value: string) => `${value}%`,
-        },
-        line: {
-          style: {
-            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
-            lineWidth: 1,
-          },
-        },
-        tickLine: {
-          style: {
-            stroke: currentTheme === 'dark' ? '#ffffff' : '#000000',
-            lineWidth: 1,
-          },
-        },
-      },
-    },
-    tooltip: {
-      title: (datum: { rune: string | number; damageIncrease: number }) => {
-        const runeValue = typeof datum.rune === 'number' ? datum.rune.toString() : datum.rune;
-        return `卢恩:${runeValue} | 增伤:${datum.damageIncrease.toFixed(2)}%`;
-      },
-    },
-    smooth: true,
-    color: '#5B8FF9',
-    lineStyle: {
-      lineWidth: 3,
-    },
-  };
-
-  // 监听主题变化
-  useEffect(() => {
-    const checkTheme = () => {
-      const newTheme = getCurrentTheme();
-      if (newTheme !== currentTheme) {
-        setCurrentTheme(newTheme);
-        setChartKey(prev => prev + 1);
-      }
-    };
-
-    // 初始检查
-    checkTheme();
-
-    // 监听 localStorage 变化
-    const handleStorageChange = () => {
-      // 延迟一点时间确保 localStorage 已更新
-      setTimeout(checkTheme, 50);
-    };
-
-    // 监听系统主题变化
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleMediaChange = () => {
-      checkTheme();
-    };
-
-    // 监听自定义主题变化事件
-    const handleThemeChange = () => {
-      setTimeout(checkTheme, 50);
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    window.addEventListener('themeChange', handleThemeChange);
-    mediaQuery.addEventListener('change', handleMediaChange);
-
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-      window.removeEventListener('themeChange', handleThemeChange);
-      mediaQuery.removeEventListener('change', handleMediaChange);
-    };
-  }, [currentTheme]);
-
-  // 处理窗口大小变化和拖拽导致的图表刷新问题
-  useEffect(() => {
-    // 节流后的图表刷新函数
-    const throttledChartRefresh = throttle(() => {
-      // 强制重新渲染图表
-      setChartKey(prev => prev + 1);
-    }, 300); // 300ms节流延迟
-
-    // 监听窗口大小变化
-    const handleResize = () => {
-      throttledChartRefresh();
-    };
-
-    // 监听拖拽相关事件
-    const handleDragEnd = () => {
-      setTimeout(throttledChartRefresh, 100);
-    };
-
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('dragend', handleDragEnd);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('dragend', handleDragEnd);
-    };
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // 监听标签页切换，确保图表正确渲染
-  useEffect(() => {
-    if (activeEntryTab === '特殊事件及地形效果') {
-      const timer = setTimeout(() => {
-        setChartKey(prev => prev + 1);
-        window.dispatchEvent(new Event('resize'));
-      }, 200);
-
-      return () => clearTimeout(timer);
-    }
-  }, [activeEntryTab]);
 
   // 监听外部Tab切换
   useEffect(() => {
@@ -578,7 +376,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           talismanEntries: dataManager.getTalismanEntries(),
           inGameEntries: dataManager.getInGameEntries(),
           enhancementCategories: dataManager.getEnhancementCategories(),
-          inGameSpecialBuff: dataManager.getInGameSpecialBuff(),
           itemEffects: dataManager.getItemEffects(),
           deepNightEntries: dataManager.getDeepNightEntries(),
           loading: false
@@ -938,7 +735,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     },
   ];
 
-  // 深夜模式词条表格列定义（复用局外词条的列定义）
+  // 深夜模式局外词条表格列定义（复用局外词条的列定义）
   const deepNightColumns: TableColumnsType<EntryData> = [
     {
       title: 'ID',
@@ -1005,56 +802,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     },
   ];
 
-  // 特殊事件及地形效果表格列定义
-  const specialBuffColumns: TableColumnsType<EntryData> = [
-    {
-      title: 'ID',
-      dataIndex: 'entry_id',
-      key: 'entry_id',
-      width: '8%',
-      align: 'center',
-      onCell: () => ({
-        style: { fontSize: '11px', color: 'var(--theme-text-secondary)' }
-      }),
-      sorter: (a, b) => {
-        const idA = a.entry_id || '';
-        const idB = b.entry_id || '';
-        return idA.localeCompare(idB);
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_id' ? sortedInfo.order : null,
-    },
-    {
-      title: '类型',
-      dataIndex: 'entry_type',
-      key: 'entry_type',
-      align: 'center',
-      width: '15%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
-      sorter: (a, b) => {
-        const typeA = a.entry_type || '';
-        const typeB = b.entry_type || '';
-        return typeA.localeCompare(typeB, 'zh-CN');
-      },
-      sortDirections: ['ascend', 'descend'],
-      sortOrder: sortedInfo.columnKey === 'entry_type' ? sortedInfo.order : null,
-    },
-    {
-      title: '效果名称',
-      dataIndex: 'entry_name',
-      key: 'entry_name',
-      width: '20%',
-    },
-    {
-      title: '效果描述',
-      dataIndex: 'explanation',
-      key: 'explanation',
-      width: '55%',
-      render: (text) => text || '-',
-    },
-  ];
 
   // 道具效果表格列定义
   const itemEffectColumns: TableColumnsType<ItemEffect> = [
@@ -1222,10 +969,14 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         columns = outsiderColumns;
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
         break;
-      case '深夜模式词条':
+      case '深夜模式局外词条':
         tableData = data.deepNightEntries;
         columns = deepNightColumns;
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        break;
+      case '深夜模式局内词条':
+        tableData = []; // 暂时为空，等待数据
+        columns = inGameColumns; // 复用局内词条的列定义
         break;
       case '护符词条':
         tableData = data.talismanEntries;
@@ -1236,11 +987,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = data.inGameEntries;
         columns = inGameColumns;
         tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
-        break;
-      case '特殊事件及地形效果':
-        tableData = data.inGameSpecialBuff;
-        columns = specialBuffColumns;
-        tableData = filterData(tableData, searchKeyword);
         break;
       default:
         tableData = data.outsiderEntries;
@@ -1279,52 +1025,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           />
         )}
 
-        {/* 特殊事件及地形效果 tab 的折线图 */}
-        {tabKey === '特殊事件及地形效果' && !data.loading && (
-          <div style={{
-            marginTop: '30px',
-            padding: '20px',
-            backgroundColor: 'var(--theme-bg-primary)',
-            borderRadius: '8px',
-            border: '1px solid var(--theme-border)'
-          }}>
-            <div style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginBottom: '20px',
-            }}>
-              <h3 style={{
-                color: 'var(--theme-text-primary)',
-                fontSize: '16px',
-                fontWeight: 'bold',
-                margin: 0
-              }}>
-                🪬 恶魔的添翼:卢恩-增伤关系图
-              </h3>
-              <Button.Group size="small">
-                <Button
-                  type={isLinearMode ? 'default' : 'primary'}
-                  onClick={() => setIsLinearMode(false)}
-                >
-                  非线性模式
-                </Button>
-                <Button
-                  type={isLinearMode ? 'primary' : 'default'}
-                  onClick={() => setIsLinearMode(true)}
-                >
-                  线性模式
-                </Button>
-              </Button.Group>
-            </div>
-            <div
-              id="line-chart-container"
-              style={{ height: '400px' }}
-            >
-              <Line key={`line-chart-${chartKey}-${activeEntryTab}`} {...lineConfig} />
-            </div>
-          </div>
-        )}
       </div>
     );
   };
@@ -1428,7 +1128,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       );
     }
 
-    if (tabKey === '强化类别词条适用范围' || tabKey === '特殊事件及地形效果') {
+    if (tabKey === '强化类别词条适用范围') {
       return null;
     }
 
@@ -1527,7 +1227,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           </div>
         </div>
       );
-    } else if (tabKey === '深夜模式词条') {
+    } else if (tabKey === '深夜模式局外词条') {
       return (
         <div className="filter-search-row">
           <div className="filter-search-content">
@@ -1571,6 +1271,45 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 options={characterOptions}
                 notFoundContent="暂无角色"
                 showSearch={false}
+              />
+              <Button onClick={clearAll} type="default" size="middle">
+                清除所有
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+    } else if (tabKey === '深夜模式局内词条') {
+      return (
+        <div className="filter-search-row">
+          <div className="filter-search-content">
+            {/* 左侧：搜索、多选、清除 */}
+            <div className="filter-controls">
+              <CustomSearch
+                placeholder={`搜索 ${tabKey} 关键字`}
+                value={searchKeyword}
+                onChange={setSearchKeyword}
+                onSearch={(value) => {
+                  setSearchKeyword(value);
+                  setCurrentPage(1);
+                }}
+                className="custom-search-input"
+                allowClear
+              />
+              <Select
+                className="deep-night-in-game-type-select"
+                mode="multiple"
+                allowClear
+                tagRender={tagRender}
+                placeholder="按词条类型筛选"
+                value={selectedInGameTypes}
+                onChange={(values) => {
+                  setSelectedInGameTypes(values);
+                  setCurrentPage(1);
+                }}
+                options={inGameTypeOptions}
+                maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
+                style={{ minWidth: '180px', maxWidth: '300px' }}
               />
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
@@ -1687,16 +1426,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
             ),
           },
           {
-            key: '特殊事件及地形效果',
-            label: '🌑 特殊事件及地形效果',
-            children: (
-              <div id="special-events">
-                {renderSearchAndFilter('特殊事件及地形效果')}
-                {renderTableContent('特殊事件及地形效果')}
-              </div>
-            ),
-          },
-          {
             key: '道具效果',
             label: '🌒 道具/采集效果',
             children: (
@@ -1707,12 +1436,22 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
             ),
           },
           {
-            key: '深夜模式词条',
+            key: '深夜模式局外词条',
             label: '🌌 深夜模式-局外词条',
             children: (
               <div id="deep-night-entries">
-                {renderSearchAndFilter('深夜模式词条')}
-                {renderTableContent('深夜模式词条')}
+                {renderSearchAndFilter('深夜模式局外词条')}
+                {renderTableContent('深夜模式局外词条')}
+              </div>
+            ),
+          },
+          {
+            key: '深夜模式局内词条',
+            label: '🌌 深夜模式-局内词条',
+            children: (
+              <div id="deep-night-in-game-entries">
+                {renderSearchAndFilter('深夜模式局内词条')}
+                {renderTableContent('深夜模式局内词条')}
               </div>
             ),
           },
