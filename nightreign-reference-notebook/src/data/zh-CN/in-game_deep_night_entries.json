@@ -3,34 +3,34 @@
 		"6610400": {
 			"entry_entry_id": 6610400,
 			"entry_name": "提升血量上限",
-			"entry_type": "能力值",
+			"entry_type": "能力",
 			"explanation": "生命值上限+10%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6610500": {
 			"entry_id": 6610500,
 			"entry_name": "提升专注值上限",
-			"entry_type": "能力值",
+			"entry_type": "能力",
 			"explanation": "专注值上限+15%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6610600": {
 			"entry_id": 6610600,
 			"entry_name": "提升精力上限",
-			"entry_type": "能力值",
+			"entry_type": "能力",
 			"explanation": "精力值上限+12%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6610700": {
 			"entry_id": 6610700,
 			"entry_name": "减少专注值消耗",
-			"entry_type": "能力值",
+			"entry_type": "能力",
 			"explanation": "专注值消耗-8%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6610800": {
 			"entry_id": 6610800,
@@ -38,7 +38,7 @@
 			"entry_type": "攻击力",
 			"explanation": "魔力/火/雷/圣属性伤害+5%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6610801": {
 			"entry_id": 6610801,
@@ -46,7 +46,7 @@
 			"entry_type": "攻击力",
 			"explanation": "魔力/火/雷/圣属性伤害+8%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6610802": {
 			"entry_id": 6610802,
@@ -54,7 +54,7 @@
 			"entry_type": "攻击力",
 			"explanation": "魔力/火/雷/圣属性伤害+11%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611001": {
 			"entry_id": 6611001,
@@ -62,7 +62,7 @@
 			"entry_type": "减伤率",
 			"explanation": "受到的物理属性伤害-10.5%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611002": {
 			"entry_id": 6611002,
@@ -70,7 +70,7 @@
 			"entry_type": "减伤率",
 			"explanation": "受到的物理属性伤害-12%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611100": {
 			"entry_id": 6611100,
@@ -78,7 +78,7 @@
 			"entry_type": "减伤率",
 			"explanation": "受到的魔力/火/雷/圣属性伤害-6%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611101": {
 			"entry_id": 6611101,
@@ -86,7 +86,7 @@
 			"entry_type": "减伤率",
 			"explanation": "受到的魔力/火/雷/圣属性伤害-10.5%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611102": {
 			"entry_id": 6611102,
@@ -94,7 +94,7 @@
 			"entry_type": "减伤率",
 			"explanation": "受到的魔力/火/雷/圣属性伤害-12%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611200": {
 			"entry_id": 6611200,
@@ -102,7 +102,7 @@
 			"entry_type": "攻击力",
 			"explanation": "魔法造成的伤害+5% (只要用魔法杖打出的都算）",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611201": {
 			"entry_id": 6611201,
@@ -110,7 +110,7 @@
 			"entry_type": "攻击力",
 			"explanation": "魔法造成的伤害+8.5% (只要用魔法杖打出的都算）",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611202": {
 			"entry_id": 6611202,
@@ -118,7 +118,7 @@
 			"entry_type": "攻击力",
 			"explanation": "魔法造成的伤害+11% (只要用魔法杖打出的都算）",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611300": {
 			"entry_id": 6611300,
@@ -126,7 +126,7 @@
 			"entry_type": "攻击力",
 			"explanation": "祷告造成的伤害+5%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611301": {
 			"entry_id": 6611301,
@@ -134,7 +134,7 @@
 			"entry_type": "攻击力",
 			"explanation": "祷告造成的伤害+8.5%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611302": {
 			"entry_id": 6611302,
@@ -142,7 +142,7 @@
 			"entry_type": "攻击力",
 			"explanation": "祷告造成的伤害+11%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"6611400": {
 			"entry_id": 6611400,
@@ -150,31 +150,31 @@
 			"entry_type": "恢复",
 			"explanation": "增加红露滴圣杯瓶10%恢复量",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8760000": {
 			"entry_id": 8760000,
 			"entry_name": "降低血量上限",
-			"entry_type": "减益(能力值)",
+			"entry_type": "减益(能力)",
 			"explanation": "生命值上限-4% / -6%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8760100": {
 			"entry_id": 8760100,
 			"entry_name": "降低专注值上限",
-			"entry_type": "减益(能力值)",
+			"entry_type": "减益(能力)",
 			"explanation": "专注值上限-6% / -9%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8760200": {
 			"entry_id": 8760200,
 			"entry_name": "降低精力上限",
-			"entry_type": "减益(能力值)",
+			"entry_type": "减益(能力)",
 			"explanation": "精力值上限-5% / -8%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8761000": {
 			"entry_id": 8761000,
@@ -182,7 +182,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "受到的物理属性伤害+6% / +8%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8761100": {
 			"entry_id": 8761100,
@@ -190,7 +190,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "受到的魔力/火/雷/圣属性伤害+6% / +8%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8762000": {
 			"entry_id": 8762000,
@@ -198,7 +198,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "中毒/猩红腐败/出血/冻伤/催眠/发狂/骤死异常耐受上限-30 / -45",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8763000": {
 			"entry_id": 8763000,
@@ -206,7 +206,7 @@
 			"entry_type": "减益(恢复)",
 			"explanation": "减少红露滴圣杯瓶6% / 9%恢复量",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8766000": {
 			"entry_id": 8766000,
@@ -214,7 +214,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "每秒减少1点生命值",
 			"notes": "可以触发“受到损伤的当下，能通过攻击恢复部分血量”系列\n不能触发“受到损伤时……”系列",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8770000": {
 			"entry_id": 8770000,
@@ -222,7 +222,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "黑夜雨伤害变为2倍 / 2.5倍",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8771000": {
 			"entry_id": 8771000,
@@ -230,7 +230,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "随着特定时间点，受到的伤害持续叠加1% / 2.5%，共叠加4次\n触发时机暂不确定，猜测是：第一天开始、第一个缩圈结束，第二圈开始缩圈，第二圈缩圈结束。\n第二天黎明时，效果会解除。",
 			"notes": "不确定，有待进一步研究",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8800100": {
 			"entry_id": 8800100,
@@ -238,7 +238,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "闪避后无敌帧结束的后摇，受到的伤害+15% / +20%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8800200": {
 			"entry_id": 8800200,
@@ -246,7 +246,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "连续闪避时，受到的伤害+30% / +46%，效果持续15秒",
 			"notes": "连续按闪避时，第3次闪避触发效果\n2次按下闪避键的间隔小于1秒，就会被判定为“连续闪避”",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8801000": {
 			"entry_id": 8801000,
@@ -254,7 +254,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "使用圣杯瓶的动作中，受到的伤害+33%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8810000": {
 			"entry_id": 8810000,
@@ -262,7 +262,7 @@
 			"entry_type": "减益(行动)",
 			"explanation": "血量不满时，造成的伤害-5% / -7%",
 			"notes": "现版本血量小于84.99%才会触发该效果",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8810200": {
 			"entry_id": 8810200,
@@ -270,7 +270,7 @@
 			"entry_type": "减益(行动)",
 			"explanation": "血量不满时，绝招量表累积速率-10% / -15%",
 			"notes": "现版本血量小于84.99%才会触发该效果",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8810300": {
 			"entry_id": 8810300,
@@ -278,7 +278,7 @@
 			"entry_type": "减益(行动)",
 			"explanation": "血量不满时，每1.3秒增加2点中毒值",
 			"notes": "现版本血量小于84.99%才会触发该效果",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8810400": {
 			"entry_id": 8810400,
@@ -286,7 +286,7 @@
 			"entry_type": "减益(行动)",
 			"explanation": "血量不满时，每1.3秒增加2点腐败值",
 			"notes": "现版本血量小于84.99%才会触发该效果",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8813100": {
 			"entry_id": 8813100,
@@ -294,7 +294,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "精力值小于50%时，受到的伤害+10% / +15%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8821000": {
 			"entry_id": 8821000,
@@ -302,7 +302,7 @@
 			"entry_type": "减益(行动)",
 			"explanation": "每次攻击有3% / 5%，造成的伤害变为1%",
 			"notes": "仅降低伤害，依旧可以打出削韧值/异常值/冲击力",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8830000": {
 			"entry_id": 8830000,
@@ -310,7 +310,7 @@
 			"entry_type": "减益(减伤率)",
 			"explanation": "玩家触发异常后，异常状态扣除的血量增加+25% / +35%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8831000": {
 			"entry_id": 8831000,
@@ -318,15 +318,15 @@
 			"entry_type": "减益(行动)",
 			"explanation": "陷入濒死后，绝招量表-30% / -45%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8831200": {
 			"entry_id": 8831200,
 			"entry_name": "濒死时，降低血量上限",
-			"entry_type": "减益(能力值)",
+			"entry_type": "减益(能力)",
 			"explanation": "陷入濒死后，30秒内，生命值上限-15%",
 			"notes": "",
-			"superposability": "相同entry_name可叠加"
+			"superposability": "相同词条可叠加"
 		},
 		"8880000": {
 			"entry_id": 8880000,
@@ -334,7 +334,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能刮起冰风暴",
 			"notes": "冰风暴：造成120点基础魔力属性伤害，4点削韧，1号冲击力，50点冻伤值\n冰风暴持续存在1.2秒，半径1.7m，但仅进行一次伤害判定\n附魔效果：20秒内，武器附带20点冻伤值",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8880200": {
 			"entry_id": 8880200,
@@ -342,7 +342,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能喷洒黑焰",
 			"notes": "黑焰：造成5点基础火属性伤害，1点削韧，0号冲击力\n持续存在3.5秒，半径1m，附带黑焰特效\n黑焰特效：1.2秒内，每0.1秒扣除敌人（最大生命值的0.010%+3）\n附魔效果：7秒内，武器附带12点火属性伤害\n黑焰效果可以多层无限叠加，每层的持续时间单独计算",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8880300": {
 			"entry_id": 8880300,
@@ -350,7 +350,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能形成幻影进行攻击",
 			"notes": "幻影：造成165点基础物理伤害，8点削韧，6号冲击力",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8881000": {
 			"entry_id": 8881000,
@@ -358,7 +358,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "蓄力使出打击攻击时，能释放黄金冲击波",
 			"notes": "黄金冲击波：造成150点基础圣属性伤害，4点削韧，1号冲击力\n黄金冲击波会向前扩散12m\n附魔效果：20秒内，武器附带12点圣属性伤害",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8881200": {
 			"entry_id": 8881200,
@@ -366,7 +366,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能将敌人拉近自己",
 			"notes": "拉拽：造成45点基础魔力属性伤害，3点削韧，3号冲击力\n共有3层不同的球状攻击判定，半径3.2m / 半径5.2m / 半径7m\n根据敌人的远近最多可以让3个攻击判定都命中",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8881500": {
 			"entry_id": 8881500,
@@ -374,7 +374,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能形成熔岩",
 			"notes": "熔岩：造成50点基础火属性伤害，5点削韧，3号冲击力\n熔岩持续存在3秒，半径2m\n每0.5秒可持续造成25点基础火属性伤害，1点削韧，0号冲击力\n附魔效果：20秒内，武器附带12点火属性伤害",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8882100": {
 			"entry_id": 8882100,
@@ -382,7 +382,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能释放雷电",
 			"notes": "雷电：造成120点基础雷属性伤害，5点削韧，3号冲击力\n附魔效果：20秒内，武器附带12点雷属性伤害",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8882500": {
 			"entry_id": 8882500,
@@ -390,7 +390,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能形成催眠烟雾",
 			"notes": "催眠烟雾：持续存在3秒，半径1m扩散至3m，每0.5秒可造成20点睡眠值\n附魔效果：20秒内，武器附带20点催眠值\n（实际的存在时间解包看到就是3秒，比视觉上的动画特效更长）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8883000": {
 			"entry_id": 8883000,
@@ -398,7 +398,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使出蓄力攻击时，能形成魔力球，进行追击",
 			"notes": "魔力球：3个魔力球，每个造成20点基础魔力属性伤害，1点削韧，3号冲击力\n（弓专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8883100": {
 			"entry_id": 8883100,
@@ -406,7 +406,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "精密射击时，能在命中点降下落雷",
 			"notes": "落雷：造成33%武器面板攻击力+30点基础雷属性伤害，不造成削韧，0号冲击力\n在水域可以额外形成扩散雷，造成60点基础雷属性伤害，不造成削韧，1号冲击力\n（弓弩专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8883200": {
 			"entry_id": 8883200,
@@ -414,7 +414,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "精密射击时，能在命中点形成毒性烟雾",
 			"notes": "毒性烟雾：持续存在1.8秒，半径1m扩散至3m，每0.5秒可造成11点中毒值\n（弓弩专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8883300": {
 			"entry_id": 8883300,
@@ -422,7 +422,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "精密射击时，能在命中点形成腐败烟雾",
 			"notes": "腐败烟雾：持续存在1.8秒，半径1m扩散至3m，每0.5秒可造成9点腐败值\n（弓弩专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8883400": {
 			"entry_id": 8883400,
@@ -430,7 +430,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "精密射击时，能在命中点招来血蝇",
 			"notes": "血蝇：造成3%武器面板攻击力+1点基础物理伤害，不造成削韧，0号冲击力\n持续存在1.8秒，半径1m扩散至3m，每0.5秒可造成7点出血值\n（弓弩专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8884200": {
 			"entry_id": 8884200,
@@ -438,7 +438,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "持盾维持防御时，能缓慢恢复血量\n并展开圣域，提升减伤率",
 			"notes": "持盾维持防御超过2.5秒后展开圣域，内置3秒冷却时间\n圣域：附近的友方单位，受到的伤害-15%，\n每1.5秒回复7点生命值，持续35秒\n弱化版圣域，和战技/其他entry_name引发的圣域数值不同\n（盾牌专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8884300": {
 			"entry_id": 8884300,
@@ -446,7 +446,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "防御时失去平衡，或是被敌人格挡时\n能发动忍耐，提升强韧度与减伤率",
 			"notes": "被破盾或者被弹反后，3.5秒内，受到的伤害-30%，免疫冲击力\n（盾牌专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8885000": {
 			"entry_id": 8885000,
@@ -454,7 +454,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "使用圣杯瓶时，也会恢复专注值",
 			"notes": "使用圣杯瓶时，可以额外回复20%专注值",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8885100": {
 			"entry_id": 8885100,
@@ -462,7 +462,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "专注值不够时，咏唱失败动作会转为恢复专注值",
 			"notes": "咏唱失败的动作会被替换，并恢复13%专注值\n（法术触媒专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		},
 		"8885200": {
 			"entry_id": 8885200,
@@ -470,7 +470,7 @@
 			"entry_type": "特殊效果",
 			"explanation": "维持防御时，能提升魔法、祷告的\n攻击力与缩短咏唱时间",
 			"notes": "双手共持法术触媒时，按照维持防御的时间触发增益buff，最多3层，\n3层buff可互相叠加，但buff结束时间独立计算\n每2.5秒触发一层持续时间为25秒的增益\n法术伤害+10%，获得相当于30点灵巧所带来的施法速度\n（法术触媒专属entry_name）",
-			"superposability": "相同entry_name不可叠加"
+			"superposability": "相同词条不可叠加"
 		}
 	}
 ]

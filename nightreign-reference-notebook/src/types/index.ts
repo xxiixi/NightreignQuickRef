@@ -115,8 +115,11 @@ export const typeColorMap: Record<string, string> = {
   '香': 'magenta',
   '油脂': 'gold',
   // 深夜模式词条
-  '出击时的道具(结晶露滴)': 'blue',
-  '减益(减伤率)': 'volcano',
+  '出击时的道具(结晶露滴)': 'green',
+  '减益(减伤率)': 'magenta',
   '减益(能力值)': 'red',
-  '减益(行动)': 'orange',
+  '减益(行动)': 'geekblue',
+  // 深夜模式局内词条
+  '减益(恢复)': 'volcano',
+  '特殊效果': 'cyan',
 }; 

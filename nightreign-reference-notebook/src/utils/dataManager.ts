@@ -9,6 +9,7 @@ export interface EntryData {
   explanation: string | null;
   superposability?: string | null;
   talisman?: string;
+  notes?: string | null;
 }
 
 export interface EnhancementCategory {
@@ -141,7 +142,8 @@ class DataManager {
         inGameSpecialBuff,
         characterData,
         itemEffects,
-        deepNightEntries
+        deepNightEntries,
+        inGameDeepNightEntries
       ] = await Promise.all([
         import('../data/zh-CN/outsider_entries_zh-CN.json'),
         import('../data/zh-CN/talisman_entries_zh-CN.json'),
@@ -155,7 +157,8 @@ class DataManager {
         import('../data/zh-CN/in-game_special_buff.json'),
         import('../data/character-info/character_data.json'),
         import('../data/zh-CN/item_effect.json'),
-        import('../data/zh-CN/deep_night_entries.json')
+        import('../data/zh-CN/deep_night_entries.json'),
+        import('../data/zh-CN/in-game_deep_night_entries.json')
       ]);
 
       // 加载角色详细数据
@@ -217,6 +220,7 @@ class DataManager {
       this.dataCache.set('characterDetailData', characterDetailData);
       this.dataCache.set('itemEffects', itemEffects.default);
       this.dataCache.set('deepNightEntries', deepNightEntries.default);
+      this.dataCache.set('inGameDeepNightEntries', inGameDeepNightEntries.default);
 
       this.isLoaded = true;
       console.log('所有数据预加载完成');
@@ -281,7 +285,57 @@ class DataManager {
   }
 
   public getDeepNightEntries(): EntryData[] {
-    return this.dataCache.get('deepNightEntries') || [];
+    const rawData = this.dataCache.get('deepNightEntries') || [];
+    // 处理深夜模式局外词条的数据格式
+    const processedData: EntryData[] = [];
+    
+    if (Array.isArray(rawData)) {
+      rawData.forEach(group => {
+        if (typeof group === 'object' && group !== null) {
+          Object.values(group).forEach((entry: any) => {
+            if (entry && typeof entry === 'object') {
+              processedData.push({
+                entry_id: entry.entry_id || entry.entry_entry_id || '',
+                entry_name: entry.entry_name || '',
+                entry_type: entry.entry_type || null,
+                explanation: entry.explanation || null,
+                superposability: entry.superposability || null,
+                notes: entry.notes || null
+              });
+            }
+          });
+        }
+      });
+    }
+    
+    return processedData;
+  }
+
+  public getInGameDeepNightEntries(): EntryData[] {
+    const rawData = this.dataCache.get('inGameDeepNightEntries') || [];
+    // 处理深夜模式局内词条的数据格式
+    const processedData: EntryData[] = [];
+    
+    if (Array.isArray(rawData)) {
+      rawData.forEach(group => {
+        if (typeof group === 'object' && group !== null) {
+          Object.values(group).forEach((entry: any) => {
+            if (entry && typeof entry === 'object') {
+              processedData.push({
+                entry_id: entry.entry_id || entry.entry_entry_id || '',
+                entry_name: entry.entry_name || '',
+                entry_type: entry.entry_type || null,
+                explanation: entry.explanation || null,
+                superposability: entry.superposability || null,
+                notes: entry.notes || null
+              });
+            }
+          });
+        }
+      });
+    }
+    
+    return processedData;
   }
 
   // 检查是否已加载

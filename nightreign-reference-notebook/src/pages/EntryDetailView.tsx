@@ -202,6 +202,7 @@ interface DataState {
   enhancementCategories: EnhancementCategory[];
   itemEffects: ItemEffect[];
   deepNightEntries: EntryData[];
+  inGameDeepNightEntries: EntryData[];
   loading: boolean;
 }
 
@@ -284,6 +285,19 @@ const inGameTypeOptions = [
   { value: '不甘', label: '不甘' },
 ];
 
+// 深夜模式局内词条类型选项
+const inGameDeepNightTypeOptions = [
+  { value: '能力值', label: '能力值' },
+  { value: '攻击力', label: '攻击力' },
+  { value: '减伤率', label: '减伤率' },
+  { value: '恢复', label: '恢复' },
+  { value: '减益(能力值)', label: '减益(能力值)' },
+  { value: '减益(减伤率)', label: '减益(减伤率)' },
+  { value: '减益(恢复)', label: '减益(恢复)' },
+  { value: '减益(行动)', label: '减益(行动)' },
+  { value: '特殊效果', label: '特殊效果' },
+];
+
 const tagRender = (props: { label: React.ReactNode; value: string; closable?: boolean; onClose?: () => void }) => {
   const { label, value, closable, onClose } = props;
   const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -352,6 +366,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     enhancementCategories: [],
     itemEffects: [],
     deepNightEntries: [],
+    inGameDeepNightEntries: [],
     loading: true
   });
 
@@ -378,6 +393,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           enhancementCategories: dataManager.getEnhancementCategories(),
           itemEffects: dataManager.getItemEffects(),
           deepNightEntries: dataManager.getDeepNightEntries(),
+          inGameDeepNightEntries: dataManager.getInGameDeepNightEntries(),
           loading: false
         });
       } catch (error) {
@@ -975,8 +991,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
         break;
       case '深夜模式局内词条':
-        tableData = []; // 暂时为空，等待数据
+        tableData = data.inGameDeepNightEntries;
         columns = inGameColumns; // 复用局内词条的列定义
+        tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
         break;
       case '护符词条':
         tableData = data.talismanEntries;
@@ -1307,7 +1324,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setSelectedInGameTypes(values);
                   setCurrentPage(1);
                 }}
-                options={inGameTypeOptions}
+                options={inGameDeepNightTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
                 style={{ minWidth: '180px', maxWidth: '300px' }}
               />
