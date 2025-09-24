@@ -43,7 +43,9 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '局内词条', label: '🌖 局内词条', anchorId: 'in-game-entries', tabKey: '局内词条' },
         { key: '护符词条', label: '🌗 护符词条', anchorId: 'talisman-entries', tabKey: '护符词条' },
         { key: '强化类别词条适用范围', label: '🌘 强化类别词条适用范围', anchorId: 'enhancement-categories', tabKey: '强化类别词条适用范围' },
-        { key: '道具/采集效果', label: '🌒 道具/采集效果', anchorId: 'item-effects', tabKey: '道具效果' }
+        { key: '道具/采集效果', label: '🌒 道具/采集效果', anchorId: 'item-effects', tabKey: '道具效果' },
+        { key: '深夜模式-局外词条', label: '🌌 深夜模式-局外词条', anchorId: 'deep-night-entries', tabKey: '深夜模式局外词条' },
+        { key: '深夜模式-局内词条', label: '🌌 深夜模式-局内词条', anchorId: 'deep-night-in-game-entries', tabKey: '深夜模式局内词条' },
       ]
     },
     {
@@ -55,7 +57,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '圆桌厅堂人物数据', label: '🏛️ 圆桌厅堂人物数据', anchorId: 'roundtable-characters', tabKey: 'character-data' },
         { key: '永夜山羊召唤罪人详情', label: '🐐 永夜山羊召唤罪人详情', anchorId: 'sinner-details', tabKey: 'sinner-data' },
         { key: '利普拉的交易选项', label: '⚖️ 利普拉的交易(Boss战)', anchorId: 'lipula-trades', tabKey: 'lipula-trades' },
-        { key: '特殊事件及地形效果', label: '🌑 特殊事件及地形效果', anchorId: 'special-events', tabKey: 'special-events' }
+        { key: '特殊事件及地形效果', label: '🌋 特殊事件及地形效果', anchorId: 'special-events', tabKey: 'special-events' }
       ]
     },
     {

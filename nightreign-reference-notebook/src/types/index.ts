@@ -75,7 +75,7 @@ export interface CharacterData {
 // 词条类型颜色映射
 export const typeColorMap: Record<string, string> = {
   // 局外词条
-  '能力': 'blue',
+  '能力值': 'blue',
   '攻击力': 'red',
   '技艺/绝招': 'orange',
   '魔法/祷告': 'purple',

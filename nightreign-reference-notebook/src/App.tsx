@@ -86,6 +86,14 @@ function App() {
     setActiveStep(0);
   }, [activeTab]);
 
+  // 子Tab为一次性指令：生效后立即清空，避免持续控制子组件，阻止手动切换
+  useEffect(() => {
+    if (activeSubTab) {
+      const timer = setTimeout(() => setActiveSubTab(''), 0);
+      return () => clearTimeout(timer);
+    }
+  }, [activeSubTab]);
+
   // 渲染内容
   const renderContent = () => {
     switch (activeTab) {

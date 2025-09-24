@@ -354,23 +354,13 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         {/* 最新更新 */}
                         <div style={{ marginBottom: '8px' }}>
                           <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>
-                            🆕 最新更新 (v1.02.02)
+                            🆕 最新更新 (v1.02.3 | 9月24日)
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 添加了深夜模式局外词条
+                            • 添加了深夜模式局外词条、局内词条
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 更新了数据来源
-                          </div>
-                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 更新了1.02.2部分普通局外遗物数据
-                            <span style={{ marginLeft: '12px', fontSize: '10px' }}>
-                              <br />
-                              - 隐士开大HP上限提升<br />
-                              - 铁眼标记持续时间增加<br />
-                              - 特定武器攻击回血、回蓝提升<br />
-                              - 击飞减伤Buff时间减少
-                            </span>
+                            • 更新了v1.02.3版本的新数据
                           </div>
                         </div>
 
@@ -381,19 +371,16 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
                             • 夜雨伤害数据待更新(无数据来源)
                           </div>
-                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 深夜模式局内词条待更新(无数据来源)
-                          </div>
                         </div>
 
-                        <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}>
+                        {/* <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }}>
                           <div style={{ fontWeight: 'bold', color: '#fa8c16', marginBottom: '4px' }}>
                             🐛 已知问题
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
                             • 部分数据可能存在版本差异，发现后会尽快修正
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   }
@@ -426,7 +413,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
           <Text type="secondary" className="subtitle-text version-info">
-            黑夜君临版本: v1.02.02 (2025.9.10更新)
+            黑夜君临版本: v1.02.3 (2025.9.24更新)
           </Text>
           <Text type="secondary" className="subtitle-text">
             个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容

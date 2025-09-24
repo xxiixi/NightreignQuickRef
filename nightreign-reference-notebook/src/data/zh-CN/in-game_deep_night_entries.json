@@ -3,28 +3,28 @@
 		"6610400": {
 			"entry_entry_id": 6610400,
 			"entry_name": "提升血量上限",
-			"entry_type": "能力",
+			"entry_type": "能力值",
 			"explanation": "生命值上限+10%",
 			"superposability": "相同词条可叠加"
 		},
 		"6610500": {
 			"entry_id": 6610500,
 			"entry_name": "提升专注值上限",
-			"entry_type": "能力",
+			"entry_type": "能力值",
 			"explanation": "专注值上限+15%",
 			"superposability": "相同词条可叠加"
 		},
 		"6610600": {
 			"entry_id": 6610600,
 			"entry_name": "提升精力上限",
-			"entry_type": "能力",
+			"entry_type": "能力值",
 			"explanation": "精力值上限+12%",
 			"superposability": "相同词条可叠加"
 		},
 		"6610700": {
 			"entry_id": 6610700,
 			"entry_name": "减少专注值消耗",
-			"entry_type": "能力",
+			"entry_type": "能力值",
 			"explanation": "专注值消耗-8%",
 			"superposability": "相同词条可叠加"
 		},
@@ -141,7 +141,7 @@
 		"8760000": {
 			"entry_id": 8760000,
 			"entry_name": "降低血量上限",
-			"entry_type": "减益(能力)",
+			"entry_type": "减益(能力值)",
 			"explanation": "生命值上限-4% / -6%",
 			
 			"superposability": "相同词条可叠加"
@@ -149,7 +149,7 @@
 		"8760100": {
 			"entry_id": 8760100,
 			"entry_name": "降低专注值上限",
-			"entry_type": "减益(能力)",
+			"entry_type": "减益(能力值)",
 			"explanation": "专注值上限-6% / -9%",
 			
 			"superposability": "相同词条可叠加"
@@ -157,7 +157,7 @@
 		"8760200": {
 			"entry_id": 8760200,
 			"entry_name": "降低精力上限",
-			"entry_type": "减益(能力)",
+			"entry_type": "减益(能力值)",
 			"explanation": "精力值上限-5% / -8%",
 			
 			"superposability": "相同词条可叠加"
@@ -297,7 +297,7 @@
 		"8831200": {
 			"entry_id": 8831200,
 			"entry_name": "濒死时，降低血量上限",
-			"entry_type": "减益(能力)",
+			"entry_type": "减益(能力值)",
 			"explanation": "陷入濒死后，30秒内，生命值上限-15%",
 			"superposability": "相同词条可叠加"
 		},

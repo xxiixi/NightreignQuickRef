@@ -2,35 +2,35 @@
     {
         "entry_id":"8000000",
         "entry_name":"提升血量上限",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"生命值上限+10% \/ +15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8010000",
         "entry_name":"提升专注值上限",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"专注值上限+10% \/ +15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8010100",
         "entry_name":"减少专注值消耗",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"专注值消耗-10% \/ -15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8020000",
         "entry_name":"提升精力上限",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"精力值上限+10% \/ +15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8020200",
         "entry_name":"提升精力恢复速度",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"精力回复速度+4点\/秒 \/ +6点\/秒",
         "superposability":"可叠加"
     },
@@ -247,28 +247,28 @@
     {
         "entry_id":"8220000",
         "entry_name":"提升防御强度",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"防御时，最终损失的精力值-10%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8220001",
         "entry_name":"提升防御强度＋１",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"防御时，最终损失的精力值-15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8220002",
         "entry_name":"提升防御强度＋２",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"防御时，最终损失的精力值-20%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8230000",
         "entry_name":"提升强韧度",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"受到的韧性伤害-25% \/ -38%",
         "superposability":"可叠加"
     },
@@ -409,7 +409,7 @@
         "entry_id":"8350000",
         "entry_name":"提升战技攻击力",
         "entry_type":"攻击力",
-        "explanation":"战技造成的伤害+5% \/ +8% \/ +11%",
+        "explanation":"战技造成的伤害+7% \/ +9% \/ +14%",
         "superposability":"可叠加"
     },
     {
@@ -576,21 +576,21 @@
     {
         "entry_id":"8500000",
         "entry_name":"打倒敌人时，增加获得的卢恩",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"获得的卢恩+10%，仅对击杀奖励有效",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8510000",
         "entry_name":"提升观察力",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"观察力+20",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8520000",
         "entry_name":"敌人比较不会攻击自己",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"仇恨增益-300 \/ -450 \/ -600",
         "superposability":"可叠加"
     },
@@ -807,7 +807,7 @@
     {
         "entry_id":"8652000",
         "entry_name":"防御成功时，提升强韧度",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"受到的韧性伤害-12%，持续10秒",
         "superposability":"未知"
     },

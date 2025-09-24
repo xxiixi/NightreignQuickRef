@@ -1932,7 +1932,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             },
             {
               key: 'special-events',
-              label: '🌑 特殊事件及地形效果',
+              label: '🌋 特殊事件及地形效果',
               children: (
                 <div id="special-events">
                   {loading ? (
