@@ -514,7 +514,7 @@
         "entry_id":"8440200",
         "entry_name":"使用圣杯瓶时，改为缓慢恢复",
         "entry_type":"恢复",
-        "explanation":"使用圣杯瓶时，能缓慢恢复血量",
+        "explanation":"立刻恢复10%(受恢复量buff加成)；后续恢复1%/0.1s，持续8s(不受恢复量buff加成)",
         "superposability":"不可叠加"
     },
     {

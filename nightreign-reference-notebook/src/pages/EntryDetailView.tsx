@@ -495,7 +495,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         item.superposability || '',
         item.talisman || '',
         item.entry_id || ''
-      ].map(field => field.toLowerCase());
+      ].map(field => String(field).toLowerCase());
 
       // 检查所有搜索词是否都在至少一个字段中出现
       return searchTerms.every(term =>
@@ -524,7 +524,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         item.effect || '',
         item.type || '',
         item.singleGridQty?.toString() || ''
-      ].map(field => field.toLowerCase());
+      ].map(field => String(field).toLowerCase());
 
       return searchTerms.every(term =>
         searchableFields.some(field => field.includes(term))
