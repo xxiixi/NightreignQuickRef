@@ -122,4 +122,7 @@ export const typeColorMap: Record<string, string> = {
   // 深夜模式局内词条
   '减益(恢复)': 'volcano',
   '特殊效果': 'cyan',
+  '法术触媒专属': 'purple',
+  '盾牌专属': 'magenta',
+  '弓弩专属': 'volcano',
 }; 
