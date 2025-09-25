@@ -30,13 +30,14 @@ const Footer: React.FC = React.memo(() => {
         <Text type="secondary" className="footer-text">
           <HeartOutlined style={{ marginRight: '4px', color: '#ff4d4f' }} />
           Created by{' '}
-          {/* <a 
-            href="https://github.com/xxiixi" 
-            target="_blank" 
+          <a
+            href="https://github.com/xxiixi"
+            target="_blank"
             rel="noopener noreferrer"
             className="footer-link"
-          > */}
-          Cecilia
+          >
+            Cecilia
+          </a>
           {/* </a> */}
           {' '}｜{' '}
           <GithubOutlined style={{ marginRight: '4px' }} />

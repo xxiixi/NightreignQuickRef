@@ -304,22 +304,21 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   />
                 </Popover>
               </Tooltip>
-              <Tooltip title="查看原项目" placement="bottom" className="theme-toggle-btn">
+              <Tooltip title="查看本项目" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
-                    <div style={{ padding: '8px', maxWidth: '200px', width: '180px' }}>
+                    <div style={{ padding: '8px', maxWidth: '200px' }}>
                       <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' }}>
-                        本项目GitHub仓库
+                        <GithubOutlined style={{ marginRight: '4px' }} /> GitHub仓库
                       </div>
                       <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
-                        <GithubOutlined style={{ marginRight: '4px' }} />NightreignQuickRef
                         <a
                           href="https://github.com/xxiixi/NightreignQuickRef"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="header-link"
                         >
-                          点击跳转
+                          NightreignQuickRef
                         </a>
                       </div>
                       <div style={{
