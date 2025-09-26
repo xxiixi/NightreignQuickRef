@@ -49,4 +49,8 @@ Build output will be generated in the `dist` directory
 npm run preview
 ```
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xxiixi/NightreignQuickRef&type=Date)](https://www.star-history.com/#xxiixi/NightreignQuickRef&Date)
+
 
