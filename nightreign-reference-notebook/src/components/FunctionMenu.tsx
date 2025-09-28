@@ -23,7 +23,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '升级所需卢恩', label: '💰 升级所需卢恩统计', anchorId: 'runes-required' },
         { key: '游戏时间机制: 监牢/夜雨', label: '🌧️ 游戏时间机制: 监牢/夜雨', anchorId: 'prison-rain-mechanism' },
         { key: '血量恢复计算器', label: '❤️ 血量恢复计算器', anchorId: 'recovery-calculator' },
-        { key: '隐士出招表', label: '🔮 隐士混合魔法出招表', anchorId: 'hermit-magic-list' }
+        { key: '评论与讨论', label: '💬 评论与讨论', anchorId: 'comments-discussion' }
       ]
     },
     {
@@ -32,7 +32,8 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       children: [
         { key: '角色属性数据', label: '📊 角色基础属性对比', anchorId: 'character-attributes' },
         { key: '角色详细数据', label: '📈 角色等级成长数据', anchorId: 'character-detail-data' },
-        { key: '无敌帧长度对比', label: '⚡ 翻滚/闪避无敌帧对比', anchorId: 'dodge-frames' }
+        { key: '无敌帧长度对比', label: '⚡ 翻滚/闪避无敌帧对比', anchorId: 'dodge-frames' },
+        { key: '隐士出招表', label: '🔮 隐士混合魔法出招表', anchorId: 'hermit-magic-list' }
       ]
     },
     {

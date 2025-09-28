@@ -108,9 +108,6 @@ body[tomato-theme="dark"] .steps-container {
   justify-content: flex-end;
   align-items: center;
 }
-
-/* 移除top-bar-left，因为logo按钮已经固定在左上角 */
-
 /* Logo图片样式 */
 .fixed-logo img {
   width: 50px;
@@ -198,6 +195,33 @@ body[tomato-theme="dark"] .fixed-logo img:hover {
   transform: translateX(2px) !important;
 }
 
+/* ===== Giscus评论组件 ===== */
+.giscus-comments-modal .ant-modal-body {
+  padding: 0;
+}
+
+.giscus-comments-modal .ant-modal-header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px 24px;
+}
+
+.giscus-comments-modal .ant-modal-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-1);
+}
+
+#giscus-comments {
+  min-height: 400px;
+  padding: 20px;
+}
+
+/* 确保Giscus在暗色模式下正确显示 */
+[data-theme="dark"] #giscus-comments,
+body[tomato-theme="dark"] #giscus-comments {
+  background-color: var(--content-bg);
+}
+
 /* 黑暗模式适配 */
 [data-theme="dark"] .function-menu .ant-menu-item,
 body[tomato-theme="dark"] .function-menu .ant-menu-item {
@@ -237,7 +261,8 @@ body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover 
 }
 
 .theme-toggle-btn,
-.language-toggle-btn {
+.language-toggle-btn,
+.visits-counter-btn {
   color: var(--color-title-primary) !important;
   border: none !important;
   background: transparent !important;
@@ -245,13 +270,68 @@ body[tomato-theme="dark"] .function-menu .ant-menu-submenu .ant-menu-item:hover 
   padding: var(--spacing-sm) var(--spacing-md);
   border-radius: var(--radius-md);
   transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
 }
 
 .theme-toggle-btn:hover,
-.language-toggle-btn:hover {
+.language-toggle-btn:hover,
+.visits-counter-btn:hover {
   color: var(--color-primary-500) !important;
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.12) !important;
   transform: translateY(-1px);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.theme-toggle-btn:active,
+.language-toggle-btn:active,
+.visits-counter-btn:active {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.08),
+    0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* 为按钮添加微妙的发光效果 */
+.theme-toggle-btn::before,
+.language-toggle-btn::before,
+.visits-counter-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.theme-toggle-btn:hover::before,
+.language-toggle-btn:hover::before,
+.visits-counter-btn:hover::before {
+  left: 100%;
+}
+
+/* 暗色模式下的按钮样式 */
+[data-theme="dark"] .theme-toggle-btn,
+[data-theme="dark"] .language-toggle-btn,
+[data-theme="dark"] .visits-counter-btn {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+[data-theme="dark"] .theme-toggle-btn:hover,
+[data-theme="dark"] .language-toggle-btn:hover,
+[data-theme="dark"] .visits-counter-btn:hover {
+  color: var(--color-primary-400) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== 头部组件 ===== */

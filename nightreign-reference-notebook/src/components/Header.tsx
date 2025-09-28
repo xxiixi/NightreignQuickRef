@@ -1,7 +1,7 @@
 import React from 'react';
 import { useVercount } from 'vercount-react';
 import { Typography, Space, Button, Tooltip, Popover } from 'antd';
-import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, RobotOutlined, StarOutlined, BaiduOutlined, BilibiliOutlined, LinkOutlined, ArrowRightOutlined, GithubOutlined, HistoryOutlined } from '@ant-design/icons';
+import { MoonOutlined, SunOutlined, FireOutlined, ReadOutlined, BaiduOutlined, BilibiliOutlined, LinkOutlined, ArrowRightOutlined, GithubOutlined, PushpinOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
       <div className="top-bar">
         <div className="top-bar-content">
           <div className="top-bar-right">
-            <Space size="middle">
+            <Space size="small">
               <Tooltip title={isDarkMode ? "切换到亮色模式" : "切换到暗色模式"} placement="bottom">
                 <Button
                   type="text"
@@ -274,7 +274,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                   />
                 </Popover>
               </Tooltip>
-              <Tooltip title="网站声明" placement="bottom" className="theme-toggle-btn">
+              {/* <Tooltip title="网站声明" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
                     <div style={{ padding: '8px', maxWidth: '250px', width: '250px' }}>
@@ -303,45 +303,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                     className="visits-counter-btn"
                   />
                 </Popover>
-              </Tooltip>
-              <Tooltip title="查看本项目" placement="bottom" className="theme-toggle-btn">
-                <Popover
-                  content={
-                    <div style={{ padding: '8px', maxWidth: '200px' }}>
-                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' }}>
-                        <GithubOutlined style={{ marginRight: '4px' }} /> GitHub仓库
-                      </div>
-                      <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
-                        <a
-                          href="https://github.com/xxiixi/NightreignQuickRef"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="header-link"
-                        >
-                          NightreignQuickRef
-                        </a>
-                      </div>
-                      <div style={{
-                        marginTop: '8px',
-                        borderTop: '1px solid rgba(198, 198, 198, 0.2)',
-                        paddingTop: '8px',
-                        fontSize: '10px',
-                        color: '#999'
-                      }}>
-                        🙏 求个Star ⭐️ 感谢支持 🙏
-                      </div>
-                    </div>
-                  }
-                  placement="bottom"
-                  trigger="click"
-                >
-                  <Button
-                    type="text"
-                    icon={<StarOutlined />}
-                    className="visits-counter-btn"
-                  />
-                </Popover>
-              </Tooltip>
+              </Tooltip> */}
               <Tooltip title="查看更新记录和计划" placement="bottom" className="theme-toggle-btn">
                 <Popover
                   content={
@@ -388,7 +350,45 @@ const Header: React.FC<HeaderProps> = React.memo(({
                 >
                   <Button
                     type="text"
-                    icon={<HistoryOutlined />}
+                    icon={<PushpinOutlined />}
+                    className="visits-counter-btn"
+                  />
+                </Popover>
+              </Tooltip>
+              <Tooltip title="查看本项目" placement="bottom" className="theme-toggle-btn">
+                <Popover
+                  content={
+                    <div style={{ padding: '8px', maxWidth: '200px' }}>
+                      <div style={{ fontSize: '13px', marginBottom: '8px', fontWeight: 'bold' }}>
+                        <GithubOutlined style={{ marginRight: '4px' }} /> GitHub仓库
+                      </div>
+                      <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+                        <a
+                          href="https://github.com/xxiixi/NightreignQuickRef"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="header-link"
+                        >
+                          NightreignQuickRef
+                        </a>
+                      </div>
+                      <div style={{
+                        marginTop: '8px',
+                        borderTop: '1px solid rgba(198, 198, 198, 0.2)',
+                        paddingTop: '8px',
+                        fontSize: '10px',
+                        color: '#999'
+                      }}>
+                        🙏 求个Star ⭐️ 感谢支持 🙏
+                      </div>
+                    </div>
+                  }
+                  placement="bottom"
+                  trigger="click"
+                >
+                  <Button
+                    type="text"
+                    icon={<GithubOutlined />}
                     className="visits-counter-btn"
                   />
                 </Popover>

@@ -17,6 +17,7 @@
     "@ant-design/colors": "^7.2.1",
     "@ant-design/icons": "^6.0.0",
     "@ant-design/plots": "^2.6.3",
+    "@giscus/react": "^3.1.0",
     "@types/lodash": "^4.17.20",
     "antd": "^5.26.7",
     "lodash": "^4.17.21",
