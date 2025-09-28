@@ -3,7 +3,7 @@ import { Typography, Timeline, Table, Alert, Steps, Progress, Statistic } from '
 import { CheckCircleTwoTone, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectTwoTone, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined, PlayCircleTwoTone, MessageOutlined } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
-import InlineGiscusComments from '../components/InlineGiscusComments';
+import GiscusComments from '../components/GiscusComments';
 import '../styles/gameMechanicsView.css';
 
 const { Title, Text } = Typography;
@@ -525,7 +525,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                     </Title>
                   </div>
                   <div className="card-body">
-                    <InlineGiscusComments />
+                    <GiscusComments />
                   </div>
                 </div>
               </div>
