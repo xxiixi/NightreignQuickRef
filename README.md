@@ -48,6 +48,9 @@ Build output will be generated in the `dist` directory
 ```bash
 npm run preview
 ```
+## Stargazers
+
+[![Stargazers repo roster for @xxiixi/NightreignQuickRef](https://reporoster.com/stars/xxiixi/NightreignQuickRef)](https://github.com/xxiixi/NightreignQuickRef/stargazers)
 
 ## Star History
 
