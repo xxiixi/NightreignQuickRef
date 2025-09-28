@@ -3,11 +3,11 @@
 <div align="center">
 
 [![Elden Ring Nightreign](https://img.shields.io/badge/Elden_Ring-Nightreign-blue)](https://www.bandainamcoent.com/games/nightreign)
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0)
+![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/xxiixi/NightreignQuickRef)
 
 
-[![Reference Notebook](https://img.shields.io/badge/Reference%20Notebook-View%20Online-8B5CF6?style=for-the-badge&logo=github)](https://xixi.github.io/NightreignQuickRef)
+[![Reference Notebook](https://img.shields.io/badge/Reference%20Notebook-View%20Online-8B5CF6?style=for-the-badge&logo=github)](https://xxiixi.github.io/NightreignQuickRef/)
 [![Map Filter](https://img.shields.io/badge/Map%20Filter-View%20Online-FF1493?style=for-the-badge&logo=github)](https://xxiixi.github.io/NightreignMapFilter/)
 
 </div>
