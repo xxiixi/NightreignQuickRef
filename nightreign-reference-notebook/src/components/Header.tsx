@@ -331,6 +331,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
                             • 夜雨伤害数据待更新(无数据来源)
+                            • 剑骸大剑、玛雷家的行刑剑数据待更新
                           </div>
                         </div>
 
