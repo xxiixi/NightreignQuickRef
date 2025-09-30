@@ -135,6 +135,17 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             <ArrowRightOutlined />
                           </a>
                         </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <BaiduOutlined style={{ marginRight: '4px' }} />
+                          剑骸马雷1.02.2具体成长曲线
+                          <a
+                            href="https://tieba.baidu.com/p/10027082782?share=9105&fr=sharewise&see_lz=0"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
 
                         <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }} />
 
@@ -331,7 +342,6 @@ const Header: React.FC<HeaderProps> = React.memo(({
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
                             • 夜雨伤害数据待更新(无数据来源)
-                            • 剑骸大剑、玛雷家的行刑剑数据待更新
                           </div>
                         </div>
 

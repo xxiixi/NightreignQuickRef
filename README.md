@@ -19,6 +19,7 @@
 - [黑夜君临 新词条数据一览](https://tieba.baidu.com/p/9935090782?pid=152476350171&cid=#152476350171)
 - [全传说武器庇佑效果](https://tieba.baidu.com/p/9889921465?pid=152403477340&cid=#152403477340)
 - [黑夜君临1.02.2部分详细更新内容（包含深夜模式改动）](https://tieba.baidu.com/p/10026641416?pid=152611338073&cid=#152611338073)
+- [剑骸马雷1.02.2具体成长曲线](https://tieba.baidu.com/p/10027082782?share=9105&fr=sharewise&see_lz=0)
 
 ### Bilibili视频
 - [【艾尔登法环：黑夜君临】全词条汇总！遗物+护符+武器固有效果+武器随机buff](https://www.bilibili.com/video/BV1GfMSzvE3V)
