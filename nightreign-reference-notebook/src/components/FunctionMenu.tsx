@@ -22,6 +22,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
         { key: '游戏时间机制', label: '⏰ 游戏时间机制', anchorId: 'game-time-mechanism' },
         { key: '升级所需卢恩', label: '💰 升级所需卢恩统计', anchorId: 'runes-required' },
         { key: '游戏时间机制: 监牢/夜雨', label: '🌧️ 游戏时间机制: 监牢/夜雨', anchorId: 'prison-rain-mechanism' },
+        { key: '深夜模式评分规则', label: '🌌 深夜模式评分规则', anchorId: 'deep-night-rating-rules' },
         { key: '血量恢复计算器', label: '❤️ 血量恢复计算器', anchorId: 'recovery-calculator' },
         { key: '评论与讨论', label: '💬 评论与讨论', anchorId: 'comments-discussion' }
       ]

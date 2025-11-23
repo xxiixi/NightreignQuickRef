@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Typography, Timeline, Table, Alert, Steps, Progress, Statistic } from 'antd';
-import { CheckCircleTwoTone, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectTwoTone, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined, PlayCircleTwoTone, MessageOutlined } from '@ant-design/icons';
+import { CheckCircleTwoTone, ClockCircleTwoTone, FireTwoTone, HeartTwoTone, LockOutlined, MoneyCollectTwoTone, PauseCircleTwoTone, ThunderboltTwoTone, CloudOutlined, PlayCircleTwoTone, MessageOutlined, TrophyTwoTone } from '@ant-design/icons';
 import RecoveryCalculator from '../components/RecoveryCalculator';
 import DataSourceTooltip from '../components/DataSourceTooltip';
 import GiscusComments from '../components/GiscusComments';
@@ -485,6 +485,195 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                           </div>
                         </div>
 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 评分系统板块 */}
+            <div className="mechanics-grid">
+              <div className="mechanic-card" id="deep-night-rating-rules">
+                <div className="card-content">
+                  <div className="card-title-section">
+                    <Title level={5} className="mechanic-card-title">
+                      <TrophyTwoTone twoToneColor="#faad14" />
+                      深夜模式评分规则
+                    </Title>
+                  </div>
+                  <div className="card-body">
+                    <div className="rating-system-content">
+                      {/* 深度等级点数表 */}
+                      <div className="rating-table-section">
+                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>深度等级点数</Title>
+                        <Table
+                          dataSource={[
+                            { key: '1', depthLevel: '深度一 (0-999)', firstDayLoss: '-0', secondDayLoss: '-0', finalDayLoss: '-0', victory: '+200' },
+                            { key: '2', depthLevel: '深度二 (1000-1999)', firstDayLoss: '-200', secondDayLoss: '-100', finalDayLoss: '-0', victory: '+200' },
+                            { key: '3', depthLevel: '深度三 (2000-3999)', firstDayLoss: '-400', secondDayLoss: '-300', finalDayLoss: '-200', victory: '+200' },
+                            { key: '4', depthLevel: '深度四 (4000-5999)', firstDayLoss: '-600', secondDayLoss: '-500', finalDayLoss: '-400', victory: '+200' },
+                            { key: '5', depthLevel: '深度五 (6000+)', firstDayLoss: '-800', secondDayLoss: '-700', finalDayLoss: '-600', victory: '+200' },
+                          ]}
+                          columns={[
+                            {
+                              title: '深度等级',
+                              dataIndex: 'depthLevel',
+                              key: 'depthLevel',
+                              width: '20%',
+                              align: 'left',
+                            },
+                            {
+                              title: 'Day 1 失败',
+                              dataIndex: 'firstDayLoss',
+                              key: 'firstDayLoss',
+                              width: '20%',
+                              align: 'center',
+                              render: (text) => (
+                                <span style={{ color: text.startsWith('+') ? '#52c41a'  : '#1890ff' }}>
+                                  {text}
+                                </span>
+                              )
+                            },
+                            {
+                              title: 'Day 2 失败',
+                              dataIndex: 'secondDayLoss',
+                              key: 'secondDayLoss',
+                              width: '20%',
+                              align: 'center',
+                              render: (text) => (
+                                <span style={{ color: text.startsWith('+') ? '#52c41a'  : '#1890ff' }}>
+                                  {text}
+                                </span>
+                              )
+                            },
+                            {
+                              title: 'Day 3 失败',
+                              dataIndex: 'finalDayLoss',
+                              key: 'finalDayLoss',
+                              width: '20%',
+                              align: 'center',
+                              render: (text) => (
+                                <span style={{ color: text.startsWith('+') ? '#52c41a'  : '#1890ff' }}>
+                                  {text}
+                                </span>
+                              )
+                            },
+                            {
+                              title: '胜利',
+                              dataIndex: 'victory',
+                              key: 'victory',
+                              width: '20%',
+                              align: 'center',
+                              render: (text) => (
+                                <span style={{ color: text.startsWith('+') ? '#52c41a' : '#1890ff' }}>
+                                  {text}
+                                </span>
+                              )
+                            },
+                          ]}
+                          pagination={false}
+                          size="small"
+                          bordered
+                        />
+                      </div>
+
+                      {/* 条件修正表 */}
+                      <div className="rating-table-section" style={{ marginTop: '24px' }}>
+                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>条件修正</Title>
+                        <Table
+                          dataSource={[
+                            {
+                              key: '1',
+                              condition: '隐藏地图',
+                              lossModifier: '+200',
+                              winModifier: '+100',
+                              description: '随机位置在地图上不可见【仅限等级3+】'
+                            },
+                            {
+                              key: '2',
+                              condition: '隐藏夜王',
+                              lossModifier: '+200',
+                              winModifier: '+100',
+                              description: '夜王身份在进Boss房前隐藏【仅限等级3+】'
+                            },
+                            {
+                              key: '3',
+                              condition: '其他玩家提前退出',
+                              lossModifier: '50%',
+                              winModifier: '无',
+                              description: '其他玩家提前退出时，惩罚减半'
+                            },
+                            {
+                              key: '4',
+                              condition: '自己提前退出',
+                              lossModifier: '无',
+                              winModifier: '无',
+                              description: '无论输赢，都会在未来的游戏中结算惩罚（按照退出时间点判负）'
+                            },
+                            {
+                              key: '5',
+                              condition: '高1级匹配',
+                              lossModifier: '+50',
+                              winModifier: '+50',
+                              description: '对局深度比自己深度多1级时，结算时额外+50'
+                            },
+                            {
+                              key: '6',
+                              condition: '低1级匹配',
+                              lossModifier: '-50',
+                              winModifier: '-50',
+                              description: '对局深度比自己深度少1级时，结算时额外-50'
+                            },
+                          ]}
+                          columns={[
+                            {
+                              title: '条件',
+                              dataIndex: 'condition',
+                              key: 'condition',
+                              width: '20%',
+                              align: 'left',
+                            },
+                            {
+                              title: '失败时修正',
+                              dataIndex: 'lossModifier',
+                              key: 'lossModifier',
+                              width: '15%',
+                              align: 'center',
+                              render: (text) => (
+                                <span style={{ 
+                                  color: text.startsWith('+') ? '#52c41a' : '#1890ff'
+                                }}>
+                                  {text}
+                                </span>
+                              )
+                            },
+                            {
+                              title: '胜利时修正',
+                              dataIndex: 'winModifier',
+                              key: 'winModifier',
+                              width: '15%',
+                              align: 'center',
+                              render: (text) => (
+                                <span style={{ 
+                                  color: text.startsWith('+') ? '#52c41a' : '#1890ff'
+                                }}>
+                                  {text}
+                                </span>
+                              )
+                            },
+                            {
+                              title: '描述',
+                              dataIndex: 'description',
+                              key: 'description',
+                              width: '50%',
+                              align: 'left',
+                            },
+                          ]}
+                          pagination={false}
+                          size="small"
+                          bordered
+                        />
                       </div>
                     </div>
                   </div>
