@@ -504,9 +504,8 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
                   </div>
                   <div className="card-body">
                     <div className="rating-system-content">
-                      {/* 深度等级点数表 */}
                       <div className="rating-table-section">
-                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>深度等级点数</Title>
+                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>评分规则</Title>
                         <Table
                           dataSource={[
                             { key: '1', depthLevel: '深度一 (0-999)', firstDayLoss: '-0', secondDayLoss: '-0', finalDayLoss: '-0', victory: '+200' },
@@ -580,7 +579,7 @@ const GameMechanicsView: React.FC<GameMechanicsViewProps> = ({ functionName }) =
 
                       {/* 条件修正表 */}
                       <div className="rating-table-section" style={{ marginTop: '24px' }}>
-                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>条件修正</Title>
+                        <Title level={5} style={{ marginBottom: '16px', fontSize: '16px' }}>评分修正</Title>
                         <Table
                           dataSource={[
                             {

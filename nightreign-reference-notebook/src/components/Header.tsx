@@ -326,13 +326,10 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         {/* 最新更新 */}
                         <div style={{ marginBottom: '8px' }}>
                           <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>
-                            🆕 最新更新 (v1.02.3 | 9月24日)
+                            🆕 最新更新 (v1.02.3 | 11月23日)
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 添加了深夜模式局外词条、局内词条
-                          </div>
-                          <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 更新了v1.02.3版本的新数据
+                            • 添加了深夜模式评分规则
                           </div>
                         </div>
 
@@ -423,7 +420,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
           <Text type="secondary" className="subtitle-text version-info">
-            黑夜君临版本: v1.02.3 (2025.9.24更新)
+            黑夜君临版本: v1.02.3 (2025.11.23更新)
           </Text>
           <Text type="secondary" className="subtitle-text">
             个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
