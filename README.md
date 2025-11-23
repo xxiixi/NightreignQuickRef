@@ -88,6 +88,13 @@
    npm run preview
    ```
 
+6. **Deploy to GitHub Pages**
+   ```bash
+   npm run deploy
+   ```
+   This will automatically build the project and deploy it to the `gh-pages` branch.
+   The site will be available at `https://xxiixi.github.io/NightreignQuickRef/`
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=xxiixi/NightreignQuickRef&type=Date)](https://www.star-history.com/#xxiixi/NightreignQuickRef&Date)
