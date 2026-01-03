@@ -329,6 +329,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             🆕 最新更新 (v1.02.3 | 11月23日)
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 添加了DLC角色数据(雷达图)
                             • 添加了深夜模式评分规则
                           </div>
                         </div>
@@ -338,6 +339,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             🔧 TODO
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 添加DLC新词条数据
                             • 夜雨伤害数据待更新(无数据来源)
                           </div>
                         </div>
