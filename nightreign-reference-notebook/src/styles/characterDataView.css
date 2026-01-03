@@ -154,6 +154,26 @@ body[tomato-theme="dark"] .card-item .card-body {
   transition: all var(--transition-normal);
   opacity: 1;
   transform: scale(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* 确保radar-wrapper内部的Radar组件容器居中 */
+.radar-wrapper > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* 确保radar-wrapper中的canvas居中 */
+.radar-wrapper canvas {
+  display: block;
+  margin: 0 auto;
 }
 
 .radar-wrapper.theme-transitioning {
@@ -247,6 +267,22 @@ body[tomato-theme="dark"] .card-item .card-body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+/* 确保Radar组件生成的内部容器居中 */
+.radar-chart-container > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* 确保canvas在内部容器中居中 */
+.radar-chart-container canvas {
+  display: block;
+  margin: 0 auto;
 }
 
 /* 黑暗模式下选中行样式 */

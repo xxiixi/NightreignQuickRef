@@ -451,7 +451,7 @@ const CharacterDataView: React.FC = () => {
     return firstCharacter ? Object.keys(firstCharacter) : [];
   };
   const characterNames = Object.keys(characterData);
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '女爵']);
+  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '女爵', '送葬者']);
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
   const [chartKey, setChartKey] = useState(0);
 
