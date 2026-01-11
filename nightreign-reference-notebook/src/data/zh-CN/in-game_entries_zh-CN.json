@@ -304,7 +304,7 @@
         "entry_id":"8320000",
         "entry_name":"强化连续攻击的最后攻击",
         "entry_type":"攻击力",
-        "explanation":"连续攻击的最后攻击伤害+10% \/ +15% \/ +20%",
+        "explanation":"连续攻击的最后攻击伤害+21% \/ +26% \/ +31%",
         "superposability":"可叠加"
     },
     {
@@ -318,7 +318,7 @@
         "entry_id":"8320300",
         "entry_name":"强化跳跃攻击",
         "entry_type":"攻击力",
-        "explanation":"跳跃攻击造成的伤害+6% \/ +9% \/ +12%",
+        "explanation":"跳跃攻击造成的伤害+14% \/ +17% \/ +20%",
         "superposability":"可叠加"
     },
     {
@@ -409,7 +409,7 @@
         "entry_id":"8350000",
         "entry_name":"提升战技攻击力",
         "entry_type":"攻击力",
-        "explanation":"战技造成的伤害+7% \/ +9% \/ +14%",
+        "explanation":"战技造成的伤害+15% \/ +18% \/ +21%",
         "superposability":"可叠加"
     },
     {
@@ -428,7 +428,7 @@
     },
     {
         "entry_id":"8360000",
-        "entry_name":"加快累积绝招量表",
+        "entry_name":"强化自然累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表累积速率+6%",
         "superposability":"可叠加"
@@ -479,7 +479,7 @@
         "entry_id":"8420000",
         "entry_name":"强化防御反击",
         "entry_type":"强化",
-        "explanation":"防御反击造成的伤害+10% \/ +15% \/ +20%",
+        "explanation":"防御反击造成的伤害+17% \/ +20% \/ +23%",
         "superposability":"可叠加"
     },
     {
@@ -822,14 +822,14 @@
         "entry_id":"8660000",
         "entry_name":"血量偏低时，提升攻击力",
         "entry_type":"攻击力",
-        "explanation":"生命值小于20%时，造成的伤害+13% \/ +17% \/ +21%",
+        "explanation":"生命值小于40%时，造成的伤害+13% \/ +17% \/ +21%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"8660101",
         "entry_name":"血量偏低时，提升减伤率",
         "entry_type":"减伤率",
-        "explanation":"生命值小于20%时，受到的伤害-29% \/ -38% \/ -48%",
+        "explanation":"生命值小于40%时，受到的伤害-23% \/ -30% \/ -37%",
         "superposability":"可叠加"
     },
     {
@@ -843,7 +843,7 @@
         "entry_id":"8660300",
         "entry_name":"血量偏低时，展开圣域",
         "entry_type":"额外效果",
-        "explanation":"血量低于20%时使用圣域，法阵内減伤率提升20%，每秒恢复10生命值，法阵持续35秒",
+        "explanation":"血量低于40%时使用圣域，法阵内減伤率提升20%，每秒恢复10生命值，法阵持续35秒",
         "superposability":"不可叠加"
     },
     {
