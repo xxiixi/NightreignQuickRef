@@ -4,7 +4,7 @@
 			"entry_id": 6001400,
 			"entry_name": "提升物理攻击力＋３",
 			"entry_type": "攻击力",
-			"explanation": "物理攻击力+8.5%",
+			"explanation": "物理攻击力+10.5%",
 			"buff_type": "附带负面词条",
 			"superposability": "可叠加"
 		},
@@ -12,7 +12,7 @@
 			"entry_id": 6001401,
 			"entry_name": "提升物理攻击力＋４",
 			"entry_type": "攻击力",
-			"explanation": "物理攻击力+10%",
+			"explanation": "物理攻击力+12%",
 			"buff_type": "附带负面词条",
 			"superposability": "可叠加"
 		},
@@ -324,7 +324,7 @@
 			"entry_id": 6040100,
 			"entry_name": "强化防御反击＋１",
 			"entry_type": "攻击力",
-			"explanation": "防御反击造成的伤害+22%",
+			"explanation": "防御反击造成的伤害+25%",
 			"buff_type": "附带负面词条",
 			"superposability": "可叠加"
 		},
@@ -332,7 +332,7 @@
 			"entry_id": 6040101,
 			"entry_name": "强化防御反击＋２",
 			"entry_type": "攻击力",
-			"explanation": "防御反击造成的伤害+26%",
+			"explanation": "防御反击造成的伤害+29%",
 			"buff_type": "附带负面词条",
 			"superposability": "可叠加"
 		},
@@ -1436,7 +1436,7 @@
 			"entry_id": 6830000,
 			"entry_name": "降低力气、智力",
 			"entry_type": "减益(能力值)",
-			"explanation": "力气-4，智力-4",
+			"explanation": "力气-3，智力-3",
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
 		},
@@ -1444,7 +1444,7 @@
 			"entry_id": 6830100,
 			"entry_name": "降低灵巧、信仰",
 			"entry_type": "减益(能力值)",
-			"explanation": "灵巧-4，信仰-4",
+			"explanation": "灵巧-3，信仰-3",
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
 		},
@@ -1452,7 +1452,7 @@
 			"entry_id": 6830200,
 			"entry_name": "降低智力、灵巧",
 			"entry_type": "减益(能力值)",
-			"explanation": "智力-4，灵巧-4",
+			"explanation": "智力-3，灵巧-3",
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
 		},
@@ -1460,7 +1460,7 @@
 			"entry_id": 6830300,
 			"entry_name": "降低信仰、力气",
 			"entry_type": "减益(能力值)",
-			"explanation": "信仰-4，力气-4",
+			"explanation": "信仰-3，力气-3",
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
 		},
@@ -1468,7 +1468,7 @@
 			"entry_id": 6830400,
 			"entry_name": "降低生命力、感应",
 			"entry_type": "减益(能力值)",
-			"explanation": "生命力-4，感应-4",
+			"explanation": "生命力-3，感应-3",
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
 		},
