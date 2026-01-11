@@ -254,6 +254,8 @@ const characterOptions = [
   { value: '复仇者', label: '复仇者' },
   { value: '隐士', label: '隐士' },
   { value: '无赖', label: '无赖' },
+  { value: '学者', label: '学者' },
+  { value: '送葬者', label: '送葬者' }
 ];
 
 // 道具效果分类选项
@@ -589,7 +591,20 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       dataIndex: 'explanation',
       key: 'explanation',
       width: '40%',
-      render: (text) => text || '-',
+      render: (text) => {
+        if (!text) return '-';
+
+        return (
+          <div style={{
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            lineHeight: '1.6',
+            fontSize: '13px'
+          }}>
+            {text}
+          </div>
+        );
+      },
     },
     {
       title: '词条类型',
@@ -663,7 +678,20 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       dataIndex: 'explanation',
       key: 'explanation',
       width: '45%',
-      render: (text) => text || '-',
+      render: (text) => {
+        if (!text) return '-';
+
+        return (
+          <div style={{
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            lineHeight: '1.6',
+            fontSize: '13px'
+          }}>
+            {text}
+          </div>
+        );
+      },
     },
   ];
 
@@ -791,7 +819,25 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       dataIndex: 'explanation',
       key: 'explanation',
       width: '35%',
-      render: (text) => text || '-',
+      render: (text) => {
+        if (!text) return '-';
+
+        return (
+          <div style={{
+            whiteSpace: 'pre-wrap',
+            wordBreak: 'break-word',
+            lineHeight: '1.6',
+            fontSize: '13px'
+          }}>
+            {text}
+          </div>
+        );
+      },
+      onCell: () => ({
+        style: {
+          padding: '12px 8px'
+        }
+      }),
     },
     {
       title: '词条类型',
@@ -1182,7 +1228,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 }}
                 options={itemEffectTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                style={{ minWidth: '180px', maxWidth: '300px' }}
               />
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
@@ -1223,7 +1268,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 }}
                 options={outsiderTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                style={{ minWidth: '180px', maxWidth: '300px' }}
               />
               <Select
                 className="character-select"
@@ -1277,7 +1321,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 }}
                 options={deepNightTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                style={{ minWidth: '180px', maxWidth: '300px' }}
               />
               <Select
                 className="character-select"
@@ -1329,7 +1372,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 }}
                 options={inGameDeepNightTypeOptions}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                style={{ minWidth: '180px', maxWidth: '300px' }}
               />
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
@@ -1369,7 +1411,6 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   }}
                   options={inGameTypeOptions}
                   maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
-                  style={{ minWidth: '180px', maxWidth: '300px' }}
                 />
               )}
               <Button onClick={clearAll} type="default" size="middle">

@@ -620,12 +620,32 @@ body[tomato-theme="dark"] .custom-tab-button::after {
 }
 
 .outsider-type-select {
-  min-width: 350px;
+  min-width: 220px;
+  max-width: 280px;
   width: auto;
 }
 
 .in-game-type-select {
-  min-width: 350px;
+  min-width: 220px;
+  max-width: 280px;
+  width: auto;
+}
+
+.item-effect-type-select {
+  min-width: 220px;
+  max-width: 280px;
+  width: auto;
+}
+
+.deep-night-type-select {
+  min-width: 220px;
+  max-width: 280px;
+  width: auto;
+}
+
+.deep-night-in-game-type-select {
+  min-width: 220px;
+  max-width: 280px;
   width: auto;
 }
 
@@ -643,8 +663,12 @@ body[tomato-theme="dark"] .custom-tab-button::after {
   }
   
   .outsider-type-select,
-  .in-game-type-select {
+  .in-game-type-select,
+  .item-effect-type-select,
+  .deep-night-type-select,
+  .deep-night-in-game-type-select {
     min-width: auto;
+    max-width: none;
     width: 100%;
   }
   
