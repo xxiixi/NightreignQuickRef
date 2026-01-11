@@ -1132,5 +1132,19 @@
         "entry_type":"不甘",
         "explanation":"+3灵巧 +3感应",
         "superposability":"同种不甘不可叠加"
+    },
+    {
+        "entry_id":"9990900",
+        "entry_name":"学者的不甘",
+        "entry_type":"不甘",
+        "explanation":"+3智力 +3感应",
+        "superposability":"同种不甘不可叠加"
+    },
+    {
+        "entry_id":"9991000",
+        "entry_name":"送葬者的不甘",
+        "entry_type":"不甘",
+        "explanation":"+3力气 +3信仰",
+        "superposability":"同种不甘不可叠加"
     }
 ]

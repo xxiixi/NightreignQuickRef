@@ -87,9 +87,12 @@ export const typeColorMap: Record<string, string> = {
   '仅限特定角色': 'gold',
   '仅限特定武器': 'volcano',
   '出击时的武器（战技）': 'geekblue',
+  '出击时的武器（魔法）': 'purple',
+  '出击时的武器（祷告）': 'yellow',
   '出击时的武器（附加）': 'blue',
   '出击时的道具': 'orange',
   '场地环境': 'green',
+  '专属遗物': 'magenta',
   // 局内词条
   '庇佑': 'purple',
   '不甘': 'volcano',

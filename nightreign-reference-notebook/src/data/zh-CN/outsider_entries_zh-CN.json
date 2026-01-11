@@ -2154,5 +2154,432 @@
         "entry_type":"恢复",
         "explanation":"固定回复2点专注值",
         "superposability":"不可叠加"
-    }
+    },
+    {
+		"entry_id": "6630000",
+		"entry_name": "通过潜在能力，能比较容易找到短剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630100",
+		"entry_name": "通过潜在能力，能比较容易找到直剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630200",
+		"entry_name": "通过潜在能力，能比较容易找到大剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630300",
+		"entry_name": "通过潜在能力，能比较容易找到特大剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630400",
+		"entry_name": "通过潜在能力，能比较容易找到曲剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630500",
+		"entry_name": "通过潜在能力，能比较容易找到大曲剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630600",
+		"entry_name": "通过潜在能力，能比较容易找到刀",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630700",
+		"entry_name": "通过潜在能力，能比较容易找到双头剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630800",
+		"entry_name": "通过潜在能力，能比较容易找到刺剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6630900",
+		"entry_name": "通过潜在能力，能比较容易找到重刺剑",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631000",
+		"entry_name": "通过潜在能力，能比较容易找到斧",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631100",
+		"entry_name": "通过潜在能力，能比较容易找到大斧",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631200",
+		"entry_name": "通过潜在能力，能比较容易找到槌",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631300",
+		"entry_name": "通过潜在能力，能比较容易找到大槌",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631400",
+		"entry_name": "通过潜在能力，能比较容易找到连枷",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631500",
+		"entry_name": "通过潜在能力，能比较容易找到矛",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631600",
+		"entry_name": "通过潜在能力，能比较容易找到大矛",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631700",
+		"entry_name": "通过潜在能力，能比较容易找到戟",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631800",
+		"entry_name": "通过潜在能力，能比较容易找到镰刀",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6631900",
+		"entry_name": "通过潜在能力，能比较容易找到拳头",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632000",
+		"entry_name": "通过潜在能力，能比较容易找到钩爪",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632100",
+		"entry_name": "通过潜在能力，能比较容易找到软鞭",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632200",
+		"entry_name": "通过潜在能力，能比较容易找到特大武器",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632300",
+		"entry_name": "通过潜在能力，能比较容易找到弓",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632400",
+		"entry_name": "通过潜在能力，能比较容易找到大弓",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632500",
+		"entry_name": "通过潜在能力，能比较容易找到弩",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632600",
+		"entry_name": "通过潜在能力，能比较容易找到弩炮",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632700",
+		"entry_name": "通过潜在能力，能比较容易找到小盾",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632800",
+		"entry_name": "通过潜在能力，能比较容易找到中盾",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6632900",
+		"entry_name": "通过潜在能力，能比较容易找到大盾",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6633000",
+		"entry_name": "通过潜在能力，能比较容易找到手杖",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6633100",
+		"entry_name": "通过潜在能力，能比较容易找到圣印记",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "6633200",
+		"entry_name": "通过潜在能力，能比较容易找到火把",
+		"entry_type": "仅限特定武器",
+		"explanation": "直接替换角色专属池",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7006400",
+		"entry_name": "延长魔法、祷告的有效时间",
+		"entry_type": "专属遗物",
+		"explanation": "【送葬者】延长魔法、祷告的有效时间(延长50%，向下取整)",
+		"superposability": "可叠加"
+	},
+	{
+		"entry_id": "7006500",
+		"entry_name": "持续恢复专注值",
+		"entry_type": "专属遗物",
+		"explanation": "【安定者们】每5秒恢复1点专注值",
+		"superposability": "可叠加"
+	},
+	{
+		"entry_id": "7006600",
+		"entry_name": "提升近战攻击力",
+		"entry_type": "专属遗物",
+		"explanation": "【安定者们】近战攻击造成的伤害+6%(包括近战武器打出的弹道型远程战技，也吃这个效果加成)",
+		"superposability": "可叠加"
+	},
+	{
+		"entry_id": "7006700",
+		"entry_name": "提升战技攻击力",
+		"entry_type": "专属遗物",
+		"explanation": "【安定者们】战技造成的伤害+15%",
+		"superposability": "可叠加"
+	},
+	{
+		"entry_id": "7036200",
+		"entry_name": "【学者】减缓技艺进行率的下降幅度",
+		"entry_type": "仅限特定角色",
+		"explanation": "技艺进行率的下降幅度-30",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7036300",
+		"entry_name": "【学者】使用技艺时，提升目标我方人物的攻击力",
+		"entry_type": "仅限特定角色",
+		"explanation": "30秒内，目标友方单位，造成的物理伤害+20%，\n造成的魔力/火/雷/圣属性伤害+15%\n学者自身无法享受这个效果，仅增益队友",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7036400",
+		"entry_name": "【学者】对上已用绝招连结的敌人，持续给予伤害",
+		"entry_type": "仅限特定角色",
+		"explanation": "连接的敌人固定每秒扣除15点生命值，但连接的扣血效果也传递，\n连接敌人越多效果越强，实际的扣血效率远大于每秒15点\n绝招效果持续时间为20秒",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7036500",
+		"entry_name": "【学者】每次使用技艺增加样本，能获得卢恩",
+		"entry_type": "仅限特定角色",
+		"explanation": "每次用技艺观察不同种类的敌人时，+1300点卢恩(每局游戏，一种敌人只能触发一次增加卢恩)",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7036800",
+		"entry_name": "【送葬者】发动绝招时，提升攻击力",
+		"entry_type": "仅限特定角色",
+		"explanation": "发动绝招时，40秒内，造成的伤害+14%",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7036900",
+		"entry_name": "【送葬者】连击的最后攻击命中时，提升攻击力",
+		"entry_type": "仅限特定角色",
+		"explanation": "最后攻击命中时，20秒内，造成的伤害+12%",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7037000",
+		"entry_name": "【送葬者】使用祷告将辅助效果附加在自己身上时，提升物理攻击力",
+		"entry_type": "仅限特定角色",
+		"explanation": "60秒内，物理攻击力+15%",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7037300",
+		"entry_name": "【送葬者】发动绝招时，恢复触碰到的我方人物的血量",
+		"entry_type": "仅限特定角色",
+		"explanation": "绝招触碰的友方单位，固定回复（最大生命值的30%+100）",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7037600",
+		"entry_name": "连续攻击时，提升攻击力",
+		"entry_type": "专属遗物",
+		"explanation": "【送葬者】根据连续攻击累积值增加伤害，有4个等级，\n6%，10.5%，15%，15%\n每个等级buff互相独立计算持续时间和增伤\n第四阶段持续时间为0秒，其余各阶段为1.5秒",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7037700",
+		"entry_name": "出现异常状态量表时，能缓慢提升攻击力",
+		"entry_type": "专属遗物",
+		"explanation": "【废弃物之王】根据异常值存在的时间，逐步提升增加的伤害。共有10个阶段\n增伤值分别为3.5%/7%/11%/15.5%/20%/25%/30%/35%/40%/45%\n当人物获得任意异常值时，就会直接进入阶段1，增伤3.5%，\n之后每20秒会进行一次判定，如果判定时异常值仍然存在，则会提升到下一个阶段\n和异常状态触发与否无关，和异常条本身的进度以及长短无关\n在判定间隔之间异常值消失，但随后又生成的话，不会导致效果重置",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7037800",
+		"entry_name": "减伤率降低时，偶尔会让敌人攻击失效",
+		"entry_type": "专属遗物",
+		"explanation": "【安定者们】当玩家减伤率降低时，有20%概率让敌人攻击失效\n该效果会随任意减伤率降低buff一同出现和消失\n玩家还是会吃到1点伤害，并吃到异常值，但不会硬直",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7170100",
+		"entry_name": "受到损伤时，附加异常状态腐败",
+		"entry_type": "专属遗物",
+		"explanation": "【废弃物之王】受到敌人攻击时，12秒内，武器附魔25点腐败值\n猩红腐败：40秒内，每1.3秒扣除敌人（最大生命值的0.15%+15）",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7260900",
+		"entry_name": "周围陷入腐败时，持续恢复血量",
+		"entry_type": "专属遗物",
+		"explanation": "【废弃物之王】周围人物陷入异常状态猩红腐败时，\n15秒内，每1.3秒回复（最大生命值的0.15%+15）",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7360600",
+		"entry_name": "出击时，武器魔法改为“魔法辉剑",
+		"entry_type": "出击时的武器（魔法）",
+		"explanation": "仅隐士有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7360900",
+		"entry_name": "出击时，武器魔法改为“卡利亚大剑”",
+		"entry_type": "出击时的武器（魔法）",
+		"explanation": "仅隐士有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7361200",
+		"entry_name": "出击时，武器魔法改为“黑夜魔砾”",
+		"entry_type": "出击时的武器（魔法）",
+		"explanation": "仅隐士有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7361300",
+		"entry_name": "出击时，武器魔法改为“熔岩球”",
+		"entry_type": "出击时的武器（魔法）",
+		"explanation": "仅隐士有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7362100",
+		"entry_name": "出击时，武器魔法改为“责罚荆棘”",
+		"entry_type": "出击时的武器（魔法）",
+		"explanation": "仅隐士有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7370300",
+		"entry_name": "出击时，武器祷告改为“黄金之怒”",
+		"entry_type": "出击时的武器（祷告）",
+		"explanation": "仅复仇者有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7370400",
+		"entry_name": "出击时，武器祷告改为“雷电枪”",
+		"entry_type": "出击时的武器（祷告）",
+		"explanation": "仅复仇者有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7370500",
+		"entry_name": "出击时，武器祷告改为“雷击”",
+		"entry_type": "出击时的武器（祷告）",
+		"explanation": "仅复仇者有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7370600",
+		"entry_name": "出击时，武器祷告改为“火焰啊！”",
+		"entry_type": "出击时的武器（祷告）",
+		"explanation": "仅复仇者有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7370900",
+		"entry_name": "出击时，武器祷告改为“兽爪”",
+		"entry_type": "出击时的武器（祷告）",
+		"explanation": "仅复仇者有效",
+		"superposability": "不可叠加"
+	},
+	{
+		"entry_id": "7371500",
+		"entry_name": "出击时，武器祷告改为“龙焰”",
+		"entry_type": "出击时的武器（祷告）",
+		"explanation": "仅复仇者有效",
+		"superposability": "不可叠加"
+	}
 ]

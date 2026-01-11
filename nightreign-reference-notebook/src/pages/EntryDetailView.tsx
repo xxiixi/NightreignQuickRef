@@ -219,9 +219,12 @@ const outsiderTypeOptions = [
   { value: '仅限特定角色', label: '仅限特定角色' },
   { value: '仅限特定武器', label: '仅限特定武器' },
   { value: '出击时的武器（战技）', label: '出击时的武器（战技）' },
+  { value: '出击时的武器（魔法）', label: '出击时的武器（魔法）' },
+  { value: '出击时的武器（祷告）', label: '出击时的武器（祷告）' },
   { value: '出击时的武器（附加）', label: '出击时的武器（附加）' },
   { value: '出击时的道具', label: '出击时的道具' },
   { value: '场地环境', label: '场地环境' },
+  { value: '专属遗物', label: '专属遗物' }
 ];
 
 // 深夜模式局外词条类型选项
