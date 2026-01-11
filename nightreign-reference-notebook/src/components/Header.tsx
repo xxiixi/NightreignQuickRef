@@ -238,6 +238,18 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             <ArrowRightOutlined />
                           </a>
                         </div>
+                        <div style={{ marginBottom: '4px' }}>
+                          <BilibiliOutlined style={{ marginRight: '4px' }} />
+                          【艾尔登法环：黑夜君临】DLC全词条！（遗物+改动词条+可叠加性）见弃空洞者
+                          <a
+                            href="https://www.bilibili.com/video/BV1sQmTBmEGP"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ArrowRightOutlined />
+                          </a>
+                        </div>
+
                         <div style={{ marginBottom: '0px', borderTop: '1px solid rgba(198, 198, 198, 0.2)', paddingTop: '8px' }} />
                         <div style={{ marginBottom: '4px' }}>
                           <LinkOutlined style={{ marginRight: '4px' }} />
@@ -326,11 +338,12 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         {/* 最新更新 */}
                         <div style={{ marginBottom: '8px' }}>
                           <div style={{ fontWeight: 'bold', color: '#1890ff', marginBottom: '4px' }}>
-                            🆕 最新更新 (v1.02.3 | 11月23日)
+                            ✅ 最新更新
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 添加了DLC角色数据(雷达图)
-                            • 添加了深夜模式评分规则
+                            • 添加了DLC新词条数据；<br />
+                            • 添加了1.03.1版本更新后的新词条数据；<br />
+                            • 添加了DLC角色雷达图数据；
                           </div>
                         </div>
 
@@ -339,7 +352,8 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             🔧 TODO
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 添加DLC新词条数据
+                            • 添加新夜王、DLC新敌人数据<br />
+                            • 更新新角色等级、闪避面板<br />
                             • 夜雨伤害数据待更新(无数据来源)
                           </div>
                         </div>
@@ -422,7 +436,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
         </Title>
         <Space direction="vertical" size="small" className="subtitle">
           <Text type="secondary" className="subtitle-text version-info">
-            黑夜君临版本: v1.02.3 (2025.11.23更新)
+            黑夜君临版本: v1.03.1 | Dec 4 2025
           </Text>
           <Text type="secondary" className="subtitle-text">
             个人收集/整理的黑夜君临数据、机制速查网页，可快速检索条目信息，后续会添加更多内容
