@@ -211,21 +211,21 @@
     },
     {
         "entry_id":"7000900",
-        "entry_name":"加快累积绝招量表 +１",
+        "entry_name":"自然累积绝招量表 +１",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表累积速率 +5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000901",
-        "entry_name":"加快累积绝招量表 +２",
+        "entry_name":"自然累积绝招量表 +２",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表累积速率 +7.5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000902",
-        "entry_name":"加快累积绝招量表 +３",
+        "entry_name":"自然累积绝招量表 +３",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表累积速率+10%",
         "superposability":"可叠加"
@@ -255,21 +255,21 @@
         "entry_id":"7001400",
         "entry_name":"提升物理攻击力",
         "entry_type":"攻击力",
-        "explanation":"物理攻击力 +3%",
+        "explanation":"物理攻击力 +4%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001401",
         "entry_name":"提升物理攻击力 +１",
         "entry_type":"攻击力",
-        "explanation":"物理攻击力 +4%",
+        "explanation":"物理攻击力 +5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001402",
         "entry_name":"提升物理攻击力 +２",
         "entry_type":"攻击力",
-        "explanation":"物理攻击力 +5%",
+        "explanation":"物理攻击力 +6%",
         "superposability":"可叠加"
     },
     {
@@ -521,14 +521,14 @@
         "entry_id":"7012200",
         "entry_name":"血量偏低时，包含周围我方人物缓慢恢复血量",
         "entry_type":"恢复",
-        "explanation":"生命值量小于20%时，50秒内，\n每秒恢复最大生命值的 0.5%+1，内置50秒冷却时间",
+        "explanation":"生命值量小于40%时，50秒内，\n每秒恢复最大生命值的 0.5%+1，内置50秒冷却时间",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7012300",
         "entry_name":"血量偏低时，能提升减伤率",
         "entry_type":"减伤率",
-        "explanation":"生命值量小于20%时，受到的伤害 -25%",
+        "explanation":"生命值量小于40%时，受到的伤害 -16%",
         "superposability":"未知"
     },
     {
@@ -752,21 +752,21 @@
         "entry_id":"7040000",
         "entry_name":"强化轻攻击的第一记攻击",
         "entry_type":"攻击力",
-        "explanation":"轻击第一下造成的伤害 +13%",
+        "explanation":"轻击第一下造成的伤害 +15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7040100",
         "entry_name":"强化防御反击",
         "entry_type":"攻击力",
-        "explanation":"防御反击造成的伤害 +15%",
+        "explanation":"防御反击造成的伤害 +18%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7040200",
         "entry_name":"强化致命一击",
         "entry_type":"攻击力",
-        "explanation":"致命一击造成的伤害 +15%",
+        "explanation":"致命一击造成的伤害 +18%",
         "superposability":"可叠加"
     },
     {
@@ -962,168 +962,168 @@
         "entry_id":"7080000",
         "entry_name":"装备三把以上类别为短剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080100",
         "entry_name":"装备三把以上类别为直剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080200",
         "entry_name":"装备三把以上类别为大剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080300",
         "entry_name":"装备三把以上类别为特大剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080400",
         "entry_name":"装备三把以上类别为曲剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080500",
         "entry_name":"装备三把以上类别为大曲剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080600",
         "entry_name":"装备三把以上类别为刀的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080700",
         "entry_name":"装备三把以上类别为双头剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080800",
         "entry_name":"装备三把以上类别为刺剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7080900",
         "entry_name":"装备三把以上类别为重刺剑的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081000",
         "entry_name":"装备三把以上类别为斧的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081100",
         "entry_name":"装备三把以上类别为大斧的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081200",
         "entry_name":"装备三把以上类别为槌的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081300",
         "entry_name":"装备三把以上类别为大槌的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081400",
         "entry_name":"装备三把以上类别为连枷的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081500",
         "entry_name":"装备三把以上类别为矛的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081700",
         "entry_name":"装备三把以上类别为大矛的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081800",
         "entry_name":"装备三把以上类别为戟的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7081900",
         "entry_name":"装备三把以上类别为镰刀的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7082000",
         "entry_name":"装备三把以上类别为拳头的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7082100",
         "entry_name":"装备三把以上类别为钩爪的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7082200",
         "entry_name":"装备三把以上类别为软鞭的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7082300",
         "entry_name":"装备三把以上类别为特大武器的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7082400",
         "entry_name":"装备三把以上类别为弓的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
@@ -1634,175 +1634,175 @@
         "entry_id":"7330000",
         "entry_name":"提升短剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330100",
         "entry_name":"提升直剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330200",
         "entry_name":"提升大剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330300",
         "entry_name":"提升特大剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330400",
         "entry_name":"提升曲剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330500",
         "entry_name":"提升大曲剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330600",
         "entry_name":"提升刀的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330700",
         "entry_name":"提升双头剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330800",
         "entry_name":"提升刺剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7330900",
         "entry_name":"提升重刺剑的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331000",
         "entry_name":"提升斧的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331100",
         "entry_name":"提升大斧的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331200",
         "entry_name":"提升槌的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331300",
         "entry_name":"提升大槌的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331400",
         "entry_name":"提升连枷的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331500",
         "entry_name":"提升矛的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331600",
         "entry_name":"提升长矛的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331700",
         "entry_name":"提升大矛的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331800",
         "entry_name":"提升戟的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7331900",
         "entry_name":"提升镰刀的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7332000",
         "entry_name":"提升拳头的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7332100",
         "entry_name":"提升钩爪的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7332200",
         "entry_name":"提升软鞭的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7332300",
         "entry_name":"提升特大武器的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7332400",
         "entry_name":"提升弓的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +6.5%",
+        "explanation":"造成的伤害 +9%",
         "superposability":"可叠加"
     },
     {
