@@ -1,0 +1,100 @@
+{
+  "hash": "02e1187b",
+  "configHash": "37ca0e2c",
+  "lockfileHash": "3390b7c2",
+  "browserHash": "9b427d73",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "0c5be79f",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "573aab9c",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "e28881ee",
+      "needsInterop": true
+    },
+    "antd": {
+      "src": "../../node_modules/antd/es/index.js",
+      "file": "antd.js",
+      "fileHash": "44b2fe1d",
+      "needsInterop": false
+    },
+    "@ant-design/colors": {
+      "src": "../../node_modules/@ant-design/colors/es/index.js",
+      "file": "@ant-design_colors.js",
+      "fileHash": "c86c216f",
+      "needsInterop": false
+    },
+    "@ant-design/icons": {
+      "src": "../../node_modules/@ant-design/icons/es/index.js",
+      "file": "@ant-design_icons.js",
+      "fileHash": "ea175fd5",
+      "needsInterop": false
+    },
+    "vercount-react": {
+      "src": "../../node_modules/vercount-react/dist/index.js",
+      "file": "vercount-react.js",
+      "fileHash": "58c2d3ba",
+      "needsInterop": false
+    },
+    "lodash": {
+      "src": "../../node_modules/lodash/lodash.js",
+      "file": "lodash.js",
+      "fileHash": "7bc8666c",
+      "needsInterop": true
+    },
+    "@ant-design/plots": {
+      "src": "../../node_modules/@ant-design/plots/es/index.js",
+      "file": "@ant-design_plots.js",
+      "fileHash": "f0c15e04",
+      "needsInterop": false
+    },
+    "@giscus/react": {
+      "src": "../../node_modules/@giscus/react/dist/index.js",
+      "file": "@giscus_react.js",
+      "fileHash": "55b17590",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "giscus-Ci9LqPcC-4XZAQZQL": {
+      "file": "giscus-Ci9LqPcC-4XZAQZQL.js"
+    },
+    "chunk-WS3EJEWD": {
+      "file": "chunk-WS3EJEWD.js"
+    },
+    "chunk-YAWFOJRN": {
+      "file": "chunk-YAWFOJRN.js"
+    },
+    "chunk-FYGYNQUM": {
+      "file": "chunk-FYGYNQUM.js"
+    },
+    "chunk-B6BMMQ2I": {
+      "file": "chunk-B6BMMQ2I.js"
+    },
+    "chunk-CMCFCOTG": {
+      "file": "chunk-CMCFCOTG.js"
+    },
+    "chunk-42D7FHTD": {
+      "file": "chunk-42D7FHTD.js"
+    },
+    "chunk-32EALFBN": {
+      "file": "chunk-32EALFBN.js"
+    },
+    "chunk-IF26LWJR": {
+      "file": "chunk-IF26LWJR.js"
+    },
+    "chunk-G3PMV62Z": {
+      "file": "chunk-G3PMV62Z.js"
+    }
+  }
+}
