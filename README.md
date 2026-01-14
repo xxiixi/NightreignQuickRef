@@ -67,7 +67,6 @@
 
 2. **Install dependencies**
    ```bash
-   cd nightreign-reference-notebook
    npm install
    ```
 
