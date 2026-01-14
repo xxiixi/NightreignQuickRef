@@ -13,10 +13,10 @@ const EMOJI_MAP = {
   fix: '🗡️',       // Bug fix
   docs: '📜',      // Documentation
   style: '🗝️',    // Code style (formatting, indentation, etc., not CSS)
-  refactor: '🦉',  // Code refactoring
-  perf: '🖤',      // Performance improvement
+  refactor: '🧩',  // Code refactoring
+  perf: '🚀',      // Performance improvement
   test: '⚔️',      // Tests
-  ui: '🧚‍♀️',        // UI styles/layout
+  ui: '🩵',        // UI styles/layout
   chore: '🛡️',    // Chores (deps, config, build, etc.)
 }
 
