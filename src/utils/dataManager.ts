@@ -289,8 +289,8 @@ class DataManager {
     return (this.dataCache.get('enhancementCategories') as EnhancementCategory[]) || [];
   }
 
-  public getInGameSpecialBuff(): unknown[] {
-    return (this.dataCache.get('inGameSpecialBuff') as unknown[]) || [];
+  public getInGameSpecialBuff(): EntryData[] {
+    return (this.dataCache.get('inGameSpecialBuff') as EntryData[]) || [];
   }
 
   public getCharacterData(): CharacterData {
