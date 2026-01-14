@@ -265,12 +265,12 @@ class DataManager {
     return (this.dataCache.get('inGameEntries') as EntryData[]) || [];
   }
 
-  public getWeaponCharacter(): WeaponCharacter {
-    return (this.dataCache.get('weaponCharacter') as WeaponCharacter) || {};
+  public getWeaponCharacter(): WeaponCharacter[] {
+    return (this.dataCache.get('weaponCharacter') as WeaponCharacter[]) || [{}];
   }
 
-  public getWeaponEffect(): WeaponEffect {
-    return (this.dataCache.get('weaponEffect') as WeaponEffect) || {};
+  public getWeaponEffect(): WeaponEffect[] {
+    return (this.dataCache.get('weaponEffect') as WeaponEffect[]) || [{}];
   }
 
   public getCharacterStates(): CharacterData[] {

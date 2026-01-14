@@ -48,16 +48,18 @@ interface TransformedWeaponCharacter {
 
 const characterNames = ['追踪者', '守护者', '铁之眼', '女爵', '无赖', '复仇者', '隐士', '执行者'];
 
-const transformData = (rawData: WeaponCharacter) => {
-  return Object.entries(rawData).map(([weaponName, characterData], index) => ({
+const transformData = (rawData: WeaponCharacter[]) => {
+  const weapons = rawData[0];
+  return Object.entries(weapons).map(([weaponName, characterData], index) => ({
     weapon_id: `LW${String(index + 1).padStart(3, '0')}`,
     weapon_name: weaponName,
     ...characterData
   }));
 };
 
-const transformEffectData = (rawData: WeaponEffect) => {
-  return Object.entries(rawData).map(([weaponName, effectData], index) => ({
+const transformEffectData = (rawData: WeaponEffect[]) => {
+  const weapons = rawData[0];
+  return Object.entries(weapons).map(([weaponName, effectData], index) => ({
     weapon_id: `LW${String(index + 1).padStart(3, '0')}`,
     weapon_name: weaponName,
     ...effectData
