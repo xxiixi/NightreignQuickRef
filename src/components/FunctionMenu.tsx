@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Tooltip, Menu } from 'antd';
+import type { MenuProps } from 'antd';
 import logoImage from '../assets/logo-circle.png';
 import { getMainNavigationOrder } from '../config/navigationConfig';
 
@@ -9,12 +10,30 @@ interface FunctionMenuProps {
   onStepChange?: (stepIndex: number) => void; // Step切换回调
 }
 
+interface MenuItemMetadata {
+  anchorId?: string;
+  tabKey?: string;
+  stepIndex?: number;
+  parentKey?: string;
+}
+
+type MenuItemType = NonNullable<MenuProps['items']>[number];
+
+interface MenuItemWithMetadata {
+  key: string;
+  label: React.ReactNode;
+  anchorId?: string;
+  tabKey?: string;
+  stepIndex?: number;
+  children?: MenuItemWithMetadata[];
+}
+
 const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange, onStepChange }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
 
   // 功能导航菜单项 - 使用Menu组件的数据结构
-  const menuItems = [
+  const menuItems: MenuItemWithMetadata[] = [
     {
       key: '游戏机制',
       label: '⚙️ 游戏机制',
@@ -72,15 +91,43 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
     },
   ];
 
+  // 创建映射对象存储每个菜单项的自定义属性
+  const menuItemMetadata = new Map<string, MenuItemMetadata>();
+  
+  menuItems.forEach(item => {
+    if (item.children) {
+      item.children.forEach(child => {
+        menuItemMetadata.set(child.key, {
+          anchorId: child.anchorId,
+          tabKey: child.tabKey,
+          stepIndex: child.stepIndex,
+          parentKey: item.key
+        });
+      });
+    }
+  });
 
+  // 清理菜单项，移除自定义属性，只保留 Menu 组件需要的属性
+  const cleanMenuItem = (item: MenuItemWithMetadata): MenuItemType => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { anchorId, tabKey, stepIndex, ...cleanedItem } = item;
+    const result: MenuItemType = {
+      key: cleanedItem.key,
+      label: cleanedItem.label,
+      ...(cleanedItem.children && {
+        children: cleanedItem.children.map(cleanMenuItem)
+      })
+    };
+    return result;
+  };
 
   // 根据配置文件中的顺序重新排列菜单项
-  const getOrderedMenuItems = () => {
+  const getOrderedMenuItems = (): MenuItemType[] => {
     const order = getMainNavigationOrder();
     return order.map(key => {
       const item = menuItems.find(item => item.key === key);
-      return item!;
-    });
+      return item ? cleanMenuItem(item) : null;
+    }).filter((item): item is MenuItemType => item !== null);
   };
 
   const handleMenuClick = ({ key }: { key: string }) => {
@@ -91,31 +138,28 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       onTabChange(key);
       setMenuVisible(false);
     } else {
-      // 检查是否是子菜单项
-      const subMenuItem = menuItems.flatMap(item =>
-        item.children.map(subItem => ({ ...subItem, parentKey: item.key }))
-      ).find(subItem => subItem.key === key);
-
-      if (subMenuItem) {
+      // 从映射对象中获取子菜单项的元数据
+      const metadata = menuItemMetadata.get(key);
+      if (metadata && metadata.parentKey) {
         // 先切换到父菜单页面
-        onTabChange(subMenuItem.parentKey);
+        onTabChange(metadata.parentKey);
         setMenuVisible(false);
 
         // 延迟执行锚点跳转，确保页面已经渲染
         setTimeout(() => {
           // 处理Tab页面的切换
-          if ('tabKey' in subMenuItem && subMenuItem.tabKey && onSubTabChange) {
-            onSubTabChange(subMenuItem.tabKey);
+          if (metadata.tabKey && onSubTabChange) {
+            onSubTabChange(metadata.tabKey);
           }
 
           // 处理Step页面的切换
-          if ('stepIndex' in subMenuItem && typeof subMenuItem.stepIndex === 'number' && onStepChange) {
-            onStepChange(subMenuItem.stepIndex);
+          if (typeof metadata.stepIndex === 'number' && onStepChange) {
+            onStepChange(metadata.stepIndex);
           }
 
           // 执行锚点跳转
-          if (subMenuItem.anchorId) {
-            const element = document.getElementById(subMenuItem.anchorId);
+          if (metadata.anchorId) {
+            const element = document.getElementById(metadata.anchorId);
             if (element) {
               element.scrollIntoView({
                 behavior: 'smooth',

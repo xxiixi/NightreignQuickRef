@@ -244,7 +244,7 @@ class DataManager {
       this.dataCache.set('inGameDeepNightEntries', inGameDeepNightEntries.default);
 
       this.isLoaded = true;
-      console.log('所有数据预加载完成');
+      // console.log('所有数据预加载完成');
     } catch (error) {
       console.error('数据预加载失败:', error);
       message.error('数据加载失败，请刷新页面重试');

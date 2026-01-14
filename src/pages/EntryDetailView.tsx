@@ -413,7 +413,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
   // 监听筛选状态变化，用于调试
   useEffect(() => {
-    console.log('FilteredInfo changed:', filteredInfo);
+    // console.log('FilteredInfo changed:', filteredInfo);
   }, [filteredInfo]);
 
   // 清除所有筛选和排序
@@ -432,7 +432,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
   // 表格变化处理函数
   const handleTableChange: OnChange = (_pagination, filters, sorter) => {
-    console.log('Table change - filters:', filters, 'sorter:', sorter);
+    // console.log('Table change - filters:', filters, 'sorter:', sorter);
     setFilteredInfo(filters);
     setSortedInfo(sorter as Sorts);
   };
@@ -473,17 +473,17 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
     // 叠加性筛选
     if (superposabilityFilters && superposabilityFilters.length > 0) {
-      console.log('Applying superposability filter:', superposabilityFilters);
-      const beforeCount = filtered.length;
+      // console.log('Applying superposability filter:', superposabilityFilters);
+      // const beforeCount = filtered.length;
       filtered = filtered.filter(item => {
         const itemSuperposability = item.superposability || '';
         const isIncluded = superposabilityFilters.includes(itemSuperposability);
         if (!isIncluded) {
-          console.log(`Filtered out item "${item.entry_name}" with superposability "${itemSuperposability}"`);
+          // console.log(`Filtered out item "${item.entry_name}" with superposability "${itemSuperposability}"`);
         }
         return isIncluded;
       });
-      console.log(`Superposability filter: ${beforeCount} -> ${filtered.length} items`);
+      // console.log(`Superposability filter: ${beforeCount} -> ${filtered.length} items`);
     }
 
     // 关键词搜索
