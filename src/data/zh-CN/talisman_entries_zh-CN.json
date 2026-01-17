@@ -314,7 +314,7 @@
     {
         "entry_id":"330801",
         "entry_name":"降低血量上限",
-        "explanation":"减少15%最大生命值",
+        "explanation":"减少6%最大生命值",
         "talisman":"源辉石刀"
     },
     {
@@ -368,7 +368,7 @@
     {
         "entry_id":"340701",
         "entry_name":"降低减伤率",
-        "explanation":"增加受到的30%伤害",
+        "explanation":"降低5%减伤率",
         "talisman":"熔炉羽护符"
     },
     {

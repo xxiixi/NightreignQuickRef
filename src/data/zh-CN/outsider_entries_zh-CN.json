@@ -542,7 +542,7 @@
         "entry_id":"7030000",
         "entry_name":"身在图腾碑石周围时，能提升强韧度",
         "entry_type":"仅限特定角色",
-        "explanation":"∘ 无赖释放图腾石碑时，本buff会赋予给石碑周围的玩家\n∘ 获得buff的玩家受到的韧性伤害 -50%，内置30秒冷却时间",
+        "explanation":"∘ 无赖释放图腾石碑时，本buff会赋予给石碑周围的玩家\n∘ 获得buff的玩家受到的韧性伤害 -90%，内置30秒冷却时间",
         "superposability":"不可叠加"
     },
     {
@@ -563,7 +563,7 @@
         "entry_id":"7030700",
         "entry_name":"防御时，变得容易被敌人攻击",
         "entry_type":"行动",
-        "explanation":"仇恨增益 +300",
+        "explanation":"仇恨+9，松开后持续4s ",
         "superposability":"未知"
     },
     {
@@ -661,7 +661,7 @@
         "entry_id":"7033400",
         "entry_name":"【守护者】在能力发动期间，防御成功时能形成冲击波",
         "entry_type":"仅限特定角色",
-        "explanation":"造成固定100点物理伤害，5点削韧，3号冲击力",
+        "explanation":"造成[固定100点 + 0.12%最大生命值]的物理伤害，5点削韧，3号冲击力",
         "superposability":"不可叠加"
     },
     {
@@ -673,16 +673,16 @@
     },
     {
         "entry_id":"7034400",
-        "entry_name":"【执行者】提升技艺发动期间的攻击力，但攻击时会减少血量",
+        "entry_name":"【执行者】提升技艺发动期间的攻击力，但攻击时会降低减伤率",
         "entry_type":"仅限特定角色",
-        "explanation":"发动技艺时，每次攻击-10点生命值，造成的伤害 +8%",
+        "explanation":"发动技艺期间，buff:攻击力提升35%; debuff:每次攻击后会降低减伤率40%，持续5s，攻击会持续刷新debuff",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7034500",
         "entry_name":"【执行者】在技艺发动期间，妖刀进入解放状态时，能恢复血量",
         "entry_type":"仅限特定角色",
-        "explanation":"固定回复100点生命值",
+        "explanation":"回复[最大生命值 × 5% + 100]点血量",
         "superposability":"不可叠加"
     },
     {
@@ -745,7 +745,7 @@
         "entry_id":"7036100",
         "entry_name":"防御成功时，恢复血量",
         "entry_type":"恢复",
-        "explanation":"固定回复8点生命值",
+        "explanation":"固定回复15点生命值",
         "superposability":"不可叠加"
     },
     {
@@ -1123,7 +1123,7 @@
         "entry_id":"7082400",
         "entry_name":"装备三把以上类别为弓的武器，能提升攻击力",
         "entry_type":"仅限特定武器",
-        "explanation":"造成的伤害 +20%，指定放在背包里就可生效，用别的武器也可增伤",
+        "explanation":"造成的伤害 +10%，指定放在背包里就可生效，用别的武器也可增伤",
         "superposability":"不可叠加"
     },
     {
@@ -1179,7 +1179,7 @@
         "entry_id":"7090300",
         "entry_name":"在图腾碑石周围打倒敌人时，能恢复血量",
         "entry_type":"恢复",
-        "explanation":"∘ 无赖释放图腾石碑时，本buff会和石碑增伤buff同时赋予给石碑周围的玩家\n∘ 获得buff的玩家每击杀一个敌人回复[最大生命值 × 20%]点血量，持续20秒",
+        "explanation":"∘ 无赖释放图腾石碑时，本buff会和石碑增伤buff同时赋予给石碑周围的玩家\n∘ 获得buff的玩家每击杀一个敌人回复[最大生命值 × 50%]点血量，持续20秒",
         "superposability":"不可叠加"
     },
     {
@@ -1802,7 +1802,7 @@
         "entry_id":"7332400",
         "entry_name":"提升弓的攻击力",
         "entry_type":"攻击力",
-        "explanation":"造成的伤害 +9%",
+        "explanation":"造成的伤害 +6%",
         "superposability":"可叠加"
     },
     {
@@ -2446,21 +2446,21 @@
 		"entry_id": "7036800",
 		"entry_name": "【送葬者】发动绝招时，提升攻击力",
 		"entry_type": "仅限特定角色",
-		"explanation": "发动绝招时，造成的伤害+14%，持续40秒",
+		"explanation": "发动绝招时，造成的伤害+18%，持续40秒",
 		"superposability": "不可叠加"
 	},
 	{
 		"entry_id": "7036900",
 		"entry_name": "【送葬者】连击的最后攻击命中时，提升攻击力",
 		"entry_type": "仅限特定角色",
-		"explanation": "最后攻击命中时，造成的伤害+12%，持续20秒",
+		"explanation": "最后攻击命中时，造成的伤害+16%，持续20秒",
 		"superposability": "不可叠加"
 	},
 	{
 		"entry_id": "7037000",
 		"entry_name": "【送葬者】使用祷告将辅助效果附加在自己身上时，提升物理攻击力",
 		"entry_type": "仅限特定角色",
-		"explanation": "物理攻击力+15%，持续60秒",
+		"explanation": "物理攻击力+19%，持续60秒",
 		"superposability": "不可叠加"
 	},
 	{
@@ -2474,7 +2474,7 @@
 		"entry_id": "7037600",
 		"entry_name": "【玻璃项链】连续攻击时，提升攻击力",
 		"entry_type": "专属遗物",
-		"explanation": "根据连续攻击累积值增加伤害\n ∘ 共有4个阶段 [6%\/10.5%\/15%\/15%]\n ∘ 持续时间 [1-3阶段1.5秒，4阶段0秒]\n ∘ 每个等级buff互相独立计算持续时间和增伤",
+		"explanation": "根据连续攻击累积值增加伤害\n ∘ 共有4个阶段 [5%\/6.5%\/9%\/15%]\n ∘ 持续时间 [1-3阶段1.5秒，4阶段0秒]\n ∘ 每个等级buff互相独立计算持续时间和增伤",
 		"superposability": "不可叠加"
 	},
 	{
