@@ -23,6 +23,8 @@ import nightOfTheDemon from '../assets/BossRelics/night-of-the-demon.avif';
 import nightOfTheFathom from '../assets/BossRelics/night-of-the-fathom.avif';
 import nightOfTheMiasma from '../assets/BossRelics/night-of-the-miasma.avif';
 import nightOfTheLord from '../assets/BossRelics/night-of-the-lord.avif';
+import nightOfTheBalancers from '../assets/BossRelics/the-will-of-the-balancers.avif';
+import nightOfTheDreglords from '../assets/BossRelics/the-night-of-dregs.avif';
 
 // 导入Negations图片
 import standardDamage from '../assets/Negations/standard-damage-damage-type-elden-ring-nightreign-wiki-guide.png';
@@ -406,6 +408,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     '"黑夜之魔"利普拉': nightOfTheDemon,
     '"黑夜光骑士"弗格尔': nightOfTheChampion,
     '黑夜轮廓': nightOfTheLord,
+    '安定者们': nightOfTheBalancers,
+    '废弃物之王(一阶段)': nightOfTheDreglords,
+    '废弃物之王(二阶段)': nightOfTheDreglords,
   };
 
 
