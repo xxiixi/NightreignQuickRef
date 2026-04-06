@@ -19,7 +19,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
   onToggleTheme,
   // onToggleLanguage
 }) => {
-  const { sitePv, siteUv, pagePv } = useVercount();
+  const { siteUv, pagePv } = useVercount();
 
   // 根据图标类型获取对应的图标组件
   const getDataSourceIcon = (iconType: DataSourceIcon): React.ReactNode => {
@@ -102,13 +102,13 @@ const Header: React.FC<HeaderProps> = React.memo(({
                         访问量统计 🔥
                       </div>
                       <div style={{ fontSize: '12px' }}>
-                        本站总访客数 <span style={{ color: '#1890ff' }}>{siteUv}</span> 人
+                        总访客数 <span style={{ color: '#1890ff' }}>{siteUv}</span> 人
                       </div>
-                      <div style={{ fontSize: '12px' }}>
+                      {/* <div style={{ fontSize: '12px' }}>
                         本站总访问量 <span style={{ color: '#1890ff' }}>{sitePv}</span> 次
-                      </div>
+                      </div> */}
                       <div style={{ fontSize: '12px' }}>
-                        数据查询页访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
+                        总访问量 <span style={{ color: '#1890ff' }}>{pagePv}</span> 次
                       </div>
                       <div style={{
                         marginTop: '8px',
@@ -159,6 +159,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             ✅ 最新更新
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
+                            • 添加了DLC新夜王数据；<br />
                             • 添加了DLC新词条数据；<br />
                             • 添加了{getVersionNumber()}版本更新后的新词条数据；<br />
                             • 添加了DLC角色雷达图数据；
@@ -170,7 +171,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             🔧 TODO
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 添加新夜王、DLC新敌人数据<br />
+                            • 添加DLC新敌人数据<br />
                             • 更新新角色等级、闪避面板<br />
                             • 夜雨伤害数据待更新(无数据来源)
                           </div>
