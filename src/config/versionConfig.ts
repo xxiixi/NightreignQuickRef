@@ -9,8 +9,8 @@ export interface VersionInfo {
 }
 
 export const NIGHTREIGN_VERSION: VersionInfo = {
-  version: '1.03.4',
-  releaseDate: 'Jan 16 2026'
+  version: '1.03.5',
+  releaseDate: 'Oct 20 2026'
 };
 
 export const getVersionDisplayText = (): string => {

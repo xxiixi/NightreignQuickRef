@@ -311,3 +311,100 @@ body[tomato-theme="dark"] .character-attributes-table .ant-table-tbody > tr.ant-
     margin-top: 12px;
   }
 } 
+/* ===== 雷达图自定义图例（固定单行 + 左右滚动箭头） ===== */
+.radar-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  min-width: 0;
+  padding: 0 4px;
+  margin-bottom: 4px;
+}
+
+.radar-legend-scroll {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.radar-legend-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.radar-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--color-text-1);
+  white-space: nowrap;
+}
+
+.radar-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.radar-legend-arrow {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text-2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.radar-legend-arrow:hover {
+  background: var(--color-primary-100);
+  color: var(--color-primary-500);
+}
+
+/* 雷达图内容列：自定义图例在上，图表在下 */
+.radar-chart-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.radar-chart-inner > .radar-legend {
+  flex: 0 0 auto;
+}
+
+.radar-chart-inner > div:last-child {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.radar-chart-inner canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+.radar-legend-scroll.is-centered {
+  justify-content: center;
+}

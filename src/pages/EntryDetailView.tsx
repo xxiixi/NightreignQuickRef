@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Table, Input, Select, message, Tabs, Tag, Spin, Button } from 'antd';
+import { Table, Input, Select, message, Tabs, Tag, Spin, Button, Checkbox, Space } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 import type { EntryData } from '../types';
 import { typeColorMap } from '../types';
@@ -7,6 +7,7 @@ import DataManager from '../utils/dataManager';
 import type { EnhancementCategory, ItemEffect } from '../utils/dataManager';
 import { debounce } from 'lodash';
 import { SearchOutlined } from '@ant-design/icons';
+import CustomPagination from '../components/CustomPagination';
 
 // 自定义搜索组件接口
 interface CustomSearchProps {
@@ -79,110 +80,6 @@ const CustomSearch: React.FC<CustomSearchProps> = ({
   );
 };
 
-// 自定义分页组件接口
-interface CustomPaginationProps {
-  currentPage: number;
-  pageSize: number;
-  totalItems: number;
-  onPageChange: (page: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
-  loading?: boolean;
-}
-
-// 自定义分页组件
-const CustomPagination: React.FC<CustomPaginationProps> = ({
-  currentPage,
-  pageSize,
-  totalItems,
-  onPageChange,
-  onPageSizeChange,
-  loading = false
-}) => {
-  const totalPages = Math.ceil(totalItems / pageSize);
-
-  if (loading || totalItems === 0) {
-    return null;
-  }
-
-  return (
-    <div className="custom-pagination-row" style={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginTop: '15px',
-      padding: '0 16px'
-    }}>
-      {/* 左侧：每页显示选择器 */}
-      <div className="page-size-controls" style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '8px'
-      }}>
-        <span style={{
-          color: 'var(--theme-text-secondary)',
-          fontSize: '14px'
-        }}>
-          每页显示
-        </span>
-        <Select
-          value={pageSize.toString()}
-          onChange={(value) => {
-            onPageSizeChange(Number(value));
-            onPageChange(1);
-          }}
-          options={[
-            { value: '15', label: '15 条' },
-            { value: '20', label: '20 条' },
-            { value: '30', label: '30 条' },
-            { value: '50', label: '50 条' },
-            { value: '80', label: '80 条' },
-            { value: '100', label: '100 条' },
-          ]}
-          size="small"
-          style={{ width: '100px' }}
-        />
-        <span style={{
-          color: 'var(--theme-text-secondary)',
-          fontSize: '14px'
-        }}>
-          共 {totalItems} 条记录
-        </span>
-      </div>
-
-      {/* 右侧：分页按钮 */}
-      <div className="page-nav-controls" style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '10px'
-      }}>
-        <Button
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage <= 1}
-          size="middle"
-        >
-          上一页
-        </Button>
-
-        <span style={{
-          margin: '0 15px',
-          color: 'var(--theme-text-secondary)',
-          fontSize: '14px'
-        }}>
-          第 {currentPage} 页，共 {totalPages} 页
-        </span>
-
-        <Button
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage >= totalPages}
-          size="middle"
-        >
-          下一页
-        </Button>
-      </div>
-    </div>
-  );
-};
-
 // 扩展的强化类别接口，用于表格显示
 interface EnhancedEnhancementCategory extends EnhancementCategory {
   skillType?: string;
@@ -199,6 +96,7 @@ interface DataState {
   outsiderEntries: EntryData[];
   talismanEntries: EntryData[];
   inGameEntries: EntryData[];
+  inGamePotentialEntries: EntryData[];
   enhancementCategories: EnhancementCategory[];
   itemEffects: ItemEffect[];
   deepNightEntries: EntryData[];
@@ -207,7 +105,7 @@ interface DataState {
 }
 
 const outsiderTypeOptions = [
-  { value: '能力', label: '能力' },
+  { value: '能力值', label: '能力值' },
   { value: '攻击力', label: '攻击力' },
   { value: '技艺/绝招', label: '技艺/绝招' },
   { value: '魔法/祷告', label: '魔法/祷告' },
@@ -224,7 +122,8 @@ const outsiderTypeOptions = [
   { value: '出击时的武器（附加）', label: '出击时的武器（附加）' },
   { value: '出击时的道具', label: '出击时的道具' },
   { value: '场地环境', label: '场地环境' },
-  { value: '专属遗物', label: '专属遗物' }
+  { value: '专属遗物', label: '专属遗物' },
+  { value: '武器固有', label: '武器固有' }
 ];
 
 // 深夜模式局外词条类型选项
@@ -276,7 +175,7 @@ const itemEffectTypeOptions = [
 
 // 添加局内词条类型选项
 const inGameTypeOptions = [
-  { value: '能力', label: '能力' },
+  { value: '能力值', label: '能力值' },
   { value: '攻击力', label: '攻击力' },
   { value: '强化', label: '强化' },
   { value: '恢复', label: '恢复' },
@@ -289,6 +188,27 @@ const inGameTypeOptions = [
   { value: '庇佑', label: '庇佑' },
   { value: '不甘', label: '不甘' },
 ];
+
+// 「潜在能力」是局内武器固有的一类词条（43 条），单独放在
+// src/data/zh-CN/in-game_potential_entries_zh-CN.json，页签「局内-潜在能力」
+
+// 局内-潜在能力词条类型选项（这 43 条里实际出现的类型）
+const potentialAbilityTypeOptions = [
+  { value: '能力值', label: '能力值' },
+  { value: '攻击力', label: '攻击力' },
+  { value: '强化', label: '强化' },
+  { value: '恢复', label: '恢复' },
+  { value: '减伤率', label: '减伤率' },
+  { value: '技艺/绝招', label: '技艺/绝招' },
+  { value: '额外效果', label: '额外效果' },
+  { value: '附加异常状态', label: '附加异常状态' },
+  { value: '对异常状态的抵抗力', label: '对异常状态的抵抗力' },
+];
+
+// 未实装标签：数据里 tags 含此值即视为「未实装」词条
+const NOT_IMPLEMENTED_TAG = '未实装';
+// 未实装标签配色（antd 预设色；放在「词条类型」列，需与普通类型标签明显区分）
+const NOT_IMPLEMENTED_COLOR = 'orange';
 
 // 深夜模式局内词条类型选项
 const inGameDeepNightTypeOptions = [
@@ -364,10 +284,13 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const [activeEntryTab, setActiveEntryTab] = useState(activeSubTab || '局外词条');
   const [filteredInfo, setFilteredInfo] = useState<Filters>({});
   const [sortedInfo, setSortedInfo] = useState<Sorts>({});
+  // 是否展示未实装词条（默认不展示）
+  const [showNotImplemented, setShowNotImplemented] = useState(false);
   const [data, setData] = useState<DataState>({
     outsiderEntries: [],
     talismanEntries: [],
     inGameEntries: [],
+    inGamePotentialEntries: [],
     enhancementCategories: [],
     itemEffects: [],
     deepNightEntries: [],
@@ -395,6 +318,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           outsiderEntries: dataManager.getOutsiderEntries(),
           talismanEntries: dataManager.getTalismanEntries(),
           inGameEntries: dataManager.getInGameEntries(),
+          inGamePotentialEntries: dataManager.getInGamePotentialEntries(),
           enhancementCategories: dataManager.getEnhancementCategories(),
           itemEffects: dataManager.getItemEffects(),
           deepNightEntries: dataManager.getDeepNightEntries(),
@@ -453,14 +377,18 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
   const filterData = (data: EntryData[], searchValue: string, types?: string[], character?: string, inGameTypes?: string[], superposabilityFilters?: string[]) => {
     let filtered = data;
 
-    // 类型筛选
+    // 类型筛选（「未实装」是标签而不是 entry_type，需要单独匹配）
+    const matchesType = (item: EntryData, list: string[]) =>
+      list.includes(item.entry_type || '') ||
+      (list.includes(NOT_IMPLEMENTED_TAG) && (item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+
     if (types && types.length > 0) {
-      filtered = filtered.filter(item => types.includes(item.entry_type || ''));
+      filtered = filtered.filter(item => matchesType(item, types));
     }
 
     // 局内词条类型筛选
     if (inGameTypes && inGameTypes.length > 0) {
-      filtered = filtered.filter(item => inGameTypes.includes(item.entry_type || ''));
+      filtered = filtered.filter(item => matchesType(item, inGameTypes));
     }
 
     // 角色筛选
@@ -554,6 +482,42 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
     return transformedData;
   };
 
+  // 词条名称 + 标签：「未实装」归到「词条类型」列，这里只渲染「XX专属遗物」等标签
+  const renderEntryName = (name: string | null | undefined, record: EntryData) => {
+    const tags = (record.tags || []).filter(tag => tag !== NOT_IMPLEMENTED_TAG);
+    // 少数词条名里带 \n（如 7030500「【追踪者】发动绝招后，\n能提升…」），要 pre-wrap 才会换行
+    const label = <span style={{ whiteSpace: 'pre-wrap' }}>{name || '-'}</span>;
+    if (tags.length === 0) return label;
+    return (
+      <Space size={4} wrap>
+        {label}
+        {tags.map(tag => (
+          <Tag
+            key={tag}
+            color="gold"
+            style={{ marginInlineEnd: 0, fontSize: '11px', lineHeight: '18px' }}
+          >
+            {tag}
+          </Tag>
+        ))}
+      </Space>
+    );
+  };
+
+  // 词条类型列：未实装词条只显示「未实装」标签，不再显示词条类型
+  const renderEntryType = (type: string | null | undefined, record: EntryData) => {
+    if ((record.tags || []).includes(NOT_IMPLEMENTED_TAG)) {
+      return <Tag color={NOT_IMPLEMENTED_COLOR}>{NOT_IMPLEMENTED_TAG}</Tag>;
+    }
+    return type ? <Tag color={getTypeColor(type)}>{type}</Tag> : '-';
+  };
+
+  // 「未实装」条目默认隐藏，勾选「显示未实装」后才在类型筛选里提供该选项
+  const withNotImplemented = (opts: { value: string; label: string }[]) =>
+    showNotImplemented
+      ? [...opts, { value: NOT_IMPLEMENTED_TAG, label: NOT_IMPLEMENTED_TAG }]
+      : opts;
+
   // 局外词条表格列定义
   const outsiderColumns: TableColumnsType<EntryData> = [
     {
@@ -585,6 +549,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -605,6 +570,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           </div>
         );
       },
+      onCell: () => ({
+        style: {
+          padding: '12px 8px'
+        }
+      }),
     },
     {
       title: '词条类型',
@@ -612,9 +582,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'entry_type',
       align: 'center',
       width: '12%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text: string, record: EntryData) => renderEntryType(text, record),
     },
     {
       title: '叠加性',
@@ -672,6 +640,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -692,6 +661,11 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
           </div>
         );
       },
+      onCell: () => ({
+        style: {
+          padding: '12px 8px'
+        }
+      }),
     },
   ];
 
@@ -726,6 +700,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -758,9 +733,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'entry_type',
       align: 'center',
       width: '12%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text: string, record: EntryData) => renderEntryType(text, record),
     },
     {
       title: '叠加性',
@@ -813,6 +786,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       },
       sortDirections: ['ascend', 'descend'],
       sortOrder: sortedInfo.columnKey === 'entry_name' ? sortedInfo.order : null,
+      render: (text: string, record: EntryData) => renderEntryName(text, record),
     },
     {
       title: '解释',
@@ -845,9 +819,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
       key: 'entry_type',
       align: 'center',
       width: '12%',
-      render: (text) => text ? (
-        <Tag color={getTypeColor(text)}>{text}</Tag>
-      ) : '-',
+      render: (text: string, record: EntryData) => renderEntryType(text, record),
     },
     {
       title: '叠加性',
@@ -1033,16 +1005,28 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         tableData = data.outsiderEntries;
         columns = outsiderColumns;
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
         break;
       case '深夜模式局外词条':
         tableData = data.deepNightEntries;
         columns = deepNightColumns;
         tableData = filterData(tableData, searchKeyword, selectedTypes, selectedCharacter, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
         break;
       case '深夜模式局内词条':
         tableData = data.inGameDeepNightEntries;
         columns = inGameColumns; // 复用局内词条的列定义
         tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
         break;
       case '护符词条':
         tableData = data.talismanEntries;
@@ -1051,6 +1035,16 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
         break;
       case '局内词条':
         tableData = data.inGameEntries;
+        columns = inGameColumns;
+        tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
+        // 默认隐藏未实装词条，勾选「显示未实装」后才展示
+        if (!showNotImplemented) {
+          tableData = tableData.filter(item => !(item.tags || []).includes(NOT_IMPLEMENTED_TAG));
+        }
+        break;
+      case '潜在能力':
+        // 这 43 条都是已实装词条，没有「显示未实装」开关，也不需要隐藏逻辑
+        tableData = data.inGamePotentialEntries;
         columns = inGameColumns;
         tableData = filterData(tableData, searchKeyword, selectedInGameTypes, undefined, undefined, filteredInfo.superposability as string[]);
         break;
@@ -1186,6 +1180,9 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
 
   // 渲染搜索和筛选器的函数
   const renderSearchAndFilter = (tabKey: string) => {
+    // 「局内词条」和「潜在能力」共用同一套筛选控件，只有类型选项不同
+    const isInGameEntriesTab = tabKey === '局内词条' || tabKey === '潜在能力';
+
     if (data.loading) {
       return (
         <div className="loading-container">
@@ -1266,7 +1263,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setSelectedTypes(values);
                   setCurrentPage(1);
                 }}
-                options={outsiderTypeOptions}
+                options={withNotImplemented(outsiderTypeOptions)}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
               />
               <Select
@@ -1282,6 +1279,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 notFoundContent="暂无角色"
                 showSearch={false}
               />
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => {
+                  setShowNotImplemented(e.target.checked);
+                  setCurrentPage(1);
+                }}
+              >
+                显示未实装
+              </Checkbox>
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>
@@ -1319,7 +1325,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setSelectedTypes(values);
                   setCurrentPage(1);
                 }}
-                options={deepNightTypeOptions}
+                options={withNotImplemented(deepNightTypeOptions)}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
               />
               <Select
@@ -1335,6 +1341,15 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 notFoundContent="暂无角色"
                 showSearch={false}
               />
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => {
+                  setShowNotImplemented(e.target.checked);
+                  setCurrentPage(1);
+                }}
+              >
+                显示未实装
+              </Checkbox>
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>
@@ -1370,9 +1385,18 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                   setSelectedInGameTypes(values);
                   setCurrentPage(1);
                 }}
-                options={inGameDeepNightTypeOptions}
+                options={withNotImplemented(inGameDeepNightTypeOptions)}
                 maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
               />
+              <Checkbox
+                checked={showNotImplemented}
+                onChange={(e) => {
+                  setShowNotImplemented(e.target.checked);
+                  setCurrentPage(1);
+                }}
+              >
+                显示未实装
+              </Checkbox>
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
               </Button>
@@ -1397,7 +1421,7 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                 className="custom-search-input"
                 allowClear
               />
-              {tabKey === '局内词条' && (
+              {isInGameEntriesTab && (
                 <Select
                   className="in-game-type-select"
                   mode="multiple"
@@ -1409,9 +1433,21 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
                     setSelectedInGameTypes(values);
                     setCurrentPage(1);
                   }}
-                  options={inGameTypeOptions}
+                  options={tabKey === '潜在能力' ? potentialAbilityTypeOptions : withNotImplemented(inGameTypeOptions)}
                   maxTagPlaceholder={omittedValues => `+${omittedValues.length}...`}
                 />
+              )}
+              {/* 「潜在能力」这 43 条都是已实装词条，不提供「显示未实装」开关 */}
+              {tabKey === '局内词条' && (
+                <Checkbox
+                  checked={showNotImplemented}
+                  onChange={(e) => {
+                    setShowNotImplemented(e.target.checked);
+                    setCurrentPage(1);
+                  }}
+                >
+                  显示未实装
+                </Checkbox>
               )}
               <Button onClick={clearAll} type="default" size="middle">
                 清除所有
@@ -1463,6 +1499,16 @@ const EntryDetailView: React.FC<EntryDetailViewProps> = ({ activeSubTab }) => {
               <div id="in-game-entries">
                 {renderSearchAndFilter('局内词条')}
                 {renderTableContent('局内词条')}
+              </div>
+            ),
+          },
+          {
+            key: '潜在能力',
+            label: '🌖 局内-潜在能力',
+            children: (
+              <div id="in-game-potential-entries">
+                {renderSearchAndFilter('潜在能力')}
+                {renderTableContent('潜在能力')}
               </div>
             ),
           },

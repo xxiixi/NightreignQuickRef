@@ -6,6 +6,9 @@ export interface EntryData {
   explanation: string | null;
   superposability?: string | null;
   talisman?: string;
+  notes?: string | null;
+  /** 词条名称/词条类型栏要展示的标签，如「未实装」 */
+  tags?: string[];
 }
 
 // Boss数据接口
@@ -13,15 +16,40 @@ export interface BossData {
   id: number;
   name: string;
   baseHealth: number | string;
+  /** 普通形态的额外缩放（会显示在括号里，如头领的 ×3.75）；缺省视为 1 */
+  baseHealthMultiplier?: number | number[];
+  /** DLC 全局缩放（仅两支 DLC 夜王使用，参与计算但不显示） */
+  dlcMultiplier?: number;
+  /** 单人/双人/三人的人数倍率覆盖（默认 [1,2,3]，来自 MultiPlayCorrectionParam） */
+  basePlayerMultipliers?: number[];
   nightreignHealth: number | string;
-  normalAbsorption: number;
-  slashAbsorption: number;
-  strikeAbsorption: number;
-  pierceAbsorption: number;
-  magicAbsorption: number;
-  fireAbsorption: number;
-  lightningAbsorption: number;
-  holyAbsorption: number;
+  /** 永夜王倍率（[Everdark Sovereign Scaling] 等，永夜列照此显示；支持多个因子数组） */
+  nightreignHealthMultiplier: number | number[] | string;
+  /** 永夜王血量列的人数倍率覆盖（默认 [1,2,3]） */
+  nightreignPlayerMultipliers?: number[];
+  /**
+   * 深夜模式基础额外血量倍率（深度 1~5，相对当前普通血量）。
+   * DLC 夜王还要再乘 deepNightDlcMultiplier（0.8）。
+   */
+  deepNightHealthMultipliers?: number[];
+  /** 深夜 DLC 归一化系数（0.8），与 deepNightHealthMultipliers 相乘；无 DLC 的行不填 */
+  deepNightDlcMultiplier?: number;
+  /** 深夜原始削韧承受倍率（深度 1~5，0.88~0.84） */
+  deepNightPoiseDamageRate?: number[];
+  /** 深夜 DLC 原始削韧承受倍率（1.136），与 deepNightPoiseDamageRate 相乘 */
+  deepNightDlcPoiseMultiplier?: number;
+  /** 深夜档位说明，如 "4a" */
+  deepNightTier?: string;
+  /** 深夜倍率的额外说明（机制特例、数据来源等） */
+  deepNightNote?: string;
+  normalAbsorption: number | string;
+  slashAbsorption: number | string;
+  strikeAbsorption: number | string;
+  pierceAbsorption: number | string;
+  magicAbsorption: number | string;
+  fireAbsorption: number | string;
+  lightningAbsorption: number | string;
+  holyAbsorption: number | string;
   poisonResistance: number | string;
   scarletRotResistance: number | string;
   bleedResistance: number | string;
@@ -29,9 +57,8 @@ export interface BossData {
   frostResistance: number | string;
   sleepResistance: number | string;
   madnessResistance: number | string;
-  basePoise: number;
+  basePoise: number | string;
   nightreignPoise: number | string;
-  nightreignHealthMultiplier: number | string;
 }
 
 // 野生Boss数据接口
@@ -93,6 +120,7 @@ export const typeColorMap: Record<string, string> = {
   '出击时的道具': 'orange',
   '场地环境': 'green',
   '专属遗物': 'magenta',
+  '武器固有': 'cyan',
   // 局内词条
   '庇佑': 'purple',
   '不甘': 'volcano',

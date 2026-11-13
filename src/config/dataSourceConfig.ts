@@ -132,6 +132,11 @@ export const DATA_SOURCE_CONFIG: DataSourceGroup[] = [
         title: '官方 Wiki',
         url: 'https://eldenringnightreign.wiki.fextralife.com/Elden+Ring+Nightreign+Wiki',
         icon: 'link'
+      },
+      {
+        title: 'Smithbox 2.2.6',
+        url: 'https://github.com/vawser/Smithbox/releases#release-2.2.6',
+        icon: 'link'
       }
     ]
   }

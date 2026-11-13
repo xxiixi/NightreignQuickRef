@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, message, Spin } from 'antd';
+import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, message, Spin } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData, WildBossData, CharacterData, EntryData } from '../types';
@@ -56,6 +56,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const [characterSearchKeyword, setCharacterSearchKeyword] = useState('');
   const [selectedCharacterLocations, setSelectedCharacterLocations] = useState<string[]>([]);
   const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
+  const [deepNightDepth, setDeepNightDepth] = useState<number>(0); // 0=普通，1~5=深夜深度
   const [activeBossTab, setActiveBossTab] = useState<string>(activeSubTab || 'boss-data');
 
   // 特殊事件相关状态
@@ -178,7 +179,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const locationColorMap: Record<string, string> = {
     '要塞': 'cyan',
     '监牢': 'volcano',
-    '教堂': 'orange',
+    '大教堂': 'orange',
+    // DLC 新增据点
+    '湖沼': 'cyan',
+    '锻造村': 'volcano',
+    '大空洞主城': 'purple',
+    '神殿塔': 'geekblue',
+    '大空洞大教堂': 'orange',
+    '大空洞遗迹': 'magenta',
+    '大空洞异变': 'red',
     '遗迹': 'magenta',
     '营地': 'green',
     '矿洞': 'magenta',
@@ -349,8 +358,8 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   };
 
   // 根据吸收数值返回CSS类名
-  const getAbsorptionClass = (value: number): string => {
-    if (value === null || value === undefined) {
+  const getAbsorptionClass = (value: number | string): string => {
+    if (value === null || value === undefined || typeof value !== 'number') {
       return '';
     }
 
@@ -372,13 +381,17 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   };
 
   // 计算韧性函数
-  const calculatePoise = (basePoise: number): number => {
+  const calculatePoise = (basePoise: number, record: BossData): number | string => {
     const poiseMultipliers = {
       1: 1,      // 单人
       2: 1.82,   // 双人
       3: 3.33    // 三人
     };
-    return Math.round(basePoise * poiseMultipliers[playerCount as keyof typeof poiseMultipliers]);
+    const scaledPoise = basePoise * poiseMultipliers[playerCount as keyof typeof poiseMultipliers];
+    if (deepNightDepth === 0) return Math.round(scaledPoise);
+    const damageRate = record.deepNightPoiseDamageRate?.[deepNightDepth - 1] ?? 1;
+    const dlcMultiplier = record.deepNightDlcPoiseMultiplier ?? 1;
+    return (scaledPoise / damageRate / dlcMultiplier).toFixed(2);
   };
 
   // 计算抗性函数
@@ -402,30 +415,52 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     '"黑夜之智"格诺斯塔': nightOfTheWise,
     '"坚盾"弗堤士': nightOfTheWise,
     '"超越之光"亚尼姆斯': nightOfTheWise,
-    '"深海黑夜"玛丽斯': nightOfTheFathom,
+    '"深海黑夜"玛利斯': nightOfTheFathom,
+    '征兆': nightOfTheFathom,
     '"黑夜雾霾"卡莉果': nightOfTheMiasma,
     '"黑夜王"布德奇冥': nightOfTheLord,
     '"黑夜之魔"利普拉': nightOfTheDemon,
     '"黑夜光骑士"弗格尔': nightOfTheChampion,
     '黑夜轮廓': nightOfTheLord,
-    '安定者们': nightOfTheBalancers,
-    '废弃物之王(一阶段)': nightOfTheDreglords,
-    '废弃物之王(二阶段)': nightOfTheDreglords,
+    '"继承英雄武器的众女孩"哈尔莫妮亚': nightOfTheBalancers,
+    '个体': nightOfTheBalancers,
+    '头领': nightOfTheBalancers,
+    '合体': nightOfTheBalancers,
+    '反叛的史柴格斯': nightOfTheDreglords,
+    '冲动的史柴格斯': nightOfTheDreglords,
   };
 
 
 
+  const getDeepNightHpMultiplier = (record: BossData) => {
+    if (deepNightDepth === 0) return 1;
+    const depthMultiplier = record.deepNightHealthMultipliers?.[deepNightDepth - 1] ?? 1;
+    const dlcMultiplier = record.deepNightDlcMultiplier ?? 1;
+    return depthMultiplier * dlcMultiplier;
+  };
+
   const defaultFooter = () => (
     <div className="footer-text">
+      {deepNightDepth > 0 && (
+        <div>◦ 当前显示深度{deepNightDepth}深夜血量：DLC 夜王已乘深夜 0.8（合体安定者除外）</div>
+      )}
       <div>◦ 普通夜王血量 = 基础血量 × 玩家人数</div>
       <div>◦ 永夜王血量为倍率加成：永夜王血量 = 基础血量 × 永夜王血量加成倍率 × 玩家人数</div>
       <div>◦ 永夜王血量为独立数值：永夜王血量 = 永夜王血量 × 玩家人数</div>
+      <div>◦ DLC夜王有额外血量倍率1.25 （合体安定者除外）</div>
+      <div>◦ 安定者头领获得buff：攻击力+5%，韧性攻击+15%</div>
+      <div>◦ 安定者永夜个体血量倍率为 1 / 1.35 / 1.7，合体血量倍率为 1 / 1.75 / 2.5</div>
+      <div>◦ 安定者永夜个体每次被击杀都会永久为自身添加一层buff：属性攻击力+7%，韧性攻击+5%</div>
+      <div>◦ 冲动的史柴格斯抗性说明：基于反叛的史柴格斯 普通/切割/打击/突刺/魔力/雷 ×0.95、火 ×0.91、圣 ×0.92，出血 ×2.15、冻伤 ×2.15、睡眠 ×3.96</div>
     </div>
   );
 
   const resistanceFooter = () => (
     <div className="footer-text">
       <div>◦ 韧性倍率：单人100%，双人182%，三人333%｜ 普通韧性 = 基础韧性 × 韧性倍率 ｜ 永夜王韧性 = 永夜王韧性 × 韧性倍率</div>
+      {deepNightDepth > 0 && (
+        <div>◦ 深夜韧性 = 韧性 × 人数倍率 ÷ 削韧承受倍率（0.88~0.84）；DLC 夜王再 ÷1.136（合体安定者除外）</div>
+      )}
       <div>◦ 抗性(异常耐受上限)倍率：单人100%，双人267%，三人400%｜ 抗性 = 基础抗性 × 抗性倍率</div>
     </div>
   );
@@ -486,7 +521,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: `Boss血量(${playerCount}人)`,
+      title: `Boss血量(${playerCount}人${deepNightDepth > 0 ? `·深度${deepNightDepth}` : ''})`,
       children: [
         {
           title: '基础血量',
@@ -494,11 +529,25 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'baseHealth',
           width: 80,
           align: 'center',
-          render: (value) => {
+          render: (value, record) => {
             if (typeof value === 'number') {
+              // baseHealthMultiplier：会显示的额外缩放（如头领的 ×3.75）
+              const rawMultiplier = record.baseHealthMultiplier;
+              const factors = Array.isArray(rawMultiplier)
+                ? rawMultiplier.filter((f): f is number => typeof f === 'number')
+                : (typeof rawMultiplier === 'number' ? [rawMultiplier] : []);
+              // dlcMultiplier：DLC 全局缩放，只算不显示
+              const dlcScale = typeof record.dlcMultiplier === 'number' ? record.dlcMultiplier : 1;
+              const scale = factors.reduce((a, b) => a * b, 1) * dlcScale;
+              // basePlayerMultipliers：人数倍率覆盖（默认按人数 1/2/3）
+              const players = Array.isArray(record.basePlayerMultipliers) &&
+                typeof record.basePlayerMultipliers[playerCount - 1] === 'number'
+                ? record.basePlayerMultipliers[playerCount - 1] : playerCount;
+              const deepNightScale = getDeepNightHpMultiplier(record);
               return (
                 <span className="health-base">
-                  {Math.round(value * 3.54 * playerCount).toLocaleString()}
+                  {Math.round(value * 3.54 * players * scale * deepNightScale).toLocaleString()}
+                  {factors.length ? `(×${factors.join('×')})` : ''}
                 </span>
               );
             }
@@ -516,12 +565,32 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 100,
           align: 'center',
           render: (value, record) => {
-            if (typeof value === 'number' && typeof record.nightreignHealth === 'number') {
-              const nightreignBaseHealth = Math.round(record.nightreignHealth * 3.54 * playerCount);
-              const nightreignHealth = Math.round(nightreignBaseHealth * value);
+            if (typeof record.nightreignHealth === 'number') {
+              // 倍率为 "-" 时按 1 处理（如只存在于永夜、但不吃额外倍率的形态）；支持多因子数组
+              // nightreignHealthMultiplier：永夜王倍率（为数字时一律显示，含 ×1）
+              const factors = Array.isArray(value)
+                ? value.filter((f): f is number => typeof f === 'number')
+                : (typeof value === 'number' ? [value] : []);
+              // dlcMultiplier：DLC 全局缩放，只算不显示
+              const dlcScale = typeof record.dlcMultiplier === 'number' ? record.dlcMultiplier : 1;
+              const scale = factors.reduce((a, b) => a * b, 1) * dlcScale;
+              // nightreignPlayerMultipliers：人数倍率覆盖（默认按人数 1/2/3）
+              const players = Array.isArray(record.nightreignPlayerMultipliers) &&
+                typeof record.nightreignPlayerMultipliers[playerCount - 1] === 'number'
+                ? record.nightreignPlayerMultipliers[playerCount - 1] : playerCount;
+              const deepNightScale = getDeepNightHpMultiplier(record);
+              const nightreignHealth = Math.round(record.nightreignHealth * 3.54 * players * scale * deepNightScale);
               return (
                 <span className="health-nightreign">
-                  {nightreignHealth.toLocaleString()}{value !== 1 ? `(×${value})` : ''}
+                  {nightreignHealth.toLocaleString()}{factors.length ? `(×${factors.join('×')})` : ''}
+                </span>
+              );
+            }
+            // 复合写法（多 Boss 共享血条，如「4000(160, 237, 422)」）直接显示原文
+            if (typeof record.nightreignHealth === 'string' && record.nightreignHealth !== '-') {
+              return (
+                <span className="health-nightreign">
+                  {record.nightreignHealth}
                 </span>
               );
             }
@@ -739,7 +808,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: `韧性(${playerCount}人)`,
+      title: `韧性(${playerCount}人${deepNightDepth > 0 ? `·深度${deepNightDepth}` : ''})`,
       children: [
         {
           title: '基础韧性',
@@ -747,11 +816,20 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'basePoise',
           width: 70,
           align: 'center',
-          render: (value) => (
-            <span className="health-base">
-              {calculatePoise(value)}
-            </span>
-          ),
+          render: (value, record) => {
+            if (typeof value === 'number') {
+              return (
+                <span className="health-base">
+                  {calculatePoise(value, record)}
+                </span>
+              );
+            }
+            return (
+              <span className="health-base">
+                {value}
+              </span>
+            );
+          },
         },
         {
           title: '永夜王韧性',
@@ -759,11 +837,11 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           key: 'nightreignPoise',
           width: 80,
           align: 'center',
-          render: (value) => {
+          render: (value, record) => {
             if (typeof value === 'number') {
               return (
                 <span className="health-nightreign">
-                  {calculatePoise(value)}
+                  {calculatePoise(value, record)}
                 </span>
               );
             }
@@ -1627,6 +1705,15 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
     },
   ];
 
+  const lipulaFooter = () => (
+    <div className="footer-text">
+      <div>◦ 炼金碎片小：随羊头施法后掉落，捡起恢复20HP，减少发狂累积量表55，并且获得炼金碎片buff—物理攻击x1.05、受到的发狂累积量x0.7，持续10s</div>
+      <div>◦ 炼金碎片大：随罪人死亡后掉落，捡起恢复4%+120HP，减少发狂累积量表999(等于清除)，获得炼金碎片buff2—物理攻击x1.05、受到的发狂累积量x0.8，持续20s</div>
+      <div>◦ 恶魔的眼界：将随意累积发狂量表。具体效果为17s后睁眼，睁眼累积发狂值15/0.35s，持续7s。结束后闭眼17s，然后再次睁眼。睁眼累积发狂值15/0.7s，持续7s</div>
+      <div>◦ 罪人金身buff：第一层加20%攻击，后续每层加2%攻击</div>
+    </div>
+  );
+
   // 特殊事件及地形效果表格列定义
   const specialEventColumns: ColumnsType<EntryData> = [
     {
@@ -1672,7 +1759,10 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       dataIndex: 'explanation',
       key: 'explanation',
       width: '55%',
-      render: (text) => text || '-',
+      // 数据里用 \n 分行（如「地底神殿的恩惠」），要 pre-wrap 才会真的换行
+      render: (text) => (
+        <span style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>{text || '-'}</span>
+      ),
     },
   ];
 
@@ -1790,7 +1880,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               label: '🌙 夜王基础数据',
               children: (
                 <div id="night-king-basic">
-                  <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                     <Radio.Group
                       value={playerCount}
                       onChange={(e) => setPlayerCount(e.target.value)}
@@ -1800,6 +1890,22 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       <Radio.Button value={2}>双人模式</Radio.Button>
                       <Radio.Button value={3}>三人模式</Radio.Button>
                     </Radio.Group>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ color: 'var(--theme-text-secondary, #999)', fontSize: '13px' }}>深夜深度</span>
+                      <Segmented
+                        value={deepNightDepth}
+                        onChange={(value) => setDeepNightDepth(Number(value))}
+                        size="middle"
+                        options={[
+                          { label: '普通', value: 0 },
+                          { label: '深度1', value: 1 },
+                          { label: '深度2', value: 2 },
+                          { label: '深度3', value: 3 },
+                          { label: '深度4', value: 4 },
+                          { label: '深度5', value: 5 },
+                        ]}
+                      />
+                    </div>
                   </div>
                   <Table
                     columns={leftColumns}
@@ -1931,6 +2037,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                     pagination={false}
                     size="small"
                     bordered
+                    footer={lipulaFooter}
                   />
                 </div>
               ),
@@ -1949,7 +2056,9 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                       <Table
                         columns={specialEventColumns}
                         dataSource={specialEventData}
-                        rowKey="entry_id"
+                        // 没有游戏 ID 的条目都用 "-" 占位（火山口、地底神殿…），
+                        // 单用 entry_id 会撞 key，所以拼上名称
+                        rowKey={(record) => `${record.entry_id}|${record.entry_name}`}
                         pagination={false}
                         size="small"
                         bordered

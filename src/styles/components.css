@@ -1313,3 +1313,152 @@ body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
     padding: var(--spacing-sm) var(--spacing-md) !important;
   }
 }
+/* 长导航标签：避免悬停时 letter-spacing 把文字挤到换行 */
+.custom-tab-button.long-label {
+  width: 190px;
+}
+
+.custom-tab-button.long-label a {
+  white-space: nowrap;
+}
+
+@media (max-width: 999px) {
+  .custom-tab-button.long-label {
+    width: 150px;
+  }
+
+  .custom-tab-button.long-label a {
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .custom-tab-button.long-label:hover a {
+    letter-spacing: 0;
+  }
+}
+
+/* 武器战技与魔法祷告表格 */
+.weapon-skill-magic-table .ant-table-cell {
+  white-space: pre-line;
+  vertical-align: top;
+  word-break: break-word;
+}
+
+.weapon-skill-magic-table .ant-table-thead > tr > th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.weapon-skill-magic-table .ant-table-tbody > tr > td {
+  font-size: 12px;
+}
+
+/* 战技/专用战技分类标签缩小 */
+.weapon-skill-category-tags .ant-tag {
+  margin-inline-end: 0;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+/* 表格末尾的 Excel 表头说明 */
+.weapon-skill-magic-notes {
+  margin-top: 12px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.7;
+  white-space: pre-line;
+}
+
+[data-theme="dark"] .weapon-skill-magic-notes,
+body[tomato-theme="dark"] .weapon-skill-magic-notes {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.weapon-skill-magic-notes-title {
+  margin-bottom: 6px;
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.weapon-skill-magic-note + .weapon-skill-magic-note {
+  margin-top: 6px;
+}
+
+/* 行内展开的详细说明（如彗星亚兹勒弹道） */
+.weapon-skill-detail-trigger {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.weapon-skill-detail-toggle.ant-btn {
+  height: auto;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.weapon-skill-magic-table .ant-table-expanded-row > td {
+  padding: 0 8px 8px;
+}
+
+.weapon-skill-detail-panel {
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--color-text-2);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.weapon-skill-detail-title {
+  margin-bottom: 6px;
+  color: var(--color-text-1);
+  font-weight: 600;
+}
+
+.weapon-skill-detail-text {
+  max-height: 60vh;
+  overflow-y: auto;
+  white-space: pre-line;
+}
+
+[data-theme="dark"] .weapon-skill-detail-panel,
+body[tomato-theme="dark"] .weapon-skill-detail-panel {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 伤害类型筛选 */
+.damage-type-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+}
+
+.damage-type-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  flex: none;
+}
+
+.damage-type-select .ant-select-selection-item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.damage-type-select .ant-select-selection-item .damage-type-icon {
+  width: 14px;
+  height: 14px;
+}
+
+.damage-type-select .ant-select-selection-item-content {
+  display: inline-flex;
+  align-items: center;
+}

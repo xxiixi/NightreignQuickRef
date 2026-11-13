@@ -62,6 +62,7 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       children: [
         { key: '局外词条', label: '🌕 局外词条', anchorId: 'outsider-entries', tabKey: '局外词条' },
         { key: '局内词条', label: '🌖 局内词条', anchorId: 'in-game-entries', tabKey: '局内词条' },
+        { key: '潜在能力', label: '🌖 局内-潜在能力', anchorId: 'in-game-potential-entries', tabKey: '潜在能力' },
         { key: '护符词条', label: '🌗 护符词条', anchorId: 'talisman-entries', tabKey: '护符词条' },
         { key: '强化类别词条适用范围', label: '🌘 强化类别词条适用范围', anchorId: 'enhancement-categories', tabKey: '强化类别词条适用范围' },
         { key: '道具/采集效果', label: '🌒 道具/采集效果', anchorId: 'item-effects', tabKey: '道具效果' },
@@ -87,6 +88,17 @@ const FunctionMenu: React.FC<FunctionMenuProps> = ({ onTabChange, onSubTabChange
       children: [
         { key: '传说武器强度面板', label: '🛡️ 不同角色使用传说武器的强度面板', anchorId: 'weapon-strength-panel', stepIndex: 0 },
         { key: '武器庇佑效果', label: '🗡️ 传说武器的庇佑效果', anchorId: 'weapon-blessing-effects', stepIndex: 1 }
+      ]
+    },
+    {
+      key: '武器战技与魔法祷告',
+      label: '✨ 武器战技与魔法祷告',
+      children: [
+        { key: '武器战技', label: '⚔️ 战技', anchorId: 'weapon-skills', tabKey: '战技' },
+        { key: '专用战技', label: '🗡️ 专用战技', anchorId: 'unique-weapon-skills', tabKey: '专用战技' },
+        { key: '魔法', label: '🔮 魔法', anchorId: 'sorceries', tabKey: '魔法' },
+        { key: '祷告', label: '🙏 祷告', anchorId: 'incantations', tabKey: '祷告' },
+        { key: '辅助类', label: '✨ 辅助类', anchorId: 'support-skills', tabKey: '辅助类' },
       ]
     },
   ];

@@ -1,8 +1,44 @@
 [
 	{
+		"6000800": {
+			"entry_id": 6000800,
+			"entry_name": "缩短技艺的冷却时间 +4",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6000801": {
+			"entry_id": 6000801,
+			"entry_name": "缩短技艺的冷却时间 +5",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6000900": {
+			"entry_id": 6000900,
+			"entry_name": "自然累积绝招量表 +4",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6000901": {
+			"entry_id": 6000901,
+			"entry_name": "自然累积绝招量表 +5",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6001000": {
+			"entry_id": 6001000,
+			"entry_name": "强韧度 +4",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6001001": {
+			"entry_id": 6001001,
+			"entry_name": "强韧度 +5",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6001400": {
 			"entry_id": 6001400,
-			"entry_name": "提升物理攻击力＋３",
+			"entry_name": "提升物理攻击力 +3",
 			"entry_type": "攻击力",
 			"explanation": "物理攻击力+10.5%",
 			"buff_type": "附带负面词条",
@@ -10,7 +46,7 @@
 		},
 		"6001401": {
 			"entry_id": 6001401,
-			"entry_name": "提升物理攻击力＋４",
+			"entry_name": "提升物理攻击力 +4",
 			"entry_type": "攻击力",
 			"explanation": "物理攻击力+12%",
 			"buff_type": "附带负面词条",
@@ -18,7 +54,7 @@
 		},
 		"6001500": {
 			"entry_id": 6001500,
-			"entry_name": "提升魔力属性攻击力＋３",
+			"entry_name": "提升魔力属性攻击力 +3",
 			"entry_type": "攻击力",
 			"explanation": "魔力属性攻击力+10.5%",
 			"buff_type": "附带负面词条",
@@ -26,7 +62,7 @@
 		},
 		"6001501": {
 			"entry_id": 6001501,
-			"entry_name": "提升魔力属性攻击力＋４",
+			"entry_name": "提升魔力属性攻击力 +4",
 			"entry_type": "攻击力",
 			"explanation": "魔力属性攻击力+12%",
 			"buff_type": "附带负面词条",
@@ -34,7 +70,7 @@
 		},
 		"6001600": {
 			"entry_id": 6001600,
-			"entry_name": "提升火属性攻击力＋３",
+			"entry_name": "提升火属性攻击力 +3",
 			"entry_type": "攻击力",
 			"explanation": "火属性攻击力+10.5%",
 			"buff_type": "附带负面词条",
@@ -42,7 +78,7 @@
 		},
 		"6001601": {
 			"entry_id": 6001601,
-			"entry_name": "提升火属性攻击力＋４",
+			"entry_name": "提升火属性攻击力 +4",
 			"entry_type": "攻击力",
 			"explanation": "火属性攻击力+12%",
 			"buff_type": "附带负面词条",
@@ -50,7 +86,7 @@
 		},
 		"6001700": {
 			"entry_id": 6001700,
-			"entry_name": "提升雷属性攻击力＋３",
+			"entry_name": "提升雷属性攻击力 +3",
 			"entry_type": "攻击力",
 			"explanation": "雷属性攻击力+10.5%",
 			"buff_type": "附带负面词条",
@@ -58,7 +94,7 @@
 		},
 		"6001701": {
 			"entry_id": 6001701,
-			"entry_name": "提升雷属性攻击力＋４",
+			"entry_name": "提升雷属性攻击力 +4",
 			"entry_type": "攻击力",
 			"explanation": "雷属性攻击力+12%",
 			"buff_type": "附带负面词条",
@@ -66,7 +102,7 @@
 		},
 		"6001800": {
 			"entry_id": 6001800,
-			"entry_name": "提升圣属性攻击力＋３",
+			"entry_name": "提升圣属性攻击力 +3",
 			"entry_type": "攻击力",
 			"explanation": "圣属性攻击力+10.5%",
 			"buff_type": "附带负面词条",
@@ -74,7 +110,7 @@
 		},
 		"6001801": {
 			"entry_id": 6001801,
-			"entry_name": "提升圣属性攻击力＋４",
+			"entry_name": "提升圣属性攻击力 +4",
 			"entry_type": "攻击力",
 			"explanation": "圣属性攻击力+12%",
 			"buff_type": "附带负面词条",
@@ -82,7 +118,7 @@
 		},
 		"6002600": {
 			"entry_id": 6002600,
-			"entry_name": "提升魔力属性减伤率＋１",
+			"entry_name": "提升魔力属性减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "减少受到魔力属性伤害-15%",
 			"buff_type": "附带负面词条",
@@ -90,7 +126,7 @@
 		},
 		"6002601": {
 			"entry_id": 6002601,
-			"entry_name": "提升魔力属性减伤率＋２",
+			"entry_name": "提升魔力属性减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "减少受到魔力属性伤害-16%",
 			"buff_type": "附带负面词条",
@@ -98,7 +134,7 @@
 		},
 		"6002700": {
 			"entry_id": 6002700,
-			"entry_name": "提升火属性减伤率＋１",
+			"entry_name": "提升火属性减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "减少受到火属性伤害-15%",
 			"buff_type": "附带负面词条",
@@ -106,7 +142,7 @@
 		},
 		"6002701": {
 			"entry_id": 6002701,
-			"entry_name": "提升火属性减伤率＋２",
+			"entry_name": "提升火属性减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "减少受到火属性伤害-16%",
 			"buff_type": "附带负面词条",
@@ -114,7 +150,7 @@
 		},
 		"6002800": {
 			"entry_id": 6002800,
-			"entry_name": "提升雷属性减伤率＋１",
+			"entry_name": "提升雷属性减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "减少受到雷属性伤害-15%",
 			"buff_type": "附带负面词条",
@@ -122,7 +158,7 @@
 		},
 		"6002801": {
 			"entry_id": 6002801,
-			"entry_name": "提升雷属性减伤率＋２",
+			"entry_name": "提升雷属性减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "减少受到雷属性伤害-16%",
 			"buff_type": "附带负面词条",
@@ -130,7 +166,7 @@
 		},
 		"6002900": {
 			"entry_id": 6002900,
-			"entry_name": "提升圣属性减伤率＋１",
+			"entry_name": "提升圣属性减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "减少受到圣属性伤害-15%",
 			"buff_type": "附带负面词条",
@@ -138,7 +174,7 @@
 		},
 		"6002901": {
 			"entry_id": 6002901,
-			"entry_name": "提升圣属性减伤率＋２",
+			"entry_name": "提升圣属性减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "减少受到圣属性伤害-16%",
 			"buff_type": "附带负面词条",
@@ -146,7 +182,7 @@
 		},
 		"6003000": {
 			"entry_id": 6003000,
-			"entry_name": "提升对中毒的抵抗力＋１",
+			"entry_name": "提升对中毒的抵抗力 +1",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+110点中毒异常耐受上限",
 			"buff_type": "不附带负面词条",
@@ -154,7 +190,7 @@
 		},
 		"6003001": {
 			"entry_id": 6003001,
-			"entry_name": "提升对中毒的抵抗力＋２",
+			"entry_name": "提升对中毒的抵抗力 +2",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+130点中毒异常耐受上限",
 			"buff_type": "附带负面词条",
@@ -162,7 +198,7 @@
 		},
 		"6003100": {
 			"entry_id": 6003100,
-			"entry_name": "提升对出血的抵抗力＋１",
+			"entry_name": "提升对出血的抵抗力 +1",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+110点出血异常耐受上限",
 			"buff_type": "不附带负面词条",
@@ -170,7 +206,7 @@
 		},
 		"6003101": {
 			"entry_id": 6003101,
-			"entry_name": "提升对出血的抵抗力＋２",
+			"entry_name": "提升对出血的抵抗力 +2",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+130点出血异常耐受上限",
 			"buff_type": "附带负面词条",
@@ -178,7 +214,7 @@
 		},
 		"6003200": {
 			"entry_id": 6003200,
-			"entry_name": "提升对催眠的抵抗力＋１",
+			"entry_name": "提升对催眠的抵抗力 +1",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+110点催眠异常耐受上限",
 			"buff_type": "不附带负面词条",
@@ -186,7 +222,7 @@
 		},
 		"6003201": {
 			"entry_id": 6003201,
-			"entry_name": "提升对催眠的抵抗力＋２",
+			"entry_name": "提升对催眠的抵抗力 +2",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+130点催眠异常耐受上限",
 			"buff_type": "附带负面词条",
@@ -194,7 +230,7 @@
 		},
 		"6003300": {
 			"entry_id": 6003300,
-			"entry_name": "提升对骤死的抵抗力＋１",
+			"entry_name": "提升对骤死的抵抗力 +1",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+110点死亡异常耐受上限",
 			"buff_type": "不附带负面词条",
@@ -202,7 +238,7 @@
 		},
 		"6003301": {
 			"entry_id": 6003301,
-			"entry_name": "提升对骤死的抵抗力＋２",
+			"entry_name": "提升对骤死的抵抗力 +2",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+130点死亡异常耐受上限",
 			"buff_type": "附带负面词条",
@@ -210,7 +246,7 @@
 		},
 		"6003400": {
 			"entry_id": 6003400,
-			"entry_name": "提升对腐败的抵抗力＋１",
+			"entry_name": "提升对腐败的抵抗力 +1",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+110点猩红腐败异常耐受上限",
 			"buff_type": "不附带负面词条",
@@ -218,7 +254,7 @@
 		},
 		"6003401": {
 			"entry_id": 6003401,
-			"entry_name": "提升对腐败的抵抗力＋２",
+			"entry_name": "提升对腐败的抵抗力 +2",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+130点猩红腐败异常耐受上限",
 			"buff_type": "附带负面词条",
@@ -226,7 +262,7 @@
 		},
 		"6003500": {
 			"entry_id": 6003500,
-			"entry_name": "提升对冻伤的抵抗力＋１",
+			"entry_name": "提升对冻伤的抵抗力 +1",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+110点冻伤异常耐受上限",
 			"buff_type": "不附带负面词条",
@@ -234,7 +270,7 @@
 		},
 		"6003501": {
 			"entry_id": 6003501,
-			"entry_name": "提升对冻伤的抵抗力＋２",
+			"entry_name": "提升对冻伤的抵抗力 +2",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+130点冻伤异常耐受上限",  
 			"buff_type": "附带负面词条",
@@ -242,7 +278,7 @@
 		},
 		"6003600": {
 			"entry_id": 6003600,
-			"entry_name": "提升对发狂的抵抗力＋１",
+			"entry_name": "提升对发狂的抵抗力 +1",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+110点发狂异常耐受上限",
 			"buff_type": "不附带负面词条",
@@ -250,7 +286,7 @@
 		},
 		"6003601": {
 			"entry_id": 6003601,
-			"entry_name": "提升对发狂的抵抗力＋２",
+			"entry_name": "提升对发狂的抵抗力 +2",
 			"entry_type": "对异常状态的抵抗力",
 			"explanation": "+130点发狂异常耐受上限",
 			"buff_type": "附带负面词条",
@@ -258,7 +294,7 @@
 		},
 		"6005600": {
 			"entry_id": 6005600,
-			"entry_name": "受到损伤的当下，能通过攻击恢复部分血量＋１",
+			"entry_name": "受到损伤的当下，能通过攻击恢复部分血量 +1",
 			"entry_type": "恢复",
 			"explanation": "最近一次被攻击的4s内，可通过攻击恢复这部分虚血每次攻击的恢复量=武器基础回血量×动作回血倍率×1.25",
 			"buff_type": "附带负面词条",
@@ -266,39 +302,93 @@
 		},
 		"6005601": {
 			"entry_id": 6005601,
-			"entry_name": "受到损伤的当下，能通过攻击恢复部分血量＋２",
+			"entry_name": "受到损伤的当下，能通过攻击恢复部分血量 +2",
 			"entry_type": "恢复",
 			"explanation": "最近一次被攻击的4s内，可通过攻击恢复这部分虚血每次攻击的恢复量=武器基础回血量×动作回血倍率×1.35",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6006000": {
+			"entry_id": 6006000,
+			"entry_name": "提升双手共持时，造成失去平衡的能力 +1",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6006001": {
+			"entry_id": 6006001,
+			"entry_name": "提升双手共持时，造成失去平衡的能力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6006100": {
+			"entry_id": 6006100,
+			"entry_name": "提升双手各持时，造成失去平衡的能力 +1",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6006101": {
+			"entry_id": 6006101,
+			"entry_name": "提升双手各持时，造成失去平衡的能力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6012300": {
+			"entry_id": 6012300,
+			"entry_name": "血量偏低时，提升减伤率 +1",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6012301": {
+			"entry_id": 6012301,
+			"entry_name": "血量偏低时，提升减伤率 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6030200": {
 			"entry_id": 6030200,
-			"entry_name": "食用苔药等等道具时，能恢复血量＋１",
+			"entry_name": "食用苔药等等道具时，能恢复血量 +1",
 			"entry_type": "恢复",
-			"explanation": "使用对应道具后立即回复80点生命值，然后每秒回复最大生命值的0.5%+1，持续20秒",
+			"explanation": "使用对应道具后立即回复80点生命值，\n然后每秒回复最大生命值的0.5%+1，持续20秒",
 			"buff_type": "不附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6030201": {
+			"entry_id": 6030201,
+			"entry_name": "食用苔药等等道具时，能恢复血量 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6030600": {
 			"entry_id": 6030600,
-			"entry_name": "防御成功时，能累积绝招量表＋１",
+			"entry_name": "防御成功时，能累积绝招量表 +1",
 			"entry_type": "技艺/绝招",
 			"explanation": "绝招量表+1.5",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6030601": {
+			"entry_id": 6030601,
+			"entry_name": "防御成功时，能累积绝招量表 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6030800": {
 			"entry_id": 6030800,
-			"entry_name": "使出致命一击时，加快累积绝招量表＋１",
+			"entry_name": "使出致命一击时，能累积绝招量表 +1",
 			"entry_type": "技艺/绝招",
 			"explanation": "绝招量表+6.5",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6030801": {
+			"entry_id": 6030801,
+			"entry_name": "使出致命一击时，能累积绝招量表 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6030900": {
 			"entry_id": 6030900,
-			"entry_name": "涂抹油脂类道具时，能额外提升物理攻击力＋１",
+			"entry_name": "涂抹油脂类道具时，能额外提升物理攻击力 +1",
 			"entry_type": "攻击力",
 			"explanation": "30秒内，增加物理伤害+17%",
 			"buff_type": "附带负面词条",
@@ -306,23 +396,65 @@
 		},
 		"6030901": {
 			"entry_id": 6030901,
-			"entry_name": "涂抹油脂类道具时，能额外提升物理攻击力＋２",
+			"entry_name": "涂抹油脂类道具时，能额外提升物理攻击力 +2",
 			"entry_type": "攻击力",
 			"explanation": "30秒内，增加物理伤害+20%",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6031900": {
+			"entry_id": 6031900,
+			"entry_name": "使出致命一击时，能获得卢恩 +1",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6031901": {
+			"entry_id": 6031901,
+			"entry_name": "使出致命一击时，能获得卢恩 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6032200": {
+			"entry_id": 6032200,
+			"entry_name": "受到攻击时，能提升攻击力 +1",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6032201": {
+			"entry_id": 6032201,
+			"entry_name": "受到攻击时，能提升攻击力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6035100": {
 			"entry_id": 6035100,
-			"entry_name": "使出致命一击时，能提升精力的恢复速度＋１",
+			"entry_name": "使出致命一击时，能提升精力的恢复速度 +1",
 			"entry_type": "恢复",
 			"explanation": "15秒内，精力回复速度+17点/秒",
 			"buff_type": "不附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6035101": {
+			"entry_id": 6035101,
+			"entry_name": "使出致命一击时，能提升精力的恢复速度 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6040000": {
+			"entry_id": 6040000,
+			"entry_name": "强化轻攻击的第一记攻击 +1",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6040001": {
+			"entry_id": 6040001,
+			"entry_name": "强化轻攻击的第一记攻击 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6040100": {
 			"entry_id": 6040100,
-			"entry_name": "强化防御反击＋１",
+			"entry_name": "强化防御反击 +1",
 			"entry_type": "攻击力",
 			"explanation": "防御反击造成的伤害+25%",
 			"buff_type": "附带负面词条",
@@ -330,7 +462,7 @@
 		},
 		"6040101": {
 			"entry_id": 6040101,
-			"entry_name": "强化防御反击＋２",
+			"entry_name": "强化防御反击 +2",
 			"entry_type": "攻击力",
 			"explanation": "防御反击造成的伤害+29%",
 			"buff_type": "附带负面词条",
@@ -338,35 +470,71 @@
 		},
 		"6040300": {
 			"entry_id": 6040300,
-			"entry_name": "提升投掷壶的攻击力＋１",
+			"entry_name": "提升投掷壶的攻击力 +1",
 			"entry_type": "攻击力",
 			"explanation": "投掷壶造成的伤害+30%",
 			"buff_type": "不附带负面词条",
 			"superposability": "可叠加"
 		},
+		"6040301": {
+			"entry_id": 6040301,
+			"entry_name": "提升投掷壶的攻击力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6040400": {
 			"entry_id": 6040400,
-			"entry_name": "提升投掷小刀的攻击力＋１",
+			"entry_name": "提升投掷小刀的攻击力 +1",
 			"entry_type": "攻击力",
 			"explanation": "投掷小刀造成的伤害+30%",
 			"buff_type": "不附带负面词条",
 			"superposability": "可叠加"
 		},
+		"6040401": {
+			"entry_id": 6040401,
+			"entry_name": "提升投掷小刀的攻击力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6040500": {
 			"entry_id": 6040500,
-			"entry_name": "提升使用辉石、重力石道具的攻击力＋１",
+			"entry_name": "提升使用辉石、重力石道具的攻击力 +1",
 			"entry_type": "攻击力",
 			"explanation": "投掷辉石、重力石造成的伤害+30%",
 			"buff_type": "不附带负面词条",
 			"superposability": "可叠加"
 		},
+		"6040501": {
+			"entry_id": 6040501,
+			"entry_name": "提升使用辉石、重力石道具的攻击力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6043000": {
+			"entry_id": 6043000,
+			"entry_name": "强化咆哮与吐息 +1",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6043001": {
+			"entry_id": 6043001,
+			"entry_name": "强化咆哮与吐息 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6043100": {
 			"entry_id": 6043100,
-			"entry_name": "强化调香术＋１",
+			"entry_name": "强化调香术 +1",
 			"entry_type": "攻击力",
-			"explanation": "调香术造成的伤害+18%",
+			"explanation": "调香术造成的伤害+30%",
 			"buff_type": "不附带负面词条",
 			"superposability": "可叠加"
+		},
+		"6043101": {
+			"entry_id": 6043101,
+			"entry_name": "强化调香术 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
 		},
 		"6060300": {
 			"entry_id": 6060300,
@@ -402,23 +570,35 @@
 		},
 		"6090000": {
 			"entry_id": 6090000,
-			"entry_name": "提升打倒敌人时，绝招量表的累积量＋１",
+			"entry_name": "打倒敌人时，能累积绝招量表 +1",
 			"entry_type": "技艺/绝招",
 			"explanation": "绝招量表+6.5",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6090001": {
+			"entry_id": 6090001,
+			"entry_name": "打倒敌人时，能累积绝招量表 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6160000": {
 			"entry_id": 6160000,
-			"entry_name": "突刺反击成功时，能恢复血量＋１",
+			"entry_name": "突刺反击成功时，能恢复血量 +1",
 			"entry_type": "恢复",
 			"explanation": "触发突刺反击时，回复人物最大生命值的3.3%",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
 		},
+		"6160001": {
+			"entry_id": 6160001,
+			"entry_name": "突刺反击成功时，能恢复血量 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6260000": {
 			"entry_id": 6260000,
-			"entry_name": "对陷入中毒的敌人，能强化攻击＋１",
+			"entry_name": "对陷入中毒的敌人，能强化攻击 +1",
 			"entry_type": "行动",
 			"explanation": "对中毒的敌人造成的伤害+16%",
 			"buff_type": "附带负面词条",
@@ -426,7 +606,7 @@
 		},
 		"6260001": {
 			"entry_id": 6260001,
-			"entry_name": "对陷入中毒的敌人，能强化攻击＋２",
+			"entry_name": "对陷入中毒的敌人，能强化攻击 +2",
 			"entry_type": "行动",
 			"explanation": "对中毒的敌人造成的伤害+20%",
 			"buff_type": "附带负面词条",
@@ -434,7 +614,7 @@
 		},
 		"6260300": {
 			"entry_id": 6260300,
-			"entry_name": "对陷入猩红腐败的敌人，能强化攻击＋１",
+			"entry_name": "对陷入猩红腐败的敌人，能强化攻击 +1",
 			"entry_type": "行动",
 			"explanation": "对猩红腐败的敌人造成的伤害+16%",
 			"buff_type": "附带负面词条",
@@ -442,7 +622,7 @@
 		},
 		"6260301": {
 			"entry_id": 6260301,
-			"entry_name": "对陷入猩红腐败的敌人，能强化攻击＋２",
+			"entry_name": "对陷入猩红腐败的敌人，能强化攻击 +2",
 			"entry_type": "行动",
 			"explanation": "对猩红腐败的敌人造成的伤害+20%",
 			"buff_type": "附带负面词条",
@@ -450,7 +630,7 @@
 		},
 		"6260400": {
 			"entry_id": 6260400,
-			"entry_name": "对陷入冻伤的敌人，能强化攻击＋１",
+			"entry_name": "对陷入冻伤的敌人，能强化攻击 +1",
 			"entry_type": "行动",
 			"explanation": "对冻伤的敌人造成的伤害+16%",
 			"buff_type": "附带负面词条",
@@ -458,7 +638,7 @@
 		},
 		"6260401": {
 			"entry_id": 6260401,
-			"entry_name": "对陷入冻伤的敌人，能强化攻击＋２",
+			"entry_name": "对陷入冻伤的敌人，能强化攻击 +2",
 			"entry_type": "行动",
 			"explanation": "对冻伤的敌人造成的伤害+20%",
 			"buff_type": "附带负面词条",
@@ -484,9 +664,9 @@
 		},
 		"6500200": {
 			"entry_id": 6500200,
-			"entry_name": "【铁之眼】技艺会附加引发异常状态中毒的效果; 对上陷入中毒的敌人，能给予大伤害",
+			"entry_name": "【铁之眼】技艺会附加引发异常状态中毒的效果\n对上陷入中毒的敌人，能给予大伤害",
 			"entry_type": "仅限特定角色",
-			"explanation": "附带 70 点中毒值，如果目标已经中毒，扣除敌人最大生命值的 0.25% + 250; 中毒：40秒内，每秒扣除敌人最大生命值的 0.1% + 10",
+			"explanation": "附带70点中毒值，如果目标已经中毒，扣除敌人最大生命值的0.25%+250\n中毒：40秒内，每秒扣除敌人最大生命值的0.1%+10",
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
 		},
@@ -502,7 +682,7 @@
 			"entry_id": 6500400,
 			"entry_name": "【无赖】技艺命中敌人时，能降低对方的攻击力",
 			"entry_type": "仅限特定角色",
-			"explanation": "13s 内，敌人造成的伤害-13%",
+			"explanation": "13s 内，敌人造成的伤害 -13%",
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
 		},
@@ -510,7 +690,7 @@
 			"entry_id": 6500500,
 			"entry_name": "【复仇者】发动能力时，能提升专注值上限",
 			"entry_type": "仅限特定角色",
-			"explanation": "每次发动能力【死灵术】，提升专注值上限，局内无限成长; 最多可成长60次，最多 +51% 专注值上限;",
+			"explanation": "每次发动能力【死灵术】，提升专注值上限，局内无限成长\n最多可成长60次，封顶+51%专注值上限\n第1~20次：每次成长+0.75%专注值上限\n第21~40次：每次成长+0.85%专注值上限\n第41~60次：每次成长+0.95%专注值上限",
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
 		},
@@ -530,6 +710,21 @@
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
 		},
+		"6500800": {
+			"entry_id": 6500800,
+			"entry_name": "【学者】对自己使用技艺时，能减少消耗的专注值",
+			"entry_type": "仅限特定角色",
+			"explanation": "40秒内，自身消耗的专注值-15%/-30%/-45%，和技艺进行率挂钩",
+			"buff_type": "不附带负面词条",
+			"superposability": "不可叠加"
+		},
+		"6500900": {
+			"entry_id": 6500900,
+			"entry_name": "【送葬者】发动绝招后，能再次使用技艺",
+			"entry_type": "仅限特定角色",
+			"buff_type": "不附带负面词条",
+			"superposability": "不可叠加"
+		},
 		"6600000": {
 			"entry_id": 6600000,
 			"entry_name": "周围陷入催眠时，提升攻击力",
@@ -540,11 +735,17 @@
 		},
 		"6600001": {
 			"entry_id": 6600001,
-			"entry_name": "周围陷入催眠时，提升攻击力＋１",
+			"entry_name": "周围陷入催眠时，提升攻击力 +1",
 			"entry_type": "行动",
 			"explanation": "周围有任意角色催眠后，造成伤害+22%，持续20秒",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
+		},
+		"6600002": {
+			"entry_id": 6600002,
+			"entry_name": "周围陷入催眠时，提升攻击力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
 		},
 		"6600100": {
 			"entry_id": 6600100,
@@ -556,11 +757,17 @@
 		},
 		"6600101": {
 			"entry_id": 6600101,
-			"entry_name": "周围陷入发狂时，提升攻击力＋１",
+			"entry_name": "周围陷入发狂时，提升攻击力 +1",
 			"entry_type": "行动",
 			"explanation": "周围有任意角色发狂后，造成伤害+22%，持续20秒",
 			"buff_type": "附带负面词条",
 			"superposability": "不同级别可叠加"
+		},
+		"6600102": {
+			"entry_id": 6600102,
+			"entry_name": "周围陷入发狂时，提升攻击力 +2",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
 		},
 		"6610400": {
 			"entry_id": 6610400,
@@ -595,6 +802,18 @@
 			"buff_type": "不附带负面词条",
 			"superposability": "可叠加"
 		},
+		"6610701": {
+			"entry_id": 6610701,
+			"entry_name": "减少专注值消耗 +1",
+			"explanation": "专注值消耗-13%",
+			"tags": ["未实装"]
+		},
+		"6610702": {
+			"entry_id": 6610702,
+			"entry_name": "减少专注值消耗 +2",
+			"explanation": "专注值消耗-16%",
+			"tags": ["未实装"]
+		},
 		"6610800": {
 			"entry_id": 6610800,
 			"entry_name": "提升属性攻击力",
@@ -605,7 +824,7 @@
 		},
 		"6610801": {
 			"entry_id": 6610801,
-			"entry_name": "提升属性攻击力＋１",
+			"entry_name": "提升属性攻击力 +1",
 			"entry_type": "攻击力",
 			"explanation": "魔力/火/雷/圣属性伤害+8%",
 			"buff_type": "附带负面词条",
@@ -613,15 +832,21 @@
 		},
 		"6610802": {
 			"entry_id": 6610802,
-			"entry_name": "提升属性攻击力＋２",
+			"entry_name": "提升属性攻击力 +2",
 			"entry_type": "攻击力",
 			"explanation": "魔力/火/雷/圣属性伤害+10%",
 			"buff_type": "附带负面词条",
 			"superposability": "可叠加"
 		},
+		"6611000": {
+			"entry_id": 6611000,
+			"entry_name": "提升物理减伤率",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6611001": {
 			"entry_id": 6611001,
-			"entry_name": "提升物理减伤率＋１",
+			"entry_name": "提升物理减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "受到的物理属性伤害-10.5%",
 			"buff_type": "附带负面词条",
@@ -629,7 +854,7 @@
 		},
 		"6611002": {
 			"entry_id": 6611002,
-			"entry_name": "提升物理减伤率＋２",
+			"entry_name": "提升物理减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "受到的物理属性伤害-12%",
 			"buff_type": "附带负面词条",
@@ -646,7 +871,7 @@
 		},
 		"6611101": {
 			"entry_id": 6611101,
-			"entry_name": "提升属性减伤率＋１",
+			"entry_name": "提升属性减伤率 +1",
 			"entry_type": "减伤率",
 			"explanation": "受到的魔力/火/雷/圣属性伤害-10.5%",
 			"buff_type": "附带负面词条",
@@ -654,7 +879,7 @@
 		},
 		"6611102": {
 			"entry_id": 6611102,
-			"entry_name": "提升属性减伤率＋２",
+			"entry_name": "提升属性减伤率 +2",
 			"entry_type": "减伤率",
 			"explanation": "受到的魔力/火/雷/圣属性伤害-12%",
 			"buff_type": "附带负面词条",
@@ -670,7 +895,7 @@
 		},
 		"6611201": {
 			"entry_id": 6611201,
-			"entry_name": "强化魔法＋１",
+			"entry_name": "强化魔法 +1",
 			"entry_type": "攻击力",
 			"explanation": "魔法造成的伤害+8.5% (只要用魔法杖打出的都算）",
 			"buff_type": "附带负面词条",
@@ -678,7 +903,7 @@
 		},
 		"6611202": {
 			"entry_id": 6611202,
-			"entry_name": "强化魔法＋２",
+			"entry_name": "强化魔法 +2",
 			"entry_type": "攻击力",
 			"explanation": "魔法造成的伤害+10% (只要用魔法杖打出的都算）",
 			"buff_type": "附带负面词条",
@@ -694,7 +919,7 @@
 		},
 		"6611301": {
 			"entry_id": 6611301,
-			"entry_name": "强化祷告＋１",
+			"entry_name": "强化祷告 +1",
 			"entry_type": "攻击力",
 			"explanation": "祷告造成的伤害+8.5%",
 			"buff_type": "附带负面词条",
@@ -702,7 +927,7 @@
 		},
 		"6611302": {
 			"entry_id": 6611302,
-			"entry_name": "强化祷告＋２",
+			"entry_name": "强化祷告 +2",
 			"entry_type": "攻击力",
 			"explanation": "祷告造成的伤害+10%",
 			"buff_type": "附带负面词条",
@@ -946,275 +1171,11 @@
 			"buff_type": "不附带负面词条",
 			"superposability": "可叠加"
 		},
-		"6630000": {
-			"entry_id": 6630000,
-			"entry_name": "通过潜在能力，能比较容易找到短剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630100": {
-			"entry_id": 6630100,
-			"entry_name": "通过潜在能力，能比较容易找到直剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630200": {
-			"entry_id": 6630200,
-			"entry_name": "通过潜在能力，能比较容易找到大剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630300": {
-			"entry_id": 6630300,
-			"entry_name": "通过潜在能力，能比较容易找到特大剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630400": {
-			"entry_id": 6630400,
-			"entry_name": "通过潜在能力，能比较容易找到曲剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630500": {
-			"entry_id": 6630500,
-			"entry_name": "通过潜在能力，能比较容易找到大曲剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630600": {
-			"entry_id": 6630600,
-			"entry_name": "通过潜在能力，能比较容易找到刀",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630700": {
-			"entry_id": 6630700,
-			"entry_name": "通过潜在能力，能比较容易找到双头剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630800": {
-			"entry_id": 6630800,
-			"entry_name": "通过潜在能力，能比较容易找到刺剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6630900": {
-			"entry_id": 6630900,
-			"entry_name": "通过潜在能力，能比较容易找到重刺剑",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631000": {
-			"entry_id": 6631000,
-			"entry_name": "通过潜在能力，能比较容易找到斧",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631100": {
-			"entry_id": 6631100,
-			"entry_name": "通过潜在能力，能比较容易找到大斧",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631200": {
-			"entry_id": 6631200,
-			"entry_name": "通过潜在能力，能比较容易找到槌",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631300": {
-			"entry_id": 6631300,
-			"entry_name": "通过潜在能力，能比较容易找到大槌",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631400": {
-			"entry_id": 6631400,
-			"entry_name": "通过潜在能力，能比较容易找到连枷",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631500": {
-			"entry_id": 6631500,
-			"entry_name": "通过潜在能力，能比较容易找到矛",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631600": {
-			"entry_id": 6631600,
-			"entry_name": "通过潜在能力，能比较容易找到大矛",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631700": {
-			"entry_id": 6631700,
-			"entry_name": "通过潜在能力，能比较容易找到戟",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631800": {
-			"entry_id": 6631800,
-			"entry_name": "通过潜在能力，能比较容易找到镰刀",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6631900": {
-			"entry_id": 6631900,
-			"entry_name": "通过潜在能力，能比较容易找到拳头",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632000": {
-			"entry_id": 6632000,
-			"entry_name": "通过潜在能力，能比较容易找到钩爪",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632100": {
-			"entry_id": 6632100,
-			"entry_name": "通过潜在能力，能比较容易找到软鞭",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632200": {
-			"entry_id": 6632200,
-			"entry_name": "通过潜在能力，能比较容易找到特大武器",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632300": {
-			"entry_id": 6632300,
-			"entry_name": "通过潜在能力，能比较容易找到弓",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632400": {
-			"entry_id": 6632400,
-			"entry_name": "通过潜在能力，能比较容易找到大弓",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632500": {
-			"entry_id": 6632500,
-			"entry_name": "通过潜在能力，能比较容易找到弩",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632600": {
-			"entry_id": 6632600,
-			"entry_name": "通过潜在能力，能比较容易找到弩炮",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632700": {
-			"entry_id": 6632700,
-			"entry_name": "通过潜在能力，能比较容易找到小盾",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632800": {
-			"entry_id": 6632800,
-			"entry_name": "通过潜在能力，能比较容易找到中盾",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6632900": {
-			"entry_id": 6632900,
-			"entry_name": "通过潜在能力，能比较容易找到大盾",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6633000": {
-			"entry_id": 6633000,
-			"entry_name": "通过潜在能力，能比较容易找到手杖",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6633100": {
-			"entry_id": 6633100,
-			"entry_name": "通过潜在能力，能比较容易找到圣印记",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
-		"6633200": {
-			"entry_id": 6633200,
-			"entry_name": "通过潜在能力，能比较容易找到火把",
-			"entry_type": "仅限特定武器",
-			"explanation": "直接替换角色专属池",
-			"buff_type": "不附带负面词条",
-			"superposability": "不可叠加"
-		},
 		"6640000": {
 			"entry_id": 6640000,
 			"entry_name": "【追踪者】提升集中力，但降低生命力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，集中力+1，生命力-1; 等级12时达到变化最大值，集中力+10，生命力-5",
+			"explanation": "等级1时，集中力+1，生命力-1\n等级12时达到变化最大值，集中力+10，生命力-5",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1223,7 +1184,7 @@
 			"entry_id": 6640100,
 			"entry_name": "【追踪者】提升智力、信仰，但降低力气、灵巧",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，智力+1，信仰+1，力气-1，灵巧-1; 等级12时达到变化最大值，智力+15，信仰+15，力气-7、灵巧-5",
+			"explanation": "等级1时，智力+1，信仰+1，力气-1，灵巧-1\n等级12时达到变化最大值，智力+15，信仰+15，力气-7、灵巧-5",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1232,7 +1193,7 @@
 			"entry_id": 6641000,
 			"entry_name": "【守护者】提升力气、灵巧，但降低生命力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，力气+1，灵巧+2，生命力-1; 等级12时达到变化最大值，力气+9，灵巧+19，生命力-8",
+			"explanation": "等级1时，力气+1，灵巧+2，生命力-1\n等级12时达到变化最大值，力气+9，灵巧+19，生命力-8",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1241,7 +1202,7 @@
 			"entry_id": 6641100,
 			"entry_name": "【守护者】提升集中力、信仰，但降低生命力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，集中力+1，信仰+2，生命力-1; 等级12时达到变化最大值，集中力+8，信仰+17，生命力-6",
+			"explanation": "等级1时，集中力+1，信仰+2，生命力-1\n等级12时达到变化最大值，集中力+8，信仰+17，生命力-6",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1250,7 +1211,7 @@
 			"entry_id": 6642000,
 			"entry_name": "【铁之眼】提升感应，但降低灵巧",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，感应+2，灵巧-1; 等级12时达到变化最大值，感应+15，灵巧-9",
+			"explanation": "等级1时，感应+2，灵巧-1\n等级12时达到变化最大值，感应+15，灵巧-9",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1259,7 +1220,7 @@
 			"entry_id": 6642100,
 			"entry_name": "【铁之眼】提升生命力、力气，但降低灵巧",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，生命力+1，力气+2，灵巧-2; 等级12时达到变化最大值，生命力+5，力气+20，灵巧-13",
+			"explanation": "等级1时，生命力+1，力气+2，灵巧-2\n等级12时达到变化最大值，生命力+5，力气+20，灵巧-13",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1268,7 +1229,7 @@
 			"entry_id": 6643000,
 			"entry_name": "【女爵】提升生命力、力气，但降低集中力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，生命力+1，力气+2，集中力-2; 等级12时达到变化最大值，生命力+3，力气+24，集中力-14",
+			"explanation": "等级1时，生命力+1，力气+2，集中力-2\n等级12时达到变化最大值，生命力+3，力气+24，集中力-14",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1277,7 +1238,7 @@
 			"entry_id": 6643100,
 			"entry_name": "【女爵】提升集中力、信仰，但降低智力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，集中力+1，信仰+2，智力-1; 等级12时达到变化最大值，集中力+3，信仰+13，智力-5",
+			"explanation": "等级1时，集中力+1，信仰+2，智力-1\n等级12时达到变化最大值，集中力+3，信仰+13，智力-5",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1286,7 +1247,7 @@
 			"entry_id": 6644000,
 			"entry_name": "【无赖】提升集中力、智力，但降低生命力、耐力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，集中力+1，智力+2，生命力-1，耐力-1; 等级12时达到变化最大值，集中力+9，智力+35，生命力-8，耐力-4",
+			"explanation": "等级1时，集中力+1，智力+2，生命力-1，耐力-1\n等级12时达到变化最大值，集中力+9，智力+35，生命力-8，耐力-4",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1295,7 +1256,7 @@
 			"entry_id": 6644100,
 			"entry_name": "【无赖】提升感应，但降低生命力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，感应+2，生命力-1; 等级12时达到变化最大值，感应+17，生命力-4",
+			"explanation": "等级1时，感应+2，生命力-1\n等级12时达到变化最大值，感应+17，生命力-4",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1304,7 +1265,7 @@
 			"entry_id": 6645000,
 			"entry_name": "【复仇者】提升生命力、耐力，但降低集中力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，生命力+1，耐力+1，集中力-1; 等级12时达到变化最大值，生命力+5，耐力+5，集中力-11",
+			"explanation": "等级1时，生命力+1，耐力+1，集中力-1\n等级12时达到变化最大值，生命力+5，耐力+5，集中力-11",
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
 		},
@@ -1312,7 +1273,7 @@
 			"entry_id": 6645100,
 			"entry_name": "【复仇者】提升力气，但降低信仰",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，力气+2，信仰-1; 等级12时达到变化最大值，力气+25，信仰-6",
+			"explanation": "等级1时，力气+2，信仰-1\n等级12时达到变化最大值，力气+25，信仰-6",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1321,7 +1282,7 @@
 			"entry_id": 6646000,
 			"entry_name": "【隐士】提升生命力、耐力、灵巧，但降低智力、信仰",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，生命力+1，耐力+1，灵巧+2，智力-1，信仰-1; 等级12时达到变化最大值，生命力+4，耐力+5，灵巧+20，智力-10，信仰-10",
+			"explanation": "等级1时，生命力+1，耐力+1，灵巧+2，智力-1，信仰-1\n等级12时达到变化最大值，生命力+4，耐力+5，灵巧+20，智力-10，信仰-10",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1330,7 +1291,7 @@
 			"entry_id": 6646100,
 			"entry_name": "【隐士】提升智力、信仰，但降低集中力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，智力+2，信仰+2，集中力-2; 等级12时达到变化最大值，智力+12，信仰+12，集中力-13",
+			"explanation": "等级1时，智力+2，信仰+2，集中力-2\n等级12时达到变化最大值，智力+12，信仰+12，集中力-13",
 
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
@@ -1339,7 +1300,7 @@
 			"entry_id": 6647000,
 			"entry_name": "【执行者】提升生命力、耐力，但降低感应",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，生命力+1，耐力+1，感应-2; 等级12时达到变化最大值，生命力+5，耐力+6，感应-13",
+			"explanation": "等级1时，生命力+1，耐力+1，感应-2\n等级12时达到变化最大值，生命力+5，耐力+6，感应-13",
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
 		},
@@ -1347,34 +1308,63 @@
 			"entry_id": 6647100,
 			"entry_name": "【执行者】提升灵巧、感应，但降低生命力",
 			"entry_type": "仅限特定角色",
-			"explanation": "等级1时，灵巧+1，感应+1，生命力-1; 等级12时达到变化最大值，灵巧+12，感应+9，生命力-7",
+			"explanation": "等级1时，灵巧+1，感应+1，生命力-1\n等级12时达到变化最大值，灵巧+12，感应+9，生命力-7",
 
+			"buff_type": "不附带负面词条",
+			"superposability": "不可叠加"
+		},
+		"6647200": {
+			"entry_id": 6647200,
+			"entry_name": "【学者】提升集中力，但降低生命力",
+			"entry_type": "仅限特定角色",
+			"explanation": "等级1时，集中力+1，生命力-1\n等级12时达到变化最大值，集中力+9，生命力-3",
+			"buff_type": "不附带负面词条",
+			"superposability": "不可叠加"
+		},
+		"6647300": {
+			"entry_id": 6647300,
+			"entry_name": "【学者】提升耐力、灵巧，但降低智力、感应",
+			"entry_type": "仅限特定角色",
+			"explanation": "等级1时，耐力+1，灵巧+6，智力-1，感应-5\n等级12时达到变化最大值，耐力+6，灵巧+40，智力-4，感应-20",
+			"buff_type": "不附带负面词条",
+			"superposability": "不可叠加"
+		},
+		"6647400": {
+			"entry_id": 6647400,
+			"entry_name": "【送葬者】提升灵巧，但降低生命力、信仰",
+			"entry_type": "仅限特定角色",
+			"explanation": "等级1时，灵巧+2，生命力-1，信仰-2\n等级12时达到变化最大值，灵巧+19，生命力-5，信仰-13",
+			"buff_type": "不附带负面词条",
+			"superposability": "不可叠加"
+		},
+		"6647500": {
+			"entry_id": 6647500,
+			"entry_name": "【送葬者】提升集中力、信仰，但降低力气",
+			"entry_type": "仅限特定角色",
+			"explanation": "等级1时，集中力+1，信仰+1，力气-2\n等级12时达到变化最大值，集中力+9，信仰+12，力气-15",
 			"buff_type": "不附带负面词条",
 			"superposability": "不可叠加"
 		},
 		"6800000": {
 			"entry_id": 6800000,
 			"entry_name": "降低生命力",
-			"entry_type": "减益(能力值)",
 			"explanation": "生命力-5",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6800200": {
 			"entry_id": 6800200,
 			"entry_name": "降低耐力",
-			"entry_type": "减益(能力值)",
 			"explanation": "耐力-5",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6810100": {
 			"entry_id": 6810100,
 			"entry_name": "降低减伤率",
-			"entry_type": "减益(减伤率)",
-			"explanation": "受到的伤害+10%",
+			"explanation": "未实装?",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6820000": {
 			"entry_id": 6820000,
@@ -1490,7 +1480,7 @@
 		},
 		"6840200": {
 			"entry_id": 6840200,
-			"entry_name": "降低绝招量表累积量",
+			"entry_name": "降低绝招量表累积",
 			"entry_type": "减益(行动)",
 			"explanation": "绝招量表累积速率-15%",
 			"buff_type": "随机加入正面词条",
@@ -1499,18 +1489,16 @@
 		"6850000": {
 			"entry_id": 6850000,
 			"entry_name": "降低物理减伤率",
-			"entry_type": "减益(减伤率)",
 			"explanation": "受到的物理属性伤害+12%",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6850100": {
 			"entry_id": 6850100,
 			"entry_name": "降低属性减伤率",
-			"entry_type": "减益(减伤率)",
 			"explanation": "受到的魔力/火/雷/圣属性伤害+12%",
 			"buff_type": "随机加入正面词条",
-			"superposability": "可叠加"
+			"tags": ["未实装"]
 		},
 		"6850200": {
 			"entry_id": 6850200,
@@ -1520,6 +1508,18 @@
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
 		},
+		"6850300": {
+			"entry_id": 6850300,
+			"entry_name": "降低圣杯瓶恢复量",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6850400": {
+			"entry_id": 6850400,
+			"entry_name": "增加急速冲刺的精力消耗",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6850500": {
 			"entry_id": 6850500,
 			"entry_name": "持续减少血量",
@@ -1528,9 +1528,15 @@
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
 		},
+		"6850600": {
+			"entry_id": 6850600,
+			"entry_name": "增加闪避时的精力消耗",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
 		"6850700": {
 			"entry_id": 6850700,
-			"entry_name": "闪避后的当下，受伤时损伤加剧",
+			"entry_name": "闪避后的当下，降低减伤率",
 			"entry_type": "减益(减伤率)",
 			"explanation": "闪避后无敌帧结束的后摇，受到的伤害+45%",
 			"buff_type": "随机加入正面词条",
@@ -1552,6 +1558,18 @@
 			"explanation": "使用圣杯瓶的动作中，受到的伤害+45%",
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
+		},
+		"6851000": {
+			"entry_id": 6851000,
+			"entry_name": "使用圣杯瓶时，累积催眠量表",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6851100": {
+			"entry_id": 6851100,
+			"entry_name": "使用圣杯瓶时，累积发狂量表",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
 		},
 		"6851200": {
 			"entry_id": 6851200,
@@ -1579,6 +1597,18 @@
 			"notes": "现版本血量小于84.99%才会触发该效果",
 			"buff_type": "随机加入正面词条",
 			"superposability": "可叠加"
+		},
+		"6851500": {
+			"entry_id": 6851500,
+			"entry_name": "血量全满时，降低攻击力",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
+		},
+		"6851600": {
+			"entry_id": 6851600,
+			"entry_name": "濒死时，翻倒圣杯瓶",
+			"explanation": "未实装?",
+			"tags": ["未实装"]
 		},
 		"6851700": {
 			"entry_id": 6851700,

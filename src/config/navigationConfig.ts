@@ -30,6 +30,10 @@ export const mainNavigationItems: NavigationItem[] = [
     key: '传说武器详情',
     label: '传说武器详情'
   },
+  {
+    key: '武器战技与魔法祷告',
+    label: '武器战技与魔法祷告'
+  },
 ];
 
 // 获取主导航项的顺序

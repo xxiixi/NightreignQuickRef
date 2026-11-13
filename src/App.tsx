@@ -13,6 +13,7 @@ import GameMechanicsView from './pages/GameMechanicsView';
 import LegendaryWeaponView from './pages/LegendaryWeaponView';
 import CharacterDataView from './pages/CharacterDataView';
 import BossDataView from './pages/BossDataView';
+import WeaponSkillMagicView from './pages/WeaponSkillMagicView';
 import { initializeTheme, setupThemeListener } from './utils/themeUtils';
 import DataManager from './utils/dataManager';
 import { getDefaultPage } from './config/navigationConfig';
@@ -107,6 +108,8 @@ function App() {
         return <GameMechanicsView functionName="游戏机制" />;
       case '夜王Boss数据':
         return <BossDataView activeSubTab={activeSubTab} />;
+      case '武器战技与魔法祷告':
+        return <WeaponSkillMagicView activeSubTab={activeSubTab} />;
       default:
         return <EntryDetailView activeSubTab={activeSubTab} />;
     }

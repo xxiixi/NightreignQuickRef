@@ -1,8 +1,8 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { Typography, Table, Alert, Tabs, Divider } from 'antd';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { Typography, Table, Alert, Tabs, Divider, Switch, Tooltip } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { Radar, Column } from '@ant-design/plots';
-import { ThunderboltTwoTone } from '@ant-design/icons';
+import { ThunderboltTwoTone, QuestionCircleOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import { throttle } from 'lodash';
 import { getCurrentTheme } from '../utils/themeUtils';
 import '../styles/characterDataView.css';
@@ -42,11 +42,19 @@ interface CharacterLevelData {
   [key: string]: string | number;
 }
 
+// 「强化闪避」加成（60fps）：默认 +6 帧，女爵·闪身 +2 帧
+const ENHANCED_DODGE_BONUS = 6;
+const ENHANCED_DODGE_BONUS_OVERRIDES: { [name: string]: number } = {
+  '女爵（闪身）': 2,
+};
+
 // 闪避无敌帧对比组件
 const DodgeFramesComparison = () => {
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
   const [chartKey, setChartKey] = useState(0);
   const [frameData, setFrameData] = useState<Array<{ name: string; type: string; value: number }>>([]);
+  // 是否叠加「强化闪避」：无敌帧 +6（女爵·闪身 +2），动作总帧长不变
+  const [enhancedDodge, setEnhancedDodge] = useState(false);
 
   useEffect(() => {
     const checkTheme = () => {
@@ -141,9 +149,32 @@ const DodgeFramesComparison = () => {
     loadFrameData();
   }, []);
 
+  // 「强化闪避」：把 6 帧非无敌帧转为无敌帧（女爵·闪身只转 2 帧），总帧长不变
+  const displayFrameData = useMemo(() => {
+    if (!enhancedDodge) {
+      return frameData;
+    }
+    return frameData.map((item) => {
+      const bonus = ENHANCED_DODGE_BONUS_OVERRIDES[item.name] ?? ENHANCED_DODGE_BONUS;
+      if (item.type === '无敌帧') {
+        return { ...item, value: item.value + bonus };
+      }
+      if (item.type === '非无敌帧') {
+        return { ...item, value: Math.max(0, item.value - bonus) };
+      }
+      return item;
+    });
+  }, [frameData, enhancedDodge]);
+
+  // 值为 0 的段不参与绘制，避免出现 0 标签
+  const chartFrameData = useMemo(
+    () => displayFrameData.filter((item) => item.value > 0),
+    [displayFrameData],
+  );
+
   // 计算每个角色的总帧数用于顶部注释
   const totalFrames: { [key: string]: number } = {};
-  frameData.forEach((item: { name: string; type: string; value: number }) => {
+  displayFrameData.forEach((item: { name: string; type: string; value: number }) => {
     if (!totalFrames[item.name]) {
       totalFrames[item.name] = 0;
     }
@@ -166,7 +197,7 @@ const DodgeFramesComparison = () => {
   }));
 
   const config = {
-    data: frameData,
+    data: chartFrameData,
     xField: 'name',
     yField: 'value',
     stack: true,
@@ -176,7 +207,7 @@ const DodgeFramesComparison = () => {
     autoFit: true,
     label: {
       text: 'value',
-      textBaseline: 'bottom',
+      textBaseline: 'middle',
       position: 'inside',
     },
     tooltip: false,
@@ -244,15 +275,42 @@ const DodgeFramesComparison = () => {
 
   return (
     <div className="content-wrapper card-item">
-      <div className="card-header">
-        <Title level={5} className="character-card-title">
+      <div
+        className="card-header"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '12px',
+          flexWrap: 'wrap',
+        }}
+      >
+        <Title level={5} className="character-card-title" style={{ margin: 0 }}>
           翻滚/闪避 帧数对比
         </Title>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Text style={{ fontSize: '13px', color: 'var(--color-text-2)' }}>强化闪避</Text>
+          <Switch
+            size="small"
+            checked={enhancedDodge}
+            onChange={setEnhancedDodge}
+            checkedChildren="开"
+            unCheckedChildren="关"
+          />
+          <Tooltip title="开启后按「强化闪避」加成显示：无敌帧 +6 帧（女爵·闪身 +2 帧），动作总帧长不变。熔炉羽护符、风结晶露滴同理。">
+            <QuestionCircleOutlined style={{ color: 'var(--color-text-3)', cursor: 'help' }} />
+          </Tooltip>
+        </div>
       </div>
       <div className="card-body">
         <div style={{ marginBottom: '10px', color: 'var(--theme-text-secondary)', fontSize: '14px' }}>
           提示：图中为60帧情况下的数据（1帧即1/60秒）
         </div>
+        {enhancedDodge && (
+          <div style={{ marginBottom: '10px', color: 'var(--color-primary-500)', fontSize: '14px' }}>
+            已开启「强化闪避」：无敌帧 +6（女爵·闪身 +2），非无敌帧相应减少，总帧长不变
+          </div>
+        )}
         <div
           className="dodge-frames-chart-container"
           style={{
@@ -263,7 +321,7 @@ const DodgeFramesComparison = () => {
             position: 'relative'
           }}
         >
-          <Column key={`dodge-frames-${chartKey}`} {...config} />
+          <Column key={`dodge-frames-${chartKey}-${enhancedDodge ? 'enhanced' : 'base'}`} {...config} />
         </div>
 
         {/* 提示信息 */}
@@ -286,6 +344,10 @@ const DodgeFramesComparison = () => {
               <div className="tip-item">
                 4. 各数值对应的秒数计算：帧数数值× (1/60秒); 举例: 追踪者翻滚总时长为40帧，在60帧情况下，对应的时长为 40×(1/60)s = 2/3s ≈ 0.67s
               </div>
+
+              <div className="tip-item">
+                5. 熔炉羽护符、风结晶露滴或局内强化闪避额外获得的无敌帧为6帧，女爵（闪身）为2帧
+              </div>
             </div>
           }
           type="info"
@@ -306,6 +368,84 @@ interface CharacterState {
 interface CharacterData {
   [characterName: string]: CharacterState;
 }
+
+// G2 默认分类色板（与 light/dark 主题的 category10 一致）
+const RADAR_COLORS = [
+  '#1783FF', '#00C9C9', '#F0884D', '#D580FF', '#7863FF',
+  '#60C42D', '#BD8F24', '#FF80CA', '#2491B3', '#17C76F',
+];
+
+// 雷达图自定义图例：固定单行，超出时用左右箭头滚动（类似 ECharts legend type=scroll）
+const RadarLegend: React.FC<{
+  names: string[];
+  getColor: (name: string) => string;
+}> = ({ names, getColor }) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateArrows = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 1);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', updateArrows, { passive: true });
+    const resizeObserver = new ResizeObserver(updateArrows);
+    resizeObserver.observe(el);
+    window.addEventListener('resize', updateArrows);
+    return () => {
+      el.removeEventListener('scroll', updateArrows);
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', updateArrows);
+    };
+  }, [updateArrows, names]);
+
+  const scroll = (direction: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: direction * Math.max(el.clientWidth * 0.6, 120), behavior: 'smooth' });
+  };
+
+  return (
+    <div className="radar-legend">
+      <button
+        type="button"
+        className="radar-legend-arrow"
+        aria-label="向左滚动图例"
+        style={{ visibility: canScrollLeft ? 'visible' : 'hidden' }}
+        onClick={() => scroll(-1)}
+      >
+        <LeftOutlined />
+      </button>
+      <div
+        className={`radar-legend-scroll${!canScrollLeft && !canScrollRight ? ' is-centered' : ''}`}
+        ref={scrollRef}
+      >
+        {names.map((name) => (
+          <span className="radar-legend-item" key={name}>
+            <span className="radar-legend-dot" style={{ backgroundColor: getColor(name) }} />
+            <span>{name}</span>
+          </span>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="radar-legend-arrow"
+        aria-label="向右滚动图例"
+        style={{ visibility: canScrollRight ? 'visible' : 'hidden' }}
+        onClick={() => scroll(1)}
+      >
+        <RightOutlined />
+      </button>
+    </div>
+  );
+};
 
 const CharacterDataView: React.FC = () => {
   // 数据状态
@@ -469,6 +609,12 @@ const CharacterDataView: React.FC = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>(['追踪者', '女爵', '送葬者']);
   const [currentTheme, setCurrentTheme] = useState<'light' | 'dark'>(getCurrentTheme());
   const [chartKey, setChartKey] = useState(0);
+
+  // 角色颜色按 characterNames 固定映射，图例与雷达图共用，避免选中顺序变化导致换色
+  const getRadarColor = (name: string) => {
+    const index = characterNames.indexOf(name);
+    return RADAR_COLORS[(index >= 0 ? index : 0) % RADAR_COLORS.length];
+  };
 
   useEffect(() => {
     const checkTheme = () => {
@@ -693,13 +839,23 @@ const CharacterDataView: React.FC = () => {
   const rowSelection: TableProps<{ key: string; character: string;[key: string]: string }>['rowSelection'] = {
     selectedRowKeys,
     onChange: (newSelectedRowKeys: React.Key[]) => {
-      // 限制最多选择8个角色
-      if (newSelectedRowKeys.length <= 8) {
+      // 至少保留一名角色，避免雷达图变成空图（不弹提示）
+      if (newSelectedRowKeys.length === 0) {
+        const fallback = selectedRowKeys[0] ?? characterNames[0];
+        if (fallback) {
+          setSelectedRowKeys([fallback]);
+        }
+        return;
+      }
+      // 最多选择全部角色（原先固定为 8，DLC 新增学者/送葬者后会导致全选失效）
+      if (newSelectedRowKeys.length <= characterNames.length) {
         setSelectedRowKeys(newSelectedRowKeys);
       }
     },
     getCheckboxProps: (record: { key: string; character: string;[key: string]: string }) => ({
       name: record.character,
+      // 只剩一名角色时锁住它，不能再取消
+      disabled: selectedRowKeys.length === 1 && selectedRowKeys.includes(record.key),
     }),
   };
 
@@ -737,87 +893,101 @@ const CharacterDataView: React.FC = () => {
               id="radar-chart-container"
             >
               {selectedRowKeys.length > 0 ? (
-                <Radar
-                  key={`radar-main-${chartKey}`}
-                  data={radarData}
-                  xField="item"       // 用于X轴（雷达图的各个顶点）的字段
-                  yField="score"      // 用于Y轴（数值）的字段
-                  colorField="type"   // 用于区分不同角色的字段
-                  height={380}        // 雷达图高度
-                  autoFit={true}      // 自适应容器大小
-                  theme={currentTheme}        // 根据当前主题动态设置
-
-                  // 坐标轴配置
-                  axis={{
-                    x: {
-                      grid: true,
-                      gridLineWidth: 1,
-                      tick: false,
-                      gridLineDash: [0, 0],
-                    },
-                    y: {
-                      zIndex: 1,
-                      title: false,
-                      gridLineWidth: 1,
-                      gridLineDash: [0, 0],
-                      gridAreaFill: (_: unknown, index: number) => {
-                        return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
-                      },
-                      labelFormatter: (value: number) => {
-                        const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                        return levelMap[value] || '';
-                      },
-
-                    },
-                  }}
-
-                  // 数据点配置
-                  point={{
-                    size: 4,
-                  }}
-
-                  // 刻度配置 - 恢复辅助线
-                  scale={{
-                    x: { padding: 50, align: 0 },
-                    y: {
-                      tickCount: 5,
-                      domainMin: 0,
-                      domainMax: 5
-                    }
-                  }}
-
-                  // 线条样式
-                  style={{
-                    lineWidth: 2,
-                  }}
-
-                  // 提示框配置
-                  tooltip={{
-                    items: [
-                      {
-                        channel: 'y',
-                        valueFormatter: (value: number) => {
-                          const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
-                          return levelMap[value] || value.toString();
-                        }
-                      }
-                    ]
-                  }}
-
-                  // 填充区域样式
-                  area={{
-                    style: {
-                      fillOpacity: 0.1,      // 填充透明度
-                    },
-                  }}
-
-                  // 线样式
-                  line={{
-                    style: {
-                      lineWidth: 2,
-                    },
-                  }}
-                />
+                <>
+                  <div className="radar-chart-inner">
+                    <RadarLegend
+                      names={selectedRowKeys.map(key => key.toString())}
+                      getColor={getRadarColor}
+                    />
+                    <Radar
+                      key={`radar-main-${chartKey}-${selectedRowKeys.join('-')}`}
+                      data={radarData}
+                      xField="item"       // 用于X轴（雷达图的各个顶点）的字段
+                      yField="score"      // 用于Y轴（数值）的字段
+                      colorField="type"   // 用于区分不同角色的字段
+                      legend={false}      // 使用自定义单行图例
+                      height={380}        // 雷达图高度
+                      autoFit={true}      // 自适应容器大小
+                      animate={false}     // 关闭更新动画，避免切换角色超过 8 个时残留外圈
+                      theme={currentTheme}        // 根据当前主题动态设置
+    
+                      // 坐标轴配置
+                      axis={{
+                        x: {
+                          grid: true,
+                          gridLineWidth: 1,
+                          tick: false,
+                          gridLineDash: [0, 0],
+                        },
+                        y: {
+                          zIndex: 1,
+                          title: false,
+                          gridLineWidth: 1,
+                          gridLineDash: [0, 0],
+                          gridAreaFill: (_: unknown, index: number) => {
+                            return index % 2 === 1 ? 'rgba(0, 0, 0, 0.04)' : '';
+                          },
+                          labelFormatter: (value: number) => {
+                            const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
+                            return levelMap[value] || '';
+                          },
+    
+                        },
+                      }}
+    
+                      // 数据点配置
+                      point={{
+                        size: 4,
+                      }}
+    
+                      // 刻度配置 - 恢复辅助线
+                      scale={{
+                        x: { padding: 50, align: 0 },
+                        y: {
+                          tickCount: 5,
+                          domainMin: 0,
+                          domainMax: 5
+                        },
+                        color: {
+                          domain: characterNames,
+                          range: RADAR_COLORS,
+                        },
+                      }}
+    
+                      // 线条样式
+                      style={{
+                        lineWidth: 2,
+                      }}
+    
+                      // 提示框配置
+                      tooltip={{
+                        items: [
+                          {
+                            channel: 'y',
+                            valueFormatter: (value: number) => {
+                              const levelMap: Record<number, string> = { 1: 'D', 2: 'C', 3: 'B', 4: 'A', 5: 'S' };
+                              return levelMap[value] || value.toString();
+                            }
+                          }
+                        ]
+                      }}
+    
+                      // 填充区域样式
+                      area={{
+                        style: {
+                          fillOpacity: 0.1,      // 填充透明度
+                        },
+                      }}
+    
+                      // 线样式
+                      line={{
+                        style: {
+                          lineWidth: 2,
+                        },
+                      }}
+                    />
+                  </div>
+                </>
               ) : (
                 // 空状态显示
                 <div

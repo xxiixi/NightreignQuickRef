@@ -1,255 +1,262 @@
 [
     {
         "entry_id":"7000000",
-        "entry_name":"生命力+１",
-        "entry_type":"能力",
+        "entry_name":"生命力 +1",
+        "entry_type":"能力值",
         "explanation":"+1点生命力（固定+20点生命值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000001",
-        "entry_name":"生命力+２",
-        "entry_type":"能力",
+        "entry_name":"生命力 +2",
+        "entry_type":"能力值",
         "explanation":"+2点生命力（固定+40点生命值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000002",
-        "entry_name":"生命力+３",
-        "entry_type":"能力",
+        "entry_name":"生命力 +3",
+        "entry_type":"能力值",
         "explanation":"+3点生命力（固定+60点生命值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000090",
-        "entry_name":"提升血量上限",
-        "entry_type":"能力",
+        "entry_name":"【深海的黑夜/深海的暗夜】提升血量上限",
+        "entry_type":"专属遗物",
         "explanation":"+5点生命力（固定+100点生命值上限）",
-        "superposability":"可叠加"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7000100",
-        "entry_name":"集中力+１",
-        "entry_type":"能力",
+        "entry_name":"集中力 +1",
+        "entry_type":"能力值",
         "explanation":"+1点集中力（固定+5点专注值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000101",
-        "entry_name":"集中力+２",
-        "entry_type":"能力",
+        "entry_name":"集中力 +2",
+        "entry_type":"能力值",
         "explanation":"+2点集中力（固定+10点专注值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000102",
-        "entry_name":"集中力+３",
-        "entry_type":"能力",
+        "entry_name":"集中力 +3",
+        "entry_type":"能力值",
         "explanation":"+3点集中力（固定+15点专注值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000190",
-        "entry_name":"提升专注值上限",
-        "entry_type":"能力",
+        "entry_name":"【智的黑夜/智的暗夜】提升专注值上限",
+        "entry_type":"专属遗物",
         "explanation":"+5点集中力（固定+25点专注值上限）",
-        "superposability":"可叠加"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7000200",
-        "entry_name":"耐力+１",
-        "entry_type":"能力",
+        "entry_name":"耐力 +1",
+        "entry_type":"能力值",
         "explanation":"+1点耐力（固定+2点精力值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000201",
-        "entry_name":"耐力+２",
-        "entry_type":"能力",
+        "entry_name":"耐力 +2",
+        "entry_type":"能力值",
         "explanation":"+2点耐力（固定+4点精力值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000202",
-        "entry_name":"耐力+３",
-        "entry_type":"能力",
+        "entry_name":"耐力 +3",
+        "entry_type":"能力值",
         "explanation":"+3点耐力（固定+6点精力值上限）",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000290",
-        "entry_name":"提升精力上限",
-        "entry_type":"能力",
+        "entry_name":"【猎人的黑夜/猎人的暗夜】提升精力上限",
+        "entry_type":"专属遗物",
         "explanation":"+5点耐力（固定+10点精力值上限）",
-        "superposability":"可叠加"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7000300",
-        "entry_name":"力气+１",
-        "entry_type":"能力",
+        "entry_name":"力气 +1",
+        "entry_type":"能力值",
         "explanation":"+1点力气",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000301",
-        "entry_name":"力气+２",
-        "entry_type":"能力",
+        "entry_name":"力气 +2",
+        "entry_type":"能力值",
         "explanation":"+2点力气",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000302",
-        "entry_name":"力气+３",
-        "entry_type":"能力",
+        "entry_name":"力气 +3",
+        "entry_type":"能力值",
         "explanation":"+3点力气",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000400",
-        "entry_name":"灵巧+１",
-        "entry_type":"能力",
+        "entry_name":"灵巧 +1",
+        "entry_type":"能力值",
         "explanation":"+1点灵巧",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000401",
-        "entry_name":"灵巧+２",
-        "entry_type":"能力",
+        "entry_name":"灵巧 +2",
+        "entry_type":"能力值",
         "explanation":"+2点灵巧",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000402",
-        "entry_name":"灵巧+３",
-        "entry_type":"能力",
+        "entry_name":"灵巧 +3",
+        "entry_type":"能力值",
         "explanation":"+3点灵巧",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000500",
-        "entry_name":"智力+１",
-        "entry_type":"能力",
+        "entry_name":"智力 +1",
+        "entry_type":"能力值",
         "explanation":"+1点智力",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000501",
-        "entry_name":"智力+２",
-        "entry_type":"能力",
+        "entry_name":"智力 +2",
+        "entry_type":"能力值",
         "explanation":"+2点智力",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000502",
-        "entry_name":"智力+３",
-        "entry_type":"能力",
+        "entry_name":"智力 +3",
+        "entry_type":"能力值",
         "explanation":"+3点智力",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000600",
-        "entry_name":"信仰+１",
-        "entry_type":"能力",
+        "entry_name":"信仰 +1",
+        "entry_type":"能力值",
         "explanation":"+1点信仰",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000601",
-        "entry_name":"信仰+２",
-        "entry_type":"能力",
+        "entry_name":"信仰 +2",
+        "entry_type":"能力值",
         "explanation":"+2点信仰",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000602",
-        "entry_name":"信仰+３",
-        "entry_type":"能力",
+        "entry_name":"信仰 +3",
+        "entry_type":"能力值",
         "explanation":"+3点信仰",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000700",
-        "entry_name":"感应+１",
-        "entry_type":"能力",
+        "entry_name":"感应 +1",
+        "entry_type":"能力值",
         "explanation":"+1点感应",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000701",
-        "entry_name":"感应+２",
-        "entry_type":"能力",
+        "entry_name":"感应 +2",
+        "entry_type":"能力值",
         "explanation":"+2点感应",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000702",
-        "entry_name":"感应+３",
-        "entry_type":"能力",
+        "entry_name":"感应 +3",
+        "entry_type":"能力值",
         "explanation":"+3点感应",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000800",
-        "entry_name":"缩短技艺的冷却时间+１",
+        "entry_name":"缩短技艺的冷却时间 +1",
         "entry_type":"技艺/绝招",
         "explanation":"技艺冷却时间 -5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000801",
-        "entry_name":"缩短技艺的冷却时间+２",
+        "entry_name":"缩短技艺的冷却时间 +2",
         "entry_type":"技艺/绝招",
         "explanation":"技艺冷却时间 -7.5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000802",
-        "entry_name":"缩短技艺的冷却时间+３",
+        "entry_name":"缩短技艺的冷却时间 +3",
         "entry_type":"技艺/绝招",
         "explanation":"技艺冷却时间 -10%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000900",
-        "entry_name":"自然累积绝招量表 +１",
+        "entry_name":"自然累积绝招量表 +1",
         "entry_type":"技艺/绝招",
-        "explanation":"绝招量表累积速率 +5%",
+        "explanation":"绝招量表自然累积速率 +5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000901",
-        "entry_name":"自然累积绝招量表 +２",
+        "entry_name":"自然累积绝招量表 +2",
         "entry_type":"技艺/绝招",
-        "explanation":"绝招量表累积速率 +7.5%",
+        "explanation":"绝招量表自然累积速率 +7.5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7000902",
-        "entry_name":"自然累积绝招量表 +３",
+        "entry_name":"自然累积绝招量表 +3",
         "entry_type":"技艺/绝招",
-        "explanation":"绝招量表累积速率+10%",
+        "explanation":"绝招量表自然累积速率 +10%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001000",
-        "entry_name":"强韧度+１",
-        "entry_type":"能力",
+        "entry_name":"强韧度 +1",
+        "entry_type":"能力值",
         "explanation":"受到的韧性伤害 -5%",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7001001",
-        "entry_name":"强韧度+２",
-        "entry_type":"能力",
+        "entry_name":"强韧度 +2",
+        "entry_type":"能力值",
         "explanation":"受到的韧性伤害 -10%",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7001002",
-        "entry_name":"强韧度+３",
-        "entry_type":"能力",
+        "entry_name":"强韧度 +3",
+        "entry_type":"能力值",
         "explanation":"受到的韧性伤害 -15%",
-        "superposability":"未知"
+        "superposability":"可叠加"
+    },
+    {
+        "entry_id":"7001100",
+        "entry_name":"【深海的暗夜/祝福铁币】持续恢复血量",
+        "entry_type":"专属遗物",
+        "explanation":"每秒恢复2点生命值",
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7001400",
@@ -260,14 +267,14 @@
     },
     {
         "entry_id":"7001401",
-        "entry_name":"提升物理攻击力 +１",
+        "entry_name":"提升物理攻击力 +1",
         "entry_type":"攻击力",
         "explanation":"物理攻击力 +5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001402",
-        "entry_name":"提升物理攻击力 +２",
+        "entry_name":"提升物理攻击力 +2",
         "entry_type":"攻击力",
         "explanation":"物理攻击力 +6%",
         "superposability":"可叠加"
@@ -281,14 +288,14 @@
     },
     {
         "entry_id":"7001501",
-        "entry_name":"提升魔力属性攻击力 +１",
+        "entry_name":"提升魔力属性攻击力 +1",
         "entry_type":"攻击力",
         "explanation":"魔力属性攻击力 +5.5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001502",
-        "entry_name":"提升魔力属性攻击力 +２",
+        "entry_name":"提升魔力属性攻击力 +2",
         "entry_type":"攻击力",
         "explanation":"魔力属性攻击力 +6.5%",
         "superposability":"可叠加"
@@ -302,14 +309,14 @@
     },
     {
         "entry_id":"7001601",
-        "entry_name":"提升火属性攻击力 +１",
+        "entry_name":"提升火属性攻击力 +1",
         "entry_type":"攻击力",
         "explanation":"火属性攻击力 +5.5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001602",
-        "entry_name":"提升火属性攻击力 +２",
+        "entry_name":"提升火属性攻击力 +2",
         "entry_type":"攻击力",
         "explanation":"火属性攻击力 +6.5%",
         "superposability":"可叠加"
@@ -323,14 +330,14 @@
     },
     {
         "entry_id":"7001701",
-        "entry_name":"提升雷属性攻击力 +１",
+        "entry_name":"提升雷属性攻击力 +1",
         "entry_type":"攻击力",
         "explanation":"雷属性攻击力 +5.5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001702",
-        "entry_name":"提升雷属性攻击力 +２",
+        "entry_name":"提升雷属性攻击力 +2",
         "entry_type":"攻击力",
         "explanation":"雷属性攻击力 +6.5%",
         "superposability":"可叠加"
@@ -344,17 +351,132 @@
     },
     {
         "entry_id":"7001801",
-        "entry_name":"提升圣属性攻击力 +１",
+        "entry_name":"提升圣属性攻击力 +1",
         "entry_type":"攻击力",
         "explanation":"圣属性攻击力 +5.5%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7001802",
-        "entry_name":"提升圣属性攻击力 +２",
+        "entry_name":"提升圣属性攻击力 +2",
         "entry_type":"攻击力",
         "explanation":"圣属性攻击力 +6.5%",
         "superposability":"可叠加"
+    },
+    {
+        "entry_id":"7001900",
+        "entry_name":"附加异常状态中毒的效果",
+        "explanation":"毒据点武器附带",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7001901",
+        "entry_name":"附加异常状态中毒的效果 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7001902",
+        "entry_name":"附加异常状态中毒的效果 +2",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002000",
+        "entry_name":"附加异常状态出血的效果",
+        "entry_type":"武器固有",
+        "explanation":"出血据点武器附带",
+        "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7002001",
+        "entry_name":"附加异常状态出血的效果 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002002",
+        "entry_name":"附加异常状态出血的效果 +2",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002100",
+        "entry_name":"附加异常状态催眠的效果",
+        "explanation":"睡眠据点武器附带",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002101",
+        "entry_name":"附加异常状态催眠的效果 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002102",
+        "entry_name":"附加异常状态催眠的效果 +2",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002103",
+        "entry_name":"附加异常状态催眠的效果 +3",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002200",
+        "entry_name":"附加异常状态死亡的效果",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002300",
+        "entry_name":"附加异常状态猩红腐败的效果",
+        "explanation":"腐败据点/腐败森林武器附带",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002301",
+        "entry_name":"附加异常状态猩红腐败的效果 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002302",
+        "entry_name":"附加异常状态猩红腐败的效果 +2",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002400",
+        "entry_name":"附加异常状态冻伤的效果",
+        "explanation":"冻伤据点/山顶武器附带",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002401",
+        "entry_name":"附加异常状态冻伤的效果 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002402",
+        "entry_name":"附加异常状态冻伤的效果 +2",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002403",
+        "entry_name":"附加异常状态冻伤的效果 +3",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7002500",
+        "entry_name":"附加异常状态发狂的效果",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7002600",
@@ -407,7 +529,7 @@
     },
     {
         "entry_id":"7003300",
-        "entry_name":"提升对死亡的抵抗力",
+        "entry_name":"提升对骤死的抵抗力",
         "entry_type":"对异常状态的抵抗力",
         "explanation":"+75点死亡异常耐受上限",
         "superposability":"可叠加"
@@ -438,46 +560,58 @@
         "entry_name":"受到损伤的当下，能通过攻击恢复部分血量",
         "entry_type":"恢复",
         "explanation":"∘ 最近一次被攻击的4s内，可通过攻击恢复这部分虚血\n∘ 每次攻击的恢复量 = 武器基础回血量 × 动作回血倍率",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
     },
     {
         "entry_id":"7006000",
         "entry_name":"提升双手共持时，造成失去平衡的能力",
         "entry_type":"攻击力",
         "explanation":"双手共持时，造成的削韧 +5%",
-        "superposability":"未知"
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7006100",
         "entry_name":"提升双手各持时，造成失去平衡的能力",
         "entry_type":"攻击力",
         "explanation":"双手各持时，造成的削韧 +5%",
-        "superposability":"未知"
+        "superposability":"可叠加"
+    },
+    {
+        "entry_id":"7010000",
+        "entry_name":"【守护者】提升技艺的有效距离",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7010200",
         "entry_name":"使用圣杯瓶时，连同恢复周围我方人物",
         "entry_type":"队伍成员",
-        "explanation":null,
+        "explanation":"自己回复最大生命值的50%，队友回复最大生命值的50%",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7010500",
         "entry_name":"【追踪者】发动绝招时，能燃起火焰、蔓延周围",
         "entry_type":"仅限特定角色",
-        "explanation":null,
+        "explanation":"每秒造成35点基础火属性伤害",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7010700",
-        "entry_name":"【女爵】以短剑使出连续攻击时，能对着周围的敌人，再次上演最近做过的行动",
+        "entry_name":"【女爵】短剑连击的最后攻击命中时，能对着周围的敌人，再次上演最近做过的行动",
         "entry_type":"仅限特定角色",
         "explanation":"女爵用短剑连续攻击，用出整套动作最后一下时触发重演，重演造成连续攻击过程中伤害的40%",
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"7010800",
+        "entry_name":"【无赖】提升技艺伤害，但降低技艺发动期间的减伤率",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7010900",
-        "entry_name":"【复仇者】发动绝招时，能以自己的血量为代价完全恢复我方人物的血量",
+        "entry_name":"【复仇者】发动绝招时，能以自己的血量为代价，完全恢复周围我方人物的血量",
         "entry_type":"仅限特定角色",
         "explanation":"扣除自身最大生命值的 50%，恢复周围友军最大生命值的 100%",
         "superposability":"不可叠加"
@@ -490,11 +624,29 @@
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"7011100",
+        "entry_name":"【守护者】发动绝招时，能提升周围我方人物的减伤率",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7011200",
         "entry_name":"【复仇者】发动绝招时，能引发灵火爆炸",
         "entry_type":"仅限特定角色",
         "explanation":null,
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7011400",
+        "entry_name":"【守护者】发动技艺时，能恢复周围我方人物的血量",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7011500",
+        "entry_name":"【追踪者】技艺会附加引发异常状态出血的效果",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7011600",
@@ -509,6 +661,12 @@
         "entry_type":"仅限特定角色",
         "explanation":"恢复最大生命值的 15%，内置0.9秒冷却时间",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7011900",
+        "entry_name":"【守护者】技艺会附加圣属性攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7012000",
@@ -529,56 +687,86 @@
         "entry_name":"血量偏低时，能提升减伤率",
         "entry_type":"减伤率",
         "explanation":"生命值量小于40%时，受到的伤害 -16%",
-        "superposability":"未知"
+        "superposability":"可叠加"
+    },
+    {
+        "entry_id":"7012400",
+        "entry_name":"重攻击时，能朝周围引发热浪",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7012500",
+        "entry_name":"跳跃时，能触发多颗魔法球",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7012600",
+        "entry_name":"周围有我方人物时，能提升攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7012700",
+        "entry_name":"防御反击时，能形成光柱",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7020000",
         "entry_name":"【追踪者】发动技艺时，轻攻击能使出缠绕火焰的追加攻击（仅限大剑）",
         "entry_type":"仅限特定角色",
-        "explanation":"使用技艺后用大剑进行轻攻击，武器+20点火属性攻击力，持续20秒",
+        "explanation":"使用技艺后用大剑进行轻攻击，造成武器面板的155%伤害，削韧16.5，武器+20点火属性攻击力，持续20秒",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7030000",
         "entry_name":"身在图腾碑石周围时，能提升强韧度",
         "entry_type":"仅限特定角色",
-        "explanation":"∘ 无赖释放图腾石碑时，本buff会赋予给石碑周围的玩家\n∘ 获得buff的玩家受到的韧性伤害 -90%，内置30秒冷却时间",
+        "explanation":"在图腾碑石周围时，受到的韧性伤害-90%，内置30秒冷却时间\n该效果为触发型而非“光环效果”，只要无赖释放绝招“图腾石碑”的时候你在周围，就能触发\n反过来说，如果释放的时候你不在周围，之后靠近石碑不能触发效果",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7030200",
         "entry_name":"食用苔药等等道具时，能恢复血量",
         "entry_type":"恢复",
-        "explanation":"使用对应道具后立即回复20点血量，然后每秒回复[最大生命值 × 0.5% + 1]点血量，持续20秒",
-        "superposability":"不可叠加"
+        "explanation":"使用对应道具后立即回复50点生命值，\n然后每秒回复最大生命值的0.5%+1，持续20秒",
+        "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"7030500",
+        "entry_name":"【追踪者】发动绝招后，\n能提升攻击力与精力上限，但降低减伤率",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7030600",
         "entry_name":"防御成功时，能累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表 +1",
-        "superposability":"未知"
+        "superposability":"不同级别可叠加"
     },
     {
         "entry_id":"7030700",
         "entry_name":"防御时，变得容易被敌人攻击",
         "entry_type":"行动",
-        "explanation":"仇恨+9，松开后持续4s ",
-        "superposability":"未知"
+        "explanation":"4秒内，仇恨增益 +450",
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7030800",
-        "entry_name":"使出致命一击时，加快累积绝招量表",
+        "entry_name":"使出致命一击时，能累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表 +5",
-        "superposability":"未知"
+        "superposability":"不同级别可叠加"
     },
     {
         "entry_id":"7030900",
         "entry_name":"涂抹油脂类道具时，能额外提升物理攻击力",
         "entry_type":"攻击力",
         "explanation":"30秒内，增加物理伤害 +10%",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
     },
     {
         "entry_id":"7031200",
@@ -591,8 +779,26 @@
         "entry_id":"7031300",
         "entry_name":"【无赖】在技艺发动期间，受到攻击时能提升攻击力与精力上限",
         "entry_type":"仅限特定角色",
-        "explanation":"20秒内，最大精力值 +20%，造成的伤害 +10%",
+        "explanation":"20秒内，最大精力值+20%，造成的伤害+10%",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7031400",
+        "entry_name":"【追踪者】缩短技艺的冷却时间",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7031600",
+        "entry_name":"连续防御成功时，能提升防御强度、弹开强力攻击",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7031700",
+        "entry_name":"防御成功时，能释放冲击波",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7031800",
@@ -604,7 +810,7 @@
     {
         "entry_id":"7031900",
         "entry_name":"使出致命一击时，能获得卢恩",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"+600卢恩",
         "superposability":"不可叠加"
     },
@@ -614,6 +820,12 @@
         "entry_type":"攻击力",
         "explanation":"10秒内，造成的伤害 +15%",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7032300",
+        "entry_name":"【追踪者】发动技艺时，能提升攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7032400",
@@ -627,7 +839,7 @@
         "entry_name":"【女爵】在绝招发动期间，打倒敌人时能提升攻击力",
         "entry_type":"仅限特定角色",
         "explanation":"∘ 在隐身的12.5秒内，击杀敌人会叠加层数，每层增伤15%，持续30s \n∘ 每层独立计时，上限30层（如层数为3时增伤计算：1.15*1.15*1.15 ≈ 1.52，增伤52%）",
-        "superposability":"可叠加"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7032800",
@@ -644,8 +856,14 @@
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"7033000",
+        "entry_name":"【追踪者】发动能力时，能提升攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7033200",
-        "entry_name":"【追踪者】技艺的使用次数+１",
+        "entry_name":"【追踪者】技艺的使用次数 +1",
         "entry_type":"仅限特定角色",
         "explanation":null,
         "superposability":"不可叠加"
@@ -653,16 +871,45 @@
     {
         "entry_id":"7033300",
         "entry_name":"【守护者】在能力发动期间，会变得容易受敌人攻击",
-        "entry_type":"仅限特定角色",
-        "explanation":"仇恨增益 +600",
-        "superposability":"不可叠加"
+        "explanation":"未实装?",
+        "tags": ["未实装"]
     },
     {
         "entry_id":"7033400",
         "entry_name":"【守护者】在能力发动期间，防御成功时能形成冲击波",
         "entry_type":"仅限特定角色",
-        "explanation":"造成[固定100点 + 0.12%最大生命值]的物理伤害，5点削韧，3号冲击力",
+        "explanation":"伤害分为2个部分\n冲击波：造成固定100点物理伤害，5点削韧，3号冲击力\n反伤：扣除敌人最大生命值的0.12%\n偶尔会出现仅有冲击波击中的情况，因此伤害不稳定",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7033600",
+        "entry_name":"【女爵】延长绝招的有效时间",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7033700",
+        "entry_name":"以特大武器蓄力攻击时，岩石会攀附在武器上",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7033800",
+        "entry_name":"【无赖】在发动技艺的最后攻击时，能永久性提升攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7033900",
+        "entry_name":"【隐士】延长鲜血烙印的有效时间",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7034000",
+        "entry_name":"【隐士】收集四种属性痕时，能提升属性攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7034100",
@@ -670,6 +917,18 @@
         "entry_type":"仅限特定角色",
         "explanation":"30秒内，提升生命值上限50%",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7034200",
+        "entry_name":"【执行者】在绝招发动期间，能提升攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7034300",
+        "entry_name":"【执行者】强化能力的效果，但降低对异常状态的抵抗力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7034400",
@@ -700,46 +959,89 @@
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"7034800",
+        "entry_name":"使出火属性的致命一击时，能提升精力上限",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7034900",
+        "entry_name":"使出致命一击时，能恢复血量",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7035000",
+        "entry_name":"使出致命一击时，能附加雷属性攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7035100",
         "entry_name":"使出致命一击时，能提升精力的恢复速度",
         "entry_type":"恢复",
         "explanation":"15秒内，精力回复速度 +10点\/秒",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"7035200",
+        "entry_name":"连续防御成功时，能硬化自身",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7035300",
+        "entry_name":"使出致命一击时，能形成催眠烟雾",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7035400",
-        "entry_name":"通过肢体动作“盘腿坐”，能累积发狂量表",
-        "entry_type":"行动",
+        "entry_name":"【魔的黑夜/魔的暗夜】通过肢体动作“盘腿坐”，能累积发狂量表",
+        "entry_type":"专属遗物",
         "explanation":"每2秒 +10点发狂值。 触发发狂异常时，扣除[最大生命值 × 10% + 100]点血量，固定扣除30点专注值，造成2.4秒发狂硬直",
-        "superposability":"可叠加"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7035500",
-        "entry_name":"引发异常状态发狂后，能持续恢复专注值",
-        "entry_type":"恢复",
+        "entry_name":"【魔的黑夜/魔的暗夜】引发异常状态发狂后，能持续恢复专注值",
+        "entry_type":"专属遗物",
         "explanation":"引发发狂异常后，25秒内，每0.5秒回复1点专注值",
         "superposability":"可叠加"
     },
     {
+        "entry_id":"7035600",
+        "entry_name":"急速冲刺期间落地时，能造成地面裂开",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7035700",
-        "entry_name":"切换武器时，能附加随机的属性攻击力",
-        "entry_type":"攻击力",
+        "entry_name":"【王的黑夜】切换武器时，能附加随机的属性攻击力",
+        "entry_type":"专属遗物",
         "explanation":"10秒内，增加随机属性的攻击力 +20",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7035800",
-        "entry_name":"附加属性攻击力时，能提升属性攻击力",
-        "entry_type":"攻击力",
-        "explanation":"魔力\/火\/雷\/圣属性伤害 +10%（本词条不能加成魔法\/祷告）",
+        "entry_name":"【猎人的暗夜/王的黑夜/金色露珠】附加属性攻击力时，能提升属性攻击力",
+        "entry_type":"专属遗物",
+        "explanation":"魔力/火/雷/圣属性伤害 +10%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7035900",
-        "entry_name":"切换武器时，能提升物理攻击力",
-        "entry_type":"攻击力",
+        "entry_name":"【王的黑夜】切换武器时，能提升物理攻击力",
+        "entry_type":"专属遗物",
         "explanation":"10秒内，物理攻击力 +10%",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7036000",
+        "entry_name":"【智的暗夜/老旧怀表】连续攻击时，恢复专注值",
+        "entry_type":"专属遗物",
+        "explanation":"固定回复最大专注值的5%，内置4秒冷却",
+        "superposability":"可叠加"
     },
     {
         "entry_id":"7036100",
@@ -771,10 +1073,16 @@
     },
     {
         "entry_id":"7040201",
-        "entry_name":"强化致命一击+１ (爵的黑夜)",
-        "entry_type":"攻击力",
-        "explanation":"致命一击造成的伤害 +20%",
-        "superposability":"可叠加"
+        "entry_name":"【爵的黑夜/爵的暗夜】强化致命一击 +1",
+        "entry_type":"专属遗物",
+        "explanation":"致命一击造成的伤害+23%",
+        "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"7040290",
+        "entry_name":"强化致命一击 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7040300",
@@ -787,28 +1095,28 @@
         "entry_id":"7040400",
         "entry_name":"提升投掷小刀的攻击力",
         "entry_type":"攻击力",
-        "explanation":"投投掷小刀造成的伤害 +15%",
+        "explanation":"投掷小刀造成的伤害 +15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7040500",
         "entry_name":"提升使用辉石、重力石道具的攻击力",
         "entry_type":"攻击力",
-        "explanation":"投投掷石头造成的伤害 +15%",
+        "explanation":"投掷辉石、重力石造成的伤害 +15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7043000",
         "entry_name":"强化咆哮与吐息",
         "entry_type":"攻击力",
-        "explanation":"咆哮与吐息造成的伤害 +12%",
+        "explanation":"咆哮与吐息造成的伤害 +15%",
         "superposability":"可叠加"
     },
     {
         "entry_id":"7043100",
         "entry_name":"强化调香术",
         "entry_type":"攻击力",
-        "explanation":"调香术造成的伤害 +12%",
+        "explanation":"调香术造成的伤害 +15%",
         "superposability":"可叠加"
     },
     {
@@ -863,9 +1171,8 @@
     {
         "entry_id":"7043900",
         "entry_name":"强化黑夜的魔法",
-        "entry_type":"魔法/祷告",
-        "explanation":"黑夜的魔法造成的伤害 +12%",
-        "superposability":"可叠加"
+        "explanation":"未实装?",
+        "tags": ["未实装"]
     },
     {
         "entry_id":"7044000",
@@ -921,14 +1228,14 @@
         "entry_name":"不包含自己，提升周围我方人物的精力恢复速度",
         "entry_type":"队伍成员",
         "explanation":"周围友方人物但不包括自己，精力恢复速度+4点\/秒",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7050100",
         "entry_name":"道具效用能扩及我方人物",
         "entry_type":"队伍成员",
         "explanation":null,
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7060000",
@@ -940,7 +1247,7 @@
     {
         "entry_id":"7060100",
         "entry_name":"每次解开魔法师塔的机关，能提升专注值上限",
-        "entry_type":"能力",
+        "entry_type":"能力值",
         "explanation":"专注值上限每次 +18%，局内无限成长",
         "superposability":"不可叠加"
     },
@@ -1163,17 +1470,17 @@
     },
     {
         "entry_id":"7090000",
-        "entry_name":"提升打倒敌人时，绝招量表的累积量表",
+        "entry_name":"打倒敌人时，能累积绝招量表",
         "entry_type":"技艺/绝招",
         "explanation":"绝招量表 +5",
-        "superposability":"未知"
+        "superposability":"不同级别可叠加"
     },
     {
         "entry_id":"7090100",
         "entry_name":"打倒敌人时，除了自己恢复周围我方人物的血量",
         "entry_type":"队伍成员",
-        "explanation":"固定回复20点血量，有0.5秒内置冷却时间",
-        "superposability":"未知"
+        "explanation":"固定回复20点生命值，有0.5秒内置冷却时间",
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7090300",
@@ -1183,18 +1490,30 @@
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"7100000",
+        "entry_name":"对陷入中毒的敌人\n使出致命一击时，能给予大伤害",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7100100",
         "entry_name":"攻击命中时，能恢复精力",
         "entry_type":"恢复",
         "explanation":"攻击成功时，+2点精力值",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
     },
     {
         "entry_id":"7100110",
-        "entry_name":"攻击成功时，能恢复精力+１ (野兽的黑夜)",
-        "entry_type":"恢复",
+        "entry_name":"【野兽的黑夜/野兽的暗夜】攻击命中时，能恢复精力 +1",
+        "entry_type":"专属遗物",
         "explanation":"攻击成功时，+3点精力值",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"7100190",
+        "entry_name":"攻击命中时，能恢复精力 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7110000",
@@ -1207,28 +1526,34 @@
         "entry_id":"7120000",
         "entry_name":"出击时的武器，附加魔力属性攻击力",
         "entry_type":"出击时的武器（附加）",
-        "explanation":"根据武器类型降低物理攻击力30\/40\/50\/60，并增加魔力属性攻击力33\/44\/55\/66",
+        "explanation":"根据武器品质降低物理攻击力18/24/30/36，\n并增加魔力属性攻击力19.8/26.4/33/39.6",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7120100",
         "entry_name":"出击时的武器，附加火属性攻击力",
         "entry_type":"出击时的武器（附加）",
-        "explanation":"根据武器类型降低物理攻击力30\/40\/50\/60，并增加火属性攻击力33\/44\/55\/66",
+        "explanation":"根据武器品质降低物理攻击力18/24/30/36，\n并增加火属性攻击力19.8/26.4/33/39.6",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7120101",
+        "entry_name":"出击时的武器，附加火属性攻击力 +1",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7120200",
         "entry_name":"出击时的武器，附加雷属性攻击力",
         "entry_type":"出击时的武器（附加）",
-        "explanation":"根据武器类型降低物理攻击力30\/40\/50\/60，并增加雷属性攻击力33\/44\/55\/66",
+        "explanation":"根据武器品质降低物理攻击力18/24/30/36，\n并增加雷属性攻击力19.8/26.4/33/39.6",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7120300",
         "entry_name":"出击时的武器，附加圣属性攻击力",
         "entry_type":"出击时的武器（附加）",
-        "explanation":"根据武器类型降低物理攻击力30\/40\/50\/60，并增加圣属性攻击力33\/44\/55\/66",
+        "explanation":"根据武器品质降低物理攻击力18/24/30/36，\n并增加圣属性攻击力19.8/26.4/33/39.6",
         "superposability":"不可叠加"
     },
     {
@@ -1251,6 +1576,12 @@
         "entry_type":"出击时的武器（附加）",
         "explanation":"∘ 附带25点基础出血值，武器造成的伤害 -15%\n∘ 出血：扣除敌人[最大生命值 × 12.5% + 100]点血量",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7120700",
+        "entry_name":"出击时的武器，附加异常状态猩红腐败",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7120900",
@@ -1536,8 +1867,20 @@
         "entry_id":"7160000",
         "entry_name":"突刺反击成功时，能恢复血量",
         "entry_type":"恢复",
-        "explanation":"触发突刺反击时，回复人物最大生命值 × 2.5% (突刺反击本身的物理伤害增益为10%)",
-        "superposability":"不可叠加"
+        "explanation":"触发突刺反击时，回复人物最大生命值的 2.5%",
+        "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"7200000",
+        "entry_name":"头部射击时，能恢复血量",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7200100",
+        "entry_name":"头部射击时，能提升让敌人失去平衡的能力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7220000",
@@ -1555,8 +1898,8 @@
     },
     {
         "entry_id":"7230001",
-        "entry_name":"在出击期间，大幅减少于商店购物时所需的卢恩",
-        "entry_type":"场地环境",
+        "entry_name":"【魔的黑夜】在出击期间，大幅减少于商店购物时所需的卢恩",
+        "entry_type":"专属遗物",
         "explanation":"物品出售价格-20%",
         "superposability":"不可叠加"
     },
@@ -1565,46 +1908,64 @@
         "entry_name":"受到损伤并被弹飞时，能提升强韧度与减伤率",
         "entry_type":"减伤率",
         "explanation":"玩家被击飞时，20秒内，受到的伤害 -20%，受到的韧性伤害 -20%",
-        "superposability":"未知"
+        "superposability":"不可叠加"
     },
     {
         "entry_id":"7260000",
         "entry_name":"对陷入中毒的敌人，能强化攻击",
         "entry_type":"行动",
         "explanation":"对中毒的敌人造成的伤害 +10%",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"7260200",
+        "entry_name":"对陷入催眠的敌人，能强化攻击",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7260300",
         "entry_name":"对陷入猩红腐败的敌人，能强化攻击",
         "entry_type":"行动",
         "explanation":"对猩红腐败的敌人造成的伤害 +10%",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
     },
     {
         "entry_id":"7260400",
         "entry_name":"对陷入冻伤的敌人，能强化攻击",
         "entry_type":"行动",
         "explanation":"对冻伤的敌人造成的伤害 +10%",
-        "superposability":"不可叠加"
+        "superposability":"不同级别可叠加"
+    },
+    {
+        "entry_id":"7260600",
+        "entry_name":"对陷入催眠的敌人，能通过攻击引发魔力爆炸",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7260700",
-        "entry_name":"周围人物陷入异常状态冻伤时，能隐藏自己的身影",
-        "entry_type":"行动",
+        "entry_name":"【雾霾的黑夜/雾霾的暗夜】周围人物陷入异常状态冻伤时，能隐藏自己的身影",
+        "entry_type":"专属遗物",
         "explanation":"隐身时间为5秒",
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"7260710",
+        "entry_name":"周围人物陷入中毒、腐败时，能提升攻击力",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7260800",
-        "entry_name":"周围人物陷入中毒、腐败时，能提升攻击力 (智的黑夜)",
-        "entry_type":"行动",
+        "entry_name":"【智的黑夜】周围人物陷入中毒、腐败时，能提升攻击力",
+        "entry_type":"专属遗物",
         "explanation":"20秒内，玩家造成的伤害 +12%",
         "superposability":"不可叠加"
     },
     {
         "entry_id":"7270100",
-        "entry_name":"【铁之眼】技艺的使用次数+１",
+        "entry_name":"【铁之眼】技艺的使用次数 +1",
         "entry_type":"仅限特定角色",
         "explanation":null,
         "superposability":"不可叠加"
@@ -1613,7 +1974,7 @@
         "entry_id":"7280000",
         "entry_name":"【铁之眼】延长弱点显露的时间",
         "entry_type":"仅限特定角色",
-        "explanation":"标记存在时间从17变为22秒",
+        "explanation":"标记存在时间从17.5变为22秒",
         "superposability":"不可叠加"
     },
     {
@@ -1624,11 +1985,23 @@
         "superposability":"不可叠加"
     },
     {
+        "entry_id":"7300000",
+        "entry_name":"【女爵】发动技艺时，能催眠敌人",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
         "entry_id":"7310000",
         "entry_name":"【无赖】延长绝招的有效时间",
         "entry_type":"仅限特定角色",
         "explanation":"墓碑存在时间从20秒变为30秒",
         "superposability":"不可叠加"
+    },
+    {
+        "entry_id":"7320000",
+        "entry_name":"【复仇者】提升能力的发动机率",
+        "explanation":"未实装?",
+        "tags":["未实装"]
     },
     {
         "entry_id":"7330000",
@@ -1745,9 +2118,8 @@
     {
         "entry_id":"7331600",
         "entry_name":"提升长矛的攻击力",
-        "entry_type":"攻击力",
         "explanation":"造成的伤害 +9%",
-        "superposability":"可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7331700",
@@ -1920,9 +2292,8 @@
     {
         "entry_id":"7341600",
         "entry_name":"以长矛攻击时，恢复血量",
-        "entry_type":"恢复",
         "explanation":"固定回复15点生命值",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7341700",
@@ -2095,9 +2466,8 @@
     {
         "entry_id":"7351600",
         "entry_name":"以长矛攻击时，恢复专注值",
-        "entry_type":"恢复",
         "explanation":"固定回复2点专注值",
-        "superposability":"不可叠加"
+        "tags":["未实装"]
     },
     {
         "entry_id":"7351700",
@@ -2386,6 +2756,13 @@
 		"explanation": "直接替换角色专属池",
 		"superposability": "不可叠加"
 	},
+    {
+        "entry_id":"7006200",
+        "entry_name":"【雾霾的暗夜】提升物理减伤率",
+        "entry_type":"专属遗物",
+        "explanation":"受到的物理属性伤害 -10%",
+        "superposability":"可叠加"
+    },
 	{
 		"entry_id": "7006400",
 		"entry_name": "【单眼镜的皮革袋】延长魔法、祷告的有效时间",
@@ -2446,21 +2823,21 @@
 		"entry_id": "7036800",
 		"entry_name": "【送葬者】发动绝招时，提升攻击力",
 		"entry_type": "仅限特定角色",
-		"explanation": "发动绝招时，造成的伤害+18%，持续40秒",
+		"explanation": "发动绝招时，造成的伤害 +18%，持续40秒",
 		"superposability": "不可叠加"
 	},
 	{
 		"entry_id": "7036900",
 		"entry_name": "【送葬者】连击的最后攻击命中时，提升攻击力",
 		"entry_type": "仅限特定角色",
-		"explanation": "最后攻击命中时，造成的伤害+16%，持续20秒",
+		"explanation": "最后攻击命中时，造成的伤害 +16%，持续20秒",
 		"superposability": "不可叠加"
 	},
 	{
 		"entry_id": "7037000",
 		"entry_name": "【送葬者】使用祷告将辅助效果附加在自己身上时，提升物理攻击力",
 		"entry_type": "仅限特定角色",
-		"explanation": "物理攻击力+19%，持续60秒",
+		"explanation": "物理攻击力 +19%，持续60秒",
 		"superposability": "不可叠加"
 	},
 	{
@@ -2474,7 +2851,7 @@
 		"entry_id": "7037600",
 		"entry_name": "【玻璃项链】连续攻击时，提升攻击力",
 		"entry_type": "专属遗物",
-		"explanation": "根据连续攻击累积值增加伤害\n ∘ 共有4个阶段 [5%\/6.5%\/9%\/15%]\n ∘ 持续时间 [1-3阶段1.5秒，4阶段0秒]\n ∘ 每个等级buff互相独立计算持续时间和增伤",
+		"explanation": "根据连续攻击累积值增加伤害\n ∘ 共有4个阶段 [5%/6.5%/9%/空置阶段]\n ∘ 持续时间 [1-3阶段1.5秒，4阶段0秒]\n ∘ 每个等级buff互相独立计算持续时间和增伤\n空置阶段不会额外增伤，仅用于到达阈增伤阈值之后减缓连击值继续累积",
 		"superposability": "不可叠加"
 	},
 	{
@@ -2488,7 +2865,7 @@
 		"entry_id": "7037800",
 		"entry_name": "【安定的遗志】减伤率降低时，偶尔会让敌人攻击失效",
 		"entry_type": "专属遗物",
-		"explanation": "∘ 当玩家减伤率降低时，有20%概率让敌人攻击失效\n∘ 该效果会随任意减伤率降低buff一同出现和消失\n∘ 攻击失效时，玩家会受到1点伤害，会累积异常条，但不会硬直",
+		"explanation": "∘ 当玩家减伤率降低时，有 20%概率让敌人攻击失效\n∘ 该效果会随任意减伤率降低buff一同出现和消失\n∘ 攻击失效时，玩家会受到1点伤害，会累积异常条，但不会硬直",
 		"superposability": "不可叠加"
 	},
 	{
@@ -2533,6 +2910,18 @@
 		"explanation": "仅隐士有效",
 		"superposability": "不可叠加"
 	},
+    {
+        "entry_id":"7361500",
+        "entry_name":"出击时，武器魔法改为“辉石冰块”",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7361800",
+        "entry_name":"出击时，武器魔法改为“重力球”",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
 	{
 		"entry_id": "7362100",
 		"entry_name": "出击时，武器魔法改为“责罚荆棘”",
@@ -2540,6 +2929,18 @@
 		"explanation": "仅隐士有效",
 		"superposability": "不可叠加"
 	},
+    {
+        "entry_id":"7370000",
+        "entry_name":"出击时，武器祷告改为“恩惠赐福”",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
+    {
+        "entry_id":"7370200",
+        "entry_name":"出击时，武器祷告改为“熔炉百相之角”",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
 	{
 		"entry_id": "7370300",
 		"entry_name": "出击时，武器祷告改为“黄金之怒”",
@@ -2557,9 +2958,8 @@
 	{
 		"entry_id": "7370500",
 		"entry_name": "出击时，武器祷告改为“雷击”",
-		"entry_type": "出击时的武器（祷告）",
 		"explanation": "仅复仇者有效",
-		"superposability": "不可叠加"
+        "tags":["未实装"]
 	},
 	{
 		"entry_id": "7370600",
@@ -2568,6 +2968,12 @@
 		"explanation": "仅复仇者有效",
 		"superposability": "不可叠加"
 	},
+    {
+        "entry_id":"7370800",
+        "entry_name":"出击时，武器祷告改为“黑焰”",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
 	{
 		"entry_id": "7370900",
 		"entry_name": "出击时，武器祷告改为“兽爪”",
@@ -2575,6 +2981,12 @@
 		"explanation": "仅复仇者有效",
 		"superposability": "不可叠加"
 	},
+    {
+        "entry_id":"7371200",
+        "entry_name":"出击时，武器祷告改为“蝇群”",
+        "explanation":"未实装?",
+        "tags":["未实装"]
+    },
 	{
 		"entry_id": "7371500",
 		"entry_name": "出击时，武器祷告改为“龙焰”",

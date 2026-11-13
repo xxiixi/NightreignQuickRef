@@ -9,13 +9,13 @@
         "entry_id":"310100",
         "entry_name":"提升专注值上限",
         "explanation":"专注值上限+12%",
-        "talisman":"绿琥珀链坠"
+        "talisman":"蓝琥珀链坠"
     },
     {
         "entry_id":"310200",
         "entry_name":"提升精力上限",
         "explanation":"精力值上限+12%",
-        "talisman":"蓝琥珀链坠"
+        "talisman":"绿琥珀链坠"
     },
     {
         "entry_id":"310400",
@@ -117,7 +117,7 @@
         "entry_id":"312300",
         "entry_name":"提升战技攻击力",
         "explanation":"战技造成的伤害+15%",
-        "talisman":"亚历山大的碎片"
+        "talisman":"战士壶碎片"
     },
     {
         "entry_id":"312500",

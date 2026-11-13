@@ -46,7 +46,7 @@ interface TransformedWeaponCharacter {
   [characterName: string]: string | number;
 }
 
-const characterNames = ['追踪者', '守护者', '铁之眼', '女爵', '无赖', '复仇者', '隐士', '执行者'];
+const characterNames = ['追踪者', '守护者', '铁之眼', '女爵', '无赖', '复仇者', '隐士', '执行者', '学者', '送葬者'];
 
 const transformData = (rawData: WeaponCharacter[]) => {
   const weapons = rawData[0];

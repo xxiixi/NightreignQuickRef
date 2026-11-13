@@ -31,7 +31,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 252,
-    "location": "要塞、监牢"
+    "location": "要塞、监牢、矿洞"
   },
   {
     "name": "葛瑞克骑士",
@@ -65,7 +65,7 @@
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": "免疫",
-    "location": "要塞、教堂"
+    "location": "要塞、大教堂"
   },
   {
     "name": "大神谕使者",
@@ -82,7 +82,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 112,
-    "location": "教堂"
+    "location": "大教堂"
   },
   {
     "name": "火焰修士",
@@ -99,7 +99,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "教堂、火山口"
+    "location": "大教堂、火山口"
   },
   {
     "name": "灵庙骑士",
@@ -116,7 +116,7 @@
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": "免疫",
-    "location": "教堂、隐城"
+    "location": "大教堂、隐城"
   },
   {
     "name": "大白金之子",
@@ -150,7 +150,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 112,
-    "location": "遗迹"
+    "location": "遗迹、湖沼、大空洞遗迹"
   },
   {
     "name": "堕落调香师",
@@ -235,7 +235,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "遗迹"
+    "location": "遗迹、湖沼、大空洞遗迹"
   },
   {
     "name": "白金之子射手",
@@ -303,7 +303,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 542,
-    "location": "遗迹、野外蓝名、主城地下"
+    "location": "遗迹、野外蓝名、主城地下、大空洞大教堂"
   },
   {
     "name": "火焰战车",
@@ -388,7 +388,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 154,
-    "location": "营地、监牢、主城"
+    "location": "营地、主城、大空洞主城"
   },
   {
     "name": "失乡骑士（龙飨）",
@@ -405,7 +405,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 154,
-    "location": "营地、监牢、主城"
+    "location": "监牢"
   },
   {
     "name": "老狮子",
@@ -422,7 +422,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "营地、野外蓝名、主城"
+    "location": "营地、野外蓝名、主城、大空洞遗迹"
   },
   {
     "name": "发狂南瓜头",
@@ -473,7 +473,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 112,
-    "location": "监牢"
+    "location": "监牢、锻造村"
   },
   {
     "name": "诺克斯战士",
@@ -507,7 +507,7 @@
     "poison": 112,
     "scarletRot": 112,
     "frost": 112,
-    "location": "监牢"
+    "location": "监牢、锻造村"
   },
   {
     "name": "混种（大）",
@@ -527,7 +527,7 @@
     "location": "监牢"
   },
   {
-    "name": "石肤古王",
+    "name": "石肤黑王/白王",
     "normal": 0.9,
     "strike": 0.9,
     "slash": 0.9,
@@ -558,7 +558,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "监牢"
+    "location": "监牢、大空洞主城"
   },
   {
     "name": "熔炉骑士",
@@ -575,7 +575,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 252,
-    "location": "监牢、主城、第二夜"
+    "location": "监牢、主城、第二夜、大空洞遗迹"
   },
   {
     "name": "龙人士兵",
@@ -609,7 +609,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "监牢、第二夜"
+    "location": "监牢、第二夜、大空洞主城"
   },
   {
     "name": "神皮贵族",
@@ -626,7 +626,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "监牢、第二夜"
+    "location": "监牢、第二夜、大空洞主城"
   },
   {
     "name": "古龙",
@@ -660,7 +660,7 @@
     "poison": "免疫",
     "scarletRot": 252,
     "frost": "免疫",
-    "location": "监牢、野外红名、主城楼顶、腐败森林、第二夜"
+    "location": "监牢、野外红名、主城楼顶、腐败森林、第二夜、神殿塔、大空洞异变"
   },
   {
     "name": "米兰达的花",
@@ -694,7 +694,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外蓝名、第一夜"
+    "location": "野外蓝名、第一夜、神殿塔"
   },
   {
     "name": "黑夜骑兵的马",
@@ -711,7 +711,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "野外蓝名、第一夜"
+    "location": "野外蓝名、第一夜、神殿塔"
   },
   {
     "name": "狮子混种",
@@ -745,7 +745,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外蓝名、主城地下、火山口"
+    "location": "野外蓝名、主城地下、火山口、大空洞遗迹"
   },
   {
     "name": "接肢贵族",
@@ -796,10 +796,10 @@
     "poison": 84,
     "scarletRot": 84,
     "frost": 112,
-    "location": "野外蓝名、火山口、第一夜"
+    "location": "野外蓝名、火山口、第一夜、神殿塔"
   },
   {
-    "name": "黄金河马",
+    "name": "黄金河马/大黄金河马",
     "normal": 1,
     "strike": 1,
     "slash": 1.1,
@@ -813,7 +813,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外蓝名、隐城、第二夜"
+    "location": "野外蓝名、隐城、第二夜、大空洞主城"
   },
   {
     "name": "王室幽魂",
@@ -830,7 +830,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "野外蓝名、主城地下、隐城、第一夜"
+    "location": "野外蓝名、主城地下、隐城、第一夜、神殿塔"
   },
   {
     "name": "铃珠猎人",
@@ -847,10 +847,10 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外红名、主城地下、主城楼顶、腐败森林、第一夜"
+    "location": "野外红名、主城地下、主城楼顶、腐败森林、第一夜、大空洞异变"
   },
   {
-    "name": "腐败树灵",
+    "name": "腐烂树灵",
     "normal": 1,
     "strike": 1,
     "slash": 1,
@@ -864,7 +864,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 112,
-    "location": "野外红名、主城楼顶、腐败森林、第一夜"
+    "location": "野外红名、主城楼顶、腐败森林、第一夜、神殿塔"
   },
   {
     "name": "祖灵",
@@ -881,7 +881,7 @@
     "poison": 542,
     "scarletRot": 542,
     "frost": 542,
-    "location": "野外红名、主城楼顶、腐败森林"
+    "location": "野外红名、主城楼顶、腐败森林、大空洞遗迹"
   },
   {
     "name": "大树守卫",
@@ -898,7 +898,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "野外红名、主城楼顶、第一夜"
+    "location": "野外红名、主城楼顶、第一夜、神殿塔"
   },
   {
     "name": "龙装大树守卫",
@@ -966,7 +966,7 @@
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": "免疫",
-    "location": "野外红名、主城楼顶、腐败森林"
+    "location": "野外红名、主城楼顶、腐败森林、大空洞异变"
   },
   {
     "name": "熔岩土龙",
@@ -1029,12 +1029,12 @@
     "fire": 0.6,
     "lightning": 0.6,
     "holy": 0.6,
-    "basePoise": 110,
+    "basePoise": 95,
     "bleed": "免疫",
     "poison": "免疫",
     "scarletRot": "免疫",
     "frost": "免疫",
-    "location": "火山口、第一夜"
+    "location": "火山口、第一夜、神殿塔"
   },
   {
     "name": "飞龙",
@@ -1064,7 +1064,7 @@
     "lightning": 0.8,
     "holy": 0.8,
     "basePoise": 100,
-    "bleed": "免疫",
+    "bleed": 252,
     "poison": 252,
     "scarletRot": 252,
     "frost": "免疫",
@@ -1119,7 +1119,7 @@
     "poison": 84,
     "scarletRot": 84,
     "frost": 112,
-    "location": "山顶、第一夜"
+    "location": "山顶、第一夜、神殿塔"
   },
   {
     "name": "山顶冰龙",
@@ -1141,11 +1141,11 @@
   {
     "name": "无头山妖",
     "normal": 1,
-    "strike": 0.9,
+    "strike": 1,
     "slash": 1.1,
     "pierce": 1,
     "magic": 1,
-    "fire": 1.2,
+    "fire": 1,
     "lightning": 1,
     "holy": 1,
     "basePoise": 65,
@@ -1204,7 +1204,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "第一夜"
+    "location": "第一夜、大空洞异变"
   },
   {
     "name": "贪食魔龙",
@@ -1255,7 +1255,7 @@
     "poison": "免疫",
     "scarletRot": 252,
     "frost": 252,
-    "location": "第一夜"
+    "location": "第一夜、神殿塔"
   },
   {
     "name": "镕铁恶魔",
@@ -1272,10 +1272,10 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 252,
-    "location": "第一夜"
+    "location": "第一夜、神殿塔"
   },
   {
-    "name": "偏地老将",
+    "name": "战场老将/偏地老将",
     "normal": 0.9,
     "strike": 0.9,
     "slash": 0.65,
@@ -1289,7 +1289,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "第一夜、第二夜"
+    "location": "第一夜、第二夜、神殿塔"
   },
   {
     "name": "恶兆妖鬼",
@@ -1306,7 +1306,7 @@
     "poison": 154,
     "scarletRot": 154,
     "frost": 154,
-    "location": "第二夜、突发事件"
+    "location": "第二夜、突发事件、神殿塔"
   },
   {
     "name": "大土龙",
@@ -1323,7 +1323,7 @@
     "poison": 252,
     "scarletRot": 252,
     "frost": 542,
-    "location": "第二夜"
+    "location": "第二夜、神殿塔"
   },
   {
     "name": "风暴之王(无名的龙)",
@@ -1374,6 +1374,567 @@
     "poison": "免疫",
     "scarletRot": 252,
     "frost": "免疫",
+    "location": "第二夜、神殿塔"
+  },
+  {
+    "name": "凯丹佣兵",
+    "normal": 1,
+    "strike": 1,
+    "slash": 1,
+    "pierce": 1,
+    "magic": 1,
+    "fire": 1,
+    "lightning": 1.2,
+    "holy": 1,
+    "basePoise": 65,
+    "bleed": 112,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 154,
+    "location": ""
+  },
+  {
+    "name": "挖石山妖",
+    "normal": 0.2,
+    "strike": 0.65,
+    "slash": 0.2,
+    "pierce": 0.2,
+    "magic": 0.8,
+    "fire": 0.6,
+    "lightning": 0.6,
+    "holy": 0.8,
+    "basePoise": 65,
+    "bleed": 154,
+    "poison": 252,
+    "scarletRot": 154,
+    "frost": 154,
+    "location": "矿洞"
+  },
+  {
+    "name": "腐败树灵",
+    "normal": 1,
+    "strike": 1,
+    "slash": 1,
+    "pierce": 1,
+    "magic": 0.8,
+    "fire": 1.2,
+    "lightning": 0.8,
+    "holy": 0.6,
+    "basePoise": 120,
+    "bleed": 252,
+    "poison": 542,
+    "scarletRot": 542,
+    "frost": 112,
+    "location": "大空洞异变"
+  },
+  {
+    "name": "癫火花",
+    "normal": 1,
+    "strike": 0.65,
+    "slash": 1.4,
+    "pierce": 1,
+    "magic": 1,
+    "fire": 0.6,
+    "lightning": 0.6,
+    "holy": 0.6,
+    "basePoise": 100,
+    "bleed": 252,
+    "poison": 542,
+    "scarletRot": 252,
+    "frost": 63,
+    "location": "湖沼"
+  },
+  {
+    "name": "蜘蛛蝎",
+    "normal": 0.75,
+    "strike": 1,
+    "slash": 0.55,
+    "pierce": 0.75,
+    "magic": 0.8,
+    "fire": 1.2,
+    "lightning": 0.8,
+    "holy": 0.8,
+    "basePoise": 65,
+    "bleed": 154,
+    "poison": "免疫",
+    "scarletRot": 252,
+    "frost": 84,
+    "location": "湖沼、大空洞遗迹"
+  },
+  {
+    "name": "杜鹃骑士",
+    "normal": 0.9,
+    "strike": 0.9,
+    "slash": 0.65,
+    "pierce": 1,
+    "magic": 0.6,
+    "fire": 0.8,
+    "lightning": 1,
+    "holy": 0.8,
+    "basePoise": 65,
+    "bleed": 154,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 154,
+    "location": "湖沼"
+  },
+  {
+    "name": "腐败眷属",
+    "normal": 1,
+    "strike": 1,
+    "slash": 0.9,
+    "pierce": 1,
+    "magic": 1,
+    "fire": 1.2,
+    "lightning": 1,
+    "holy": 1,
+    "basePoise": 30,
+    "bleed": 84,
+    "poison": "免疫",
+    "scarletRot": 252,
+    "frost": 84,
+    "location": "湖沼"
+  },
+  {
+    "name": "癫火游牧民",
+    "normal": 1.1,
+    "strike": 1,
+    "slash": 1.1,
+    "pierce": 1.1,
+    "magic": 1,
+    "fire": 1,
+    "lightning": 1,
+    "holy": 1,
+    "basePoise": 30,
+    "bleed": 84,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 84,
+    "location": "湖沼"
+  },
+  {
+    "name": "尊腐骑士",
+    "normal": 0.9,
+    "strike": 0.9,
+    "slash": 0.65,
+    "pierce": 1,
+    "magic": 0.8,
+    "fire": 1.2,
+    "lightning": 1,
+    "holy": 0.6,
+    "basePoise": 65,
+    "bleed": 154,
+    "poison": 252,
+    "scarletRot": "免疫",
+    "frost": 154,
+    "location": "湖沼、大空洞主城"
+  },
+  {
+    "name": "霜冻龙虾",
+    "normal": 0.9,
+    "strike": 1,
+    "slash": 0.65,
+    "pierce": 0.65,
+    "magic": 0.8,
+    "fire": 1.2,
+    "lightning": 1,
+    "holy": 0.8,
+    "basePoise": 80,
+    "bleed": 154,
+    "poison": 154,
+    "scarletRot": 154,
+    "frost": "免疫",
+    "location": "湖沼、大空洞大教堂"
+  },
+  {
+    "name": "死骑士",
+    "normal": 0.6,
+    "strike": 0.6,
+    "slash": 0.6,
+    "pierce": 0.8,
+    "magic": 0.6,
+    "fire": 0.8,
+    "lightning": 0.6,
+    "holy": 1,
+    "basePoise": 80,
+    "bleed": "免疫",
+    "poison": 252,
+    "scarletRot": 252,
+    "frost": 252,
+    "location": "锻造村、第一夜"
+  },
+  {
+    "name": "噩兆猎人",
+    "normal": 1,
+    "strike": 1,
+    "slash": 1,
+    "pierce": 1,
+    "magic": 0.8,
+    "fire": 0.6,
+    "lightning": 0.8,
+    "holy": 0.8,
+    "basePoise": 75,
+    "bleed": 112,
+    "poison": 252,
+    "scarletRot": 252,
+    "frost": 112,
+    "location": "锻造村、大空洞主城"
+  },
+  {
+    "name": "祖灵之民",
+    "normal": 1.1,
+    "strike": 1,
+    "slash": 1.1,
+    "pierce": 1.1,
+    "magic": 1,
+    "fire": 1,
+    "lightning": 1,
+    "holy": 1,
+    "basePoise": 40,
+    "bleed": 252,
+    "poison": 252,
+    "scarletRot": 252,
+    "frost": 542,
+    "location": "锻造村"
+  },
+  {
+    "name": "祖灵之民萨满",
+    "normal": 1.1,
+    "strike": 1,
+    "slash": 1.1,
+    "pierce": 1.1,
+    "magic": 0.8,
+    "fire": 1,
+    "lightning": 1,
+    "holy": 1,
+    "basePoise": 50,
+    "bleed": 252,
+    "poison": 252,
+    "scarletRot": 252,
+    "frost": 542,
+    "location": "锻造村"
+  },
+  {
+    "name": "黑焰习武修士",
+    "normal": 1,
+    "strike": 1,
+    "slash": 0.9,
+    "pierce": 1,
+    "magic": 1,
+    "fire": 0.6,
+    "lightning": 0.8,
+    "holy": 0.8,
+    "basePoise": 65,
+    "bleed": 112,
+    "poison": 154,
+    "scarletRot": 154,
+    "frost": 154,
+    "location": "锻造村"
+  },
+  {
+    "name": "血怪之首",
+    "normal": 1,
+    "strike": 1,
+    "slash": 1.2,
+    "pierce": 1,
+    "magic": 0.8,
+    "fire": 0.6,
+    "lightning": 0.8,
+    "holy": 0.8,
+    "basePoise": 80,
+    "bleed": 252,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "锻造村、大空洞遗迹"
+  },
+  {
+    "name": "唤灵蜗牛",
+    "normal": 1.1,
+    "strike": 1.1,
+    "slash": 1.4,
+    "pierce": 1.1,
+    "magic": 0.6,
+    "fire": 1,
+    "lightning": 1.2,
+    "holy": 1,
+    "basePoise": 30,
+    "bleed": 84,
+    "poison": 84,
+    "scarletRot": 84,
+    "frost": 63,
+    "location": "大空洞大教堂"
+  },
+  {
+    "name": "拷问老者",
+    "normal": 0.9,
+    "strike": 0.9,
+    "slash": 1.2,
+    "pierce": 1,
+    "magic": 0.9,
+    "fire": 1.2,
+    "lightning": 0.9,
+    "holy": 0.9,
+    "basePoise": 80,
+    "bleed": 112,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "大空洞大教堂"
+  },
+  {
+    "name": "拷问官",
+    "normal": 0.9,
+    "strike": 0.75,
+    "slash": 1.2,
+    "pierce": 1,
+    "magic": 0.9,
+    "fire": 1.2,
+    "lightning": 0.9,
+    "holy": 0.9,
+    "basePoise": 80,
+    "bleed": 112,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "大空洞大教堂"
+  },
+  {
+    "name": "灵火龙",
+    "normal": 0.65,
+    "strike": 0.9,
+    "slash": 0.55,
+    "pierce": 0.6,
+    "magic": 0.4,
+    "fire": 0.6,
+    "lightning": 0.6,
+    "holy": 1.1,
+    "basePoise": 120,
+    "bleed": "免疫",
+    "poison": "免疫",
+    "scarletRot": 252,
+    "frost": "免疫",
+    "location": "大空洞大教堂"
+  },
+  {
+    "name": "大螃蟹",
+    "normal": 0.65,
+    "strike": 1,
+    "slash": 0.65,
+    "pierce": 0.65,
+    "magic": 0.8,
+    "fire": 0.8,
+    "lightning": 0.8,
+    "holy": 0.8,
+    "basePoise": 80,
+    "bleed": 154,
+    "poison": 154,
+    "scarletRot": 154,
+    "frost": 84,
+    "location": "大空洞大教堂"
+  },
+  {
+    "name": "巨型螯虾",
+    "normal": 0.9,
+    "strike": 1,
+    "slash": 0.65,
+    "pierce": 0.9,
+    "magic": 0.8,
+    "fire": 0.8,
+    "lightning": 0.8,
+    "holy": 0.8,
+    "basePoise": 80,
+    "bleed": 154,
+    "poison": 154,
+    "scarletRot": 154,
+    "frost": 84,
+    "location": "大空洞大教堂"
+  },
+  {
+    "name": "紫怪之首",
+    "normal": 1,
+    "strike": 1,
+    "slash": 1.2,
+    "pierce": 1,
+    "magic": 0.8,
+    "fire": 0.6,
+    "lightning": 0.8,
+    "holy": 0.8,
+    "basePoise": 80,
+    "bleed": 252,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "大空洞遗迹"
+  },
+  {
+    "name": "血病巨鸦",
+    "normal": 1.1,
+    "strike": 1.1,
+    "slash": 1.4,
+    "pierce": 1.1,
+    "magic": 1.2,
+    "fire": 1,
+    "lightning": 1.2,
+    "holy": 1.2,
+    "basePoise": 65,
+    "bleed": 84,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "大空洞遗迹"
+  },
+  {
+    "name": "咒剑士",
+    "normal": 1,
+    "strike": 1,
+    "slash": 1.2,
+    "pierce": 1,
+    "magic": 1,
+    "fire": 1,
+    "lightning": 1,
+    "holy": 1,
+    "basePoise": 85,
+    "bleed": 112,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "大空洞主城、第一夜、大空洞遗迹"
+  },
+  {
+    "name": "神兽战士（电/冰）",
+    "normal": 0.6,
+    "strike": 0.6,
+    "slash": 0.6,
+    "pierce": 1,
+    "magic": 0.8,
+    "fire": 0.8,
+    "lightning": 0.8,
+    "holy": 1,
+    "basePoise": 80,
+    "bleed": 112,
+    "poison": 112,
+    "scarletRot": 112,
+    "frost": 112,
+    "location": "大空洞主城、第一夜"
+  },
+  {
+    "name": "腐败化身",
+    "normal": 0.9,
+    "strike": 1,
+    "slash": 0.9,
+    "pierce": 0.9,
+    "magic": 0.8,
+    "fire": 2,
+    "lightning": 0.8,
+    "holy": 0.6,
+    "basePoise": 120,
+    "bleed": "免疫",
+    "poison": "免疫",
+    "scarletRot": "免疫",
+    "frost": 154,
+    "location": "大空洞主城"
+  },
+  {
+    "name": "大红熊",
+    "normal": 1,
+    "strike": 1,
+    "slash": 1.1,
+    "pierce": 1,
+    "magic": 1,
+    "fire": 1.2,
+    "lightning": 1,
+    "holy": 1,
+    "basePoise": 120,
+    "bleed": 252,
+    "poison": 154,
+    "scarletRot": 154,
+    "frost": 252,
+    "location": "第一夜"
+  },
+  {
+    "name": "负伤恶魔/洞底恶魔",
+    "normal": 1,
+    "strike": 0.99,
+    "slash": 1.18,
+    "pierce": 1.02,
+    "magic": 0.8,
+    "fire": 0.22,
+    "lightning": 0.78,
+    "holy": 0.83,
+    "basePoise": 120,
+    "bleed": 252,
+    "poison": "免疫",
+    "scarletRot": 542,
+    "frost": "免疫",
+    "location": "第一夜"
+  },
+  {
+    "name": "骑士亚尔特留斯",
+    "normal": 1,
+    "strike": 1.1,
+    "slash": 0.9,
+    "pierce": 1,
+    "magic": 0.85,
+    "fire": 0.9,
+    "lightning": 1.1,
+    "holy": 1.1,
+    "basePoise": 150,
+    "bleed": 542,
+    "poison": 542,
+    "scarletRot": 542,
+    "frost": 542,
+    "location": "第二夜"
+  },
+  {
+    "name": "恶魔王子",
+    "normal": 1,
+    "strike": 0.99,
+    "slash": 1.18,
+    "pierce": 1.02,
+    "magic": 0.8,
+    "fire": 0.22,
+    "lightning": 0.78,
+    "holy": 0.83,
+    "basePoise": 120,
+    "bleed": 252,
+    "poison": "免疫",
+    "scarletRot": 542,
+    "frost": "免疫",
+    "location": "第二夜"
+  },
+  {
+    "name": "神兽舞狮",
+    "normal": 0.7,
+    "strike": 0.7,
+    "slash": 0.8,
+    "pierce": 1,
+    "magic": 0.6,
+    "fire": 1,
+    "lightning": 0.6,
+    "holy": 0.6,
+    "basePoise": 120,
+    "bleed": 112,
+    "poison": 154,
+    "scarletRot": 112,
+    "frost": 252,
+    "location": "第二夜"
+  },
+  {
+    "name": "鲜血君王 蒙格",
+    "normal": 0.9,
+    "strike": 0.9,
+    "slash": 0.9,
+    "pierce": 0.9,
+    "magic": 0.6,
+    "fire": 0.2,
+    "lightning": 0.6,
+    "holy": 0.6,
+    "basePoise": 110,
+    "bleed": 112,
+    "poison": 252,
+    "scarletRot": 252,
+    "frost": 252,
     "location": "第二夜"
   }
 ]

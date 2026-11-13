@@ -159,10 +159,11 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             ✅ 最新更新
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 添加了DLC新夜王数据；<br />
-                            • 添加了DLC新词条数据；<br />
-                            • 添加了{getVersionNumber()}版本更新后的新词条数据；<br />
-                            • 添加了DLC角色雷达图数据；
+                            • 修正了部分词条与夜王数据，同步{getVersionNumber()}版本；<br />
+                            • 添加了DLC角色详细数据；<br />
+                            • 添加了武器战技与魔法祷告数据（数据来源 by: 虚空蛋黄酱）；<br />
+                            • 添加了大空洞野生Boss与特殊事件效果；<br />
+                            • 添加了夜王深夜模式的倍率；
                           </div>
                         </div>
 
@@ -171,9 +172,7 @@ const Header: React.FC<HeaderProps> = React.memo(({
                             🔧 TODO
                           </div>
                           <div style={{ marginLeft: '12px', marginBottom: '2px' }}>
-                            • 添加DLC新敌人数据<br />
-                            • 更新新角色等级、闪避面板<br />
-                            • 夜雨伤害数据待更新(无数据来源)
+                            • 暂无<br />
                           </div>
                         </div>
                       </div>
