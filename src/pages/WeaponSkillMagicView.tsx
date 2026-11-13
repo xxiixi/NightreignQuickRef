@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, Checkbox, Input, Select, Table, Tabs, Tag, Tooltip } from 'antd';
+import { Button, Input, Select, Table, Tabs, Tag, Tooltip } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { SearchOutlined } from '@ant-design/icons';
 import CustomPagination from '../components/CustomPagination';
@@ -57,8 +57,6 @@ const supportNotes = [
   '黑夜君临 v1.01 辅助类法术   by: 虚空蛋黄酱',
   '本作治疗量或附魔攻击力=基础值*(1+智力或信仰*1.5/99），与触媒完全无关。',
 ];
-
-const NOT_IMPLEMENTED = '未实装';
 
 const DAMAGE_TYPE_ALIASES: Record<string, string> = {
   普通: '普通',
@@ -129,26 +127,21 @@ const damageTypesOf = (row: Row): string[] => {
   return [...result];
 };
 
-// 取行上的分类标签；战技/专用战技的 DLC 行都带「未实装」
+// DLC 行在页面上视为未实装，表格和筛选项都不展示，数据文件保留
+const isUnimplementedSkillRow = (row: Row, kind: 'weaponArt' | 'unique') => {
+  if (kind === 'weaponArt') {
+    return row['版本'] === 'DLC' || row['分类'] === 'DLC新增';
+  }
+  return row['版本'] === 'DLC';
+};
+
 const categoryTagsOf = (row: Row, kind?: 'weaponArt' | 'unique'): string[] => {
   const raw = row['分类'] || '';
-  if (kind === 'weaponArt') {
-    if (row['版本'] === 'DLC' || raw === 'DLC新增') {
-      return [NOT_IMPLEMENTED];
-    }
-    return raw
-      .split(/[、,，/]/)
-      .map(item => item.replace(/战灰$/, '').trim())
-      .filter(Boolean);
-  }
-  const tags = raw
+  const suffix = kind === 'weaponArt' ? /战灰$/ : /类$/;
+  return raw
     .split(/[、,，/]/)
-    .map(item => item.replace(/类$/, '').trim())
+    .map(item => item.replace(suffix, '').trim())
     .filter(Boolean);
-  if (row['版本'] === 'DLC') {
-    tags.push(NOT_IMPLEMENTED);
-  }
-  return tags;
 };
 
 interface MergeRule {
@@ -207,33 +200,29 @@ const DataTable: React.FC<DataTableProps> = ({
   const [pageSize, setPageSize] = useState(20);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedDamageTypes, setSelectedDamageTypes] = useState<string[]>([]);
-  const [showNotImplemented, setShowNotImplemented] = useState(false);
   const [expandedRowKeys, setExpandedRowKeys] = useState<string[]>([]);
+
+  const sourceData = useMemo(
+    () => (skillFilterKind ? data.filter(row => !isUnimplementedSkillRow(row, skillFilterKind)) : data),
+    [data, skillFilterKind]
+  );
 
   const categoryOptions = useMemo(() => {
     if (!skillFilterKind) return [];
     const tags = new Set<string>();
-    data.forEach(row => {
+    sourceData.forEach(row => {
       categoryTagsOf(row, skillFilterKind).forEach(tag => tags.add(tag));
     });
-    return [...tags]
-      .filter(tag => tag !== NOT_IMPLEMENTED || showNotImplemented)
-      .map(tag => ({ value: tag, label: tag }));
-  }, [data, skillFilterKind, showNotImplemented]);
+    return [...tags].map(tag => ({ value: tag, label: tag }));
+  }, [skillFilterKind, sourceData]);
 
   const filteredData = useMemo(() => {
-    let rows = data;
+    let rows = sourceData;
 
-    if (skillFilterKind) {
+    if (skillFilterKind && selectedCategories.length > 0) {
       rows = rows.filter(row => {
         const tags = categoryTagsOf(row, skillFilterKind);
-        if (!showNotImplemented && tags.includes(NOT_IMPLEMENTED)) {
-          return false;
-        }
-        if (selectedCategories.length > 0 && !tags.some(tag => selectedCategories.includes(tag))) {
-          return false;
-        }
-        return true;
+        return tags.some(tag => selectedCategories.includes(tag));
       });
     }
 
@@ -250,11 +239,11 @@ const DataTable: React.FC<DataTableProps> = ({
       Object.values(row).some(value => String(value).toLowerCase().includes(k))
       || damageTypesOf(row).some(type => type.toLowerCase().includes(k))
     );
-  }, [data, damageFilter, keyword, selectedCategories, selectedDamageTypes, showNotImplemented, skillFilterKind]);
+  }, [damageFilter, keyword, selectedCategories, selectedDamageTypes, skillFilterKind, sourceData]);
 
   useEffect(() => {
     setPage(1);
-  }, [keyword, selectedCategories, selectedDamageTypes, showNotImplemented]);
+  }, [keyword, selectedCategories, selectedDamageTypes]);
 
   const totalPages = Math.max(1, Math.ceil(filteredData.length / pageSize));
 
@@ -416,31 +405,16 @@ const DataTable: React.FC<DataTableProps> = ({
           />
         )}
         {skillFilterKind && (
-          <>
-            <Checkbox
-              checked={showNotImplemented}
-              onChange={(e) => {
-                const checked = e.target.checked;
-                setShowNotImplemented(checked);
-                if (!checked) {
-                  setSelectedCategories(prev => prev.filter(tag => tag !== NOT_IMPLEMENTED));
-                }
-              }}
-            >
-              显示未实装
-            </Checkbox>
-            <Button
-              onClick={() => {
-                setKeyword('');
-                setSelectedCategories([]);
-                setSelectedDamageTypes([]);
-                setShowNotImplemented(false);
-                setPage(1);
-              }}
-            >
-              清除所有
-            </Button>
-          </>
+          <Button
+            onClick={() => {
+              setKeyword('');
+              setSelectedCategories([]);
+              setSelectedDamageTypes([]);
+              setPage(1);
+            }}
+          >
+            清除所有
+          </Button>
         )}
       </div>
       <Table<Row>
@@ -545,7 +519,7 @@ const renderCategoryTags = (tags: string[], hints?: Record<string, string>) => (
       const hint = hints?.[tag];
       const tagNode = (
         <Tag
-          color={tag === NOT_IMPLEMENTED ? 'orange' : (categoryColorMap[tag] || 'blue')}
+          color={categoryColorMap[tag] || 'blue'}
           style={hint ? { cursor: 'help' } : undefined}
         >
           {tag}
@@ -562,20 +536,11 @@ const renderCategoryTags = (tags: string[], hints?: Record<string, string>) => (
   </div>
 );
 
-const renderWeaponArtCategory = (_: string, record: Row) => {
-  if (record['版本'] === 'DLC' || record['分类'] === 'DLC新增') {
-    return renderCategoryTags([NOT_IMPLEMENTED]);
-  }
-  return renderCategoryTags(splitCategoryTags(record['分类'] || '', /战灰$/), categoryHints);
-};
+const renderWeaponArtCategory = (_: string, record: Row) =>
+  renderCategoryTags(splitCategoryTags(record['分类'] || '', /战灰$/), categoryHints);
 
-const renderUniqueCategory = (_: string, record: Row) => {
-  const tags = splitCategoryTags(record['分类'] || '', /类$/);
-  if (record['版本'] === 'DLC') {
-    return renderCategoryTags([NOT_IMPLEMENTED, ...tags]);
-  }
-  return renderCategoryTags(tags);
-};
+const renderUniqueCategory = (_: string, record: Row) =>
+  renderCategoryTags(splitCategoryTags(record['分类'] || '', /类$/));
 
 const weaponArtColumns: ColumnsType<Row> = [
   {
@@ -594,7 +559,6 @@ const weaponArtColumns: ColumnsType<Row> = [
   textColumn('削韧', '削韧', 170),
   textColumn('物理类型', '物理类型', 90),
   damageTypeColumn(100),
-  textColumn('特殊加成', '特殊加成', 100),
   textColumn('备注', '备注', 320),
 ];
 
@@ -614,7 +578,6 @@ const uniqueWeaponArtColumns: ColumnsType<Row> = [
   textColumn('霸体', '霸体', 70),
   textColumn('类型', '类型', 60),
   textColumn('攻击倍率/基础攻击力', '攻击倍率/基础攻击力', 220),
-  textColumn('特殊加成', '特殊加成', 100),
   textColumn('削韧', '削韧', 180),
   damageTypeColumn(110),
   textColumn('备注', '备注', 320),
