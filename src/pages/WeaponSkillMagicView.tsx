@@ -293,7 +293,7 @@ const DataTable: React.FC<DataTableProps> = ({
           return {
             ...previous,
             rowSpan: spansByColumn.get(columnKey)?.[rowIndex] ?? 1,
-            style: { ...previous.style, verticalAlign: 'top' },
+            style: { ...previous.style, verticalAlign: 'middle' },
           };
         },
       };
@@ -455,11 +455,20 @@ const DataTable: React.FC<DataTableProps> = ({
   );
 };
 
+// 数据里用 "/" 表示空值，展示时与词条页统一为 "-"
+const displayCellValue = (value: unknown): string => {
+  if (value == null) return '-';
+  const text = String(value);
+  if (!text.trim() || text.trim() === '/') return '-';
+  return text;
+};
+
 const textColumn = (title: string, key: string, width: number): ColumnsType<Row>[number] => ({
   title,
   dataIndex: key,
   key,
   width,
+  render: (value: unknown) => displayCellValue(value),
 });
 
 const damageTypeColumn = (width: number): ColumnsType<Row>[number] => ({
@@ -467,7 +476,10 @@ const damageTypeColumn = (width: number): ColumnsType<Row>[number] => ({
   dataIndex: '伤害类型',
   key: '伤害类型',
   width,
-  render: (value: string) => formatDamageType(value || ''),
+  render: (value: string) => {
+    const text = displayCellValue(value);
+    return text === '-' ? text : formatDamageType(text);
+  },
 });
 
 const spellDetailConfig: DetailConfig = {

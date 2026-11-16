@@ -1337,20 +1337,15 @@ body[tomato-theme="dark"] .custom-search-wrapper .ant-input {
   }
 }
 
-/* 武器战技与魔法祷告表格 */
+/* 武器战技与魔法祷告表格：与词条等 small bordered 表对齐，仅保留换行需求 */
 .weapon-skill-magic-table .ant-table-cell {
   white-space: pre-line;
-  vertical-align: top;
   word-break: break-word;
+  vertical-align: middle;
 }
 
 .weapon-skill-magic-table .ant-table-thead > tr > th {
   white-space: nowrap;
-  vertical-align: middle;
-}
-
-.weapon-skill-magic-table .ant-table-tbody > tr > td {
-  font-size: 12px;
 }
 
 /* 战技/专用战技分类标签缩小 */
