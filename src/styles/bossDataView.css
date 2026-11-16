@@ -334,3 +334,125 @@ body[tomato-theme="dark"] .ant-table-sticky-header .ant-table-thead > tr > th {
   background-color: var(--content-bg);
   border-bottom-color: var(--theme-border);
 }
+
+.night-king-controls {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+/* 人数按钮下移：数字越大越靠下 */
+.player-count-group {
+  margin-top: 10px;
+}
+
+/* 轨道整体下移：数字越大越靠下 */
+.depth-track {
+  margin-top: 8px;
+}
+
+.depth-track-rail {
+  position: relative;
+  width: 640px;
+  height: 48px;
+}
+
+.depth-track-line {
+  position: absolute;
+  left: 36px;
+  right: 36px;
+  top: 9px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #d6e4ff 0%, #adc6ff 20%, #85a5ff 40%, #597ef7 60%, #2f54eb 80%, #10239e 100%);
+  overflow: hidden;
+}
+
+.depth-track-stops {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.depth-track-stop {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 72px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.depth-track-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--content-bg, #fff);
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--stop-color) 75%, #fff);
+  transition: width 0.15s ease, height 0.15s ease, margin-top 0.15s ease, box-shadow 0.15s ease;
+}
+
+.depth-track-stop.is-selected .depth-track-dot {
+  background: var(--stop-color);
+  box-shadow: 0 0 0 2px var(--stop-color), 0 0 0 5px color-mix(in srgb, var(--stop-color) 32%, transparent);
+  width: 12px;
+  height: 12px;
+  margin-top: 6px;
+}
+
+.depth-track-stop:hover .depth-track-dot,
+.depth-track-stop:focus-visible .depth-track-dot {
+  box-shadow: 0 0 0 2px var(--stop-color), 0 0 0 5px color-mix(in srgb, var(--stop-color) 24%, transparent);
+}
+
+.depth-track-stop:focus-visible {
+  outline: none;
+}
+
+.depth-track-mark {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--color-text-2);
+}
+
+.depth-track-stop.is-selected .depth-track-mark {
+  color: color-mix(in srgb, var(--stop-color) 62%, #061178);
+  font-weight: 600;
+}
+
+body[tomato-theme="dark"] .depth-track-line {
+  background: linear-gradient(90deg, #d6e4ff 0%, #adc6ff 20%, #85a5ff 40%, #597ef7 60%, #3d6bf5 80%, #5b7cff 100%);
+}
+
+body[tomato-theme="dark"] .depth-track-stop:nth-child(5) {
+  --stop-color: #3d6bf5 !important;
+}
+
+body[tomato-theme="dark"] .depth-track-stop:nth-child(6) {
+  --stop-color: #5b7cff !important;
+}
+
+body[tomato-theme="dark"] .depth-track-stop.is-selected .depth-track-mark {
+  color: color-mix(in srgb, var(--stop-color) 78%, #fff);
+}
+
+body[tomato-theme="dark"] .depth-track-dot {
+  background: var(--content-bg, #1f1f1f);
+  box-shadow: 0 0 0 1.5px color-mix(in srgb, var(--stop-color) 55%, #d6e4ff);
+}
+
+body[tomato-theme="dark"] .depth-track-stop.is-selected .depth-track-dot {
+  background: var(--stop-color);
+  box-shadow: 0 0 0 2px var(--stop-color), 0 0 0 5px color-mix(in srgb, var(--stop-color) 32%, transparent);
+}

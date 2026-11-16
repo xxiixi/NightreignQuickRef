@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, Segmented, message, Spin } from 'antd';
+import { Table, Card, Image, Tabs, Select, Input, Button, Tag, Radio, message, Spin } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { BossData, WildBossData, CharacterData, EntryData } from '../types';
@@ -49,14 +49,84 @@ interface BossDataViewProps {
   activeSubTab?: string;
 }
 
+const DEPTH_STOPS = [
+  { value: 0, label: '普通模式', color: '#d6e4ff' },
+  { value: 1, label: '深度1', color: '#adc6ff' },
+  { value: 2, label: '深度2', color: '#85a5ff' },
+  { value: 3, label: '深度3', color: '#597ef7' },
+  { value: 4, label: '深度4', color: '#2f54eb' },
+  { value: 5, label: '深度5', color: '#10239e' },
+];
+
+const DepthTrack: React.FC<{ value: number; onChange: (value: number) => void }> = ({ value, onChange }) => (
+  <div
+    className="depth-track"
+    role="radiogroup"
+    aria-label="深夜深度"
+    onKeyDown={(event) => {
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+      event.preventDefault();
+      const next = event.key === 'ArrowRight' ? Math.min(5, value + 1) : Math.max(0, value - 1);
+      onChange(next);
+    }}
+  >
+    <div className="depth-track-rail">
+      <div className="depth-track-line" aria-hidden="true" />
+      <div className="depth-track-stops">
+        {DEPTH_STOPS.map(stop => {
+          const selected = stop.value === value;
+          return (
+            <button
+              key={stop.value}
+              type="button"
+              role="radio"
+              aria-checked={selected}
+              aria-label={stop.label}
+              className={`depth-track-stop${selected ? ' is-selected' : ''}`}
+              style={{ '--stop-color': stop.color } as React.CSSProperties}
+              onClick={() => onChange(stop.value)}
+            >
+              <span className="depth-track-dot" />
+              <span className="depth-track-mark">{stop.label}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+);
+
+const NightKingControls: React.FC<{
+  playerCount: number;
+  onPlayerCountChange: (value: number) => void;
+  depth: number;
+  onDepthChange: (value: number) => void;
+}> = ({ playerCount, onPlayerCountChange, depth, onDepthChange }) => (
+  <div className="night-king-controls">
+    <Radio.Group
+      className="player-count-group"
+      value={playerCount}
+      onChange={(e) => onPlayerCountChange(e.target.value)}
+      size="middle"
+    >
+      <Radio.Button value={1}>单人模式</Radio.Button>
+      <Radio.Button value={2}>双人模式</Radio.Button>
+      <Radio.Button value={3}>三人模式</Radio.Button>
+    </Radio.Group>
+    <DepthTrack value={depth} onChange={onDepthChange} />
+  </div>
+);
+
 const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const [filteredData] = useState<BossData[]>(bossData);
   const [wildBossSearchKeyword, setWildBossSearchKeyword] = useState('');
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [characterSearchKeyword, setCharacterSearchKeyword] = useState('');
   const [selectedCharacterLocations, setSelectedCharacterLocations] = useState<string[]>([]);
-  const [playerCount, setPlayerCount] = useState<number>(1); // 添加人数选择状态
-  const [deepNightDepth, setDeepNightDepth] = useState<number>(0); // 0=普通，1~5=深夜深度
+  const [playerCount, setPlayerCount] = useState<number>(1); // 上方血量表的人数
+  const [deepNightDepth, setDeepNightDepth] = useState<number>(0); // 上方血量表的深度，0=普通，1~5=深夜深度
+  const [lowerPlayerCount, setLowerPlayerCount] = useState<number>(1); // 下方韧性抗性表的人数
+  const [lowerDeepNightDepth, setLowerDeepNightDepth] = useState<number>(0); // 下方韧性抗性表的深度
   const [activeBossTab, setActiveBossTab] = useState<string>(activeSubTab || 'boss-data');
 
   // 特殊事件相关状态
@@ -381,21 +451,21 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   };
 
   // 计算韧性函数
-  const calculatePoise = (basePoise: number, record: BossData): number | string => {
+  const calculatePoise = (basePoise: number, record: BossData, players: number, depth: number): number | string => {
     const poiseMultipliers = {
       1: 1,      // 单人
       2: 1.82,   // 双人
       3: 3.33    // 三人
     };
-    const scaledPoise = basePoise * poiseMultipliers[playerCount as keyof typeof poiseMultipliers];
-    if (deepNightDepth === 0) return Math.round(scaledPoise);
-    const damageRate = record.deepNightPoiseDamageRate?.[deepNightDepth - 1] ?? 1;
+    const scaledPoise = basePoise * poiseMultipliers[players as keyof typeof poiseMultipliers];
+    if (depth === 0) return Math.round(scaledPoise);
+    const damageRate = record.deepNightPoiseDamageRate?.[depth - 1] ?? 1;
     const dlcMultiplier = record.deepNightDlcPoiseMultiplier ?? 1;
     return (scaledPoise / damageRate / dlcMultiplier).toFixed(2);
   };
 
   // 计算抗性函数
-  const calculateResistance = (baseResistance: number | string): number | string => {
+  const calculateResistance = (baseResistance: number | string, players: number): number | string => {
     if (typeof baseResistance === 'string') {
       return baseResistance; // 如果是"免疫"，直接返回
     }
@@ -405,7 +475,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       2: 2.67,   // 双人
       3: 4       // 三人
     };
-    return Math.round(baseResistance * resistanceMultipliers[playerCount as keyof typeof resistanceMultipliers]);
+    return Math.round(baseResistance * resistanceMultipliers[players as keyof typeof resistanceMultipliers]);
   };
 
   // Boss名称到图片的映射
@@ -458,7 +528,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
   const resistanceFooter = () => (
     <div className="footer-text">
       <div>◦ 韧性倍率：单人100%，双人182%，三人333%｜ 普通韧性 = 基础韧性 × 韧性倍率 ｜ 永夜王韧性 = 永夜王韧性 × 韧性倍率</div>
-      {deepNightDepth > 0 && (
+      {lowerDeepNightDepth > 0 && (
         <div>◦ 深夜韧性 = 韧性 × 人数倍率 ÷ 削韧承受倍率（0.88~0.84）；DLC 夜王再 ÷1.136（合体安定者除外）</div>
       )}
       <div>◦ 抗性(异常耐受上限)倍率：单人100%，双人267%，三人400%｜ 抗性 = 基础抗性 × 抗性倍率</div>
@@ -521,7 +591,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: `Boss血量(${playerCount}人${deepNightDepth > 0 ? `·深度${deepNightDepth}` : ''})`,
+      title: `Boss血量(${playerCount}人·${deepNightDepth > 0 ? `深度${deepNightDepth}` : '普通模式'})`,
       children: [
         {
           title: '基础血量',
@@ -808,7 +878,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       render: (text) => <strong>{text}</strong>,
     },
     {
-      title: `韧性(${playerCount}人${deepNightDepth > 0 ? `·深度${deepNightDepth}` : ''})`,
+      title: `韧性(${lowerPlayerCount}人·${lowerDeepNightDepth > 0 ? `深度${lowerDeepNightDepth}` : '普通模式'})`,
       children: [
         {
           title: '基础韧性',
@@ -820,7 +890,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             if (typeof value === 'number') {
               return (
                 <span className="health-base">
-                  {calculatePoise(value, record)}
+                  {calculatePoise(value, record, lowerPlayerCount, lowerDeepNightDepth)}
                 </span>
               );
             }
@@ -841,7 +911,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
             if (typeof value === 'number') {
               return (
                 <span className="health-nightreign">
-                  {calculatePoise(value, record)}
+                  {calculatePoise(value, record, lowerPlayerCount, lowerDeepNightDepth)}
                 </span>
               );
             }
@@ -855,7 +925,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
       ],
     },
     {
-      title: `抗性 (${playerCount}人)`,
+      title: `抗性 (${lowerPlayerCount}人)`,
       children: [
         {
           title: (
@@ -869,7 +939,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 60,
           align: 'center',
           render: (value) => {
-            const calculatedValue = calculateResistance(value);
+            const calculatedValue = calculateResistance(value, lowerPlayerCount);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
             return (
               <span className={`resistance-value ${originalClass}`}>
@@ -890,7 +960,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 60,
           align: 'center',
           render: (value) => {
-            const calculatedValue = calculateResistance(value);
+            const calculatedValue = calculateResistance(value, lowerPlayerCount);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
             return (
               <span className={`resistance-value ${originalClass}`}>
@@ -911,7 +981,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 60,
           align: 'center',
           render: (value) => {
-            const calculatedValue = calculateResistance(value);
+            const calculatedValue = calculateResistance(value, lowerPlayerCount);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
             return (
               <span className={`resistance-value ${originalClass}`}>
@@ -932,7 +1002,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 60,
           align: 'center',
           render: (value) => {
-            const calculatedValue = calculateResistance(value);
+            const calculatedValue = calculateResistance(value, lowerPlayerCount);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
             return (
               <span className={`resistance-value ${originalClass}`}>
@@ -953,7 +1023,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 60,
           align: 'center',
           render: (value) => {
-            const calculatedValue = calculateResistance(value);
+            const calculatedValue = calculateResistance(value, lowerPlayerCount);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
             return (
               <span className={`resistance-value ${originalClass}`}>
@@ -974,7 +1044,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 60,
           align: 'center',
           render: (value) => {
-            const calculatedValue = calculateResistance(value);
+            const calculatedValue = calculateResistance(value, lowerPlayerCount);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
             return (
               <span className={`resistance-value ${originalClass}`}>
@@ -995,7 +1065,7 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
           width: 60,
           align: 'center',
           render: (value) => {
-            const calculatedValue = calculateResistance(value);
+            const calculatedValue = calculateResistance(value, lowerPlayerCount);
             const originalClass = getResistanceClass(value); // 基于原始数值确定颜色
             return (
               <span className={`resistance-value ${originalClass}`}>
@@ -1880,33 +1950,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
               label: '🌙 夜王基础数据',
               children: (
                 <div id="night-king-basic">
-                  <div style={{ marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-                    <Radio.Group
-                      value={playerCount}
-                      onChange={(e) => setPlayerCount(e.target.value)}
-                      size="middle"
-                    >
-                      <Radio.Button value={1}>单人模式</Radio.Button>
-                      <Radio.Button value={2}>双人模式</Radio.Button>
-                      <Radio.Button value={3}>三人模式</Radio.Button>
-                    </Radio.Group>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ color: 'var(--theme-text-secondary, #999)', fontSize: '13px' }}>深夜深度</span>
-                      <Segmented
-                        value={deepNightDepth}
-                        onChange={(value) => setDeepNightDepth(Number(value))}
-                        size="middle"
-                        options={[
-                          { label: '普通', value: 0 },
-                          { label: '深度1', value: 1 },
-                          { label: '深度2', value: 2 },
-                          { label: '深度3', value: 3 },
-                          { label: '深度4', value: 4 },
-                          { label: '深度5', value: 5 },
-                        ]}
-                      />
-                    </div>
-                  </div>
+                  <NightKingControls
+                    playerCount={playerCount}
+                    onPlayerCountChange={setPlayerCount}
+                    depth={deepNightDepth}
+                    onDepthChange={setDeepNightDepth}
+                  />
                   <Table
                     columns={leftColumns}
                     dataSource={filteredData}
@@ -1917,6 +1966,12 @@ const BossDataView: React.FC<BossDataViewProps> = ({ activeSubTab }) => {
                     bordered
                     footer={defaultFooter}
                     style={{ marginBottom: '24px' }}
+                  />
+                  <NightKingControls
+                    playerCount={lowerPlayerCount}
+                    onPlayerCountChange={setLowerPlayerCount}
+                    depth={lowerDeepNightDepth}
+                    onDepthChange={setLowerDeepNightDepth}
                   />
                   <Table
                     columns={rightColumns}
